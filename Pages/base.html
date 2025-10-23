@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}فروشگاه قالب{% endblock %}</title>
+    <meta name="description" content="{% block description %}فروشگاه قالب - ارائه بهترین قالب‌های وبسایت با کیفیت عالی{% endblock %}">
+    
+    <!-- CSS Files -->
+  <link rel="stylesheet" href="/CSS/base.css">
+    <link rel="stylesheet" href="/CSS/components.css">
+    <link rel="stylesheet" href="/CSS/layouts.css">
+    <link rel="stylesheet" href="/CSS/responsive.css">
+    <link rel="stylesheet" href="/CSS/utilities.css">
+        <link rel="stylesheet" href="/CSS/dashboard.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../assets/fonts/Sahel.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">پرش به محتوای اصلی</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header__inner">
+                <!-- Logo -->
+                <div class="header__logo">
+                    <a href="index.html" aria-label="بازگشت به صفحه اصلی">
+                        <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب" width="150" height="40">
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="header__nav" role="navigation" aria-label="منوی اصلی">
+                    <ul class="nav-list">
+                        <li class="nav-list__item">
+                            <a href="index.html" class="nav-list__link {% if page == 'index' %}nav-list__link--active{% endif %}">خانه</a>
+                        </li>
+                        <li class="nav-list__item">
+                            <a href="about.html" class="nav-list__link {% if page == 'about' %}nav-list__link--active{% endif %}">درباره ما</a>
+                        </li>
+                        <li class="nav-list__item">
+                            <a href="contact.html" class="nav-list__link {% if page == 'contact' %}nav-list__link--active{% endif %}">تماس با ما</a>
+                        </li>
+                        <li class="nav-list__item">
+                            <a href="templates.html" class="nav-list__link {% if page == 'templates' %}nav-list__link--active{% endif %}">قالب‌ها</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- User Actions -->
+                <div class="header__actions">
+                    <!-- Auth Buttons (for guest users) -->
+                    <div class="auth-buttons">
+                        <a href="login.html" class="btn btn--outline btn--sm">ورود</a>
+                        <a href="signup.html" class="btn btn--primary btn--sm">ثبت‌نام</a>
+                    </div>
+
+                    <!-- User Dropdown (for logged in users) -->
+                    <div class="user-dropdown hidden">
+                        <button class="user-dropdown__toggle" aria-expanded="false" aria-haspopup="true">
+                            <img src="../assets/images/user-placeholder.svg" alt="پروفایل کاربر" class="user-avatar">
+                            <span class="user-name">کاربر</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="user-dropdown__menu" role="menu">
+                            <a href="dashboard.html" class="user-dropdown__item" role="menuitem">
+                                <i class="fas fa-tachometer-alt"></i>
+                                پنل کاربری
+                            </a>
+                            <a href="profile.html" class="user-dropdown__item" role="menuitem">
+                                <i class="fas fa-user"></i>
+                                پروفایل
+                            </a>
+                            <a href="purchases.html" class="user-dropdown__item" role="menuitem">
+                                <i class="fas fa-shopping-bag"></i>
+                                خریدهای من
+                            </a>
+                            <a href="my-templates.html" class="user-dropdown__item" role="menuitem">
+                                <i class="fas fa-palette"></i>
+                                قالب‌های من
+                            </a>
+                            <hr class="user-dropdown__divider">
+                            <button class="user-dropdown__item logout-btn" role="menuitem">
+                                <i class="fas fa-sign-out-alt"></i>
+                                خروج
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cart Widget -->
+                    <div class="cart-widget">
+                        <a href="cart.html" class="cart-link" aria-label="سبد خرید">
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="cart-count" aria-live="polite">0</span>
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle hidden-desktop" aria-label="منو" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main" role="main">
+        {% block content %}
+        <!-- Page specific content will be inserted here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب" class="footer__logo">
+                    <p class="footer__description mt-4">
+                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
+                    </p>
+                    
+                    <!-- Social Links -->
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-link" aria-label="اینستاگرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="تلگرام">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="توییتر">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="لینکدین">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer__section">
+                    <h5>لینک‌های سریع</h5>
+                    <a href="index.html">خانه</a>
+                    <a href="about.html">درباره ما</a>
+                    <a href="contact.html">تماس با ما</a>
+                    <a href="templates.html">قالب‌ها</a>
+                    <a href="blog.html">بلاگ</a>
+                </div>
+                
+                <div class="footer__section">
+                    <h5>خدمات</h5>
+                    <a href="custom-design.html">طراحی سفارشی</a>
+                    <a href="support.html">پشتیبانی</a>
+                    <a href="docs.html">مستندات</a>
+                    <a href="affiliate.html">همکاری در فروش</a>
+                    <a href="developer.html">API توسعه‌دهندگان</a>
+                </div>
+                
+                <div class="footer__section">
+                    <h5>تماس با ما</h5>
+                    <address class="not-italic">
+                        <p><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</p>
+                        <p><i class="fas fa-phone"></i> ۰۲۱-۲۲۳۴۵۶۷۸</p>
+                        <p><i class="fas fa-envelope"></i> info@webtemplate.ir</p>
+                        <p><i class="fas fa-clock"></i> شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <div class="footer-bottom__content">
+                    <p>&copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">حریم خصوصی</a>
+                        <a href="terms.html">قوانین و مقررات</a>
+                        <a href="sitemap.html">نقشه سایت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="بازگشت به بالا">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="globalLoading" style="display: none;">
+        <div class="loading-spinner"></div>
+        <span class="loading-text">در حال بارگذاری...</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module" src="../js/main.js"></script>
+    
+    {% block extra_js %}{% endblock %}
+    
+    <script>
+        // Global functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('back-to-top--visible');
+                } else {
+                    backToTop.classList.remove('back-to-top--visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Mobile menu functionality
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const headerNav = document.querySelector('.header__nav');
+            
+            if (mobileToggle && headerNav) {
+                mobileToggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    headerNav.classList.toggle('header__nav--open');
+                });
+            }
+            
+            // User dropdown functionality
+            const userDropdown = document.querySelector('.user-dropdown');
+            if (userDropdown) {
+                const toggle = userDropdown.querySelector('.user-dropdown__toggle');
+                const menu = userDropdown.querySelector('.user-dropdown__menu');
+                
+                toggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    menu.classList.toggle('user-dropdown__menu--open');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userDropdown.contains(e.target)) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                        menu.classList.remove('user-dropdown__menu--open');
+                    }
+                });
+            }
+            
+            // Global loading indicator
+            window.showGlobalLoading = function() {
+                document.getElementById('globalLoading').style.display = 'flex';
+            };
+            
+            window.hideGlobalLoading = function() {
+                document.getElementById('globalLoading').style.display = 'none';
+            };
+        });
+        
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error);
+        });
+        
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+    </script>
+</body>
+</html>
