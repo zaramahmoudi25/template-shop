@@ -1,0 +1,418 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام - فروشگاه قالب</title>
+    <meta name="description" content="ثبت‌نام در فروشگاه قالب و دسترسی به امکانات ویژه">
+
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/components.css" %}">
+    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
+    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+       
+        .header {
+            background: #ffffff !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .auth-section {
+            padding-top: 120px;
+            padding-bottom: 60px;
+        }
+        
+        .auth-container {
+            margin-top: 2rem;
+        }
+        
+     
+        .header__inner {
+            background: #ffffff;
+        }
+        
+        .nav-list a {
+            color: #374151;
+        }
+        
+        .nav-list a:hover {
+            color: #6366f1;
+        }
+        
+        .logo-text {
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="auth-page">
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__logo">
+                    <a href="/index/" class="logo-link">
+                        <img src="/images/logo.png" alt="فروشگاه قالب" class="logo">
+                        <span class="logo-text">قالب‌شاپ</span>
+                    </a>
+                </div>
+                <nav class="header__nav">
+                    <ul class="nav-list">
+                        <li><a href="/index/">خانه</a></li>
+                        <li><a href="/about/">درباره ما</a></li>
+                        <li><a href="/contact/">تماس با ما</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="auth-header">
+                            <h1 class="auth-title">ایجاد حساب کاربری</h1>
+                            <p class="auth-subtitle">همین حالا ثبت‌نام کنید و از امکانات ویژه بهره‌مند شوید</p>
+                        </div>
+
+                        <form class="auth-form" id="signupForm">
+                            <div class="form-group">
+                                <label for="username" class="form-label">نام کاربری *</label>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="نام کاربری خود را وارد کنید" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">ایمیل *</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="form-label">رمز عبور *</label>
+                                <div class="password-input">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="رمز عبور قوی انتخاب کنید" required>
+                                    <button type="button" class="password-toggle" aria-label="نمایش رمز عبور">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength mt-2">
+                                    <div class="strength-bar">
+                                        <div class="strength-fill" data-strength="0"></div>
+                                    </div>
+                                    <span class="strength-text">قدرت رمز عبور: ضعیف</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmPassword" class="form-label">تکرار رمز عبور *</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="رمز عبور را تکرار کنید" required>
+                                    <button type="button" class="password-toggle" aria-label="نمایش رمز عبور">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="terms" required>
+                                    <span class="checkmark"></span>
+                                    <span>با <a href="/terms/" class="text-link">قوانین و مقررات</a> موافقم</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="newsletter">
+                                    <span class="checkmark"></span>
+                                    <span>مایل به دریافت خبرنامه و پیشنهادات ویژه هستم</span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary btn--lg w-full">
+                                <i class="fas fa-user-plus"></i>
+                                ایجاد حساب کاربری
+                            </button>
+
+                            <div class="auth-divider">
+                                <span>یا</span>
+                            </div>
+
+                            <div class="social-auth">
+                                <button type="button" class="btn btn--outline btn--lg w-full social-btn google-btn">
+                                    <i class="fab fa-google"></i>
+                                    ادامه با گوگل
+                                </button>
+                            </div>
+
+                            <div class="auth-footer">
+                                <p>قبلاً حساب کاربری دارید؟ 
+                                    <a href="/login/" class="auth-link">وارد شوید</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="auth-benefits">
+                        <h2 class="benefits-title">مزایای ثبت‌نام</h2>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <i class="fas fa-shopping-cart"></i>
+                                <div class="benefit-content">
+                                    <h3>خرید آسان</h3>
+                                    <p>تجربه خرید سریع و بدون دردسر با پرداخت امن</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-download"></i>
+                                <div class="benefit-content">
+                                    <h3>دانلود سریع</h3>
+                                    <p>دسترسی فوری به فایل‌های خریداری شده</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-heart"></i>
+                                <div class="benefit-content">
+                                    <h3>لیست علاقه‌مندی</h3>
+                                    <p>ذخیره قالب‌های مورد علاقه برای خرید بعدی</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-gift"></i>
+                                <div class="benefit-content">
+                                    <h3>تخفیف‌های ویژه</h3>
+                                    <p>دریافت پیشنهادات و تخفیف‌های اختصاصی</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-history"></i>
+                                <div class="benefit-content">
+                                    <h3>تاریخچه خرید</h3>
+                                    <p>دسترسی به تمام خریدهای قبلی و دانلود مجدد</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <div class="benefit-content">
+                                    <h3>فروش قالب</h3>
+                                    <p>امکان آپلود و فروش قالب‌های خودتان</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__col">
+                    <div class="footer__logo">
+                        <img src="/images/logo.png" alt="فروشگاه قالب" class="footer-logo">
+                        <span class="footer-logo-text">قالب‌شاپ</span>
+                    </div>
+                    <p class="footer__description">
+                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" class="social-link" aria-label="اینستاگرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="تلگرام">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="توییتر">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="لینکدین">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">لینک‌های سریع</h3>
+                    <ul class="footer__links">
+                        <li><a href="/index/" class="footer__link">خانه</a></li>
+                        <li><a href="/template/" class="footer__link">قالب‌ها</a></li>
+                        <li><a href="/about/" class="footer__link">درباره ما</a></li>
+                        <li><a href="/contact/" class="footer__link">تماس با ما</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">خدمات</h3>
+                    <ul class="footer__links">
+                        <li><a href="/custom-design/" class="footer__link">طراحی سفارشی</a></li>
+                        <li><a href="/support/" class="footer__link">پشتیبانی</a></li>
+                        <li><a href="/docs/" class="footer__link">مستندات</a></li>
+                        <li><a href="/affiliate/" class="footer__link">همکاری در فروش</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">تماس با ما</h3>
+                    <div class="footer__contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>آدرس</strong>
+                                <span>تهران، خیابان ولیعصر</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>تلفن</strong>
+                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ایمیل</strong>
+                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ساعات کاری</strong>
+                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <div class="footer-bottom__content">
+                    <p class="copyright">
+                        &copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.
+                    </p>
+                    <div class="footer-bottom__links">
+                        <a href="/privacy/" class="footer-bottom__link">حریم خصوصی</a>
+                        <a href="/terms/" class="footer-bottom__link">قوانین و مقررات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        const strengthFill = document.querySelector('.strength-fill');
+        const strengthText = document.querySelector('.strength-text');
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 25;
+            
+            // Lowercase check
+            if (/[a-z]/.test(password)) strength += 25;
+            
+            // Uppercase check
+            if (/[A-Z]/.test(password)) strength += 25;
+            
+            // Number/Special char check
+            if (/[0-9!@#$%^&*]/.test(password)) strength += 25;
+            
+            // Update UI
+            strengthFill.style.width = strength + '%';
+            strengthFill.dataset.strength = strength;
+            
+            // Update text and color
+            if (strength === 0) {
+                strengthText.textContent = 'قدرت رمز عبور: -';
+                strengthFill.style.backgroundColor = '#e5e7eb';
+            } else if (strength <= 25) {
+                strengthText.textContent = 'قدرت رمز عبور: ضعیف';
+                strengthFill.style.backgroundColor = '#ef4444';
+            } else if (strength <= 50) {
+                strengthText.textContent = 'قدرت رمز عبور: متوسط';
+                strengthFill.style.backgroundColor = '#f59e0b';
+            } else if (strength <= 75) {
+                strengthText.textContent = 'قدرت رمز عبور: خوب';
+                strengthFill.style.backgroundColor = '#10b981';
+            } else {
+                strengthText.textContent = 'قدرت رمز عبور: عالی';
+                strengthFill.style.backgroundColor = '#059669';
+            }
+        });
+
+        // Password toggle functionality
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const passwordInput = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.className = 'fas fa-eye-slash';
+                    this.setAttribute('aria-label', 'پنهان کردن رمز عبور');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.className = 'fas fa-eye';
+                    this.setAttribute('aria-label', 'نمایش رمز عبور');
+                }
+            });
+        });
+
+        // Confirm password validation
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        confirmPasswordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.classList.add('form-control--error');
+            } else {
+                this.classList.remove('form-control--error');
+            }
+        });
+
+        // Form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            if (password !== confirmPassword) {
+                alert('رمز عبور و تکرار آن مطابقت ندارند!');
+                return;
+            }
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ایجاد حساب...';
+            submitBtn.disabled = true;
+            
+            // Simulate signup process
+            setTimeout(() => {
+                alert('حساب کاربری با موفقیت ایجاد شد!');
+                window.location.href = '/Pages/dashboard.html';
+            }, 2000);
+        });
+
+        // Social signup
+        document.querySelector('.google-btn').addEventListener('click', function() {
+            alert('ثبت‌نام با گوگل - این قابلیت به زودی فعال خواهد شد');
+        });
+    </script>
+</body>
+</html>

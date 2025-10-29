@@ -1,0 +1,444 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تکمیل خرید - فروشگاه قالب</title>
+    <meta name="description" content="تکمیل فرآیند خرید و پرداخت امن">
+
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/components.css" %}">
+    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
+    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__logo">
+                    <a href="/index/">
+                        <img src="/images/logo.png" alt="فروشگاه قالب">
+                    </a>
+                </div>
+
+                <nav class="header__nav">
+                    <ul class="nav-list">
+                        <li><a href="/index/">خانه</a></li>
+                        <li><a href="/about/">درباره ما</a></li>
+                        <li><a href="/contact/">تماس با ما</a></li>
+                        <li><a href="/templates/">قالب‌ها</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header__actions">
+                    <div class="auth-buttons">
+                        <a href="/login/" class="btn btn--outline btn--sm">ورود</a>
+                        <a href="/signup/" class="btn btn--primary btn--sm">ثبت‌نام</a>
+                    </div>
+
+                    <div class="cart-widget">
+                        <a href="/cart/" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">3</span>
+                        </a>
+                    </div>
+
+                    <button class="mobile-menu-toggle hidden-desktop">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section">
+            <div class="container">
+                <!-- Checkout Progress -->
+                <div class="checkout-progress">
+                    <div class="progress-steps">
+                        <div class="progress-step active">
+                            <div class="step-number">۱</div>
+                            <div class="step-label">سبد خرید</div>
+                        </div>
+                        <div class="progress-step active">
+                            <div class="step-number">۲</div>
+                            <div class="step-label">اطلاعات پرداخت</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-number">۳</div>
+                            <div class="step-label">تأیید نهایی</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-number">۴</div>
+                            <div class="step-label">اتمام خرید</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-layout">
+                    <!-- Checkout Form -->
+                    <div class="checkout-form">
+                        <h1 class="page-title">تکمیل اطلاعات پرداخت</h1>
+
+                        <!-- Billing Information -->
+                        <div class="form-section">
+                            <h2 class="section-title">اطلاعات صورتحساب</h2>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName" class="form-label">نام *</label>
+                                    <input type="text" id="firstName" name="firstName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName" class="form-label">نام خانوادگی *</label>
+                                    <input type="text" id="lastName" name="lastName" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">ایمیل *</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone" class="form-label">تلفن همراه *</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address" class="form-label">آدرس</label>
+                                <textarea id="address" name="address" rows="3" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="form-section">
+                            <h2 class="section-title">روش پرداخت</h2>
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" checked>
+                                    <label for="creditCard" class="payment-label">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>کارت اعتباری</span>
+                                    </label>
+                                </div>
+
+                                <div class="payment-method">
+                                    <input type="radio" id="paypal" name="paymentMethod" value="paypal">
+                                    <label for="paypal" class="payment-label">
+                                        <i class="fab fa-paypal"></i>
+                                        <span>پی پال</span>
+                                    </label>
+                                </div>
+
+                                <div class="payment-method">
+                                    <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+                                    <label for="bankTransfer" class="payment-label">
+                                        <i class="fas fa-university"></i>
+                                        <span>انتقال بانکی</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Credit Card Form -->
+                            <div class="credit-card-form" id="creditCardForm">
+                                <div class="form-group">
+                                    <label for="cardNumber" class="form-label">شماره کارت *</label>
+                                    <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="۱۲۳۴ ۵۶۷۸ ۹۰۱۲ ۳۴۵۶" maxlength="19">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiryDate" class="form-label">تاریخ انقضا *</label>
+                                        <input type="text" id="expiryDate" name="expiryDate" class="form-control" placeholder="MM/YY" maxlength="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvv" class="form-label">CVV *</label>
+                                        <input type="text" id="cvv" name="cvv" class="form-control" placeholder="۱۲۳" maxlength="3">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cardHolder" class="form-label">نام صاحب کارت *</label>
+                                    <input type="text" id="cardHolder" name="cardHolder" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="terms" required>
+                                    <span class="checkmark"></span>
+                                    با <a href="/terms/" class="text-link">قوانین و شرایط</a> و
+                                    <a href="/privacy/" class="text-link">سیاست حفظ حریم خصوصی</a> موافقم
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="newsletter">
+                                    <span class="checkmark"></span>
+                                    مایل به دریافت خبرنامه و پیشنهادات ویژه هستم
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Checkout Actions -->
+                        <div class="checkout-actions">
+                            <a href="/cart/" class="btn btn--outline btn--lg">
+                                <i class="fas fa-arrow-right"></i>
+                                بازگشت به سبد خرید
+                            </a>
+                            <button type="submit" class="btn btn--primary btn--lg" id="completeOrder">
+                                <i class="fas fa-lock"></i>
+                                تکمیل سفارش و پرداخت
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <div class="summary-card">
+                            <h3 class="summary-title">خلاصه سفارش</h3>
+
+                            <!-- Order Items -->
+                            <div class="order-items">
+                                <div class="order-item">
+                                    <div class="item-image">
+                                        <img src="/images/hero-template-1.png" alt="قالب فروشگاهی مدرن">
+                                    </div>
+                                    <div class="item-details">
+                                        <h4>قالب فروشگاهی مدرن</h4>
+                                        <span class="item-price">۵۰,۰۰۰ تومان</span>
+                                    </div>
+                                </div>
+
+                                <div class="order-item">
+                                    <div class="item-image">
+                                        <img src="/images/hero-template-2.png" alt="قالب شرکتی حرفه‌ای">
+                                    </div>
+                                    <div class="item-details">
+                                        <h4>قالب شرکتی حرفه‌ای</h4>
+                                        <span class="item-price">۷۵,۰۰۰ تومان</span>
+                                    </div>
+                                </div>
+
+                                <div class="order-item">
+                                    <div class="item-image">
+                                        <img src="/images/hero-template-3.png" alt="قالب شخصی خلاق">
+                                    </div>
+                                    <div class="item-details">
+                                        <h4>قالب شخصی خلاق</h4>
+                                        <span class="item-price">۳۵,۰۰۰ تومان</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Order Totals -->
+                            <div class="order-totals">
+                                <div class="total-row">
+                                    <span>جمع کل</span>
+                                    <span>۱۶۰,۰۰۰ تومان</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>تخفیف</span>
+                                    <span class="discount">-۱۵,۰۰۰ تومان</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>مالیات</span>
+                                    <span>۱۳,۰۵۰ تومان</span>
+                                </div>
+                                <div class="total-divider"></div>
+                                <div class="total-row total-final">
+                                    <span>مبلغ نهایی</span>
+                                    <span class="final-amount">۱۵۸,۰۵۰ تومان</span>
+                                </div>
+                            </div>
+
+                            <!-- Security Features -->
+                            <div class="security-features">
+                                <div class="security-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>پرداخت ۱۰۰٪ امن و رمزگذاری شده</span>
+                                </div>
+                                <div class="security-item">
+                                    <i class="fas fa-lock"></i>
+                                    <span>اطلاعات شما محفوظ می‌ماند</span>
+                                </div>
+                                <div class="security-item">
+                                    <i class="fas fa-undo"></i>
+                                    <span>گارانتی بازگشت وجه ۷ روزه</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Support Info -->
+                        <div class="support-info">
+                            <h4>نیاز به کمک دارید؟</h4>
+                            <div class="support-contact">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <strong>تماس تلفنی</strong>
+                                        <span>۰۲۱-۲۲۳۴۵۶۷۸</span>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <strong>ایمیل</strong>
+                                        <span>support@webtemplate.ir</span>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-comments"></i>
+                                    <div>
+                                        <strong>چت آنلاین</strong>
+                                        <span>۲۴ ساعته</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <img src="/images/logo.png" alt="فروشگاه قالب" class="footer__logo">
+                    <p class="footer__description mt-4">
+                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
+                    </p>
+                </div>
+                
+                <div class="footer__section">
+                    <h5>لینک‌های سریع</h5>
+                    <a href="/index/">خانه</a>
+                    <a href="/about/">درباره ما</a>
+                    <a href="/contact/">تماس با ما</a>
+                    <a href="/templates/">قالب‌ها</a>
+                </div>
+                
+                <div class="footer__section">
+                    <h5>خدمات</h5>
+                    <a href="/custom-design/">طراحی سفارشی</a>
+                    <a href="/support/">پشتیبانی</a>
+                    <a href="/docs/">مستندات</a>
+                    <a href="/affiliate/">همکاری در فروش</a>
+                </div>
+                
+                <div class="footer__section">
+                    <h5>تماس با ما</h5>
+                    <p>تهران، خیابان ولیعصر</p>
+                    <p>تلفن: ۰۲۱-۲۲۳۴۵۶۷۸</p>
+                    <p>ایمیل: info@webtemplate.ir</p>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/js/main.js"></script>
+    <script>
+        // Payment method toggle
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const creditCardForm = document.getElementById('creditCardForm');
+                if (this.value === 'creditCard') {
+                    creditCardForm.style.display = 'block';
+                } else {
+                    creditCardForm.style.display = 'none';
+                }
+            });
+        });
+
+        // Card number formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let matches = value.match(/\d{4,16}/g);
+            let match = matches && matches[0] || '';
+            let parts = [];
+            
+            for (let i = 0; i < match.length; i += 4) {
+                parts.push(match.substring(i, i + 4));
+            }
+            
+            if (parts.length) {
+                e.target.value = parts.join(' ');
+            } else {
+                e.target.value = value;
+            }
+        });
+
+        // Expiry date formatting
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+        });
+
+        // CVV formatting
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+        });
+
+        // Form submission
+        document.getElementById('completeOrder').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const requiredFields = document.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('form-control--error');
+                    isValid = false;
+                } else {
+                    field.classList.remove('form-control--error');
+                }
+            });
+            
+            if (isValid) {
+                // Simulate payment processing
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال پرداخت...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    window.location.href = 'checkout-success.html';
+                }, 2000);
+            } else {
+                alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+            }
+        });
+
+        // Real-time validation
+        document.querySelectorAll('input[required]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('form-control--error');
+                } else {
+                    this.classList.remove('form-control--error');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
