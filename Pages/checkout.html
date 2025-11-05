@@ -5,47 +5,371 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تکمیل خرید - فروشگاه قالب</title>
     <meta name="description" content="تکمیل فرآیند خرید و پرداخت امن">
-     <link rel="stylesheet" href="/CSS/base.css">
+    <link rel="stylesheet" href="/CSS/base.css">
     <link rel="stylesheet" href="/CSS/components.css">
     <link rel="stylesheet" href="/CSS/layouts.css">
     <link rel="stylesheet" href="/CSS/responsive.css">
     <link rel="stylesheet" href="/CSS/utilities.css">
-            <link rel="stylesheet" href="/CSS/dashboard.css">
+    <link rel="stylesheet" href="/CSS/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        .checkout-progress {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 2rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            left: 0;
+            height: 2px;
+            background: var(--gray-300);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            background: white;
+            padding: 0 1rem;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-300);
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active .step-number {
+            background: var(--primary-500);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        
+        .progress-step.active .step-label {
+            color: var(--primary-600);
+            font-weight: 600;
+        }
+        
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .checkout-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .order-summary {
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .form-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary-300);
+        }
+        
+        .payment-method input[type="radio"]:checked + .payment-label {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+        }
+        
+        .payment-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+        
+        .payment-label i {
+            font-size: 1.5rem;
+            color: var(--primary-500);
+        }
+        
+        .credit-card-form {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .order-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius);
+        }
+        
+        .item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            flex: 1;
+        }
+        
+        .item-details h4 {
+            margin-bottom: 0.25rem;
+            color: var(--gray-900);
+        }
+        
+        .item-price {
+            color: var(--primary-600);
+            font-weight: 600;
+        }
+        
+        .order-totals {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .total-row.summary-total {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--gray-900);
+        }
+        
+        .total-divider {
+            height: 1px;
+            background: var(--gray-300);
+            margin: 0.5rem 0;
+        }
+        
+        .discount {
+            color: var(--success-600);
+        }
+        
+        .security-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+        
+        .security-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray-700);
+        }
+        
+        .security-item i {
+            color: var(--success-500);
+        }
+        
+        .support-info {
+            background: var(--primary-50);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--primary-200);
+        }
+        
+        .support-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-item i {
+            color: var(--primary-500);
+            width: 20px;
+        }
+        
+        .checkout-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .order-summary {
+                position: static;
+            }
+            
+            .checkout-form {
+                padding: 1.5rem;
+            }
+            
+            .progress-steps {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: flex-start;
+            }
+            
+            .progress-steps::before {
+                display: none;
+            }
+            
+            .progress-step {
+                flex-direction: row;
+                gap: 1rem;
+                width: 100%;
+                padding: 0;
+            }
+            
+            .checkout-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header__inner">
                 <div class="header__logo">
-                    <a href="index.html">
-                        <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب">
+                    <a href="/Pages/index.html" class="logo-link">
+                        <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب" class="logo">
+                        <span class="logo-text">قالب‌شاپ</span>
                     </a>
                 </div>
 
-                <nav class="header__nav">
+                <nav class="header__nav" id="mainNav">
                     <ul class="nav-list">
-                        <li><a href="index.html">خانه</a></li>
-                        <li><a href="about.html">درباره ما</a></li>
-                        <li><a href="contact.html">تماس با ما</a></li>
-                        <li><a href="templates.html">قالب‌ها</a></li>
+                        <li class="nav-item">
+                            <a href="/Pages/index.html" class="nav-link">خانه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Pages/template_detail.html" class="nav-link">قالب‌ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Pages/about.html" class="nav-link">درباره ما</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Pages/contact.html" class="nav-link">تماس با ما</a>
+                        </li>
                     </ul>
                 </nav>
 
                 <div class="header__actions">
                     <div class="auth-buttons">
-                        <a href="login.html" class="btn btn--outline btn--sm">ورود</a>
-                        <a href="signup.html" class="btn btn--primary btn--sm">ثبت‌نام</a>
+                        <a href="/Pages/login.html" class="btn btn-outline">ورود</a>
+                        <a href="/Pages/signup.html" class="btn btn-primary">ثبت‌نام</a>
                     </div>
 
-                    <div class="cart-widget">
-                        <a href="cart.html" class="cart-link">
+                    <div class="cart-icon">
+                        <a href="/Pages/cart.html" class="cart-link">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="cart-count">3</span>
                         </a>
                     </div>
 
-                    <button class="mobile-menu-toggle hidden-desktop">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -58,10 +382,19 @@
     <main class="main">
         <section class="section">
             <div class="container">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb mb-6">
+                    <a href="/Pages/index.html">خانه</a>
+                    <i class="fas fa-chevron-left"></i>
+                    <a href="/Pages/cart.html">سبد خرید</a>
+                    <i class="fas fa-chevron-left"></i>
+                    <span>تکمیل خرید</span>
+                </div>
+
                 <!-- Checkout Progress -->
                 <div class="checkout-progress">
                     <div class="progress-steps">
-                        <div class="progress-step active">
+                        <div class="progress-step">
                             <div class="step-number">۱</div>
                             <div class="step-label">سبد خرید</div>
                         </div>
@@ -106,12 +439,12 @@
 
                             <div class="form-group">
                                 <label for="phone" class="form-label">تلفن همراه *</label>
-                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                                <input type="tel" id="phone" name="phone" class="form-control" placeholder="09xxxxxxxxx" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="address" class="form-label">آدرس</label>
-                                <textarea id="address" name="address" rows="3" class="form-control"></textarea>
+                                <label for="address" class="form-label">آدرس *</label>
+                                <textarea id="address" name="address" rows="3" class="form-control" placeholder="آدرس کامل خود را وارد کنید" required></textarea>
                             </div>
                         </div>
 
@@ -120,51 +453,55 @@
                             <h2 class="section-title">روش پرداخت</h2>
                             <div class="payment-methods">
                                 <div class="payment-method">
-                                    <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" checked>
-                                    <label for="creditCard" class="payment-label">
+                                    <input type="radio" id="zarinpal" name="paymentMethod" value="zarinpal" checked>
+                                    <label for="zarinpal" class="payment-label">
                                         <i class="fas fa-credit-card"></i>
-                                        <span>کارت اعتباری</span>
+                                        <div>
+                                            <strong>درگاه زرین‌پال</strong>
+                                            <span>پرداخت امن با کارت‌های شتاب</span>
+                                        </div>
                                     </label>
                                 </div>
 
                                 <div class="payment-method">
-                                    <input type="radio" id="paypal" name="paymentMethod" value="paypal">
-                                    <label for="paypal" class="payment-label">
-                                        <i class="fab fa-paypal"></i>
-                                        <span>پی پال</span>
-                                    </label>
-                                </div>
-
-                                <div class="payment-method">
-                                    <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
-                                    <label for="bankTransfer" class="payment-label">
+                                    <input type="radio" id="saman" name="paymentMethod" value="saman">
+                                    <label for="saman" class="payment-label">
                                         <i class="fas fa-university"></i>
-                                        <span>انتقال بانکی</span>
+                                        <div>
+                                            <strong>درگاه سامان</strong>
+                                            <span>پرداخت از طریق کلیه کارت‌ها</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="payment-method">
+                                    <input type="radio" id="mellat" name="paymentMethod" value="mellat">
+                                    <label for="mellat" class="payment-label">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        <div>
+                                            <strong>درگاه ملت</strong>
+                                            <span>پرداخت با موبایل و کارت</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="payment-method">
+                                    <input type="radio" id="wallet" name="paymentMethod" value="wallet">
+                                    <label for="wallet" class="payment-label">
+                                        <i class="fas fa-wallet"></i>
+                                        <div>
+                                            <strong>کیف پول</strong>
+                                            <span>پرداخت از موجودی کیف پول</span>
+                                        </div>
                                     </label>
                                 </div>
                             </div>
 
-                            <!-- Credit Card Form -->
-                            <div class="credit-card-form" id="creditCardForm">
-                                <div class="form-group">
-                                    <label for="cardNumber" class="form-label">شماره کارت *</label>
-                                    <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="۱۲۳۴ ۵۶۷۸ ۹۰۱۲ ۳۴۵۶" maxlength="19">
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="expiryDate" class="form-label">تاریخ انقضا *</label>
-                                        <input type="text" id="expiryDate" name="expiryDate" class="form-control" placeholder="MM/YY" maxlength="5">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="cvv" class="form-label">CVV *</label>
-                                        <input type="text" id="cvv" name="cvv" class="form-control" placeholder="۱۲۳" maxlength="3">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="cardHolder" class="form-label">نام صاحب کارت *</label>
-                                    <input type="text" id="cardHolder" name="cardHolder" class="form-control">
+                            <!-- Wallet Payment Info -->
+                            <div class="wallet-info" id="walletInfo" style="display: none;">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    موجودی کیف پول شما: <strong>۱۵۰,۰۰۰ تومان</strong>
                                 </div>
                             </div>
                         </div>
@@ -175,8 +512,8 @@
                                 <label class="checkbox-label">
                                     <input type="checkbox" name="terms" required>
                                     <span class="checkmark"></span>
-                                    با <a href="terms.html" class="text-link">قوانین و شرایط</a> و 
-                                    <a href="privacy.html" class="text-link">سیاست حفظ حریم خصوصی</a> موافقم
+                                    با <a href="/Pages/terms.html" class="text-link">قوانین و شرایط</a> و 
+                                    <a href="/Pages/privacy.html" class="text-link">سیاست حفظ حریم خصوصی</a> موافقم
                                 </label>
                             </div>
 
@@ -191,13 +528,13 @@
 
                         <!-- Checkout Actions -->
                         <div class="checkout-actions">
-                            <a href="cart.html" class="btn btn--outline btn--lg">
+                            <a href="/Pages/cart.html" class="btn btn--outline btn--lg">
                                 <i class="fas fa-arrow-right"></i>
                                 بازگشت به سبد خرید
                             </a>
                             <button type="submit" class="btn btn--primary btn--lg" id="completeOrder">
                                 <i class="fas fa-lock"></i>
-                                تکمیل سفارش و پرداخت
+                                پرداخت و تکمیل سفارش
                             </button>
                         </div>
                     </div>
@@ -251,11 +588,11 @@
                                     <span class="discount">-۱۵,۰۰۰ تومان</span>
                                 </div>
                                 <div class="total-row">
-                                    <span>مالیات</span>
+                                    <span>مالیات (۹٪)</span>
                                     <span>۱۳,۰۵۰ تومان</span>
                                 </div>
                                 <div class="total-divider"></div>
-                                <div class="total-row total-final">
+                                <div class="total-row summary-total">
                                     <span>مبلغ نهایی</span>
                                     <span class="final-amount">۱۵۸,۰۵۰ تومان</span>
                                 </div>
@@ -276,6 +613,12 @@
                                     <span>گارانتی بازگشت وجه ۷ روزه</span>
                                 </div>
                             </div>
+
+                            <!-- Payment Button -->
+                            <button class="btn btn--primary btn--lg w-full" id="paymentBtn">
+                                <i class="fas fa-lock"></i>
+                                پرداخت ۱۵۸,۰۵۰ تومان
+                            </button>
                         </div>
 
                         <!-- Support Info -->
@@ -311,97 +654,156 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
-                <div class="footer__section">
-                    <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب" class="footer__logo">
-                    <p class="footer__description mt-4">
+                <div class="footer__col">
+                    <div class="footer__logo">
+                        <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب" class="footer-logo">
+                        <span class="footer-logo-text">قالب‌شاپ</span>
+                    </div>
+                    <p class="footer__description">
                         ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
                     </p>
+                    <div class="footer__social">
+                        <a href="#" class="social-link" aria-label="اینستاگرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="تلگرام">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="توییتر">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="لینکدین">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <div class="footer__section">
-                    <h5>لینک‌های سریع</h5>
-                    <a href="index.html">خانه</a>
-                    <a href="about.html">درباره ما</a>
-                    <a href="contact.html">تماس با ما</a>
-                    <a href="templates.html">قالب‌ها</a>
+                <div class="footer__col">
+                    <h3 class="footer__title">لینک‌های سریع</h3>
+                    <ul class="footer__links">
+                        <li><a href="/Pages/index.html" class="footer__link">خانه</a></li>
+                        <li><a href="/Pages/template_detail.html" class="footer__link">قالب‌ها</a></li>
+                        <li><a href="/Pages/about.html" class="footer__link">درباره ما</a></li>
+                        <li><a href="/Pages/contact.html" class="footer__link">تماس با ما</a></li>
+                    </ul>
                 </div>
                 
-                <div class="footer__section">
-                    <h5>خدمات</h5>
-                    <a href="custom-design.html">طراحی سفارشی</a>
-                    <a href="support.html">پشتیبانی</a>
-                    <a href="docs.html">مستندات</a>
-                    <a href="affiliate.html">همکاری در فروش</a>
+                <div class="footer__col">
+                    <h3 class="footer__title">خدمات</h3>
+                    <ul class="footer__links">
+                        <li><a href="/Pages/custom-design.html" class="footer__link">طراحی سفارشی</a></li>
+                        <li><a href="/Pages/support.html" class="footer__link">پشتیبانی</a></li>
+                        <li><a href="/Pages/docs.html" class="footer__link">مستندات</a></li>
+                        <li><a href="/Pages/affiliate.html" class="footer__link">همکاری در فروش</a></li>
+                    </ul>
                 </div>
                 
-                <div class="footer__section">
-                    <h5>تماس با ما</h5>
-                    <p>تهران، خیابان ولیعصر</p>
-                    <p>تلفن: ۰۲۱-۲۲۳۴۵۶۷۸</p>
-                    <p>ایمیل: info@webtemplate.ir</p>
+                <div class="footer__col">
+                    <h3 class="footer__title">تماس با ما</h3>
+                    <div class="footer__contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>آدرس</strong>
+                                <span>تهران، خیابان ولیعصر</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>تلفن</strong>
+                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ایمیل</strong>
+                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ساعات کاری</strong>
+                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
+
             <div class="footer__bottom">
-                <p>&copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.</p>
+                <div class="footer-bottom__content">
+                    <p class="copyright">
+                        &copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.
+                    </p>
+                    <div class="footer-bottom__links">
+                        <a href="/Pages/privacy.html" class="footer-bottom__link">حریم خصوصی</a>
+                        <a href="/Pages/terms.html" class="footer-bottom__link">قوانین و مقررات</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script type="module" src="/js/main.js"></script>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const body = document.body;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mainNav.classList.contains('active');
+            
+            if (isOpen) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('menu-open');
+            } else {
+                mainNav.classList.add('active');
+                mobileMenuBtn.classList.add('active');
+                body.classList.add('menu-open');
+            }
+        });
+
+        // Close menu when clicking on links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+
         // Payment method toggle
         document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                const creditCardForm = document.getElementById('creditCardForm');
-                if (this.value === 'creditCard') {
-                    creditCardForm.style.display = 'block';
+                const walletInfo = document.getElementById('walletInfo');
+                
+                if (this.value === 'wallet') {
+                    walletInfo.style.display = 'block';
                 } else {
-                    creditCardForm.style.display = 'none';
+                    walletInfo.style.display = 'none';
                 }
             });
         });
 
-        // Card number formatting
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-            let matches = value.match(/\d{4,16}/g);
-            let match = matches && matches[0] || '';
-            let parts = [];
-            
-            for (let i = 0; i < match.length; i += 4) {
-                parts.push(match.substring(i, i + 4));
-            }
-            
-            if (parts.length) {
-                e.target.value = parts.join(' ');
-            } else {
-                e.target.value = value;
-            }
-        });
-
-        // Expiry date formatting
-        document.getElementById('expiryDate').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-        });
-
-        // CVV formatting
-        document.getElementById('cvv').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
-        });
-
-        // Form submission
+        // Form validation and submission
         document.getElementById('completeOrder').addEventListener('click', function(e) {
             e.preventDefault();
             
             // Basic validation
-            const requiredFields = document.querySelectorAll('input[required]');
+            const requiredFields = document.querySelectorAll('input[required], textarea[required]');
             let isValid = true;
             
             requiredFields.forEach(field => {
@@ -413,21 +815,52 @@
                 }
             });
             
+            // Phone validation
+            const phoneInput = document.getElementById('phone');
+            const phoneRegex = /^09[0-9]{9}$/;
+            if (!phoneRegex.test(phoneInput.value)) {
+                phoneInput.classList.add('form-control--error');
+                isValid = false;
+                alert('لطفاً شماره موبایل معتبر وارد کنید (09xxxxxxxxx)');
+            }
+            
+            // Terms validation
+            const termsCheckbox = document.querySelector('input[name="terms"]');
+            if (!termsCheckbox.checked) {
+                alert('لطفاً با قوانین و مقررات موافقت کنید');
+                isValid = false;
+            }
+            
             if (isValid) {
                 // Simulate payment processing
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال پرداخت...';
-                this.disabled = true;
+                const submitBtn = document.getElementById('completeOrder');
+                const paymentBtn = document.getElementById('paymentBtn');
                 
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال پرداخت...';
+                paymentBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال پرداخت...';
+                submitBtn.disabled = true;
+                paymentBtn.disabled = true;
+                
+                // Simulate API call to payment gateway
                 setTimeout(() => {
+                    // Redirect to payment gateway (in real scenario)
+                    // window.location.href = 'https://zarinpal.com/payment/...';
+                    
+                    // For demo, redirect to success page
                     window.location.href = 'checkout-success.html';
-                }, 2000);
+                }, 3000);
             } else {
-                alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+                alert('لطفاً تمام فیلدهای ضروری را به درستی پر کنید.');
             }
         });
 
+        // Payment button click (same as complete order)
+        document.getElementById('paymentBtn').addEventListener('click', function() {
+            document.getElementById('completeOrder').click();
+        });
+
         // Real-time validation
-        document.querySelectorAll('input[required]').forEach(input => {
+        document.querySelectorAll('input[required], textarea[required]').forEach(input => {
             input.addEventListener('blur', function() {
                 if (!this.value.trim()) {
                     this.classList.add('form-control--error');
@@ -435,6 +868,46 @@
                     this.classList.remove('form-control--error');
                 }
             });
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) {
+                value = value.substring(0, 11);
+            }
+            e.target.value = value;
+        });
+
+        // Scroll to Top
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Auto-fill demo data for testing
+        document.addEventListener('DOMContentLoaded', function() {
+            // For demo purposes - remove in production
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                document.getElementById('firstName').value = 'علی';
+                document.getElementById('lastName').value = 'محمدی';
+                document.getElementById('email').value = 'demo@example.com';
+                document.getElementById('phone').value = '09123456789';
+                document.getElementById('address').value = 'تهران، خیابان ولیعصر، پلاک ۱۲۳';
+                document.querySelector('input[name="terms"]').checked = true;
+            }
         });
     </script>
 </body>
