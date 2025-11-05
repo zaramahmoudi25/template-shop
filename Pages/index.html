@@ -3,577 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه قالب | مرجع تخصصی قالب‌های وبسایت</title>
-    <meta name="description" content="مرجع تخصصی قالب‌های آماده برای وب‌سایت‌های فروشگاهی، شرکتی و شخصی">
+    <title>قالب‌شاپ - مرجع تخصصی قالب‌های وبسایت</title>
+    <meta name="description" content="دسترسی به بهترین قالب‌های سایت‌های خارجی برای کاربران ایرانی">
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="/CSS/base.css">
-    <link rel="stylesheet" href="/CSS/components.css">
-    <link rel="stylesheet" href="/CSS/layouts.css">
-    <link rel="stylesheet" href="/CSS/responsive.css">
-    <link rel="stylesheet" href="/CSS/utilities.css">
-    <link rel="stylesheet" href="/CSS/dashboard.css">
+    <link rel="stylesheet" href="/CSS/landing.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-                <!-- Logo -->
-                <div class="header__logo">
-                    <a href="index.html" class="logo-link">
-                        <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب" class="logo">
-                        <span class="logo-text">قالب‌شاپ</span>
-                    </a>
+<body class="landing-page">
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="landing-hero">
+            <div class="hero-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
                 </div>
+            </div>
 
-                <!-- Navigation -->
-                <nav class="header__nav" id="mainNav">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link active">خانه</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Pages/template_detail.html" class="nav-link">قالب‌ها</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Pages/about.html" class="nav-link">درباره ما</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Pages/contact.html" class="nav-link">تماس با ما</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <!-- Header Actions -->
-                <div class="header__actions">
-                    <!-- Auth Buttons -->
-                    <div class="auth-buttons">
-                        <a href="/Pages/login.html" class="btn btn-outline">ورود</a>
-                        <a href="/Pages/signup.html" class="btn btn-primary">ثبت‌نام</a>
+            <div class="container">
+                <div class="hero-content">
+                    <!-- Animated Logo -->
+                    <div class="main-logo">
+                        <div class="logo-circle">
+                            <i class="fas fa-palette logo-icon"></i>
+                        </div>
+                        <h1 class="logo-text">قالب‌شاپ</h1>
                     </div>
 
-                    <!-- Cart -->
-                    <div class="cart-icon">
-                        <a href="/Pages/cart.html" class="cart-link">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">0</span>
+                    <!-- Title -->
+                    <h2 class="hero-title">
+                        بهترین قالب‌های وبسایت در یک مکان
+                    </h2>
+
+                    <!-- Platforms Grid -->
+                    <div class="platforms-grid">
+                        <!-- Shopify -->
+                        <a href="/Pages/template-detail.html?platform=shopify" class="platform-card">
+                            <div class="platform-logo">
+                                <i class="fab fa-shopify"></i>
+                            </div>
+                            <h3 class="platform-name">Shopify</h3>
+                            <div class="platform-cta">
+                                <span>مشاهده قالب‌ها</span>
+                                <i class="fas fa-arrow-left"></i>
+                            </div>
                         </a>
-                    </div>
 
-                    <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero__content">
-                <!-- Text Content - Right Side -->
-                <div class="hero__text">
-                    <h1 class="hero__title">
-                        <span class="title-line"  style="color: aliceblue;">قالب‌های حرفه‌ای</span>
-                        <span class="title-line highlight"  style="color: rgb(148, 151, 153);">برای موفقیت آنلاین</span>
-                    </h1>
-                    <p class="hero__description">
-                        با مجموعه‌ای از بهترین قالب‌های وبسایت، کسب‌وکار خود را متحول کنید. 
-                        طراحی‌های مدرن، واکنش‌گرا و کاملاً قابل سفارشی‌سازی.
-                    </p>
-                    
-                    <div class="hero__actions">
-                        <a href="/Pages/template_detail.html" class="btn btn-primary btn-large">
-                            <i class="fas fa-rocket"></i>
-                            مشاهده قالب‌ها
+                        <!-- WordPress -->
+                        <a href="/Pages/template-detail.html?platform=wordpress" class="platform-card">
+                            <div class="platform-logo">
+                                <i class="fab fa-wordpress"></i>
+                            </div>
+                            <h3 class="platform-name">WordPress</h3>
+                            <div class="platform-cta">
+                                <span>مشاهده قالب‌ها</span>
+                                <i class="fas fa-arrow-left"></i>
+                            </div>
                         </a>
-                        <!-- <a href="#features" class="btn btn-outline btn-large">
-                            <i class="fas fa-play-circle"></i>
-                            تماشای دمو
-                        </a> -->
-                    </div>
 
-                    <div class="hero__stats">
-                        <!-- <div class="stat">
-                            <div class="stat-number">۵۰۰+</div>
-                            <div class="stat-label">قالب آماده</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">۱۰,۰۰۰+</div>
-                            <div class="stat-label">مشتری راضی</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">۹۸٪</div>
-                            <div class="stat-label">رضایت کاربران</div>
-                        </div> -->
-                    </div>
-                </div>
-
-                <!-- Visual Content - Left Side with Animation -->
-                <div class="hero__visual">
-                    <div class="template-showcase">
-                        <div class="template-slide active" data-slide="1">
-                            <img src="/Images and SVGs/hero-template-1.png" alt="قالب فروشگاهی مدرن" class="slide-image">
-                            <div class="slide-badge">پرفروش</div>
-                        </div>
-                        <div class="template-slide" data-slide="2">
-                            <img src="/Images and SVGs/hero-template-2.png" alt="قالب شرکتی حرفه‌ای" class="slide-image">
-                            <div class="slide-badge">جدید</div>
-                        </div>
-                        <div class="template-slide" data-slide="3">
-                            <img src="/Images and SVGs/hero-template-3.png" alt="قالب شخصی خلاق" class="slide-image">
-                            <div class="slide-badge">اقتصادی</div>
-                        </div>
-                    </div>
-                    <div class="slide-controls">
-                        <button class="slide-btn active" data-slide="1"></button>
-                        <button class="slide-btn" data-slide="2"></button>
-                        <button class="slide-btn" data-slide="3"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Categories Section -->
-    <section class="categories">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">دسته‌بندی‌های محبوب</h2>
-                <p class="section-subtitle">قالب‌های تخصصی برای هر نوع کسب‌وکار</p>
-            </div>
-
-            <div class="categories-grid">
-                <!-- Category 1 -->
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h3 class="category-title">فروشگاهی</h3>
-                    <p class="category-description">قالب‌های حرفه‌ای برای فروشگاه‌های آنلاین</p>
-                    <span class="category-count">۱۲۰ قالب</span>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3 class="category-title">شرکتی</h3>
-                    <p class="category-description">طراحی‌های سازمانی و حرفه‌ای</p>
-                    <span class="category-count">۸۵ قالب</span>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3 class="category-title">شخصی</h3>
-                    <p class="category-description">قالب‌های خلاقانه برای افراد</p>
-                    <span class="category-count">۹۵ قالب</span>
-                </div>
-
-                <!-- Category 4 -->
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-blog"></i>
-                    </div>
-                    <h3 class="category-title">بلاگ</h3>
-                    <p class="category-description">طراحی‌های بهینه برای محتوا</p>
-                    <span class="category-count">۷۰ قالب</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Templates -->
-    <section class="featured-templates">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">قالب‌های منتخب</h2>
-                <p class="section-subtitle">برترین و پرفروش‌ترین قالب‌های ما</p>
-            </div>
-
-            <div class="templates-grid">
-                <!-- Template 1 -->
-                <div class="template-card">
-                    <div class="template-image">
-                        <img src="/Images and SVGs/hero-template-1.png" alt="قالب فروشگاهی مدرن" class="template-img">
-                        <div class="template-overlay">
-                            <button class="btn btn-primary quick-view">
-                                <i class="fas fa-eye"></i>
-                                مشاهده سریع
-                            </button>
-                            <a href="/Pages/template_detail.html" class="btn btn-outline">
-                                جزئیات کامل
-                            </a>
-                        </div>
-                        <div class="template-badges">
-                            <span class="badge badge-primary">پرفروش</span>
-                            <span class="badge badge-success">جدید</span>
-                        </div>
-                    </div>
-                    <div class="template-content">
-                        <h3 class="template-title">قالب فروشگاهی مدرن</h3>
-                        <p class="template-description">قالب کاملاً واکنش‌گرا با امکانات کامل فروشگاهی</p>
-                        
-                        <div class="template-meta">
-                            <div class="template-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="rating-count">(۱۲۳ نظر)</span>
+                        <!-- Wix -->
+                        <a href="/Pages/template-detail.html?platform=wix" class="platform-card">
+                            <div class="platform-logo">
+                                <i class="fas fa-paint-brush"></i>
                             </div>
-                            <span class="template-category">فروشگاهی</span>
-                        </div>
-
-                        <div class="template-footer">
-                            <div class="template-price">
-                                <span class="current-price">۵۰,۰۰۰ تومان</span>
-                                <span class="old-price">۷۵,۰۰۰ تومان</span>
+                            <h3 class="platform-name">Wix</h3>
+                            <div class="platform-cta">
+                                <span>مشاهده قالب‌ها</span>
+                                <i class="fas fa-arrow-left"></i>
                             </div>
-                            <button class="btn btn-primary add-to-cart">
-                                <i class="fas fa-cart-plus"></i>
-                                افزودن
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Template 2 -->
-                <div class="template-card">
-                    <div class="template-image">
-                        <img src="/Images and SVGs/hero-template-2.png" alt="قالب شرکتی حرفه‌ای" class="template-img">
-                        <div class="template-overlay">
-                            <button class="btn btn-primary quick-view">
-                                <i class="fas fa-eye"></i>
-                                مشاهده سریع
-                            </button>
-                            <a href="/Pages/template_detail.html" class="btn btn-outline">
-                                جزئیات کامل
-                            </a>
-                        </div>
-                        <div class="template-badges">
-                            <span class="badge badge-success">پرامتیاز</span>
-                        </div>
-                    </div>
-                    <div class="template-content">
-                        <h3 class="template-title">قالب شرکتی حرفه‌ای</h3>
-                        <p class="template-description">طراحی سازمانی مدرن با قابلیت‌های پیشرفته</p>
-                        
-                        <div class="template-meta">
-                            <div class="template-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span class="rating-count">(۸۹ نظر)</span>
-                            </div>
-                            <span class="template-category">شرکتی</span>
-                        </div>
-
-                        <div class="template-footer">
-                            <div class="template-price">
-                                <span class="current-price">۷۵,۰۰۰ تومان</span>
-                            </div>
-                            <button class="btn btn-primary add-to-cart">
-                                <i class="fas fa-cart-plus"></i>
-                                افزودن
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Template 3 -->
-                <div class="template-card">
-                    <div class="template-image">
-                        <img src="/Images and SVGs/hero-template-3.png" alt="قالب شخصی خلاق" class="template-img">
-                        <div class="template-overlay">
-                            <button class="btn btn-primary quick-view">
-                                <i class="fas fa-eye"></i>
-                                مشاهده سریع
-                            </button>
-                            <a href="/Pages/template_detail.html" class="btn btn-outline">
-                                جزئیات کامل
-                            </a>
-                        </div>
-                        <div class="template-badges">
-                            <span class="badge badge-warning">اقتصادی</span>
-                        </div>
-                    </div>
-                    <div class="template-content">
-                        <h3 class="template-title">قالب شخصی خلاق</h3>
-                        <p class="template-description">طراحی مینیمال و خلاقانه برای افراد</p>
-                        
-                        <div class="template-meta">
-                            <div class="template-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <span class="rating-count">(۶۷ نظر)</span>
-                            </div>
-                            <span class="template-category">شخصی</span>
-                        </div>
-
-                        <div class="template-footer">
-                            <div class="template-price">
-                                <span class="current-price">۳۵,۰۰۰ تومان</span>
-                            </div>
-                            <button class="btn btn-primary add-to-cart">
-                                <i class="fas fa-cart-plus"></i>
-                                افزودن
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__content">
-                <!-- Column 1: Logo and Description -->
-                <div class="footer__col">
-                    <div class="footer__logo">
-                        <img src="/Images and SVGs/logo.png" alt="فروشگاه قالب" class="footer-logo">
-                        <span class="footer-logo-text">قالب‌شاپ</span>
-                    </div>
-                    <p class="footer__description">
-                        مرجع تخصصی قالب‌های آماده برای وب‌سایت‌های فروشگاهی و شخصی. 
-                        با بهترین کیفیت و پشتیبانی ۲۴ ساعته در خدمت شما هستیم.
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" class="social-link" aria-label="اینستاگرام">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="تلگرام">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="توییتر">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="لینکدین">
-                            <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
                 </div>
-
-                <!-- Column 2: Quick Links -->
-                <div class="footer__col">
-                    <h3 class="footer__title">لینک‌های سریع</h3>
-                    <ul class="footer__links">
-                        <li><a href="index.html" class="footer__link">خانه</a></li>
-                        <li><a href="/Pages/template_detail.html" class="footer__link">قالب‌ها</a></li>
-                        <li><a href="/Pages/about.html" class="footer__link">درباره ما</a></li>
-                        <li><a href="/Pages/contact.html" class="footer__link">تماس با ما</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Services -->
-                <div class="footer__col">
-                    <h3 class="footer__title">خدمات</h3>
-                    <ul class="footer__links">
-                        <li><a href="/Pages/custom-design.html" class="footer__link">طراحی سفارشی</a></li>
-                        <li><a href="/Pages/support.html" class="footer__link">پشتیبانی</a></li>
-                        <li><a href="/Pages/docs.html" class="footer__link">مستندات</a></li>
-                        <li><a href="/Pages/affiliate.html" class="footer__link">همکاری در فروش</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 4: Contact Info -->
-                <div class="footer__col">
-                    <h3 class="footer__title">تماس با ما</h3>
-                    <div class="footer__contact">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>آدرس</strong>
-                                <span>تهران، خیابان ولیعصر</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>تلفن</strong>
-                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ایمیل</strong>
-                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ساعات کاری</strong>
-                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+        </section>
+    </main>
 
-            <!-- Footer Bottom -->
-            <div class="footer__bottom">
-                <div class="footer-bottom__content">
-                    <p class="copyright">
-                        &copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.
-                    </p>
-                    <div class="footer-bottom__links">
-                        <a href="/Pages/privacy.html" class="footer-bottom__link">حریم خصوصی</a>
-                        <a href="/Pages/terms.html" class="footer-bottom__link">قوانین و مقررات</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <script>
-        // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        const body = document.body;
-
-        mobileMenuBtn.addEventListener('click', () => {
-            const isOpen = mainNav.classList.contains('active');
-            
-            if (isOpen) {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                body.classList.remove('menu-open');
-            } else {
-                mainNav.classList.add('active');
-                mobileMenuBtn.classList.add('active');
-                body.classList.add('menu-open');
-            }
-        });
-
-        // Close menu when clicking on links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                body.classList.remove('menu-open');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.header__nav') && !e.target.closest('.mobile-menu-btn')) {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                body.classList.remove('menu-open');
-            }
-        });
-
-        // Hero Slider
-        const slides = document.querySelectorAll('.template-slide');
-        const slideBtns = document.querySelectorAll('.slide-btn');
-
-        slideBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const slideId = btn.dataset.slide;
-                
-                // Remove active class from all
-                slides.forEach(slide => slide.classList.remove('active'));
-                slideBtns.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to current
-                document.querySelector(`[data-slide="${slideId}"]`).classList.add('active');
-                btn.classList.add('active');
-            });
-        });
-
-        // Auto slide every 5 seconds
-        let currentSlide = 1;
-        setInterval(() => {
-            currentSlide = currentSlide % 3 + 1;
-            document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
-            document.querySelector(`.slide-btn[data-slide="${currentSlide}"]`).classList.add('active');
-            
-            // Remove from others
-            slides.forEach((slide, index) => {
-                if (index + 1 !== currentSlide) {
-                    slide.classList.remove('active');
-                }
-            });
-            slideBtns.forEach((btn, index) => {
-                if (index + 1 !== currentSlide) {
-                    btn.classList.remove('active');
-                }
-            });
-        }, 5000);
-
-        // Scroll to Top
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
-            }
-        });
-
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Add to Cart
-        document.querySelectorAll('.add-to-cart').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const templateTitle = this.closest('.template-card').querySelector('.template-title').textContent;
-                const cartCount = document.querySelector('.cart-count');
-                
-                let count = parseInt(cartCount.textContent) + 1;
-                cartCount.textContent = count;
-                cartCount.style.display = 'flex';
-                
-                // Animation
-                this.innerHTML = '<i class="fas fa-check"></i> افزوده شد';
-                this.classList.add('success');
-                
-                setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-cart-plus"></i> افزودن';
-                    this.classList.remove('success');
-                }, 2000);
-                
-                alert(`"${templateTitle}" به سبد خرید اضافه شد!`);
-            });
-        });
-    </script>
+    <!-- JavaScript -->
+    <script src="/JS/landing.js"></script>
 </body>
 </html>

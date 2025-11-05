@@ -1,7 +1,10 @@
 // ==================== UTILITY FUNCTIONS ====================
 
 /**
- * Debounce function for performance optimization
+ * @param {Function} func - تابع اصلی
+ * @param {number} wait - زمان انتظار
+ * @param {boolean} immediate - اجرای فوری
+ * @returns {Function} تابع debounced
  */
 export const debounce = (func, wait, immediate = false) => {
     let timeout;
@@ -18,7 +21,10 @@ export const debounce = (func, wait, immediate = false) => {
 };
 
 /**
- * Throttle function for rate limiting
+ * تابع throttle برای محدود کردن نرخ فراخوانی
+ * @param {Function} func - تابع اصلی
+ * @param {number} limit - محدودیت زمانی
+ * @returns {Function} تابع throttled
  */
 export const throttle = (func, limit) => {
     let inThrottle;
@@ -32,7 +38,9 @@ export const throttle = (func, limit) => {
 };
 
 /**
- * Format price with Persian locale
+ * فرمت قیمت با locale فارسی
+ * @param {number} price - قیمت
+ * @returns {string} قیمت فرمت شده
  */
 export const formatPrice = (price) => {
     return new Intl.NumberFormat('fa-IR', {
@@ -42,7 +50,9 @@ export const formatPrice = (price) => {
 };
 
 /**
- * Validate email format
+ * اعتبارسنجی فرمت ایمیل
+ * @param {string} email - آدرس ایمیل
+ * @returns {boolean} معتبر بودن ایمیل
  */
 export const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -50,14 +60,18 @@ export const validateEmail = (email) => {
 };
 
 /**
- * Validate password strength
+ * اعتبارسنجی قدرت رمز عبور
+ * @param {string} password - رمز عبور
+ * @returns {boolean} معتبر بودن رمز عبور
  */
 export const validatePassword = (password) => {
     return password.length >= 8;
 };
 
 /**
- * Sanitize HTML to prevent XSS
+ * پاکسازی HTML برای جلوگیری از XSS
+ * @param {string} str - رشته ورودی
+ * @returns {string} رشته پاکسازی شده
  */
 export const sanitizeHTML = (str) => {
     const temp = document.createElement('div');
@@ -66,7 +80,8 @@ export const sanitizeHTML = (str) => {
 };
 
 /**
- * Get CSRF token from cookies
+ * دریافت CSRF token از cookies
+ * @returns {string|null} CSRF token
  */
 export const getCSRFToken = () => {
     const name = 'csrftoken';
@@ -85,7 +100,9 @@ export const getCSRFToken = () => {
 };
 
 /**
- * Show loading spinner
+ * نمایش spinner loading
+ * @param {HTMLElement} container - کانتینر
+ * @returns {HTMLElement} المنت spinner
  */
 export const showLoading = (container = document.body) => {
     const spinner = document.createElement('div');
@@ -99,7 +116,8 @@ export const showLoading = (container = document.body) => {
 };
 
 /**
- * Hide loading spinner
+ * پنهان کردن spinner loading
+ * @param {HTMLElement} spinner - المنت spinner
  */
 export const hideLoading = (spinner) => {
     if (spinner && spinner.parentNode) {
@@ -108,10 +126,14 @@ export const hideLoading = (spinner) => {
 };
 
 /**
- * Show toast notification
+ * نمایش toast notification
+ * @param {string} message - پیام
+ * @param {string} type - نوع (success, error, warning, info)
+ * @param {number} duration - مدت زمان نمایش
+ * @returns {HTMLElement} المنت toast
  */
 export const showToast = (message, type = 'success', duration = 5000) => {
-    // Remove existing toasts
+    // حذف toast های موجود
     const existingToasts = document.querySelectorAll('.toast');
     existingToasts.forEach(toast => toast.remove());
 
@@ -139,7 +161,7 @@ export const showToast = (message, type = 'success', duration = 5000) => {
 
     document.body.appendChild(toast);
 
-    // Add toast styles if not already added
+    // افزودن استایل‌های toast اگر وجود ندارند
     if (!document.querySelector('#toast-styles')) {
         const style = document.createElement('style');
         style.id = 'toast-styles';
@@ -173,16 +195,16 @@ export const showToast = (message, type = 'success', duration = 5000) => {
         document.head.appendChild(style);
     }
 
-    // Animate in
+    // انیمیشن ورود
     setTimeout(() => toast.classList.add('show'), 100);
 
-    // Auto remove
+    // حذف خودکار
     const autoRemove = setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
     }, duration);
 
-    // Manual close
+    // بستن دستی
     const closeBtn = toast.querySelector('.toast__close');
     closeBtn.addEventListener('click', () => {
         clearTimeout(autoRemove);
@@ -194,7 +216,7 @@ export const showToast = (message, type = 'success', duration = 5000) => {
 };
 
 /**
- * Handle API errors
+ * @param {Error} error - خطا
  */
 export const handleApiError = (error) => {
     console.error('API Error:', error);
