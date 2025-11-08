@@ -201,7 +201,7 @@ class SearchManager {
             `;
         } else {
             this.searchResults.innerHTML = results.map(result => `
-                <a href="/pages/template-detail.html?id=${result.id}" class="search-result-item">
+                <a href="/pages/templates.html?id=${result.id}" class="search-result-item">
                     <div class="search-result-item__info">
                         <h4>${result.title}</h4>
                         <span class="badge badge--primary">${result.category}</span>

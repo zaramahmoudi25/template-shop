@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل کاربری - قالب‌شاپ</title>
+    <meta name="description" content="پنل مدیریت کاربری قالب‌شاپ">
+    <link rel="stylesheet" href="/CSS/base.css">
+    <link rel="stylesheet" href="/CSS/components.css">
+    <link rel="stylesheet" href="/CSS/layouts.css">
+    <link rel="stylesheet" href="/CSS/responsive.css">
+    <link rel="stylesheet" href="/CSS/utilities.css">
+    <link rel="stylesheet" href="/CSS/dashboard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* استایل‌های سفارشی برای دشبورد */
+        .dashboard-layout {
+            background: var(--gray-50);
+            min-height: 100vh;
+            padding-top: 0;
+        }
+        
+        .sidebar-layout {
+            display: flex;
+            gap: 2rem;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-left: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .dashboard-main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .summary-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .summary-upload .summary-icon {
+            background: var(--primary-50);
+            color: var(--primary-600);
+        }
+        
+        .summary-earnings .summary-icon {
+            background: var(--success-50);
+            color: var(--success-600);
+        }
+        
+        .summary-customers .summary-icon {
+            background: var(--warning-50);
+            color: var(--warning-600);
+        }
+        
+        .summary-templates .summary-icon {
+            background: var(--info-50);
+            color: var(--info-600);
+        }
+    </style>
+</head>
+<body>
+    <main class="main">
+        <div class="dashboard-layout">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <div class="sidebar-user">
+                            <img src="../assets/images/user-avatar.jpg" alt="علی محمدی" class="user-avatar">
+                            <div class="user-info">
+                                <h3 class="user-name">علی محمدی</h3>
+                                <p class="user-email">ali.mohammadi@email.com</p>
+                                <a href="profile.html" class="edit-profile">
+                                    <i class="fas fa-edit"></i>
+                                    ویرایش پروفایل
+                                </a>
+                            </div>
+                        </div>
+
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-item">
+                                <a href="#section-summary" class="sidebar-link sidebar-link--active" data-section="summary">
+                                    <i class="fas fa-chart-line"></i>
+                                    خلاصه فعالیت‌ها
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#section-templates" class="sidebar-link" data-section="templates">
+                                    <i class="fas fa-palette"></i>
+                                    قالب‌های من
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#section-analytics" class="sidebar-link" data-section="analytics">
+                                    <i class="fas fa-chart-pie"></i>
+                                    آمار و درآمد
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#section-upload" class="sidebar-link" data-section="upload">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    آپلود قالب
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#section-settings" class="sidebar-link" data-section="settings">
+                                    <i class="fas fa-cog"></i>
+                                    تنظیمات
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <button class="sidebar-link logout-btn">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    خروج از حساب
+                                </button>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <div class="dashboard-main">
+                        <!-- Summary Section -->
+                        <section id="section-summary" class="dashboard-section">
+                            <div class="dashboard-header">
+                                <h1>خلاصه فعالیت‌ها</h1>
+                                <p>نمای کلی از عملکرد و فعالیت‌های شما</p>
+                            </div>
+
+                            <div class="dashboard-summary">
+                                <div class="summary-card summary-upload">
+                                    <div class="summary-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۱۲</div>
+                                        <div class="summary-label">قالب آپلود شده</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card summary-templates">
+                                    <div class="summary-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۲۴</div>
+                                        <div class="summary-label">قالب فعال</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card summary-earnings">
+                                    <div class="summary-icon">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۲,۵۴۰,۰۰۰</div>
+                                        <div class="summary-label">درآمد کل (تومان)</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card summary-customers">
+                                    <div class="summary-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۴۷</div>
+                                        <div class="summary-label">مشتری</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Charts -->
+                            <div class="dashboard-charts">
+                                <div class="chart-container">
+                                    <h3>درآمد ماهانه</h3>
+                                    <canvas id="earningsChart"></canvas>
+                                </div>
+                                <div class="chart-container">
+                                    <h3>فروش بر اساس دسته‌بندی</h3>
+                                    <canvas id="salesChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div class="recent-activity">
+                                <h3>فعالیت‌های اخیر</h3>
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon success">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>قالب <strong>فروشگاهی مدرن</strong> فروخته شد</p>
+                                            <span class="activity-time">۲ ساعت پیش</span>
+                                        </div>
+                                        <div class="activity-amount">+۵۰,۰۰۰ تومان</div>
+                                    </div>
+
+                                    <div class="activity-item">
+                                        <div class="activity-icon info">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>قالب جدید <strong>شرکتی حرفه‌ای</strong> آپلود شد</p>
+                                            <span class="activity-time">۱ روز پیش</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item">
+                                        <div class="activity-icon warning">
+                                            <i class="fas fa-download"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>قالب <strong>شخصی خلاق</strong> دانلود شد</p>
+                                            <span class="activity-time">۲ روز پیش</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Analytics Section -->
+                        <section id="section-analytics" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>آمار و درآمد</h1>
+                                <p>تحلیل کامل عملکرد فروش و درآمد شما</p>
+                            </div>
+
+                            <div class="dashboard-summary">
+                                <div class="summary-card summary-earnings">
+                                    <div class="summary-icon">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۲,۵۴۰,۰۰۰</div>
+                                        <div class="summary-label">درآمد کل</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card">
+                                    <div class="summary-icon" style="background: var(--primary-50); color: var(--primary-600);">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۸۹</div>
+                                        <div class="summary-label">فروش کل</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card">
+                                    <div class="summary-icon" style="background: var(--success-50); color: var(--success-600);">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۴.۸</div>
+                                        <div class="summary-label">میانگین امتیاز</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card">
+                                    <div class="summary-icon" style="background: var(--warning-50); color: var(--warning-600);">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۱,۲۴۷</div>
+                                        <div class="summary-label">بازدید کل</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-charts">
+                                <div class="chart-container">
+                                    <h3>روند فروش ۶ ماه گذشته</h3>
+                                    <canvas id="salesTrendChart"></canvas>
+                                </div>
+                                <div class="chart-container">
+                                    <h3>توزیع درآمد بر اساس قالب</h3>
+                                    <canvas id="revenueDistributionChart"></canvas>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Upload Section -->
+                        <section id="section-upload" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>آپلود قالب جدید</h1>
+                                <p>قالب خود را آپلود کنید و شروع به فروش کنید</p>
+                            </div>
+
+                            <div class="upload-form-container">
+                                <form id="templateUploadForm" enctype="multipart/form-data">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="templateTitle" class="form-label">عنوان قالب *</label>
+                                            <input type="text" id="templateTitle" name="title" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="templatePrice" class="form-label">قیمت (تومان) *</label>
+                                            <input type="number" id="templatePrice" name="price" class="form-control" min="0" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="templateDescription" class="form-label">توضیحات *</label>
+                                        <textarea id="templateDescription" name="description" rows="4" class="form-control" required></textarea>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="templateCategory" class="form-label">دسته‌بندی *</label>
+                                            <select id="templateCategory" name="category" class="form-control" required>
+                                                <option value="">انتخاب کنید</option>
+                                                <option value="shopify">فروشگاهی</option>
+                                                <option value="company">شرکتی</option>
+                                                <option value="personal">شخصی</option>
+                                                <option value="blog">بلاگ</option>
+                                                <option value="portfolio">نمونه کار</option>
+                                                <option value="education">آموزشی</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="templateTags" class="form-label">تگ‌ها</label>
+                                            <input type="text" id="templateTags" name="tags" class="form-control" placeholder="مثلاً: واکنش‌گرا, مدرن, سئو">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="templateFeatures" class="form-label">ویژگی‌های اصلی</label>
+                                        <div class="features-input">
+                                            <input type="text" id="featureInput" class="form-control" placeholder="ویژگی جدید را وارد کنید">
+                                            <button type="button" class="btn btn--outline btn--sm" id="addFeature">افزودن</button>
+                                        </div>
+                                        <div class="features-list" id="featuresList"></div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="templateThumbnail" class="form-label">تصویر شاخص *</label>
+                                            <input type="file" id="templateThumbnail" name="thumbnail" accept="image/*" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="templateFile" class="form-label">فایل قالب (ZIP) *</label>
+                                            <input type="file" id="templateFile" name="file" accept=".zip" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="agreeTerms" required>
+                                            <span class="checkmark"></span>
+                                            با <a href="terms.html" class="text-link">قوانین آپلود</a> موافقم
+                                        </label>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn--primary btn--lg">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            آپلود قالب
+                                        </button>
+                                        <button type="reset" class="btn btn--outline btn--lg">پاک کردن فرم</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+
+                        <!-- Templates Section -->
+                        <section id="section-templates" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>قالب‌های من</h1>
+                                <p>مدیریت قالب‌های آپلود شده</p>
+                            </div>
+                            <div class="user-templates">
+                                <p>محتوای بخش قالب‌های من به زودی اضافه خواهد شد.</p>
+                            </div>
+                        </section>
+
+                        <!-- Settings Section -->
+                        <section id="section-settings" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>تنظیمات حساب کاربری</h1>
+                                <p>مدیریت تنظیمات پروفایل و حساب کاربری</p>
+                            </div>
+                            <div class="user-templates">
+                                <p>محتوای بخش تنظیمات به زودی اضافه خواهد شد.</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+     <footer class="footer">
+    <div class="container">
+        <div class="footer__content">
+            <div class="footer__col">
+                <div class="footer__logo">
+                    <img src="/Images and SVGs/logo.png" alt="قالب‌شاپ" class="footer-logo">
+                    <span class="footer-logo-text">قالب‌شاپ</span>
+                </div>
+                <p class="footer__description">
+                    ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
+                </p>
+                <div class="footer__social">
+                    <a href="#" class="social-link" aria-label="اینستاگرام">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="تلگرام">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="توییتر">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="لینکدین">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer__col">
+                <h3 class="footer__title">لینک‌های سریع</h3>
+                <ul class="footer__links">
+                    <li><a href="/Pages/index.html" class="footer__link">خانه</a></li>
+                    <li><a href="/Pages/templates.html" class="footer__link">قالب‌ها</a></li>
+                    <li><a href="/Pages/about.html" class="footer__link">درباره ما</a></li>
+                    <li><a href="/Pages/contact.html" class="footer__link">تماس با ما</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__col">
+                <h3 class="footer__title">تماس با ما</h3>
+                <div class="footer__contact">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <div class="contact-info">
+                            <strong>آدرس</strong>
+                            <span>تهران، خیابان ولیعصر</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <div class="contact-info">
+                            <strong>تلفن</strong>
+                            <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <div class="contact-info">
+                            <strong>ایمیل</strong>
+                            <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock contact-icon"></i>
+                        <div class="contact-info">
+                            <strong>ساعات کاری</strong>
+                            <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <div class="footer-bottom__content">
+                <p class="copyright">
+                    &copy; ۱۴۰۳ قالب‌شاپ. تمامی حقوق محفوظ است.
+                </p>
+                <div class="footer-bottom__links">
+                    <a href="/Pages/privacy.html" class="footer-bottom__link">حریم خصوصی</a>
+                    <a href="/Pages/terms.html" class="footer-bottom__link">قوانین و مقررات</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script>
+        // Dashboard navigation
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.classList.contains('logout-btn')) return;
+                
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('sidebar-link--active'));
+                
+                // Add active class to clicked link
+                this.classList.add('sidebar-link--active');
+                
+                // Hide all sections
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show target section
+                const sectionId = this.getAttribute('data-section');
+                const targetSection = document.getElementById(`section-${sectionId}`);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                }
+            });
+        });
+
+        // Features management
+        const featuresList = document.getElementById('featuresList');
+        const addFeatureBtn = document.getElementById('addFeature');
+        const featureInput = document.getElementById('featureInput');
+
+        addFeatureBtn.addEventListener('click', function() {
+            const feature = featureInput.value.trim();
+            if (feature) {
+                const featureElement = document.createElement('div');
+                featureElement.className = 'feature-tag';
+                featureElement.innerHTML = `
+                    ${feature}
+                    <button type="button" class="remove-feature">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                featuresList.appendChild(featureElement);
+                featureInput.value = '';
+                
+                // Add remove functionality
+                featureElement.querySelector('.remove-feature').addEventListener('click', function() {
+                    featureElement.remove();
+                });
+            }
+        });
+
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Earnings Chart
+            const earningsCtx = document.getElementById('earningsChart').getContext('2d');
+            new Chart(earningsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+                    datasets: [{
+                        label: 'درآمد (هزار تومان)',
+                        data: [1200, 1900, 1500, 2500, 2200, 3000],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            rtl: true
+                        }
+                    }
+                }
+            });
+
+            // Sales Chart
+            const salesCtx = document.getElementById('salesChart').getContext('2d');
+            new Chart(salesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['فروشگاهی', 'شخصی', 'شرکتی', 'بلاگ'],
+                    datasets: [{
+                        data: [40, 25, 20, 15],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b',
+                            '#8b5cf6'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            rtl: true
+                        }
+                    }
+                }
+            });
+
+            // Sales Trend Chart
+            const salesTrendCtx = document.getElementById('salesTrendChart').getContext('2d');
+            new Chart(salesTrendCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+                    datasets: [{
+                        label: 'تعداد فروش',
+                        data: [12, 19, 8, 15, 7, 14],
+                        backgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            rtl: true
+                        }
+                    }
+                }
+            });
+
+            // Revenue Distribution Chart
+            const revenueCtx = document.getElementById('revenueDistributionChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['فروشگاهی', 'شرکتی', 'شخصی', 'بلاگ', 'آموزشی'],
+                    datasets: [{
+                        data: [35, 25, 15, 15, 10],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b',
+                            '#8b5cf6',
+                            '#ec4899'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            rtl: true
+                        }
+                    }
+                }
+            });
+        });
+
+        // Logout functionality
+        document.querySelectorAll('.logout-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('آیا از حساب کاربری خود خارج می‌شوید؟')) {
+                    window.location.href = '/Pages/index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
