@@ -1,0 +1,1061 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}قالب‌ها - فروشگاه قالب{% endblock %}
+{% block description %}مجموعه کامل قالب‌های وبسایت برای انواع کسب‌ و کارها{% endblock %}
+
+    {% block extra_css %}
+    <style>
+        .price-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .price-dollar {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .price-rial {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .old-price .price-dollar {
+            color: var(--gray-500);
+            text-decoration: line-through;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .old-price .price-rial {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+        }
+
+        .template-rating {
+            display: none !important;
+        }
+
+        .view-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-500);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .view-btn:hover {
+            background: var(--primary-600);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+            color: white;
+        }
+
+        .filters-toggle-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .filters-container {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 2rem;
+        }
+
+        .filters-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .template-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .template-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .template-card:hover .template-overlay {
+            opacity: 1;
+        }
+    </style>
+    {% endblock %}
+
+
+
+    {% block content %}
+    <main class="main">
+        <!-- Search Hero Section -->
+        <section class="search-hero-section">
+            <div class="container">
+                <div class="search-hero-content">
+                    <div class="search-hero-text">
+                        <h1 class="search-hero-title">قالب دلخواه خود را پیدا کنید</h1>
+                        <p class="search-hero-subtitle">از بین صدها قالب حرفه‌ای، مناسب‌ترین را انتخاب کنید</p>
+                    </div>
+
+                    <div class="search-hero-form">
+                        <div class="advanced-search">
+                            <div class="search-bar-large">
+                                <input type="text" id="mainSearchInput" placeholder="چه قالبی دنبالش هستید؟ مثلاً: فروشگاهی، شرکتی، شخصی..." class="search-input-large">
+                                <button class="search-btn-large" id="mainSearchBtn">
+                                    <i class="fas fa-search"></i>
+                                    جستجو
+                                </button>
+                            </div>
+
+                            <div class="quick-search-tags">
+                                <span class="tag-label">جستجوی سریع:</span>
+                                <button class="search-tag" data-search="فروشگاهی">فروشگاهی</button>
+                                <button class="search-tag" data-search="شرکتی">شرکتی</button>
+                                <button class="search-tag" data-search="شخصی">شخصی</button>
+                                <button class="search-tag" data-search="بلاگ">بلاگ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Toggle Section -->
+        <section class="filters-toggle-section">
+            <div class="container">
+                <button class="btn btn--primary btn--lg" id="showFiltersBtn">
+                    <i class="fas fa-filter"></i>
+                    مشاهده فیلترها
+                </button>
+            </div>
+        </section>
+
+        <!-- Advanced Filters Section-->
+        <section class="advanced-filters-section" id="filtersContainer" style="display: none;">
+            <div class="container">
+                <div class="filters-header">
+                    <h2 class="filters-title">
+                        <i class="fas fa-filter"></i>
+                        فیلترهای پیشرفته
+                    </h2>
+                    <div class="filters-actions">
+                        <button class="btn btn--outline btn--sm" id="resetAllFilters">
+                            <i class="fas fa-redo"></i>
+                            بازنشانی همه
+                        </button>
+                        <button class="btn btn--primary btn--sm" id="applyFilters">
+                            <i class="fas fa-check"></i>
+                            اعمال فیلترها
+                        </button>
+                        <button class="btn btn--outline btn--sm" id="hideFiltersBtn">
+                            <i class="fas fa-times"></i>
+                            بستن فیلترها
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Horizontal Filters Bar -->
+                <div class="filters-horizontal-bar">
+                    <!-- Category Filter -->
+                    <div class="filter-group-horizontal">
+                        <label class="filter-group-label">
+                            <i class="fas fa-folder"></i>
+                            دسته‌بندی
+                        </label>
+                        <div class="filter-options-horizontal">
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="all" checked>
+                                <span class="checkmark"></span>
+                                همه دسته‌ها
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="shopify">
+                                <span class="checkmark"></span>
+                                فروشگاهی
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="company">
+                                <span class="checkmark"></span>
+                                شرکتی
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="personal">
+                                <span class="checkmark"></span>
+                                شخصی
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="blog">
+                                <span class="checkmark"></span>
+                                بلاگ
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="portfolio">
+                                <span class="checkmark"></span>
+                                نمونه کار
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="filter-group-horizontal">
+                        <label class="filter-group-label">
+                            <i class="fas fa-tag"></i>
+                            محدوده قیمت
+                        </label>
+                        <div class="price-range-horizontal">
+                            <div class="price-inputs-horizontal">
+                                <input type="number" id="minPrice" placeholder="حداقل" class="price-input">
+                                <span class="price-separator">تا</span>
+                                <input type="number" id="maxPrice" placeholder="حداکثر" class="price-input">
+                                <span class="price-currency">دلار</span>
+                            </div>
+                            <div class="price-presets-horizontal">
+                                <button class="price-preset" data-min="0" data-max="50000">زیر ۵۰ هزار</button>
+                                <button class="price-preset" data-min="50000" data-max="100000">۵۰-۱۰۰ هزار</button>
+                                <button class="price-preset" data-min="100000" data-max="200000">۱۰۰-۲۰۰ هزار</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Filter -->
+                    <div class="filter-group-horizontal">
+                        <label class="filter-group-label">
+                            <i class="fas fa-star"></i>
+                            ویژگی‌ها
+                        </label>
+                        <div class="filter-options-horizontal">
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="responsive">
+                                <span class="checkmark"></span>
+                                واکنش‌گرا
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="seo">
+                                <span class="checkmark"></span>
+                                سئو بهینه
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="support">
+                                <span class="checkmark"></span>
+                                پشتیبانی
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="customizable">
+                                <span class="checkmark"></span>
+                                قابل سفارشی‌سازی
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="fast">
+                                <span class="checkmark"></span>
+                                سرعت بالا
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sort Filter -->
+                    <div class="filter-group-horizontal">
+                        <label class="filter-group-label">
+                            <i class="fas fa-sort"></i>
+                            مرتب‌سازی
+                        </label>
+                        <div class="sort-section-horizontal">
+                            <select class="sort-select-horizontal" id="sortBy">
+                                <option value="newest">جدیدترین</option>
+                                <option value="popular">محبوب‌ترین</option>
+                                <option value="price-low">قیمت: کم به زیاد</option>
+                                <option value="price-high">قیمت: زیاد به کم</option>
+                                <option value="rating">بالاترین امتیاز</option>
+                                <option value="sales">پرفروش‌ترین</option>
+                            </select>
+
+                            <div class="layout-options-horizontal">
+                                <button class="layout-btn active" data-layout="grid">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="layout-btn" data-layout="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Filters -->
+                <div class="active-filters" id="activeFiltersContainer">
+                    <span class="active-filters-label">فیلترهای فعال:</span>
+                    <div class="active-filters-list" id="activeFiltersList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Templates Grid -->
+        <section class="templates-results-section">
+            <div class="container">
+                <div class="results-header">
+                    <div class="results-info">
+                        <h2 class="results-title">همه قالب‌ها</h2>
+                        <span class="results-count" id="resultsCount">۱۲ قالب</span>
+                    </div>
+                    <div class="results-actions">
+                        <button class="btn btn--outline btn--sm" id="compareTemplates">
+                            <i class="fas fa-exchange-alt"></i>
+                            مقایسه قالب‌ها
+                        </button>
+                    </div>
+                </div>
+
+                <div class="templates-container">
+                    <div class="templates-grid" id="templatesGrid" data-layout="grid">
+                        <!-- Templates will be loaded here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Load More -->
+                <div class="load-more-section">
+                    <button class="btn btn--primary btn--lg" id="loadMoreBtn">
+                        <i class="fas fa-plus"></i>
+                        نمایش قالب‌های بیشتر
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% endblock %}
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    {% block extra_js %}
+    <script>
+        // ==================== DATA ====================
+        const templatesData = [
+            {
+                id: 1,
+                title: "قالب فروشگاهی مدرن",
+                description: "قالب کاملاً واکنش‌گرا با امکانات کامل فروشگاهی و طراحی مدرن برای راه‌اندازی فروشگاه آنلاین حرفه‌ای",
+                price: 50000,
+                originalPrice: 75000,
+                category: "shopify",
+                sales: 89,
+                image: "/Images and SVGs/hero-template-1.png",
+                badges: ["پرفروش", "جدید"],
+                features: ["responsive", "seo", "support", "customizable"]
+            },
+            {
+                id: 2,
+                title: "قالب شرکتی حرفه‌ای",
+                description: "طراحی سازمانی مدرن با قابلیت‌های پیشرفته و رابط کاربری زیبا برای شرکت‌ها و سازمان‌ها",
+                price: 75000,
+                originalPrice: null,
+                category: "company",
+                sales: 67,
+                image: "/Images and SVGs/hero-template-2.png",
+                badges: ["پرامتیاز"],
+                features: ["responsive", "seo", "support", "fast"]
+            },
+            {
+                id: 3,
+                title: "قالب شخصی خلاق",
+                description: "طراحی مینیمال و خلاقانه برای افراد با قابلیت‌های شخصی‌سازی پیشرفته برای رزومه و نمونه کار",
+                price: 35000,
+                originalPrice: null,
+                category: "personal",
+                sales: 45,
+                image: "/Images and SVGs/hero-template-3.png",
+                badges: ["اقتصادی"],
+                features: ["responsive", "customizable"]
+            },
+            {
+                id: 4,
+                title: "قالب بلاگ مدرن",
+                description: "طراحی زیبا و بهینه برای وبلاگ‌نویسی با سرعت بارگذاری بالا و امکانات مدیریت محتوای پیشرفته",
+                price: 45000,
+                originalPrice: 60000,
+                category: "blog",
+                sales: 34,
+                image: "/Images and SVGs/hero-template-1.png",
+                badges: ["جدید"],
+                features: ["responsive", "seo", "support", "fast"]
+            },
+            {
+                id: 5,
+                title: "قالب نمونه کار",
+                description: "قالب حرفه‌ای برای نمایش نمونه کارها با گالری زیبا و امکانات نمایش پیشرفته آثار هنری و طراحی",
+                price: 55000,
+                originalPrice: null,
+                category: "portfolio",
+                sales: 56,
+                image: "/Images and SVGs/hero-template-2.png",
+                badges: ["پرفروش"],
+                features: ["responsive", "seo", "customizable"]
+            },
+            {
+                id: 6,
+                title: "قالب آموزشی",
+                description: "قالب مناسب برای سایت‌های آموزشی با امکانات پیشرفته دوره‌های آنلاین و سیستم مدیریت آموزش",
+                price: 65000,
+                originalPrice: 80000,
+                category: "education",
+                sales: 42,
+                image: "/Images and SVGs/hero-template-3.png",
+                badges: ["جدید", "پرامتیاز"],
+                features: ["responsive", "seo", "support", "fast", "customizable"]
+            }
+        ];
+
+        // ==================== STATE MANAGEMENT ====================
+        let currentState = {
+            templates: [...templatesData],
+            displayedCount: 6,
+            activeFilters: {
+                categories: ['all'],
+                priceRange: { min: 0, max: 1000000 },
+                features: [],
+                sortBy: 'newest',
+                searchTerm: '',
+                layout: 'grid'
+            }
+        };
+
+        // ==================== DOM ELEMENTS ====================
+        const elements = {
+            // Mobile Menu
+            mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+            mainNav: document.getElementById('mainNav'),
+
+            // Search
+            mainSearchInput: document.getElementById('mainSearchInput'),
+            mainSearchBtn: document.getElementById('mainSearchBtn'),
+            searchTags: document.querySelectorAll('.search-tag'),
+
+            // Filters
+            categoryCheckboxes: document.querySelectorAll('input[name="category"]'),
+            minPrice: document.getElementById('minPrice'),
+            maxPrice: document.getElementById('maxPrice'),
+            pricePresets: document.querySelectorAll('.price-preset'),
+            featureCheckboxes: document.querySelectorAll('input[name="features"]'),
+            sortBy: document.getElementById('sortBy'),
+            layoutBtns: document.querySelectorAll('.layout-btn'),
+            resetAllFilters: document.getElementById('resetAllFilters'),
+            applyFilters: document.getElementById('applyFilters'),
+            showFiltersBtn: document.getElementById('showFiltersBtn'),
+            hideFiltersBtn: document.getElementById('hideFiltersBtn'),
+            filtersContainer: document.getElementById('filtersContainer'),
+
+            // Active Filters
+            activeFiltersList: document.getElementById('activeFiltersList'),
+            activeFiltersContainer: document.getElementById('activeFiltersContainer'),
+
+            // Results
+            templatesGrid: document.getElementById('templatesGrid'),
+            resultsCount: document.getElementById('resultsCount'),
+            loadMoreBtn: document.getElementById('loadMoreBtn'),
+            compareTemplates: document.getElementById('compareTemplates'),
+
+            // Scroll to Top
+            scrollToTop: document.getElementById('scrollToTop')
+        };
+
+        // ==================== INITIALIZATION ====================
+        function init() {
+            setupEventListeners();
+            setupFiltersToggle();
+            renderTemplates();
+            updateActiveFiltersDisplay();
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        function setupEventListeners() {
+            // Mobile Menu
+            elements.mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+            // Search
+            elements.mainSearchInput.addEventListener('input', debounce(handleSearch, 300));
+            elements.mainSearchBtn.addEventListener('click', handleSearch);
+            elements.searchTags.forEach(tag => {
+                tag.addEventListener('click', handleQuickSearch);
+            });
+
+            // Filters
+            elements.categoryCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', handleCategoryFilter);
+            });
+
+            elements.minPrice.addEventListener('input', debounce(handlePriceFilter, 500));
+            elements.maxPrice.addEventListener('input', debounce(handlePriceFilter, 500));
+
+            elements.pricePresets.forEach(preset => {
+                preset.addEventListener('click', handlePricePreset);
+            });
+
+            elements.featureCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', handleFeatureFilter);
+            });
+
+            elements.sortBy.addEventListener('change', handleSort);
+            elements.layoutBtns.forEach(btn => {
+                btn.addEventListener('click', handleLayoutChange);
+            });
+
+            elements.resetAllFilters.addEventListener('click', resetAllFilters);
+            elements.applyFilters.addEventListener('click', applyAllFilters);
+
+            // Results
+            elements.loadMoreBtn.addEventListener('click', loadMoreTemplates);
+            elements.compareTemplates.addEventListener('click', handleCompare);
+
+            // Scroll to Top
+            window.addEventListener('scroll', toggleScrollToTop);
+            elements.scrollToTop.addEventListener('click', scrollToTop);
+        }
+
+        // ==================== FILTERS TOGGLE FUNCTIONALITY ====================
+        function setupFiltersToggle() {
+            elements.showFiltersBtn.addEventListener('click', function() {
+                elements.filtersContainer.style.display = 'block';
+                elements.showFiltersBtn.style.display = 'none';
+
+                // انیمیشن اسکرول به بخش فیلترها
+                elements.filtersContainer.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+
+            elements.hideFiltersBtn.addEventListener('click', function() {
+                elements.filtersContainer.style.display = 'none';
+                elements.showFiltersBtn.style.display = 'block';
+            });
+        }
+
+        // ==================== MOBILE MENU ====================
+        function toggleMobileMenu() {
+            const isOpen = elements.mainNav.classList.contains('active');
+
+            if (isOpen) {
+                elements.mainNav.classList.remove('active');
+                elements.mobileMenuBtn.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            } else {
+                elements.mainNav.classList.add('active');
+                elements.mobileMenuBtn.classList.add('active');
+                document.body.classList.add('menu-open');
+            }
+        }
+
+        // ==================== SEARCH FUNCTIONALITY ====================
+        function handleSearch() {
+            const searchTerm = elements.mainSearchInput.value.trim().toLowerCase();
+            currentState.activeFilters.searchTerm = searchTerm;
+            applyAllFilters();
+        }
+
+        function handleQuickSearch(e) {
+            const searchTerm = e.target.dataset.search;
+            elements.mainSearchInput.value = searchTerm;
+            currentState.activeFilters.searchTerm = searchTerm;
+            applyAllFilters();
+        }
+
+        // ==================== FILTER FUNCTIONS ====================
+        function handleCategoryFilter(e) {
+            const value = e.target.value;
+            const isChecked = e.target.checked;
+
+            if (value === 'all' && isChecked) {
+                // If "all" is checked, uncheck others
+                elements.categoryCheckboxes.forEach(checkbox => {
+                    if (checkbox.value !== 'all') {
+                        checkbox.checked = false;
+                    }
+                });
+                currentState.activeFilters.categories = ['all'];
+            } else if (value !== 'all' && isChecked) {
+                // If specific category is checked, uncheck "all"
+                const allCheckbox = document.querySelector('input[name="category"][value="all"]');
+                allCheckbox.checked = false;
+
+                if (!currentState.activeFilters.categories.includes(value)) {
+                    currentState.activeFilters.categories.push(value);
+                }
+            } else if (value !== 'all' && !isChecked) {
+                // If specific category is unchecked, remove it
+                currentState.activeFilters.categories = currentState.activeFilters.categories.filter(cat => cat !== value);
+
+                // If no categories selected, check "all"
+                if (currentState.activeFilters.categories.length === 0) {
+                    const allCheckbox = document.querySelector('input[name="category"][value="all"]');
+                    allCheckbox.checked = true;
+                    currentState.activeFilters.categories = ['all'];
+                }
+            }
+        }
+
+        function handlePriceFilter() {
+            const min = elements.minPrice.value ? parseInt(elements.minPrice.value) : 0;
+            const max = elements.maxPrice.value ? parseInt(elements.maxPrice.value) : 1000000;
+
+            currentState.activeFilters.priceRange = { min, max };
+        }
+
+        function handlePricePreset(e) {
+            const min = parseInt(e.target.dataset.min);
+            const max = parseInt(e.target.dataset.max);
+
+            elements.minPrice.value = min;
+            elements.maxPrice.value = max;
+            currentState.activeFilters.priceRange = { min, max };
+
+            // Update preset buttons active state
+            elements.pricePresets.forEach(preset => {
+                preset.classList.remove('active');
+            });
+            e.target.classList.add('active');
+        }
+
+        function handleFeatureFilter(e) {
+            const value = e.target.value;
+            const isChecked = e.target.checked;
+
+            if (isChecked) {
+                if (!currentState.activeFilters.features.includes(value)) {
+                    currentState.activeFilters.features.push(value);
+                }
+            } else {
+                currentState.activeFilters.features = currentState.activeFilters.features.filter(feature => feature !== value);
+            }
+        }
+
+        function handleSort() {
+            currentState.activeFilters.sortBy = elements.sortBy.value;
+            applyAllFilters();
+        }
+
+        function handleLayoutChange(e) {
+            const layout = e.target.dataset.layout;
+
+            elements.layoutBtns.forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+
+            currentState.activeFilters.layout = layout;
+            elements.templatesGrid.dataset.layout = layout;
+        }
+
+        function resetAllFilters() {
+            // Reset checkboxes
+            elements.categoryCheckboxes.forEach(checkbox => {
+                checkbox.checked = checkbox.value === 'all';
+            });
+
+            // Reset price inputs
+            elements.minPrice.value = '';
+            elements.maxPrice.value = '';
+            elements.pricePresets.forEach(preset => preset.classList.remove('active'));
+
+            // Reset features
+            elements.featureCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Reset sort
+            elements.sortBy.value = 'newest';
+
+            // Reset search
+            elements.mainSearchInput.value = '';
+
+            // Reset state
+            currentState.activeFilters = {
+                categories: ['all'],
+                priceRange: { min: 0, max: 1000000 },
+                features: [],
+                sortBy: 'newest',
+                searchTerm: '',
+                layout: 'grid'
+            };
+
+            // Reset layout
+            elements.layoutBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.layout === 'grid');
+            });
+            elements.templatesGrid.dataset.layout = 'grid';
+
+            applyAllFilters();
+        }
+
+        function applyAllFilters() {
+            let filteredTemplates = templatesData.filter(template => {
+                // Category filter
+                if (!currentState.activeFilters.categories.includes('all') &&
+                    !currentState.activeFilters.categories.includes(template.category)) {
+                    return false;
+                }
+
+                // Price filter
+                if (template.price < currentState.activeFilters.priceRange.min ||
+                    template.price > currentState.activeFilters.priceRange.max) {
+                    return false;
+                }
+
+                // Features filter
+                if (currentState.activeFilters.features.length > 0) {
+                    const hasAllFeatures = currentState.activeFilters.features.every(feature =>
+                        template.features.includes(feature)
+                    );
+                    if (!hasAllFeatures) return false;
+                }
+
+                // Search filter
+                if (currentState.activeFilters.searchTerm) {
+                    const searchableText = template.title + ' ' + template.description + ' ' + template.category;
+                    if (!searchableText.toLowerCase().includes(currentState.activeFilters.searchTerm.toLowerCase())) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            // Sort templates
+            filteredTemplates.sort((a, b) => {
+                switch (currentState.activeFilters.sortBy) {
+                    case 'price-low':
+                        return a.price - b.price;
+                    case 'price-high':
+                        return b.price - a.price;
+                    case 'rating':
+                        return b.rating - a.rating;
+                    case 'popular':
+                        return b.reviews - a.reviews;
+                    case 'sales':
+                        return b.sales - a.sales;
+                    case 'newest':
+                    default:
+                        return b.id - a.id;
+                }
+            });
+
+            currentState.templates = filteredTemplates;
+            currentState.displayedCount = 6;
+            renderTemplates();
+            updateActiveFiltersDisplay();
+        }
+
+        // ==================== PRICE DISPLAY FORMAT ====================
+        function formatPrice(price) {
+            const dollar = price.toLocaleString('fa-IR');
+            const rial = (price * 50000).toLocaleString('fa-IR'); // نرخ تبدیل دلار به ریال
+            return `
+                <div class="price-display">
+                    <span class="price-dollar">${dollar} دلار</span>
+                    <span class="price-rial">${rial} ریال</span>
+                </div>
+            `;
+        }
+
+        function formatOldPrice(price) {
+            const dollar = price.toLocaleString('fa-IR');
+            const rial = (price * 50000).toLocaleString('fa-IR');
+            return `
+                <div class="price-display old-price">
+                    <span class="price-dollar">${dollar} دلار</span>
+                    <span class="price-rial">${rial} ریال</span>
+                </div>
+            `;
+        }
+
+        // ==================== TEMPLATE RENDERING ====================
+        function renderTemplates() {
+            const templatesToShow = currentState.templates.slice(0, currentState.displayedCount);
+
+            if (templatesToShow.length === 0) {
+                elements.templatesGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>هیچ قالبی یافت نشد</h3>
+                        <p>لطفاً فیلترهای جستجو را تغییر دهید یا عبارت دیگری را امتحان کنید</p>
+                    </div>
+                `;
+                elements.resultsCount.textContent = '۰ قالب';
+                elements.loadMoreBtn.style.display = 'none';
+                return;
+            }
+
+            elements.templatesGrid.innerHTML = templatesToShow.map(template => `
+                <div class="template-card" data-template-id="${template.id}">
+                    <div class="template-image">
+                        <img src="${template.image}" alt="${template.title}" class="template-img">
+                        <div class="template-overlay">
+                            <!-- حذف دکمه‌های مشاهده سریع و جزئیات کامل -->
+                        </div>
+                        <div class="template-badges">
+                            ${template.badges.map(badge => `<span class="badge badge--primary">${badge}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">${template.title}</h3>
+                        <p class="template-description">${template.description}</p>
+
+                        <div class="template-meta">
+                            <span class="template-category">${getCategoryName(template.category)}</span>
+                        </div>
+
+                        <div class="template-footer">
+                            <div class="template-price">
+                                ${formatPrice(template.price)}
+                                ${template.originalPrice ? formatOldPrice(template.originalPrice) : ''}
+                            </div>
+                            <a href="/template-detail/?id=${template.id}" class="view-btn">
+                                <i class="fas fa-eye"></i>
+                                مشاهده
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            elements.resultsCount.textContent = `${currentState.templates.length.toLocaleString('fa-IR')} قالب`;
+            elements.loadMoreBtn.style.display = currentState.templates.length > currentState.displayedCount ? 'block' : 'none';
+        }
+
+        function getCategoryName(category) {
+            const categories = {
+                'shopify': 'فروشگاهی',
+                'company': 'شرکتی',
+                'personal': 'شخصی',
+                'blog': 'بلاگ',
+                'portfolio': 'نمونه کار',
+                'education': 'آموزشی'
+            };
+            return categories[category] || category;
+        }
+
+        // ==================== ACTIVE FILTERS DISPLAY ====================
+        function updateActiveFiltersDisplay() {
+            const activeFilters = [];
+
+            // Category filters
+            if (!currentState.activeFilters.categories.includes('all')) {
+                currentState.activeFilters.categories.forEach(cat => {
+                    activeFilters.push({
+                        text: `دسته: ${getCategoryName(cat)}`,
+                        type: 'category',
+                        value: cat
+                    });
+                });
+            }
+
+            // Price filter
+            if (currentState.activeFilters.priceRange.min > 0 || currentState.activeFilters.priceRange.max < 1000000) {
+                activeFilters.push({
+                    text: `قیمت: ${currentState.activeFilters.priceRange.min.toLocaleString('fa-IR')} - ${currentState.activeFilters.priceRange.max.toLocaleString('fa-IR')} دلار`,
+                    type: 'price'
+                });
+            }
+
+            // Feature filters
+            if (currentState.activeFilters.features.length > 0) {
+                const featureNames = {
+                    'responsive': 'واکنش‌گرا',
+                    'seo': 'سئو بهینه',
+                    'support': 'پشتیبانی',
+                    'customizable': 'قابل سفارشی‌سازی',
+                    'fast': 'سرعت بالا'
+                };
+
+                currentState.activeFilters.features.forEach(feature => {
+                    activeFilters.push({
+                        text: `ویژگی: ${featureNames[feature]}`,
+                        type: 'feature',
+                        value: feature
+                    });
+                });
+            }
+
+            // Search term
+            if (currentState.activeFilters.searchTerm) {
+                activeFilters.push({
+                    text: `جستجو: "${currentState.activeFilters.searchTerm}"`,
+                    type: 'search'
+                });
+            }
+
+            // Update display
+            if (activeFilters.length === 0) {
+                elements.activeFiltersContainer.style.display = 'none';
+            } else {
+                elements.activeFiltersContainer.style.display = 'flex';
+                elements.activeFiltersList.innerHTML = activeFilters.map(filter => `
+                    <div class="active-filter">
+                        ${filter.text}
+                        <button type="button" onclick="removeFilter('${filter.type}', '${filter.value || ''}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function loadMoreTemplates() {
+            currentState.displayedCount += 6;
+            renderTemplates();
+        }
+
+        function toggleScrollToTop() {
+            if (window.pageYOffset > 300) {
+                elements.scrollToTop.classList.add('show');
+            } else {
+                elements.scrollToTop.classList.remove('show');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ==================== GLOBAL FUNCTIONS ====================
+        window.removeFilter = function(type, value) {
+            switch (type) {
+                case 'category':
+                    currentState.activeFilters.categories = currentState.activeFilters.categories.filter(cat => cat !== value);
+                    document.querySelector(`input[name="category"][value="${value}"]`).checked = false;
+
+                    if (currentState.activeFilters.categories.length === 0) {
+                        document.querySelector('input[name="category"][value="all"]').checked = true;
+                        currentState.activeFilters.categories = ['all'];
+                    }
+                    break;
+
+                case 'price':
+                    elements.minPrice.value = '';
+                    elements.maxPrice.value = '';
+                    elements.pricePresets.forEach(preset => preset.classList.remove('active'));
+                    currentState.activeFilters.priceRange = { min: 0, max: 1000000 };
+                    break;
+
+                case 'feature':
+                    currentState.activeFilters.features = currentState.activeFilters.features.filter(feature => feature !== value);
+                    document.querySelector(`input[name="features"][value="${value}"]`).checked = false;
+                    break;
+
+                case 'search':
+                    elements.mainSearchInput.value = '';
+                    currentState.activeFilters.searchTerm = '';
+                    break;
+            }
+
+            applyAllFilters();
+        };
+
+        window.handleCompare = function() {
+            showToast('قابلیت مقایسه قالب‌ها به زودی فعال خواهد شد', 'info');
+        };
+
+        function showToast(message, type = 'info') {
+            // Simple toast implementation
+            const toast = document.createElement('div');
+            toast.className = `toast toast--${type}`;
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                animation: slideDown 0.3s ease;
+            `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Add CSS for animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    transform: translateX(-50%) translateY(-100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(-50%) translateY(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ==================== INITIALIZE ====================
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    {% endblock %}
+
+</body>
+</html>

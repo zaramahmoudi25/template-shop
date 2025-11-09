@@ -1,235 +1,85 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تماس با ما - فروشگاه قالب</title>
-    <meta name="description" content="تماس با فروشگاه قالب - پشتیبانی ۲۴ ساعته">
 
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/components.css" %}">
-    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
-    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
-    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
-    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+{% block title %}تماس با ما - فروشگاه قالب{% endblock %}
+{% block description %}تماس با فروشگاه قالب - پشتیبانی ۲۴/۷{% endblock %}
 
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+    {% block extra_css %}
     <style>
-        .hero--contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                .services-hero {
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
             color: white;
-            padding: 6rem 0;
+            padding: 6rem 0 4rem;
             text-align: center;
         }
-        
-        .hero--contact .hero__title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
+
+        .services-hero__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             color: white;
         }
-        
-        .hero--contact .hero__description {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 0 auto;
+
+        .services-hero__subtitle {
+            font-size: 1.2rem;
             opacity: 0.9;
             color: white;
-        }
-        
-        .contact-section {
-            padding: 5rem 0;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-        
-        .contact-form-container,
-        .contact-info {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid var(--gray-200);
-            height: fit-content;
-        }
-        
-        .contact-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .contact-method {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--gray-50);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-method:hover {
-            background: var(--gray-100);
-            transform: translateX(-5px);
-        }
-        
-        .contact-method__icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        
-        .contact-method__content h3 {
-            margin-bottom: 0.5rem;
-            color: var(--gray-900);
-            font-size: 1.1rem;
-        }
-        
-        .contact-method__content p {
-            margin: 0;
-            color: var(--gray-700);
-            line-height: 1.5;
-        }
-        
-        .social-links {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--gray-200);
-        }
-        
-        .social-links h3 {
-            margin-bottom: 1rem;
-            color: var(--gray-900);
-        }
-        
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .hero--contact .hero__title {
-                font-size: 2.2rem;
-            }
-            
-            .hero--contact .hero__description {
-                font-size: 1.1rem;
-            }
-            
-            .contact-form-container,
-            .contact-info {
-                padding: 2rem 1.5rem;
-            }
+            max-width: 600px;
+            margin: 0 auto;
         }
     </style>
-</head>
+    {% endblock %}
+
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-                <div class="header__logo">
-                    <a href="/index/" class="logo-link">
-                        <img src="/images/logo.png" alt="فروشگاه قالب" class="logo">
-                        <span class="logo-text">قالب‌شاپ</span>
-                    </a>
-                </div>
 
-                <nav class="header__nav" id="mainNav">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="/index/" class="nav-link">خانه</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/template/" class="nav-link">قالب‌ها</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/about/" class="nav-link">درباره ما</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/contact/" class="nav-link active">تماس با ما</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <div class="header__actions">
-                    <div class="auth-buttons">
-                        <a href="/login/" class="btn btn-outline">ورود</a>
-                        <a href="/signup/" class="btn btn-primary">ثبت‌نام</a>
-                    </div>
-
-                    <div class="cart-icon">
-                        <a href="/cart/" class="cart-link">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">0</span>
-                        </a>
-                    </div>
-
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
+    {% block content %}
     <main class="main">
-        <!-- Hero Section -->
-        <section class="hero hero--contact">
+        <!-- Contact Hero Section -->
+        <section class="page-hero">
             <div class="container">
-                <div class="hero__content">
-                    <h1 class="hero__title">تماس با ما</h1>
-                    <p class="hero__description">
-                        ما اینجا هستیم تا به سوالات شما پاسخ دهیم و در راه‌اندازی وبسایتتان کمک کنیم
-                    </p>
-                </div>
+
             </div>
         </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section">
+  <!-- Hero Section -->
+        <section class="services-hero">
             <div class="container">
-                <div class="contact-grid">
-                    <!-- Contact Form -->
-                    <div class="contact-form-container">
-                        <h2 class="section-title">پیام بفرستید</h2>
+                <h1 class="services-hero__title">تماس با ما</h1>
+                <p class="services-hero__subtitle">
+آماده پاسخگویی به سوالات و پیشنهادات شما هستیم                </p>
+            </div>
+        </section>
+        <!-- Contact Section - Enhanced -->
+        <section class="page-section contact-enhanced">
+
+            <div class="container">
+
+
+                <div class="contact-cards-enhanced">
+                    <!-- Contact Form Card -->
+                    <div class="contact-card-enhanced">
+                        <h2 class="contact-card-enhanced__title">
+                            <i class="fas fa-paper-plane"></i>
+                            پیام بفرستید
+                        </h2>
                         <form class="contact-form" id="contactForm">
                             <div class="form-group">
                                 <label for="name" class="form-label">نام کامل *</label>
-                                <input type="text" id="name" name="name" class="form-control" required>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="نام و نام خانوادگی خود را وارد کنید" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="form-label">ایمیل *</label>
-                                <input type="email" id="email" name="email" class="form-control" required>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="subject" class="form-label">موضوع *</label>
-                                <input type="text" id="subject" name="subject" class="form-control" required>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="موضوع پیام خود را وارد کنید" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="message" class="form-label">پیام *</label>
-                                <textarea id="message" name="message" rows="6" class="form-control" required></textarea>
+                                <textarea id="message" name="message" rows="5" class="form-control" placeholder="متن پیام خود را اینجا بنویسید..." required></textarea>
                             </div>
 
                             <button type="submit" class="btn btn--primary btn--lg w-full">
@@ -239,10 +89,13 @@
                         </form>
                     </div>
 
-                    <!-- Contact Info -->
-                    <div class="contact-info">
-                        <h2 class="section-title">اطلاعات تماس</h2>
-                        
+                    <!-- Contact Info Card -->
+                    <div class="contact-card-enhanced">
+                        <h2 class="contact-card-enhanced__title">
+                            <i class="fas fa-info-circle"></i>
+                            اطلاعات تماس
+                        </h2>
+
                         <div class="contact-methods">
                             <div class="contact-method">
                                 <div class="contact-method__icon">
@@ -288,8 +141,8 @@
 
                         <!-- Social Links -->
                         <div class="social-links">
-                            <h3>ما را دنبال کنید</h3>
-                            <div class="flex gap-4">
+                            <h3 class="social-links-title">ما را دنبال کنید</h3>
+                            <div class="social-links-flex">
                                 <a href="#" class="social-link" aria-label="اینستاگرام">
                                     <i class="fab fa-instagram"></i>
                                 </a>
@@ -308,241 +161,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- FAQ Section -->
-        <section class="section bg-gray-50">
-            <div class="container">
-                <h2 class="section-title text-center">سوالات متداول</h2>
-                <div class="faq-container mt-8">
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            چگونه می‌توانم قالب خریداری شده را دانلود کنم؟
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>پس از تکمیل خرید، به صفحه پنل کاربری خود مراجعه کرده و در بخش "خریدهای من" می‌توانید قالب خریداری شده را دانلود کنید. همچنین لینک دانلود به ایمیل شما نیز ارسال می‌شود.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            آیا قالب‌ها واکنش‌گرا هستند؟
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>بله، تمام قالب‌های ما به طور کامل واکنش‌گرا هستند و در تمام دستگاه‌ها شامل موبایل، تبلت و دسکتاپ به خوبی نمایش داده می‌شوند.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            چگونه می‌توانم پشتیبانی دریافت کنم؟
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>می‌توانید از طریق فرم تماس با ما، تیکت پشتیبانی در پنل کاربری، یا تماس تلفنی با ما در ارتباط باشید. تیم پشتیبانی ما ۲۴/۷ آماده خدمت‌رسانی است.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            آیا قالب‌ها قابل سفارشی‌سازی هستند؟
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>بله، تمام قالب‌های ما کاملاً قابل سفارشی‌سازی هستند. شما می‌توانید رنگ‌ها، فونت‌ها، محتوا و المان‌های مختلف را به سلیقه خود تغییر دهید.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            گارانتی بازگشت وجه به چه صورت است؟
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>ما به کیفیت محصولات خود اطمینان داریم. در صورت عدم رضایت از قالب خریداری شده، تا ۷ روز پس از خرید می‌توانید درخواست بازگشت وجه دهید.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-  <footer class="footer">
-        <div class="container">
-            <div class="footer__content">
-                <div class="footer__col">
-                    <div class="footer__logo">
-                        <img src="/images/logo.png" alt="فروشگاه قالب" class="footer-logo">
-                        <span class="footer-logo-text">قالب‌شاپ</span>
-                    </div>
-                    <p class="footer__description">
-                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" class="social-link" aria-label="اینستاگرام">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="تلگرام">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="توییتر">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="لینکدین">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">لینک‌های سریع</h3>
-                    <ul class="footer__links">
-                        <li><a href="/index/" class="footer__link">خانه</a></li>
-                        <li><a href="/template/" class="footer__link">قالب‌ها</a></li>
-                        <li><a href="/about/" class="footer__link">درباره ما</a></li>
-                        <li><a href="/contact/" class="footer__link">تماس با ما</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">خدمات</h3>
-                    <ul class="footer__links">
-                        <li><a href="/custom-design/" class="footer__link">طراحی سفارشی</a></li>
-                        <li><a href="/support/" class="footer__link">پشتیبانی</a></li>
-                        <li><a href="/docs/" class="footer__link">مستندات</a></li>
-                        <li><a href="/affiliate/" class="footer__link">همکاری در فروش</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">تماس با ما</h3>
-                    <div class="footer__contact">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>آدرس</strong>
-                                <span>تهران، خیابان ولیعصر</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>تلفن</strong>
-                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ایمیل</strong>
-                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ساعات کاری</strong>
-                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer__bottom">
-                <div class="footer-bottom__content">
-                    <p class="copyright">
-                        &copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.
-                    </p>
-                    <div class="footer-bottom__links">
-                        <a href="/privacy/" class="footer-bottom__link">حریم خصوصی</a>
-                        <a href="/terms/" class="footer-bottom__link">قوانین و مقررات</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <script>
-        // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        const body = document.body;
-
-        mobileMenuBtn.addEventListener('click', () => {
-            const isOpen = mainNav.classList.contains('active');
-            
-            if (isOpen) {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                body.classList.remove('menu-open');
-            } else {
-                mainNav.classList.add('active');
-                mobileMenuBtn.classList.add('active');
-                body.classList.add('menu-open');
-            }
-        });
-
-        // FAQ functionality
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
-                const isActive = faqItem.classList.contains('faq-item--active');
-                
-                // Close all FAQ items
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('faq-item--active');
-                });
-                
-                // If clicked item wasn't active, open it
-                if (!isActive) {
-                    faqItem.classList.add('faq-item--active');
-                }
-            });
-        });
-
-        // Contact form handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('پیام شما با موفقیت ارسال شد! به زودی با شما تماس خواهیم گرفت.');
-                this.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-
-        // Scroll to Top
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
-            }
-        });
-
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    </script>
-</body>
-</html>
+    {% endblock %}

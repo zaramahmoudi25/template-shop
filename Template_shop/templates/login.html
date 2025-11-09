@@ -8,75 +8,98 @@
 
     <link rel="stylesheet" href="{% static "css/base.css" %}">
     <link rel="stylesheet" href="{% static "css/components.css" %}">
+    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+    <link rel="stylesheet" href="{% static "css/landing.css" %}">
     <link rel="stylesheet" href="{% static "css/layouts.css" %}">
     <link rel="stylesheet" href="{% static "css/responsive.css" %}">
     <link rel="stylesheet" href="{% static "css/utilities.css" %}">
-    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
-    
-        .header {
-            background: #ffffff !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-bottom: 1px solid #e5e7eb;
+        /* Minimal Auth Header */
+        .auth-header-minimal {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
         }
-        
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        /* Auth Page without header and footer */
+        .auth-page {
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .auth-page .header,
+        .auth-page .footer {
+            display: none;
+        }
+
         .auth-section {
-            padding-top: 120px;
-            padding-bottom: 60px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
         }
-        
+
         .auth-container {
-            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
-        
-     
-        .header__inner {
-            background: #ffffff;
-        }
-        
-        .nav-list a {
-            color: #374151;
-        }
-        
-        .nav-list a:hover {
-            color: #6366f1;
-        }
-        
-        .logo-text {
-            color: #1f2937;
+
+        @media (max-width: 768px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
     </style>
 </head>
+
 <body class="auth-page">
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-                <div class="header__logo">
-                    <a href="/index/" class="logo-link">
-                        <img src="/images/logo.png" alt="فروشگاه قالب" class="logo">
-                        <span class="logo-text">قالب‌شاپ</span>
-                    </a>
-                </div>
-                <nav class="header__nav">
-                    <ul class="nav-list">
-                        <li><a href="/index/">خانه</a></li>
-                        <li><a href="/about/">درباره ما</a></li>
-                        <li><a href="/contact/">تماس با ما</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <!-- Simple Back Button -->
+    <div class="auth-header-minimal">
+        <a href="/templates/" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت
+        </a>
+    </div>
 
     <main class="main">
         <section class="auth-section">
             <div class="container">
                 <div class="auth-container">
+                    <!-- Auth Card -->
                     <div class="auth-card">
                         <div class="auth-header">
                             <h1 class="auth-title">ورود به حساب کاربری</h1>
@@ -125,13 +148,14 @@
                             </div>
 
                             <div class="auth-footer">
-                                <p>حساب کاربری ندارید؟ 
+                                <p>حساب کاربری ندارید؟
                                     <a href="/signup/" class="auth-link">ثبت‌نام کنید</a>
                                 </p>
                             </div>
                         </form>
                     </div>
 
+                    <!-- Auth Features -->
                     <div class="auth-features">
                         <div class="feature-item">
                             <i class="fas fa-shield-alt"></i>
@@ -153,102 +177,6 @@
             </div>
         </section>
     </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__content">
-                <div class="footer__col">
-                    <div class="footer__logo">
-                        <img src="/images/logo.png" alt="فروشگاه قالب" class="footer-logo">
-                        <span class="footer-logo-text">قالب‌شاپ</span>
-                    </div>
-                    <p class="footer__description">
-                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" class="social-link" aria-label="اینستاگرام">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="تلگرام">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="توییتر">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="لینکدین">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">لینک‌های سریع</h3>
-                    <ul class="footer__links">
-                        <li><a href="/index/" class="footer__link">خانه</a></li>
-                        <li><a href="/template/" class="footer__link">قالب‌ها</a></li>
-                        <li><a href="/about/" class="footer__link">درباره ما</a></li>
-                        <li><a href="/contact/" class="footer__link">تماس با ما</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">خدمات</h3>
-                    <ul class="footer__links">
-                        <li><a href="/custom-design/" class="footer__link">طراحی سفارشی</a></li>
-                        <li><a href="/support/" class="footer__link">پشتیبانی</a></li>
-                        <li><a href="/docs/" class="footer__link">مستندات</a></li>
-                        <li><a href="/affiliate/" class="footer__link">همکاری در فروش</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">تماس با ما</h3>
-                    <div class="footer__contact">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>آدرس</strong>
-                                <span>تهران، خیابان ولیعصر</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>تلفن</strong>
-                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ایمیل</strong>
-                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ساعات کاری</strong>
-                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer__bottom">
-                <div class="footer-bottom__content">
-                    <p class="copyright">
-                        &copy; ۱۴۰۳ فروشگاه قالب. تمامی حقوق محفوظ است.
-                    </p>
-                    <div class="footer-bottom__links">
-                        <a href="/privacy/" class="footer-bottom__link">حریم خصوصی</a>
-                        <a href="/terms/" class="footer-bottom__link">قوانین و مقررات</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script>
         // Password toggle functionality
@@ -282,7 +210,7 @@
             // Simulate login process
             setTimeout(() => {
                 alert('با موفقیت وارد شدید!');
-                window.location.href = '/Pages/dashboard.html';
+                window.location.href = '/dashboard/';
             }, 2000);
         });
 
