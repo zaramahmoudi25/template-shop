@@ -38,7 +38,7 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             padding: 4rem 0;
         }
@@ -46,7 +46,7 @@
         .service-card {
             background: white;
             border-radius: var(--border-radius-lg);
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--gray-200);
@@ -55,9 +55,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             position: relative;
-            min-height: 250px;
+            min-height: 320px;
+            cursor: pointer;
         }
         
         .service-card:hover {
@@ -67,8 +68,8 @@
         }
         
         .service-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
             border-radius: 50%;
             display: flex;
@@ -76,26 +77,148 @@
             justify-content: center;
             margin-bottom: 1.5rem;
             color: white;
-            font-size: 2rem;
+            font-size: 1.8rem;
+            flex-shrink: 0;
         }
         
-        .coming-soon-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--gray-700);
-            margin-top: 1rem;
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .service-description {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            flex-grow: 1;
         }
         
         .coming-soon-badge {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
             background: var(--warning-500);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
             font-size: 0.875rem;
             font-weight: 600;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        
+        .services-section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .services-section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+        
+        .services-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+            border-radius: 2px;
+        }
+        
+        .sub-services-row {
+            display: flex;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .sub-service-compact {
+            background: var(--gray-50);
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 80px;
+        }
+        
+        .sub-service-title-compact {
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .sub-service-title-compact i {
+            color: var(--primary-500);
+            font-size: 0.9rem;
+        }
+        
+        .platform-badges-compact {
+            display: flex;
+            gap: 0.3rem;
+            margin: 0.3rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .platform-badge-compact {
+            background: var(--primary-100);
+            color: var(--primary-700);
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .coming-soon-badge-compact {
+            background: var(--warning-500);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .services-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gray-300), transparent);
+            margin: 4rem 0;
+        }
+        
+        /* Ensure equal height for all cards */
+        .service-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .service-main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
         }
     </style>
 </head>
@@ -163,77 +286,155 @@
         <!-- Services Grid -->
         <section class="services-section">
             <div class="container">
+                <!-- Services Section -->
+                <div class="services-section-title">
+                    <h2>خدمات</h2>
+                </div>
+                
                 <div class="services-grid">
-                    <!-- Service 1 -->
+                    <!-- Service 1: YouTube Revenue -->
                     <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-robot"></i>
+                        <div class="service-card-content">
+                            <div class="service-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="service-main-content">
+                                <h3 class="service-title">نقد کردن درآمد یوتیوب</h3>
+                                <p class="service-description">
+                                    تبدیل درآمد دلاری یوتیوب به ریال و واریز به حساب بانکی ایرانی
+                                </p>
+                            </div>
+                            <div class="coming-soon-badge">به زودی</div>
                         </div>
-                        <div class="coming-soon-text">به زودی</div>
                     </div>
 
-                    <!-- Service 2 -->
+                    <!-- Service 2: Digital Products -->
                     <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-vr-cardboard"></i>
+                        <div class="service-card-content">
+                            <div class="service-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="service-main-content">
+                                <h3 class="service-title">فروش محصولات دیجیتال</h3>
+                                <p class="service-description">
+                                    پلتفرم فروش محصولات دیجیتال با درگاه‌های پرداخت بین‌المللی
+                                </p>
+                            </div>
+                            <div class="coming-soon-badge">به زودی</div>
                         </div>
-                        <div class="coming-soon-text">به زودی</div>
                     </div>
 
-                    <!-- Service 3 -->
+                    <!-- Service 3: AdSense Revenue -->
                     <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-chart-network"></i>
+                        <div class="service-card-content">
+                            <div class="service-icon">
+                                <i class="fas fa-ad"></i>
+                            </div>
+                            <div class="service-main-content">
+                                <h3 class="service-title">نقد کردن درآمد ادسنس</h3>
+                                <p class="service-description">
+                                    تبدیل درآمد گوگل ادسنس به ریال با بهترین نرخ
+                                </p>
+                                
+                                <div class="sub-services-row">
+                                    <!-- وبسایت -->
+                                    <div class="sub-service-compact">
+                                        <div class="sub-service-title-compact">
+                                            <i class="fas fa-globe"></i>
+                                            <span>وبسایت</span>
+                                        </div>
+                                        <div class="coming-soon-badge-compact">به زودی</div>
+                                    </div>
+                                    
+                                    <!-- اپلیکیشن موبایل -->
+                                    <div class="sub-service-compact">
+                                        <div class="sub-service-title-compact">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <span>موبایل</span>
+                                        </div>
+                                        <div class="platform-badges-compact">
+                                            <span class="platform-badge-compact">Android</span>
+                                            <span class="platform-badge-compact">iOS</span>
+                                        </div>
+                                        <div class="coming-soon-badge-compact">به زودی</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="coming-soon-text">به زودی</div>
                     </div>
 
-                    <!-- Service 4 -->
+                    <!-- Service 4: Photo Sales -->
                     <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
+                        <div class="service-card-content">
+                            <div class="service-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="service-main-content">
+                                <h3 class="service-title">فروش عکس</h3>
+                                <p class="service-description">
+                                    پلتفرم فروش عکس‌های باکیفیت به بازارهای بین‌المللی
+                                </p>
+                            </div>
+                            <div class="coming-soon-badge">به زودی</div>
                         </div>
-                        <div class="coming-soon-text">به زودی</div>
                     </div>
 
-                    <!-- Service 5 -->
+                    <!-- Service 5: PSD Files -->
                     <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
+                        <div class="service-card-content">
+                            <div class="service-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="service-main-content">
+                                <h3 class="service-title">فروش فایل‌های PSD</h3>
+                                <p class="service-description">
+                                    بازارچه فروش فایل‌های طراحی PSD و منابع گرافیکی
+                                </p>
+                            </div>
+                            <div class="coming-soon-badge">به زودی</div>
                         </div>
-                        <div class="coming-soon-text">به زودی</div>
                     </div>
 
-                    <!-- Service 6 -->
+                    <!-- Service 6: Account & Subscription -->
                     <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-database"></i>
+                        <div class="service-card-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <div class="service-main-content">
+                                <h3 class="service-title">خرید اکانت و اشتراک</h3>
+                                <p class="service-description">
+                                    خرید اکانت‌های بین‌المللی و اشتراک‌های پریمیوم
+                                </p>
+                            </div>
+                            <div class="coming-soon-badge">به زودی</div>
                         </div>
-                        <div class="coming-soon-text">به زودی</div>
                     </div>
+                </div>
 
-                    <!-- Service 7 -->
-                    <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-microchip"></i>
-                        </div>
-                        <div class="coming-soon-text">به زودی</div>
-                    </div>
+                <!-- Divider -->
+                <div class="services-divider"></div>
 
-                    <!-- Service 8 -->
+                <!-- Courses Section -->
+                <div class="services-section-title">
+                    <h2>دوره‌های آموزشی</h2>
+                </div>
+                
+                <div class="services-grid">
+                    <!-- Course 1: YouTube Income -->
                     <div class="service-card">
-                        <div class="coming-soon-badge">به زودی</div>
-                        <div class="service-icon">
-                            <i class="fas fa-broadcast-tower"></i>
+                        <div class="service-card-content">
+                            <div class="service-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="service-main-content">
+                                <h3 class="service-title">دوره کسب درآمد دلاری از یوتیوب</h3>
+                                <p class="service-description">
+                                    آموزش کامل راه‌اندازی کانال یوتیوب و کسب درآمد دلاری برای کاربران ایرانی
+                                </p>
+                            </div>
+                            <div class="coming-soon-badge">به زودی</div>
                         </div>
-                        <div class="coming-soon-text">به زودی</div>
                     </div>
                 </div>
             </div>
@@ -328,6 +529,7 @@
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -348,6 +550,27 @@
                 }
             });
         }
+
+        // Close menu when clicking on links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav) {
+                    mainNav.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.classList.remove('menu-open');
+            });
+        });
+
+        // Prevent default click behavior on service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                // No action - just for visual feedback
+            });
+        });
     </script>
 </body>
 </html>
