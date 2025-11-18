@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جزئیات قالب - قالب‌شاپ</title>
-    <meta name="description" content="جزئیات قالب و مشاهده در شاپیفای">
+    <title>قالب فروشگاهی مدرن - جزئیات قالب</title>
+    <meta name="description" content="قالب فروشگاهی مدرن - کاملاً واکنش‌گرا با امکانات کامل برای فروشگاه اینترنتی">
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="/CSS/base.css">
@@ -15,29 +15,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
-        .template-simple-section {
+        .template-detail-section {
             padding: 6rem 0 4rem;
             background: var(--gray-50);
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
+            min-height: 100vh;
         }
         
         .template-simple-container {
+            max-width: 1000px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
             gap: 3rem;
         }
         
+        .template-main-content {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+        }
+        
         .template-image-container {
-            max-width: 800px;
-            width: 100%;
             border-radius: var(--border-radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--gray-200);
+            margin-bottom: 2rem;
         }
         
         .template-main-image {
@@ -46,18 +51,134 @@
             display: block;
         }
         
+        .template-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .template-category {
+            background: var(--primary-50);
+            color: var(--primary-700);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .template-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stars {
+            color: var(--warning-500);
+        }
+        
+        .rating-text {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        
+        .template-tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .template-tag {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .template-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .template-description {
+            color: var(--gray-700);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .template-features {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .template-features h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--primary-500);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-item h4 {
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .feature-item p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .shopify-btn-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
         .shopify-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            padding: 1.25rem 2.5rem;
+            padding: 1.25rem 3rem;
             background: var(--primary-500);
             color: white;
             border: none;
             border-radius: var(--border-radius);
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -71,50 +192,165 @@
             color: white;
         }
         
-        .template-title {
+        .template-info {
+            background: var(--gray-50);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .info-label {
+            display: block;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-value {
+            display: block;
+            color: var(--gray-900);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .reviews-section {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            margin-top: 2rem;
+        }
+        
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .rating-summary {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--gray-50);
+            padding: 1.5rem 2rem;
+            border-radius: var(--border-radius-lg);
+        }
+        
+        .average-rating {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--gray-900);
+        }
+        
+        .review-item {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.5rem 0;
+        }
+        
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1rem;
         }
         
-        .template-description {
-            font-size: 1.2rem;
-            color: var(--gray-600);
-            max-width: 600px;
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .reviewer-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-600);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .review-stars {
+            color: var(--warning-500);
+        }
+        
+        .review-date {
+            color: var(--gray-500);
+            font-size: 0.9rem;
+        }
+        
+        .review-text {
+            color: var(--gray-700);
             line-height: 1.6;
+            font-size: 1rem;
         }
         
         @media (max-width: 768px) {
-            .template-simple-section {
+            .template-detail-section {
                 padding: 4rem 0 2rem;
+            }
+            
+            .template-main-content {
+                padding: 2rem;
             }
             
             .template-title {
                 font-size: 2rem;
             }
             
-            .template-description {
-                font-size: 1.1rem;
+            .template-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .shopify-btn {
                 padding: 1rem 2rem;
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
         }
         
         @media (max-width: 480px) {
+            .template-main-content {
+                padding: 1.5rem;
+            }
+            
             .template-title {
                 font-size: 1.75rem;
             }
             
-            .template-description {
-                font-size: 1rem;
+            .info-grid {
+                grid-template-columns: 1fr;
             }
             
-            .template-simple-container {
-                gap: 2rem;
+            .reviews-section {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -145,6 +381,9 @@
                         <li class="nav-item">
                             <a href="/Pages/about.html" class="nav-link">درباره ما</a>
                         </li>
+                           <li class="nav-item">
+                        <a href="/Pages/feedback.html" class="nav-link">پیشنهادات و انتقادات</a>
+                    </li>
                         <li class="nav-item">
                             <a href="/Pages/contact.html" class="nav-link">تماس با ما</a>
                         </li>
@@ -168,28 +407,218 @@
     </header>
 
     <main class="main">
-        <!-- Simple Template Section -->
-        <section class="template-simple-section">
+        <!-- Template Detail Section -->
+        <section class="template-detail-section">
             <div class="container">
                 <div class="template-simple-container">
-                    <!-- Template Title -->
-                    <div class="template-text">
+                    <!-- Main Content -->
+                    <div class="template-main-content">
+                        <!-- Template Image -->
+                        <div class="template-image-container">
+                            <img src="/Images and SVGs/hero-template-1.png" alt="قالب فروشگاهی مدرن" class="template-main-image">
+                        </div>
+                        
+                        <!-- Template Meta -->
+                        <div class="template-meta">
+                            <span class="template-category">فروشگاهی</span>
+                            <div class="template-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="rating-text">۴.۵ از ۱۲۴ نظر</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Template Tags -->
+                        <!-- <div class="template-tags">
+                            <span class="template-tag">واکنش‌گرا</span>
+                            <span class="template-tag">مدرن</span>
+                            <span class="template-tag">فروشگاهی</span>
+                            <span class="template-tag">شاپیفای</span>
+                            <span class="template-tag">سئو بهینه</span>
+                            <span class="template-tag">سرعت بالا</span>
+                        </div>
+                         -->
+                        <!-- Template Title -->
                         <h1 class="template-title">قالب فروشگاهی مدرن</h1>
-                        <p class="template-description">
-                            قالب حرفه‌ای و کاملاً واکنش‌گرا برای فروشگاه اینترنتی شما
-                        </p>
+                        
+                        <!-- Template Description -->
+                        <div class="template-description">
+                            <p>قالب فروشگاهی مدرن یک راه‌حل جامع و حرفه‌ای برای ایجاد فروشگاه اینترنتی است. این قالب با طراحی زیبا و کاربرپسند، تجربه خرید آنلاین را برای مشتریان شما بهینه می‌کند.</p>
+                            
+                            <p>این قالب کاملاً واکنش‌گرا بوده و در تمام دستگاه‌ها از جمله موبایل، تبلت و دسکتاپ به بهترین شکل نمایش داده می‌شود. با استفاده از این قالب می‌توانید در کمترین زمان فروشگاه اینترنتی خود را راه‌اندازی کنید.</p>
+                        </div>
+                        
+                        <!-- Shopify Button -->
+                        <div class="shopify-btn-container">
+                            <a href="https://shopify.com" target="_blank" class="shopify-btn">
+                                <i class="fab fa-shopify"></i>
+                                مشاهده قالب در شاپیفای
+                            </a>
+                        </div>
+                        
+                        <!-- Template Info -->
+                        <div class="template-info">
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">نسخه</span>
+                                    <span class="info-value">۲.۱.۰</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">آخرین بروزرسانی</span>
+                                    <span class="info-value">۱۴۰۲/۱۰/۱۵</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">تعداد فروش</span>
+                                    <span class="info-value">۱,۲۴۷ عدد</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">امتیاز</span>
+                                    <span class="info-value">۴.۵ از ۵</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">پشتیبانی</span>
+                                    <span class="info-value">۶ ماه رایگان</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">سازگاری</span>
+                                    <span class="info-value">شاپیفای ۴.۰+</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Template Features -->
+                        <div class="template-features">
+                            <h3>ویژگی‌های اصلی قالب</h3>
+                            <div class="features-grid">
+                                <div class="feature-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <h4>واکنش‌گرا</h4>
+                                    <p>سازگار با تمام دستگاه‌های موبایل و تبلت</p>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-bolt"></i>
+                                    <h4>سرعت بالا</h4>
+                                    <p>لود سریع صفحات و بهینه‌سازی performance</p>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-search"></i>
+                                    <h4>سئو بهینه</h4>
+                                    <p>بهینه‌شده برای موتورهای جستجو</p>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <h4>فروشگاهی</h4>
+                                    <p>امکانات کامل برای فروشگاه اینترنتی</p>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-palette"></i>
+                                    <h4>قالب‌بندی آسان</h4>
+                                    <p>سازگار با صفحه‌سازهای مختلف</p>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-headset"></i>
+                                    <h4>پشتیبانی</h4>
+                                    <p>پشتیبانی ۲۴ ساعته و به‌روزرسانی رایگان</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Template Image -->
-                    <div class="template-image-container">
-                        <img src="/Images and SVGs/hero-template-1.png" alt="قالب فروشگاهی مدرن" class="template-main-image">
+                    <!-- Reviews Section -->
+                    <div class="reviews-section">
+                        <div class="reviews-header">
+                            <h2>نظرات کاربران</h2>
+                            <div class="rating-summary">
+                                <span class="average-rating">۴.۵</span>
+                                <div>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="rating-count">بر اساس ۱۲۴ نظر</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="reviews-list">
+                            <!-- Review 1 -->
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <div class="reviewer-avatar">م.ح</div>
+                                        <div>
+                                            <div class="reviewer-name">محمد حسینی</div>
+                                            <div class="review-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="review-date">۲ هفته پیش</span>
+                                </div>
+                                <div class="review-text">
+                                    قالب بسیار عالی و حرفه‌ای. طراحی زیبا و امکانات کامل. پشتیبانی عالی داشتند و در کمترین زمان پاسخگو بودند. برای فروشگاه اینترنتی بسیار مناسب است.
+                                </div>
+                            </div>
+                            
+                            <!-- Review 2 -->
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <div class="reviewer-avatar">ف.ر</div>
+                                        <div>
+                                            <div class="reviewer-name">فاطمه رضایی</div>
+                                            <div class="review-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="review-date">۱ ماه پیش</span>
+                                </div>
+                                <div class="review-text">
+                                    قالب خوبیه اما نیاز به کمی تنظیمات داره. پشتیبانی پاسخگو بود و مشکلاتم رو حل کردن. سرعت لود خوبی داره و در موبایل خیلی خوب نمایش داده میشه.
+                                </div>
+                            </div>
+                            
+                            <!-- Review 3 -->
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <div class="reviewer-avatar">ع.ک</div>
+                                        <div>
+                                            <div class="reviewer-name">علی کریمی</div>
+                                            <div class="review-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="review-date">۲ ماه پیش</span>
+                                </div>
+                                <div class="review-text">
+                                    بهترین قالبی که تا حالا استفاده کردم. امکانات کامل، طراحی مدرن و پشتیبانی فوق‌العاده. فروشگاهم رو با این قالب راه‌اندازی کردم و راضی هستم.
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <!-- Shopify Button -->
-                    <a href="https://shopify.com" target="_blank" class="shopify-btn">
-                        <i class="fab fa-shopify"></i>
-                        مشاهده قالب در شاپیفای
-                    </a>
                 </div>
             </div>
         </section>
@@ -334,10 +763,10 @@
             });
         });
 
-        // Shopify Button Click Tracking (Optional)
+        // Shopify Button Click Tracking
         document.querySelector('.shopify-btn').addEventListener('click', function() {
             console.log('Shopify preview opened');
-            // می‌توانید اینجا analytics اضافه کنید
+            // Analytics tracking
         });
     </script>
 </body>

@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحلیل درآمد یوتیوب و ادسنس - قالب‌شاپ</title>
+    <meta name="description" content="تحلیل و بررسی درآمد یوتیوب و سیستم ادسنس برای کاربران ایرانی">
+    <link rel="stylesheet" href="/CSS/base.css">
+    <link rel="stylesheet" href="/CSS/components.css">
+    <link rel="stylesheet" href="/CSS/layouts.css">
+    <link rel="stylesheet" href="/CSS/responsive.css">
+    <link rel="stylesheet" href="/CSS/utilities.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+              .services-hero {
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+        
+        .services-hero__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .services-hero__subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: white;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .youtube-adsense-hero {
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .main-tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem auto 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+        }
+        
+        .main-tab {
+            padding: 1.2rem 2.5rem;
+            background: white;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--border-radius-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            color: var(--gray-800);
+            font-size: 1.1rem;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .main-tab.active {
+            background: var(--primary-500);
+            color: white;
+            border-color: var(--primary-500);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .main-tab:hover:not(.active) {
+            border-color: var(--primary-500);
+            transform: translateY(-2px);
+        }
+        
+        .calculator-content {
+            display: none;
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .calculator-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--gray-900);
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-500);
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 1rem;
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+        }
+        
+        .adsense-calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .adsense-calculator {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .slider-section {
+            background: var(--gray-50);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .slider-container {
+            margin: 2rem 0;
+        }
+        
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .slider-value {
+            font-weight: 700;
+            color: var(--primary-500);
+            font-size: 1.5rem;
+        }
+        
+        .slider-label {
+            font-size: 1rem;
+            color: var(--gray-700);
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--gray-300);
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-500);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            background: var(--primary-600);
+            transform: scale(1.1);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-500);
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .results-section {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .results-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--gray-800);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .result-item {
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+        
+        .result-label {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-500);
+        }
+        
+        .info-box {
+            background: var(--primary-50);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-right: 4px solid var(--primary-500);
+            margin-top: 1.5rem;
+        }
+        
+        .info-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--gray-800);
+        }
+        
+        .info-text {
+            color: var(--gray-700);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        
+        .categories-section {
+            margin-top: 1.5rem;
+        }
+        
+        .categories-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .category-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .category-option:hover {
+            background: var(--gray-50);
+            border-color: var(--primary-300);
+        }
+        
+        .category-option.selected {
+            background: var(--primary-50);
+            border-color: var(--primary-500);
+            color: var(--primary-700);
+        }
+        
+        .category-option input {
+            display: none;
+        }
+        
+        .category-option .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-400);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .category-option.selected .checkmark {
+            background: var(--primary-500);
+            border-color: var(--primary-500);
+        }
+        
+        .category-option.selected .checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .file-upload {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+        }
+        
+        .file-upload i {
+            font-size: 2rem;
+            color: var(--gray-500);
+            margin-bottom: 1rem;
+        }
+        
+        .file-upload p {
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-upload span {
+            color: var(--primary-500);
+            font-size: 0.9rem;
+        }
+        
+        .ai-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius);
+        }
+        
+        .youtube-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .main-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .main-tab {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .calculator-content {
+                padding: 1.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__logo">
+                    <a href="/Pages/index.html" class="logo-link">
+                        <img src="/Images and SVGs/logo.png" alt="قالب‌شاپ" class="logo">
+                        <span class="logo-text">قالب‌شاپ</span>
+                    </a>
+                </div>
+
+                <nav class="header__nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="/Pages/index.html" class="nav-link">خانه</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a href="/Pages/youtube-adsense.html" class="nav-link">تحلیل</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="/Pages/services.html" class="nav-link">خدمات ما</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Pages/about.html" class="nav-link">درباره ما</a>
+                        </li>
+                          <li class="nav-item">
+                            <a href="/Pages/feedback.html" class="nav-link">پیشنهادات و انتقادات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Pages/contact.html" class="nav-link">تماس با ما</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="header__actions">
+                    <div class="auth-buttons">
+                        <a href="/Pages/login.html" class="btn btn-outline">ورود</a>
+                        <a href="/Pages/signup.html" class="btn btn-primary">ثبت‌نام</a>
+                    </div>
+
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+            <section class="services-hero">
+            <div class="container">
+                <h1 class="services-hero__title">تحلیل درآمد یوتیوب و ادسنس</h1>
+                <p class="services-hero__subtitle">
+محاسبه پتانسیل درآمدزایی از کانال یوتیوب و وبسایت شما              </p>
+            </div>
+        </section>
+    
+
+        <section class="container" style="padding: 2rem 0 4rem;">
+            <div class="main-tabs">
+                <div class="main-tab active" data-tab="youtube">نقد کردن درآمد یوتیوب</div>
+                <div class="main-tab" data-tab="adsense">نقد کردن درآمد ادسنس</div>
+            </div>
+
+            <div class="calculator-content active" id="youtube-content">
+                <h2 class="section-title">تحلیل درآمد کانال یوتیوب</h2>
+                
+                <div class="youtube-form-container">
+                    <form id="youtube-form">
+                        <div class="form-group">
+                            <label class="form-label">آدرس کانال یوتیوب</label>
+                            <input type="text" class="form-input" placeholder="https://youtube.com/@channelname" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">اسکرین شات از داشبورد کانال</label>
+                            <div class="file-upload" id="youtube-screenshot">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>اسکرین شات را اینجا رها کنید یا برای آپلود کلیک کنید</p>
+                                <span>حداکثر حجم: 5MB</span>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="no-copyright">
+                            <label for="no-copyright">باکس کپی رایت ندارم</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="categories-section">
+                                <label class="categories-title">موضوع فعالیت کانال</label>
+                                <div class="categories-grid">
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="film-music">
+                                        <span class="checkmark"></span>
+                                        <span>فیلم و موسیقی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="cars">
+                                        <span class="checkmark"></span>
+                                        <span>خودرو</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="animals">
+                                        <span class="checkmark"></span>
+                                        <span>حیوانات</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="sports">
+                                        <span class="checkmark"></span>
+                                        <span>ورزشی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="travel">
+                                        <span class="checkmark"></span>
+                                        <span>سفر</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="gaming">
+                                        <span class="checkmark"></span>
+                                        <span>گیمینگ</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="general">
+                                        <span class="checkmark"></span>
+                                        <span>عمومی و مردم</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="comedy">
+                                        <span class="checkmark"></span>
+                                        <span>کمدی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="entertainment">
+                                        <span class="checkmark"></span>
+                                        <span>سرگرمی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="news">
+                                        <span class="checkmark"></span>
+                                        <span>اخبار</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="fashion">
+                                        <span class="checkmark"></span>
+                                        <span>لباس و استایل</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="education">
+                                        <span class="checkmark"></span>
+                                        <span>آموزشی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="tech">
+                                        <span class="checkmark"></span>
+                                        <span>علم و تکنولوژی</span>
+                                    </label>
+                                    <label class="category-option" id="other-category">
+                                        <input type="checkbox" name="category" value="other">
+                                        <span class="checkmark"></span>
+                                        <span>سایر</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-group" id="other-category-input" style="display: none; margin-top: 1rem;">
+                                    <input type="text" class="form-input" placeholder="موضوع فعالیت خود را وارد کنید">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn--primary btn--lg" style="width: 100%; margin-top: 2rem;">
+                            <i class="fas fa-calculator"></i>
+                            محاسبه درآمد
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="calculator-content" id="adsense-content">
+                <h2 class="section-title">تحلیل درآمد ادسنس</h2>
+                
+                <div class="adsense-calculator">
+                    <div class="slider-section">
+                        <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--gray-800);">
+                            محاسبه درآمد کانال یوتیوب
+                        </h3>
+                        <p style="text-align: center; color: var(--gray-600); margin-bottom: 2rem;">
+                            اسلایدر را به چپ و راست بکشید تا پتانسیل های درآمدزایی محاسبه شود.
+                        </p>
+                        
+                        <div class="form-group">
+                            <label class="slider-label">میزان بازدید روزانه را وارد نمایید</label>
+                            <div class="slider-container">
+                                <div class="slider-header">
+                                    <span>View/Day</span>
+                                    <span class="slider-value" id="viewsValue">368,400</span>
+                                </div>
+                                <input type="range" min="1000" max="1000000" value="368400" class="slider" id="viewsSlider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="slider-label">میانگین نرخ تعامل بازدیدکنندگان</label>
+                            <div class="slider-container">
+                                <div class="slider-header">
+                                    <span>Engagement Rate</span>
+                                    <span class="slider-value" id="engagementValue">11%</span>
+                                </div>
+                                <input type="range" min="1" max="20" value="11" class="slider" id="engagementSlider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">موضوع فعالیت وبسایت</label>
+                            <select class="form-select" id="adsense-category">
+                                <option value="film-music">فیلم و موسیقی</option>
+                                <option value="cars">خودرو</option>
+                                <option value="animals">حیوانات</option>
+                                <option value="sports">ورزشی</option>
+                                <option value="travel">سفر</option>
+                                <option value="gaming">گیمینگ</option>
+                                <option value="general">عمومی و مردم</option>
+                                <option value="comedy">کمدی</option>
+                                <option value="entertainment">سرگرمی</option>
+                                <option value="news">اخبار</option>
+                                <option value="fashion">لباس و استایل</option>
+                                <option value="education">آموزشی</option>
+                                <option value="tech">علم و تکنولوژی</option>
+                                <option value="other">سایر</option>
+                            </select>
+                            
+                            <div class="form-group" id="adsense-other-category-input" style="display: none; margin-top: 1rem;">
+                                <input type="text" class="form-input" placeholder="موضوع فعالیت خود را وارد کنید">
+                            </div>
+                        </div>
+                        
+                        <div class="ai-checkbox">
+                            <input type="checkbox" id="ai-content">
+                            <label for="ai-content">مطالب با هوش مصنوعی تولید شده‌اند</label>
+                        </div>
+                    </div>
+                    
+                    <div class="results-section">
+                        <h3 class="results-title">نتایج تحلیل درآمد</h3>
+                        
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-label">درآمد تقریبی روزانه</div>
+                                <div class="result-value" id="adsense-daily">¥65,890.4</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label">درآمد تقریبی ماهانه</div>
+                                <div class="result-value" id="adsense-monthly">¥517,680.3</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label">درآمد تقریبی سالانه</div>
+                                <div class="result-value" id="adsense-yearly">¥6,212,163.6</div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-title">میانگین نرخ تعامل بازدیدکنندگان</div>
+                            <div class="info-text">
+                                هر چه تعامل بازدیدکنندگان نظیر لایک، کامنت بیشتر باشد و همچنین اکشن‌های مونتیزیشن را روی کانال فعال کرده باشید این نرخ بالاتر خواهد بود و بر روی درآمد شما تاثیر مستقیم خواهد داشت.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__col">
+                    <div class="footer__logo">
+                        <img src="/Images and SVGs/logo.png" alt="قالب‌شاپ" class="footer-logo">
+                        <span class="footer-logo-text">قالب‌شاپ</span>
+                    </div>
+                    <p class="footer__description">
+                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" class="social-link" aria-label="اینستاگرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="تلگرام">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="توییتر">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="لینکدین">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">لینک‌های سریع</h3>
+                    <ul class="footer__links">
+                        <li><a href="/Pages/index.html" class="footer__link">خانه</a></li>
+                        <li><a href="/Pages/templates.html" class="footer__link">قالب‌ها</a></li>
+                        <li><a href="/Pages/about.html" class="footer__link">درباره ما</a></li>
+                        <li><a href="/Pages/contact.html" class="footer__link">تماس با ما</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">تماس با ما</h3>
+                    <div class="footer__contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>آدرس</strong>
+                                <span>تهران، خیابان ولیعصر</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>تلفن</strong>
+                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ایمیل</strong>
+                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ساعات کاری</strong>
+                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <div class="footer-bottom__content">
+                    <p class="copyright">
+                        &copy; ۱۴۰۳ قالب‌شاپ. تمامی حقوق محفوظ است.
+                    </p>
+                    <div class="footer-bottom__links">
+                        <a href="/Pages/privacy.html" class="footer-bottom__link">حریم خصوصی</a>
+                        <a href="/Pages/terms.html" class="footer-bottom__link">قوانین و مقررات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainTabs = document.querySelectorAll('.main-tab');
+            const contents = document.querySelectorAll('.calculator-content');
+            
+            mainTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    mainTabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+            
+            const viewsSlider = document.getElementById('viewsSlider');
+            const viewsValue = document.getElementById('viewsValue');
+            const engagementSlider = document.getElementById('engagementSlider');
+            const engagementValue = document.getElementById('engagementValue');
+            
+            viewsSlider.addEventListener('input', function() {
+                const value = parseInt(this.value).toLocaleString('fa-IR');
+                viewsValue.textContent = value;
+                calculateAdsenseRevenue();
+            });
+            
+            engagementSlider.addEventListener('input', function() {
+                const value = `${this.value}%`;
+                engagementValue.textContent = value;
+                calculateAdsenseRevenue();
+            });
+            
+            // *********************محاسبه درآمد ادسنس**********************
+            function calculateAdsenseRevenue() {
+                const views = parseInt(viewsSlider.value);
+                const engagement = parseInt(engagementSlider.value);
+                
+                // ******************نمونه محاسبات که باید عوض شوند***********************
+                const dailyRevenue = (views * engagement * 0.0001).toFixed(1);
+                const monthlyRevenue = (dailyRevenue * 30).toFixed(1);
+                const yearlyRevenue = (monthlyRevenue * 12).toFixed(1);
+                
+                document.getElementById('adsense-daily').textContent = `¥${dailyRevenue.replace('.', ',')}`;
+                document.getElementById('adsense-monthly').textContent = `¥${monthlyRevenue.replace('.', ',')}`;
+                document.getElementById('adsense-yearly').textContent = `¥${yearlyRevenue.replace('.', ',')}`;
+            }
+            
+            const otherCategory = document.getElementById('other-category');
+            const otherCategoryInput = document.getElementById('other-category-input');
+            
+            otherCategory.addEventListener('click', function() {
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                if (checkbox.checked) {
+                    otherCategoryInput.style.display = 'block';
+                } else {
+                    otherCategoryInput.style.display = 'none';
+                }
+            });
+            
+            const adsenseCategory = document.getElementById('adsense-category');
+            const adsenseOtherCategoryInput = document.getElementById('adsense-other-category-input');
+            
+            adsenseCategory.addEventListener('change', function() {
+                if (this.value === 'other') {
+                    adsenseOtherCategoryInput.style.display = 'block';
+                } else {
+                    adsenseOtherCategoryInput.style.display = 'none';
+                }
+            });
+            
+            document.querySelectorAll('.category-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                    
+                    if (checkbox.checked) {
+                        this.classList.add('selected');
+                    } else {
+                        this.classList.remove('selected');
+                    }
+                    
+                    if (checkbox.value === 'other') {
+                        if (checkbox.checked) {
+                            otherCategoryInput.style.display = 'block';
+                        } else {
+                            otherCategoryInput.style.display = 'none';
+                        }
+                    }
+                });
+            });
+            
+            const fileUpload = document.getElementById('youtube-screenshot');
+            
+            fileUpload.addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('حجم فایل نباید بیشتر از 5MB باشد.');
+                            return;
+                        }
+                        fileUpload.innerHTML = `
+                            <i class="fas fa-check-circle" style="color: #10b981;"></i>
+                            <p>فایل با موفقیت آپلود شد</p>
+                            <span>${file.name}</span>
+                        `;
+                    }
+                };
+                input.click();
+            });
+            
+            const youtubeForm = document.getElementById('youtube-form');
+            
+            youtubeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('تحلیل درآمد یوتیوب با موفقیت انجام شد!');
+            });
+            
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isOpen = mainNav.classList.contains('active');
+                    
+                    if (isOpen) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    } else {
+                        mainNav.classList.add('active');
+                        mobileMenuBtn.classList.add('active');
+                        document.body.classList.add('menu-open');
+                    }
+                });
+            }
+            
+            calculateAdsenseRevenue();
+        });
+    </script>
+</body>
+</html>

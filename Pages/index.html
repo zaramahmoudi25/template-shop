@@ -9,11 +9,61 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="/CSS/base.css">
     <link rel="stylesheet" href="/CSS/landing.css">
+    <link rel="stylesheet" href="/CSS/components.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body class="landing-page">
+       <header class="header">
+    <div class="container">
+        <div class="header__inner">
+            <div class="header__logo">
+                <a href="/Pages/index.html" class="logo-link">
+                    <img src="/Images and SVGs/logo.png" alt="قالب‌شاپ" class="logo">
+                    <span class="logo-text">قالب‌شاپ</span>
+                </a>
+            </div>
+
+            <nav class="header__nav" id="mainNav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="/Pages/index.html" class="nav-link">خانه</a>
+                    </li>
+                   
+                   
+                    <li class="nav-item">
+                        <a href="/Pages/services.html" class="nav-link">خدمات ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Pages/about.html" class="nav-link">درباره ما</a>
+                    </li>
+                      <li class="nav-item">
+                        <a href="/Pages/feedback.html" class="nav-link">پیشنهادات و انتقادات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Pages/contact.html" class="nav-link">تماس با ما</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <div class="auth-buttons">
+                    <a href="/Pages/login.html" class="btn btn-outline">ورود</a>
+                    <a href="/Pages/signup.html" class="btn btn-primary">ثبت‌نام</a>
+                </div>
+
+                
+             
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+            </div>
+        </div>
+    </div>
+</header>
     <!-- Main Content -->
     <main class="main">
         <!-- Hero Section -->
@@ -43,17 +93,18 @@
                             </div>
                         </a>
 
-                        <!-- SquareSpace -->
-                        <a href="#" class="platform-card coming-soon">
+                        <!-- YouTube & Adsense -->
+                        <a href="/Pages/youtube-adsense.html" class="platform-card">
                             <div class="platform-logo">
-                                <i class="fas fa-square"></i>
+                                <i class="fab fa-youtube"></i>
                             </div>
-                            <h3 class="platform-name">SquareSpace</h3>
+                            <h3 class="platform-name">نقد درآمد یوتیوب و وب سایت</h3>
                             <div class="platform-cta">
-                                <span>به زودی</span>
-                                <i class="fas fa-clock"></i>
+                                <span>مشاهده تحلیل‌ها</span>
+                                <i class="fas fa-arrow-left"></i>
                             </div>
                         </a>
+
 
                         <!-- Coming Soon Platform -->
                         <a href="#" class="platform-card coming-soon">
@@ -73,6 +124,35 @@
     </main>
 
     <!-- JavaScript -->
-    <script src="/JS/landing.js"></script>
+    <script src="/JS/landing.js">
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        if (mobileMenuBtn && mainNav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                const isOpen = mainNav.classList.contains('active');
+                
+                if (isOpen) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                } else {
+                    mainNav.classList.add('active');
+                    mobileMenuBtn.classList.add('active');
+                    document.body.classList.add('menu-open');
+                }
+            });
+        }
+        // Close menu when clicking on links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
 </body>
 </html>
