@@ -6,21 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فروشگاه قالب | مرجع تخصصی قالب‌های وبسایت</title>
     <meta name="description" content="دسترسی به بهترین قالب‌های سایت‌های خارجی برای کاربران ایرانی">
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/components.css" %}">
-    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
-    <link rel="stylesheet" href="{% static "css/landing.css" %}">
-    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
-    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
-    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
 
-    
-    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/landing.css" %}">
+    <link rel="stylesheet" href="{% static "css/components.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body class="landing-page">
+
+ <header class="header">
+    <div class="container">
+        <div class="header__inner">
+            <div class="header__logo">
+                <a href="/index/" class="logo-link">
+                    <img src="{% static "images/logo.png" %}" alt="قالب‌شاپ" class="logo">
+                    <span class="logo-text">قالب‌شاپ</span>
+                </a>
+            </div>
+
+            <nav class="header__nav" id="mainNav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="/index/" class="nav-link">خانه</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="/services/" class="nav-link">خدمات ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about/" class="nav-link">درباره ما</a>
+                    </li>
+                      <li class="nav-item">
+                        <a href="/feedback/" class="nav-link">پیشنهادات و انتقادات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/contact/" class="nav-link">تماس با ما</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <div class="auth-buttons">
+                    <a href="/login/" class="btn btn-outline">ورود</a>
+                    <a href="/signup/" class="btn btn-primary">ثبت‌نام</a>
+                </div>
+
+
+
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+            </div>
+        </div>
+    </div>
+</header>
     <!-- Main Content -->
     <main class="main">
         <!-- Hero Section -->
@@ -36,7 +77,6 @@
 
             <div class="container">
                 <div class="hero-content">
-
                     <!-- Platforms Grid -->
                     <div class="platforms-grid">
                         <!-- Shopify -->
@@ -51,17 +91,18 @@
                             </div>
                         </a>
 
-                        <!-- SquareSpace -->
-                        <a href="#" class="platform-card coming-soon">
+                        <!-- YouTube & Adsense -->
+                        <a href="/youtube-adsense/" class="platform-card">
                             <div class="platform-logo">
-                                <i class="fas fa-square"></i>
+                                <i class="fab fa-youtube"></i>
                             </div>
-                            <h3 class="platform-name">SquareSpace</h3>
+                            <h3 class="platform-name">نقد درآمد یوتیوب و وب سایت</h3>
                             <div class="platform-cta">
-                                <span>به زودی</span>
-                                <i class="fas fa-clock"></i>
+                                <span>مشاهده تحلیل‌ها</span>
+                                <i class="fas fa-arrow-left"></i>
                             </div>
                         </a>
+
 
                         <!-- Coming Soon Platform -->
                         <a href="#" class="platform-card coming-soon">
@@ -81,6 +122,35 @@
     </main>
 
     <!-- JavaScript -->
-    <script src="{% static "js/landing.js" %}"></script>
+    <script src="{% static "js/landing.js" %}">
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        if (mobileMenuBtn && mainNav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                const isOpen = mainNav.classList.contains('active');
+
+                if (isOpen) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                } else {
+                    mainNav.classList.add('active');
+                    mobileMenuBtn.classList.add('active');
+                    document.body.classList.add('menu-open');
+                }
+            });
+        }
+        // Close menu when clicking on links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
 </body>
 </html>

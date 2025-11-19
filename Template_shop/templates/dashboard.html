@@ -14,12 +14,10 @@
     <link rel="stylesheet" href="{% static "css/responsive.css" %}">
     <link rel="stylesheet" href="{% static "css/utilities.css" %}">
     <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* استایل‌های سفارشی برای دشبورد */
         .dashboard-layout {
             background: var(--gray-50);
             min-height: 100vh;
@@ -42,11 +40,13 @@
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            transition: all 0.3s ease;
         }
 
         .dashboard-main {
             flex: 1;
             padding: 2rem 0;
+            transition: all 0.3s ease;
         }
 
         .summary-card {
@@ -95,16 +95,510 @@
             background: var(--info-50);
             color: var(--info-600);
         }
+
+        .back-to-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-500);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-home:hover {
+            background: var(--primary-600);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .copy-warning {
+            color: var(--error-500);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-warning i {
+            color: var(--error-500);
+        }
+
+        .upload-options {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-300);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-option:hover {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+        }
+
+        .upload-option i {
+            color: var(--primary-500);
+            font-size: 1.25rem;
+        }
+
+        .upload-option-content {
+            flex: 1;
+        }
+
+        .upload-option-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .upload-option-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .terms-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .terms-modal.show {
+            display: flex;
+        }
+
+        .terms-content {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .terms-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .terms-body {
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .terms-body h3 {
+            color: var(--gray-900);
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .terms-body p {
+            margin-bottom: 1rem;
+        }
+
+        .terms-body ul {
+            margin: 0.5rem 0;
+            padding-right: 1.5rem;
+        }
+
+        .terms-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .price-suggestion {
+            background: var(--warning-50);
+            border: 1px solid var(--warning-200);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-suggestion p {
+            color: var(--warning-700);
+            margin: 0;
+            font-size: 0.875rem;
+        }
+
+        .price-suggestion strong {
+            color: var(--warning-900);
+        }
+
+        .mobile-header {
+            display: none;
+            background: white;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .mobile-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* استایل‌های ریسپانسیو برای دسکتاپ کوچک و تبلت */
+        @media (max-width: 1199.98px) {
+            .sidebar {
+                width: 250px;
+            }
+
+            .dashboard-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .sidebar-layout {
+                position: relative;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                z-index: 1000;
+                transition: right 0.3s ease;
+            }
+
+            .sidebar.active {
+                right: 0;
+            }
+
+            .dashboard-main {
+                width: 100%;
+                padding: 1rem 0;
+            }
+
+            .mobile-header {
+                display: block;
+            }
+
+            .back-to-home {
+                top: 1rem;
+                left: 1rem;
+                width: 45px;
+                height: 45px;
+            }
+
+            .dashboard-summary {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .summary-card {
+                padding: 1.25rem;
+            }
+
+            .summary-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+
+            .summary-number {
+                font-size: 1.5rem;
+            }
+
+            .dashboard-charts {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .chart-container {
+                padding: 1.25rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .container {
+                padding: 0 0.75rem;
+            }
+
+            .dashboard-header {
+                padding: 1.5rem 1rem 1rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .dashboard-summary {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .summary-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+
+            .summary-content {
+                text-align: center;
+            }
+
+            .dashboard-charts,
+            .recent-activity,
+            .upload-form-container,
+            .user-templates {
+                padding: 1rem;
+            }
+
+            .chart-container {
+                padding: 1rem;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.75rem;
+                padding: 1rem;
+            }
+
+            .upload-option {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.25rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+
+            .back-to-home {
+                width: 40px;
+                height: 40px;
+                top: 0.5rem;
+                left: 0.5rem;
+            }
+
+            .mobile-header {
+                padding: 0.75rem;
+            }
+
+            .sidebar {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .dashboard-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .dashboard-header p {
+                font-size: 0.9rem;
+            }
+
+            .summary-card {
+                padding: 1rem;
+            }
+
+            .summary-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .summary-number {
+                font-size: 1.25rem;
+            }
+
+            .summary-label {
+                font-size: 0.8rem;
+            }
+
+            .upload-form-container {
+                padding: 0.5rem;
+            }
+
+            .upload-options {
+                padding: 1rem;
+            }
+
+            .terms-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .mobile-user-info h3 {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 767.98px) and (orientation: landscape) {
+            .sidebar {
+                height: 100vh;
+                overflow-y: auto;
+            }
+
+            .dashboard-main {
+                padding: 0.5rem 0;
+            }
+
+            .dashboard-header {
+                padding: 1rem 0.5rem 0.5rem;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .summary-card:hover {
+                transform: none;
+            }
+
+            .sidebar-link:hover {
+                background: transparent;
+            }
+
+            .upload-option:hover {
+                background: white;
+                border-color: var(--gray-300);
+            }
+
+            .btn {
+                min-height: 44px;
+            }
+
+            .sidebar-link {
+                min-height: 44px;
+            }
+
+            .upload-option {
+                min-height: 60px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sidebar,
+            .summary-card,
+            .sidebar-link,
+            .upload-option {
+                transition: none;
+            }
+
+            .summary-card:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <div class="mobile-header">
+        <div class="mobile-header-content">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="mobile-user-info">
+                <img src="{% static "images/user-avatar.jpg" %}" alt="علی محمدی" class="mobile-user-avatar">
+                <div>
+                    <h3 style="margin: 0; font-size: 1rem;">علی محمدی</h3>
+                    <p style="margin: 0; font-size: 0.8rem; color: var(--gray-600);">پنل کاربری</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="back-to-home" onclick="window.location.href='/index/'" title="بازگشت به خانه">
+        <i class="fas fa-home"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <main class="main">
         <div class="dashboard-layout">
             <div class="container">
                 <div class="sidebar-layout">
                     <!-- Sidebar -->
-                    <aside class="sidebar">
+                    <aside class="sidebar" id="sidebar">
                         <div class="sidebar-user">
                             <img src="{% static "images/user-avatar.jpg" %}" alt="علی محمدی" class="user-avatar">
                             <div class="user-info">
@@ -143,9 +637,15 @@
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#section-settings" class="sidebar-link" data-section="settings">
-                                    <i class="fas fa-cog"></i>
-                                    تنظیمات
+                                <a href="#section-messages" class="sidebar-link" data-section="messages">
+                                    <i class="fas fa-envelope"></i>
+                                    پیام‌های مدیر
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#section-payments" class="sidebar-link" data-section="payments">
+                                    <i class="fas fa-receipt"></i>
+                                    رسید پرداخت‌ها
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -330,12 +830,16 @@
                                 <form id="templateUploadForm" enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <label for="templateTitle" class="form-label">عنوان قالب *</label>
-                                            <input type="text" id="templateTitle" name="title" class="form-control" required>
+                                            <label for="templateTitle" class="form-label">عنوان قالب (فقط انگلیسی) *</label>
+                                            <input type="text" id="templateTitle" name="title" class="form-control" pattern="[A-Za-z0-9\s]+" title="لطفاً فقط از حروف انگلیسی و اعداد استفاده کنید" required>
+                                            <small style="color: var(--gray-500); font-size: 0.8rem;">فقط حروف انگلیسی و اعداد مجاز است</small>
                                         </div>
                                         <div class="form-group">
-                                            <label for="templatePrice" class="form-label">قیمت (تومان) *</label>
-                                            <input type="number" id="templatePrice" name="price" class="form-control" min="0" required>
+                                            <label for="templatePrice" class="form-label">قیمت پیشنهادی (تومان)</label>
+                                            <div class="price-suggestion">
+                                                <p>💰 <strong>توجه:</strong> قیمت نهایی توسط کارشناسان سایت تعیین خواهد شد. این قیمت فقط به عنوان پیشنهاد شما در نظر گرفته می‌شود.</p>
+                                            </div>
+                                            <input type="number" id="templatePrice" name="price" class="form-control" min="0" placeholder="قیمت پیشنهادی خود را وارد کنید">
                                         </div>
                                     </div>
 
@@ -349,17 +853,36 @@
                                             <label for="templateCategory" class="form-label">دسته‌بندی *</label>
                                             <select id="templateCategory" name="category" class="form-control" required>
                                                 <option value="">انتخاب کنید</option>
-                                                <option value="shopify">فروشگاهی</option>
-                                                <option value="company">شرکتی</option>
-                                                <option value="personal">شخصی</option>
-                                                <option value="blog">بلاگ</option>
-                                                <option value="portfolio">نمونه کار</option>
-                                                <option value="education">آموزشی</option>
+                                                <option value="blog">بلاگری</option>
+                                                <option value="beauty">زیبایی</option>
+                                                <option value="tattoo">تتو و آرایشی زنانه</option>
+                                                <option value="male-beauty">آرایشی مردانه</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="templateTags" class="form-label">تگ‌ها</label>
-                                            <input type="text" id="templateTags" name="tags" class="form-control" placeholder="مثلاً: واکنش‌گرا, مدرن, سئو">
+                                            <input type="text" id="templateTags" name="tags" class="form-control" placeholder="مثلاً: responsive, modern, seo">
+                                        </div>
+                                    </div>
+
+                                    <div class="upload-options">
+                                        <h4 style="margin-bottom: 1rem;">افزودن تصاویر از قالب</h4>
+
+                                        <div class="upload-option" onclick="document.getElementById('templateImages').click()">
+                                            <i class="fas fa-images"></i>
+                                            <div class="upload-option-content">
+                                                <div class="upload-option-title">آپلود تصاویر از صفحات قالب</div>
+                                                <div class="upload-option-description">تصاویر با کیفیت از صفحات مختلف قالب خود را آپلود کنید</div>
+                                            </div>
+                                            <input type="file" id="templateImages" multiple accept="image/*" style="display: none;">
+                                        </div>
+
+                                        <div class="upload-option" onclick="startScreenRecording()">
+                                            <i class="fas fa-video"></i>
+                                            <div class="upload-option-content">
+                                                <div class="upload-option-title">ضبط صفحه از قالب</div>
+                                                <div class="upload-option-description">از صفحات قالب خود اسکرین‌شات یا ویدیو ضبط کنید</div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -383,22 +906,101 @@
                                         </div>
                                     </div>
 
+                                    <!-- تیک‌های تایید -->
                                     <div class="form-group">
                                         <label class="checkbox-label">
-                                            <input type="checkbox" name="agreeTerms" required>
+                                            <input type="checkbox" name="agreeTerms" id="agreeTerms" required>
                                             <span class="checkmark"></span>
-                                            با <a href="/terms/" class="text-link">قوانین آپلود</a> موافقم
+                                            با <a href="javascript:void(0)" onclick="showTerms()" class="text-link">قوانین آپلود</a> موافقم
                                         </label>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="notCopied" id="notCopied" required>
+                                            <span class="checkmark"></span>
+                                            تأیید می‌کنم که این قالب کپی نیست
+                                        </label>
+                                        <div class="copy-warning">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            قالب کپی نیست و توسط خودم طراحی شده است
+                                        </div>
+                                    </div>
+
                                     <div class="form-actions">
-                                        <button type="submit" class="btn btn--primary btn--lg">
+                                        <button type="submit" class="btn btn--primary btn--lg" id="submitBtn" disabled>
                                             <i class="fas fa-cloud-upload-alt"></i>
                                             آپلود قالب
                                         </button>
                                         <button type="reset" class="btn btn--outline btn--lg">پاک کردن فرم</button>
                                     </div>
                                 </form>
+                            </div>
+                        </section>
+
+                        <!-- Messages Section -->
+                        <section id="section-messages" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>پیام‌های مدیر</h1>
+                                <p>پیام‌ها و اطلاعیه‌های سیستم</p>
+                            </div>
+                            <div class="user-templates">
+                                <div class="message-list">
+                                    <div class="message-item">
+                                        <div class="message-header">
+                                            <h4>قالب شما تایید شد</h4>
+                                            <span class="message-time">۲ ساعت پیش</span>
+                                        </div>
+                                        <p class="message-content">قالب "فروشگاهی مدرن" شما توسط کارشناسان بررسی و تایید شد. هم اکنون در فروشگاه قابل مشاهده است.</p>
+                                    </div>
+                                    <div class="message-item">
+                                        <div class="message-header">
+                                            <h4>پرداخت جدید</h4>
+                                            <span class="message-time">۱ روز پیش</span>
+                                        </div>
+                                        <p class="message-content">مبلغ ۵۰,۰۰۰ تومان از فروش قالب "شرکتی حرفه‌ای" به حساب شما واریز شد.</p>
+                                    </div>
+                                    <div class="message-item">
+                                        <div class="message-header">
+                                            <h4>به‌روزرسانی قوانین</h4>
+                                            <span class="message-time">۳ روز پیش</span>
+                                        </div>
+                                        <p class="message-content">قوانین جدید آپلود قالب به‌روزرسانی شد. لطفاً قبل از آپلود قالب جدید، قوانین را مطالعه کنید.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Payments Section -->
+                        <section id="section-payments" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>رسید پرداخت‌ها</h1>
+                                <p>تاریخچه واریزی‌ها و تراکنش‌های شما</p>
+                            </div>
+                            <div class="user-templates">
+                                <div class="payment-list">
+                                    <div class="payment-item">
+                                        <div class="payment-info">
+                                            <h4>فروش قالب "فروشگاهی مدرن"</h4>
+                                            <span class="payment-date">۱۴۰۳/۰۱/۱۵ - ۱۴:۳۰</span>
+                                        </div>
+                                        <div class="payment-amount success">+۵۰,۰۰۰ تومان</div>
+                                    </div>
+                                    <div class="payment-item">
+                                        <div class="payment-info">
+                                            <h4>فروش قالب "شرکتی حرفه‌ای"</h4>
+                                            <span class="payment-date">۱۴۰۳/۰۱/۱۴ - ۰۹:۱۵</span>
+                                        </div>
+                                        <div class="payment-amount success">+۷۵,۰۰۰ تومان</div>
+                                    </div>
+                                    <div class="payment-item">
+                                        <div class="payment-info">
+                                            <h4>فروش قالب "شخصی خلاق"</h4>
+                                            <span class="payment-date">۱۴۰۳/۰۱/۱۲ - ۱۶:۴۵</span>
+                                        </div>
+                                        <div class="payment-amount success">+۳۵,۰۰۰ تومان</div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 
@@ -429,95 +1031,144 @@
         </div>
     </main>
 
-    <!-- Footer -->
-     <footer class="footer">
-    <div class="container">
-        <div class="footer__content">
-            <div class="footer__col">
-                <div class="footer__logo">
-                    <img src="{% static "images/logo.png" %}" alt="قالب‌شاپ" class="footer-logo">
-                    <span class="footer-logo-text">قالب‌شاپ</span>
-                </div>
-                <p class="footer__description">
-                    ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
-                </p>
-                <div class="footer__social">
-                    <a href="#" class="social-link" aria-label="اینستاگرام">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="تلگرام">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="توییتر">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="لینکدین">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
+    <div class="terms-modal" id="termsModal">
+        <div class="terms-content">
+            <div class="terms-header">
+                <h2>قوانین آپلود قالب</h2>
+                <button class="btn btn--ghost" onclick="hideTerms()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
+            <div class="terms-body">
+                <h3>ماده ۱: شرایط کلی</h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
 
-            <div class="footer__col">
-                <h3 class="footer__title">لینک‌های سریع</h3>
-                <ul class="footer__links">
-                    <li><a href="/index/" class="footer__link">خانه</a></li>
-                    <li><a href="/templates/" class="footer__link">قالب‌ها</a></li>
-                    <li><a href="/about/" class="footer__link">درباره ما</a></li>
-                    <li><a href="/contact/" class="footer__link">تماس با ما</a></li>
+                <h3>ماده ۲: مالکیت معنوی</h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+                <ul>
+                    <li>قالب باید توسط خود شما طراحی شده باشد</li>
+                    <li>استفاده از المان‌های کپی‌شده ممنوع است</li>
+                    <li>حقوق مالکیت معنوی محفوظ است</li>
                 </ul>
-            </div>
 
-            <div class="footer__col">
-                <h3 class="footer__title">تماس با ما</h3>
-                <div class="footer__contact">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <div class="contact-info">
-                            <strong>آدرس</strong>
-                            <span>تهران، خیابان ولیعصر</span>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone contact-icon"></i>
-                        <div class="contact-info">
-                            <strong>تلفن</strong>
-                            <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope contact-icon"></i>
-                        <div class="contact-info">
-                            <strong>ایمیل</strong>
-                            <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-clock contact-icon"></i>
-                        <div class="contact-info">
-                            <strong>ساعات کاری</strong>
-                            <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <h3>ماده ۳: کیفیت فنی</h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
 
-        <div class="footer__bottom">
-            <div class="footer-bottom__content">
-                <p class="copyright">
-                    &copy; ۱۴۰۳ قالب‌شاپ. تمامی حقوق محفوظ است.
-                </p>
-                <div class="footer-bottom__links">
-                    <a href="/privacy/" class="footer-bottom__link">حریم خصوصی</a>
-                    <a href="/terms/" class="footer-bottom__link">قوانین و مقررات</a>
-                </div>
+                <h3>ماده ۴: مسئولیت‌ها</h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
             </div>
         </div>
     </div>
-</footer>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__col">
+                    <div class="footer__logo">
+                        <img src="{% static "images/logo.png" %}" alt="قالب‌شاپ" class="footer-logo">
+                        <span class="footer-logo-text">قالب‌شاپ</span>
+                    </div>
+                    <p class="footer__description">
+                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" class="social-link" aria-label="اینستاگرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="تلگرام">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="توییتر">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="لینکدین">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__col">
+                    <h3 class="footer__title">لینک‌های سریع</h3>
+                    <ul class="footer__links">
+                        <li><a href="/index/" class="footer__link">خانه</a></li>
+                        <li><a href="/templates/" class="footer__link">قالب‌ها</a></li>
+                        <li><a href="/about/" class="footer__link">درباره ما</a></li>
+                        <li><a href="/contact/" class="footer__link">تماس با ما</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h3 class="footer__title">تماس با ما</h3>
+                    <div class="footer__contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>آدرس</strong>
+                                <span>تهران، خیابان ولیعصر</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>تلفن</strong>
+                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ایمیل</strong>
+                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock contact-icon"></i>
+                            <div class="contact-info">
+                                <strong>ساعات کاری</strong>
+                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <div class="footer-bottom__content">
+                    <p class="copyright">
+                        &copy; ۱۴۰۳ قالب‌شاپ. تمامی حقوق محفوظ است.
+                    </p>
+                    <div class="footer-bottom__links">
+                        <a href="/privacy/" class="footer-bottom__link">حریم خصوصی</a>
+                        <a href="/terms/" class="footer-bottom__link">قوانین و مقررات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 991.98) {
+                    toggleSidebar();
+                }
+            });
+        });
+
         // Dashboard navigation
         document.querySelectorAll('.sidebar-link').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -570,6 +1221,41 @@
                 });
             }
         });
+
+        // Validate title (English only)
+        const titleInput = document.getElementById('templateTitle');
+        titleInput.addEventListener('input', function() {
+            const englishOnly = /^[A-Za-z0-9\s]*$/;
+            if (!englishOnly.test(this.value)) {
+                this.value = this.value.replace(/[^A-Za-z0-9\s]/g, '');
+            }
+        });
+
+        // Check agreement checkboxes
+        const agreeTerms = document.getElementById('agreeTerms');
+        const notCopied = document.getElementById('notCopied');
+        const submitBtn = document.getElementById('submitBtn');
+
+        function checkAgreements() {
+            submitBtn.disabled = !(agreeTerms.checked && notCopied.checked);
+        }
+
+        agreeTerms.addEventListener('change', checkAgreements);
+        notCopied.addEventListener('change', checkAgreements);
+
+        // Terms modal functions
+        function showTerms() {
+            document.getElementById('termsModal').classList.add('show');
+        }
+
+        function hideTerms() {
+            document.getElementById('termsModal').classList.remove('show');
+        }
+
+        // Screen recording function (placeholder)
+        function startScreenRecording() {
+            alert('قابلیت ضبط صفحه به زودی اضافه خواهد شد. در حال حاضر می‌توانید از گزینه آپلود تصاویر استفاده کنید.');
+        }
 
         // Initialize charts
         document.addEventListener('DOMContentLoaded', function() {
@@ -680,10 +1366,26 @@
         document.querySelectorAll('.logout-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (confirm('آیا از حساب کاربری خود خارج می‌شوید؟')) {
-                    window.location.href = '/index/';
+                    window.location.href = '/Pages/index.html';
                 }
             });
         });
+
+        document.getElementById('termsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideTerms();
+            }
+        });
+
+        function handleResize() {
+            if (window.innerWidth > 991.98) {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
     </script>
 </body>
 </html>

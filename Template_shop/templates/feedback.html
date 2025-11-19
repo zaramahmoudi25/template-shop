@@ -1,0 +1,492 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}پیشنهادات و انتقادات - قالب‌شاپ{% endblock %}
+{% block description %}ارسال پیشنهادات و انتقادات برای بهبود خدمات قالب‌شاپ{% endblock %}
+
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/components.css" %}">
+    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
+    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .feedback-hero {
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .feedback-hero .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feedback-hero .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .feedback-content {
+            padding: 4rem 0;
+            background: var(--gray-50);
+        }
+
+        .feedback-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .feedback-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feedback-type-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--gray-300);
+            background: white;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .feedback-type-btn:hover {
+            border-color: var(--primary-300);
+            color: var(--primary-600);
+        }
+
+        .feedback-type-btn.active {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+            color: var(--primary-700);
+        }
+
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-control--textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary-500);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-600);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .feedback-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .feedback-info h3 {
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feedback-info p {
+            color: var(--gray-600);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .feedback-hero {
+                padding: 4rem 0 2rem;
+            }
+
+            .feedback-hero .hero-title {
+                font-size: 2rem;
+            }
+
+            .feedback-form-container {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .feedback-type-selector {
+                flex-direction: column;
+            }
+
+            .feedback-type-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+    {% endblock %}
+
+    {% block content %}
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="feedback-hero">
+            <div class="container">
+                <h1 class="hero-title">پیشنهادات و انتقادات</h1>
+                <p class="hero-subtitle">نظرات شما در بهبود خدمات ما بسیار ارزشمند است</p>
+            </div>
+        </section>
+
+        <!-- Feedback Form Section -->
+        <section class="feedback-content">
+            <div class="container">
+                <div class="feedback-form-container">
+                    <!-- Type Selector
+                    <div class="feedback-type-selector">
+                        <button type="button" class="feedback-type-btn active" data-type="suggestion">
+                            <i class="fas fa-lightbulb"></i>
+                            پیشنهاد
+                        </button>
+                        <button type="button" class="feedback-type-btn" data-type="criticism">
+                            <i class="fas fa-comment-alt"></i>
+                            انتقاد
+                        </button>
+                    </div> -->
+
+                    <!-- Feedback Form -->
+                    <form class="feedback-form" id="feedbackForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">نام شما *</label>
+                            <input type="text" id="name" class="form-control" required placeholder="نام و نام خانوادگی خود را وارد کنید">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">ایمیل (اختیاری)</label>
+                            <input type="email" id="email" class="form-control" placeholder="email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">پیام شما *</label>
+                            <textarea id="message" class="form-control form-control--textarea" rows="6" required placeholder="پیشنهاد یا انتقاد خود را با جزئیات بیان کنید..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            ارسال پیام
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="feedback-info">
+                    <h3>چرا نظرات شما مهم است؟</h3>
+                    <p>
+                        ما به نظرات و پیشنهادات شما اهمیت می‌دهیم. هر پیشنهاد یا انتقادی به ما کمک می‌کند
+                        خدمات بهتری ارائه دهیم و تجربه کاربری بهتری برای همه کاربران فراهم کنیم.
+                        تمامی نظرات شما با دقت مطالعه و بررسی خواهد شد.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% endblock %}
+
+{% block extra_js %}
+    <script>
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFeedbackPage();
+        });
+
+        function initializeFeedbackPage() {
+            setupEventListeners();
+            setupMobileMenu();
+            setupScrollToTop();
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        function setupEventListeners() {
+            // Feedback Type Selection
+            const typeButtons = document.querySelectorAll('.feedback-type-btn');
+            typeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    typeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Form Submission
+            const feedbackForm = document.getElementById('feedbackForm');
+            if (feedbackForm) {
+                feedbackForm.addEventListener('submit', handleFeedbackSubmit);
+            }
+
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.classList.toggle('active');
+                    document.body.classList.toggle('menu-open');
+                });
+            }
+
+            // Scroll to Top
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', toggleScrollToTop);
+                scrollToTopBtn.addEventListener('click', scrollToTop);
+            }
+        }
+
+        // ==================== FEEDBACK FORM HANDLING ====================
+        function handleFeedbackSubmit(event) {
+            event.preventDefault();
+
+            const formData = {
+                type: document.querySelector('.feedback-type-btn.active').dataset.type,
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                message: document.getElementById('message').value.trim()
+            };
+
+            // Validation
+            if (!validateFeedbackForm(formData)) {
+                return;
+            }
+
+            // Simulate form submission
+            const submitBtn = event.target.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
+            submitBtn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                showToast('پیام شما با موفقیت ارسال شد. با تشکر از بازخورد ارزشمند شما!', 'success');
+                feedbackForm.reset();
+
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        }
+
+        function validateFeedbackForm(formData) {
+            if (!formData.name) {
+                showToast('لطفاً نام خود را وارد کنید', 'error');
+                document.getElementById('name').focus();
+                return false;
+            }
+
+            if (!formData.message) {
+                showToast('لطفاً پیام خود را وارد کنید', 'error');
+                document.getElementById('message').focus();
+                return false;
+            }
+
+            if (formData.email && !isValidEmail(formData.email)) {
+                showToast('لطفاً یک ایمیل معتبر وارد کنید', 'error');
+                document.getElementById('email').focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // ==================== MOBILE MENU ====================
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isOpen = mainNav.classList.contains('active');
+
+                    if (isOpen) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    } else {
+                        mainNav.classList.add('active');
+                        mobileMenuBtn.classList.add('active');
+                        document.body.classList.add('menu-open');
+                    }
+                });
+            }
+        }
+
+        // ==================== SCROLL TO TOP ====================
+        function setupScrollToTop() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', toggleScrollToTop);
+                scrollToTopBtn.addEventListener('click', scrollToTop);
+            }
+        }
+
+        function toggleScrollToTop() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (scrollToTopBtn) {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ==================== TOAST NOTIFICATION ====================
+        function showToast(message, type = 'info') {
+            // Remove existing toasts
+            const existingToasts = document.querySelectorAll('.toast');
+            existingToasts.forEach(toast => toast.remove());
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast--${type}`;
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <span class="toast-icon">
+                        ${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}
+                    </span>
+                    <span class="toast-message">${message}</span>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+
+            // Add styles if not exists
+            if (!document.querySelector('#toast-styles')) {
+                const style = document.createElement('style');
+                style.id = 'toast-styles';
+                style.textContent = `
+                    .toast {
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(-100px);
+                        background: white;
+                        padding: 1rem 1.5rem;
+                        border-radius: var(--border-radius);
+                        box-shadow: var(--shadow-lg);
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        z-index: 10000;
+                        transition: transform 0.3s ease;
+                        max-width: 400px;
+                        width: 90%;
+                        border-right: 4px solid;
+                    }
+                    .toast--success { border-color: #10b981; }
+                    .toast--error { border-color: #ef4444; }
+                    .toast--info { border-color: #3b82f6; }
+                    .toast-content { display: flex; align-items: center; gap: 0.5rem; flex: 1; }
+                    .toast-icon { font-weight: bold; }
+                    .toast-close { background: none; border: none; cursor: pointer; color: var(--gray-500); }
+                    .toast.show { transform: translateX(-50%) translateY(0); }
+                `;
+                document.head.appendChild(style);
+            }
+
+            document.body.appendChild(toast);
+
+            // Show animation
+            setTimeout(() => toast.classList.add('show'), 100);
+
+            // Auto remove
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }, 5000);
+        }
+    </script>
+{% endblock extra_js %}

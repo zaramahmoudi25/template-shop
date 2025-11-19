@@ -5,6 +5,12 @@
 {% block description %}درباره فروشگاه قالب و ارزش‌های ما{% endblock %}
 
     {% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/components.css" %}">
+    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
+    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
      <style>
                 .services-hero {
             background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
@@ -29,8 +35,6 @@
         }
     </style>
     {% endblock %}
-
-<body>
 
     {% block content %}
     <main class="main">

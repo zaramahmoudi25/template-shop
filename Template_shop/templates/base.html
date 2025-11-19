@@ -5,10 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>درباره ما - فروشگاه قالب</title>
+    <title>{% block title %}base{% endblock %}</title>
     <meta name="description" content="درباره فروشگاه قالب و ارزش‌های ما">
 
     <!-- CSS Files -->
+    {% block extra_css %}
     <link rel="stylesheet" href="{% static "css/base.css" %}">
     <link rel="stylesheet" href="{% static "css/components.css" %}">
     <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
@@ -18,8 +19,7 @@
     <link rel="stylesheet" href="{% static "css/utilities.css" %}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-     {% block extra_css %}{% endblock %}
+    {% endblock %}
 </head>
 
 
@@ -29,7 +29,7 @@
         <div class="header__inner">
             <div class="header__logo">
                 <a href="/index/" class="logo-link">
-                    <img src="{% static "/images/logo.png" %}" alt="قالب‌شاپ" class="logo">
+                    <img src="{% static "images/logo.png" %}" alt="قالب‌شاپ" class="logo">
                     <span class="logo-text">قالب‌شاپ</span>
                 </a>
             </div>
@@ -48,6 +48,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="/about/" class="nav-link">درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/feedback/" class="nav-link">پیشنهادات و انتقادات</a>
                     </li>
                     <li class="nav-item">
                         <a href="/contact/" class="nav-link">تماس با ما</a>

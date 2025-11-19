@@ -4,7 +4,15 @@
 {% block title %}قالب‌ها - فروشگاه قالب{% endblock %}
 {% block description %}مجموعه کامل قالب‌های وبسایت برای انواع کسب‌ و کارها{% endblock %}
 
-    {% block extra_css %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/components.css" %}">
+    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
+    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         .price-display {
             display: flex;
@@ -123,39 +131,350 @@
         .template-card:hover .template-overlay {
             opacity: 1;
         }
+
+        /* استایل‌های جدید */
+        .search-hero-section {
+            padding: 2rem 0;
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+            color: white;
+        }
+
+        .search-hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .search-hero-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 3rem;
+            }
+        }
+
+        .search-hero-text {
+            text-align: center;
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .search-hero-text {
+                text-align: right;
+            }
+        }
+
+        .shopify-text {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .search-hero-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            .search-hero-title {
+                font-size: 2rem;
+            }
+        }
+
+        .search-hero-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.6;
+        }
+
+        @media (min-width: 768px) {
+            .search-hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .search-form-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .search-form-container {
+                margin: 0;
+                max-width: 400px;
+            }
+        }
+
+        .search-form-compact {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: white;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-input-compact {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            background: transparent;
+            min-width: 0;
+        }
+
+        .search-input-compact:focus {
+            outline: none;
+        }
+
+        .search-btn-compact {
+            padding: 0.75rem 1.25rem;
+            background: var(--primary-500);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .search-btn-compact:hover {
+            background: var(--primary-600);
+            transform: translateY(-1px);
+        }
+
+        /* بخش نظرات */
+        .testimonials-section {
+            background: var(--gray-50);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .testimonials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .testimonials-header {
+                flex-direction: row;
+                gap: 0;
+            }
+        }
+
+        .testimonials-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .testimonials-actions {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .testimonials-actions {
+                width: auto;
+                justify-content: flex-start;
+            }
+        }
+
+        .testimonials-row {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scrollbar-width: thin;
+        }
+
+        .testimonials-row::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .testimonials-row::-webkit-scrollbar-track {
+            background: var(--gray-200);
+            border-radius: 3px;
+        }
+
+        .testimonials-row::-webkit-scrollbar-thumb {
+            background: var(--primary-500);
+            border-radius: 3px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            min-width: 280px;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .testimonial-card {
+                min-width: 300px;
+            }
+        }
+
+        .testimonial-text {
+            color: var(--gray-700);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .author-info h4 {
+            margin: 0;
+            color: var(--gray-900);
+            font-size: 0.9rem;
+        }
+
+        .author-info span {
+            color: var(--gray-600);
+            font-size: 0.8rem;
+        }
+
+        /* بخش همکاران */
+        .partners-section {
+            background: white;
+            padding: 3rem 0;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 480px) {
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .partner-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .partner-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .partner-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gray-900);
+        }
+
+        .partner-description {
+            color: var(--gray-600);
+            line-height: 1.6;
+            font-size: 0.8rem;
+        }
+
+        /* فیلترها */
+        .filters-toggle-section {
+            position: relative;
+        }
+
+        .toggle-filters-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-filters-btn.hidden {
+            display: none;
+        }
     </style>
     {% endblock %}
 
-
-
     {% block content %}
     <main class="main">
-        <!-- Search Hero Section -->
+        <!-- Search Hero Section با تغییرات جدید -->
         <section class="search-hero-section">
             <div class="container">
                 <div class="search-hero-content">
+                    <!-- متن در سمت راست -->
                     <div class="search-hero-text">
-                        <h1 class="search-hero-title">قالب دلخواه خود را پیدا کنید</h1>
-                        <p class="search-hero-subtitle">از بین صدها قالب حرفه‌ای، مناسب‌ترین را انتخاب کنید</p>
+                        <span class="shopify-text">
+                            قالب‌های شاپیفای
+                        </span>
+                        <br>
+                        <h1 class="search-hero-title">قالب های شاپیفای</h1>
+                        <p class="search-hero-subtitle">قالب مناسب خود را انتخاب کنید.</p>
                     </div>
 
-                    <div class="search-hero-form">
-                        <div class="advanced-search">
-                            <div class="search-bar-large">
-                                <input type="text" id="mainSearchInput" placeholder="چه قالبی دنبالش هستید؟ مثلاً: فروشگاهی، شرکتی، شخصی..." class="search-input-large">
-                                <button class="search-btn-large" id="mainSearchBtn">
-                                    <i class="fas fa-search"></i>
-                                    جستجو
-                                </button>
-                            </div>
-
-                            <div class="quick-search-tags">
-                                <span class="tag-label">جستجوی سریع:</span>
-                                <button class="search-tag" data-search="فروشگاهی">فروشگاهی</button>
-                                <button class="search-tag" data-search="شرکتی">شرکتی</button>
-                                <button class="search-tag" data-search="شخصی">شخصی</button>
-                                <button class="search-tag" data-search="بلاگ">بلاگ</button>
-                            </div>
+                    <!-- فرم جستجو در سمت چپ -->
+                    <div class="search-form-container">
+                        <div class="search-form-compact">
+                            <input type="text" id="compactSearchInput" placeholder="جستجوی قالب..." class="search-input-compact">
+                            <button class="search-btn-compact" id="compactSearchBtn">
+                                <i class="fas fa-search"></i>
+                                جستجو
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -165,9 +484,13 @@
         <!-- Filters Toggle Section -->
         <section class="filters-toggle-section">
             <div class="container">
-                <button class="btn btn--primary btn--lg" id="showFiltersBtn">
+                <button class="btn btn--primary btn--lg toggle-filters-btn" id="showFiltersBtn">
                     <i class="fas fa-filter"></i>
                     مشاهده فیلترها
+                </button>
+                <button class="btn btn--outline btn--lg toggle-filters-btn hidden" id="hideFiltersBtnMain">
+                    <i class="fas fa-times"></i>
+                    بستن فیلترها
                 </button>
             </div>
         </section>
@@ -188,10 +511,6 @@
                         <button class="btn btn--primary btn--sm" id="applyFilters">
                             <i class="fas fa-check"></i>
                             اعمال فیلترها
-                        </button>
-                        <button class="btn btn--outline btn--sm" id="hideFiltersBtn">
-                            <i class="fas fa-times"></i>
-                            بستن فیلترها
                         </button>
                     </div>
                 </div>
@@ -361,6 +680,139 @@
                 </div>
             </div>
         </section>
+
+        <!-- بخش نظرات جدید - زیر قالب‌ها -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="testimonials-header">
+                    <h2 class="testimonials-title">نظرات کاربران</h2>
+                    <div class="testimonials-actions">
+                        <button class="btn btn--outline btn--sm" id="viewMoreTestimonials">
+                            <i class="fas fa-eye"></i>
+                            مشاهده بیشتر
+                        </button>
+                        <button class="btn btn--primary btn--sm" id="addTestimonial">
+                            <i class="fas fa-plus"></i>
+                            افزودن نظر
+                        </button>
+                    </div>
+                </div>
+
+                <div class="testimonials-row">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "قالب‌های این سایت واقعاً حرفه‌ای و با کیفیت هستند. پشتیبانی عالی و پاسخگویی سریع دارند."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>محمد رضایی</h4>
+                                <span>مدیر فروشگاه اینترنتی</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "تنوع قالب‌ها فوق‌العاده است. توانستم دقیقاً همان چیزی که نیاز داشتم را پیدا کنم."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>فاطمه محمدی</h4>
+                                <span>فریلنسر طراح</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "پشتیبانی ۲۴ ساعته واقعاً کار را راحت کرده. هر سوالی داشته باشم فوراً پاسخ می‌دهند."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>علی کریمی</h4>
+                                <span>توسعه‌دهنده وب</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "کیفیت قالب‌ها بسیار بالاست و کاملاً واکنش‌گرا هستند. برای موبایل و تبلت عالی کار می‌کنند."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>سارا احمدی</h4>
+                                <span>طراح UI/UX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش همکاران جدید -->
+        <section class="partners-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">لورم ایپسوم</h2>
+                    <p class="section-subtitle">با بهترین‌ها همکاری می‌کنیم</p>
+                </div>
+
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <div class="partner-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="partner-name">لورم ایپسوم</h3>
+                        <p class="partner-description">
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                        </p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="partner-name">لورم ایپسوم</h3>
+                        <p class="partner-description">
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                        </p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="partner-name">لورم ایپسوم</h3>
+                        <p class="partner-description">
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                        </p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="partner-name">لورم ایپسوم</h3>
+                        <p class="partner-description">
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     {% endblock %}
 
@@ -381,7 +833,7 @@
                 originalPrice: 75000,
                 category: "shopify",
                 sales: 89,
-                image: "/Images and SVGs/hero-template-1.png",
+                image: "{% static "images/hero-template-1.png" %}",
                 badges: ["پرفروش", "جدید"],
                 features: ["responsive", "seo", "support", "customizable"]
             },
@@ -393,7 +845,7 @@
                 originalPrice: null,
                 category: "company",
                 sales: 67,
-                image: "/Images and SVGs/hero-template-2.png",
+                image: "{% static "images/hero-template-2.png" %}",
                 badges: ["پرامتیاز"],
                 features: ["responsive", "seo", "support", "fast"]
             },
@@ -405,7 +857,7 @@
                 originalPrice: null,
                 category: "personal",
                 sales: 45,
-                image: "/Images and SVGs/hero-template-3.png",
+                image: "{% static "images/hero-template-3.png" %}",
                 badges: ["اقتصادی"],
                 features: ["responsive", "customizable"]
             },
@@ -417,7 +869,7 @@
                 originalPrice: 60000,
                 category: "blog",
                 sales: 34,
-                image: "/Images and SVGs/hero-template-1.png",
+                image: "{% static "images/hero-template-1.png" %}",
                 badges: ["جدید"],
                 features: ["responsive", "seo", "support", "fast"]
             },
@@ -429,7 +881,7 @@
                 originalPrice: null,
                 category: "portfolio",
                 sales: 56,
-                image: "/Images and SVGs/hero-template-2.png",
+                image: "{% static "images/hero-template-2.png" %}",
                 badges: ["پرفروش"],
                 features: ["responsive", "seo", "customizable"]
             },
@@ -441,7 +893,7 @@
                 originalPrice: 80000,
                 category: "education",
                 sales: 42,
-                image: "/Images and SVGs/hero-template-3.png",
+                image: "{% static "images/hero-template-3.png" %}",
                 badges: ["جدید", "پرامتیاز"],
                 features: ["responsive", "seo", "support", "fast", "customizable"]
             }
@@ -467,12 +919,20 @@
             mobileMenuBtn: document.getElementById('mobileMenuBtn'),
             mainNav: document.getElementById('mainNav'),
 
-            // Search
-            mainSearchInput: document.getElementById('mainSearchInput'),
-            mainSearchBtn: document.getElementById('mainSearchBtn'),
-            searchTags: document.querySelectorAll('.search-tag'),
+            // Search جدید
+            compactSearchInput: document.getElementById('compactSearchInput'),
+            compactSearchBtn: document.getElementById('compactSearchBtn'),
 
-            // Filters
+            // Testimonials جدید
+            viewMoreTestimonials: document.getElementById('viewMoreTestimonials'),
+            addTestimonial: document.getElementById('addTestimonial'),
+
+            // Filter Toggle جدید
+            showFiltersBtn: document.getElementById('showFiltersBtn'),
+            hideFiltersBtnMain: document.getElementById('hideFiltersBtnMain'),
+
+            // بقیه المنت‌ها
+            searchTags: document.querySelectorAll('.search-tag'),
             categoryCheckboxes: document.querySelectorAll('input[name="category"]'),
             minPrice: document.getElementById('minPrice'),
             maxPrice: document.getElementById('maxPrice'),
@@ -482,21 +942,13 @@
             layoutBtns: document.querySelectorAll('.layout-btn'),
             resetAllFilters: document.getElementById('resetAllFilters'),
             applyFilters: document.getElementById('applyFilters'),
-            showFiltersBtn: document.getElementById('showFiltersBtn'),
-            hideFiltersBtn: document.getElementById('hideFiltersBtn'),
             filtersContainer: document.getElementById('filtersContainer'),
-
-            // Active Filters
             activeFiltersList: document.getElementById('activeFiltersList'),
             activeFiltersContainer: document.getElementById('activeFiltersContainer'),
-
-            // Results
             templatesGrid: document.getElementById('templatesGrid'),
             resultsCount: document.getElementById('resultsCount'),
             loadMoreBtn: document.getElementById('loadMoreBtn'),
             compareTemplates: document.getElementById('compareTemplates'),
-
-            // Scroll to Top
             scrollToTop: document.getElementById('scrollToTop')
         };
 
@@ -513,18 +965,25 @@
             // Mobile Menu
             elements.mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
-            // Search
-            elements.mainSearchInput.addEventListener('input', debounce(handleSearch, 300));
-            elements.mainSearchBtn.addEventListener('click', handleSearch);
+            // Search جدید
+            elements.compactSearchInput.addEventListener('input', debounce(handleCompactSearch, 300));
+            elements.compactSearchBtn.addEventListener('click', handleCompactSearch);
+
+            // Testimonials جدید
+            elements.viewMoreTestimonials.addEventListener('click', handleViewMoreTestimonials);
+            elements.addTestimonial.addEventListener('click', handleAddTestimonial);
+
+            // Quick Search Tags
             elements.searchTags.forEach(tag => {
                 tag.addEventListener('click', handleQuickSearch);
             });
 
-            // Filters
+            // Category Filters
             elements.categoryCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', handleCategoryFilter);
             });
 
+            // Price Filters
             elements.minPrice.addEventListener('input', debounce(handlePriceFilter, 500));
             elements.maxPrice.addEventListener('input', debounce(handlePriceFilter, 500));
 
@@ -532,19 +991,22 @@
                 preset.addEventListener('click', handlePricePreset);
             });
 
+            // Feature Filters
             elements.featureCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', handleFeatureFilter);
             });
 
+            // Sort and Layout
             elements.sortBy.addEventListener('change', handleSort);
             elements.layoutBtns.forEach(btn => {
                 btn.addEventListener('click', handleLayoutChange);
             });
 
+            // Filter Actions
             elements.resetAllFilters.addEventListener('click', resetAllFilters);
             elements.applyFilters.addEventListener('click', applyAllFilters);
 
-            // Results
+            // Results Actions
             elements.loadMoreBtn.addEventListener('click', loadMoreTemplates);
             elements.compareTemplates.addEventListener('click', handleCompare);
 
@@ -557,19 +1019,43 @@
         function setupFiltersToggle() {
             elements.showFiltersBtn.addEventListener('click', function() {
                 elements.filtersContainer.style.display = 'block';
-                elements.showFiltersBtn.style.display = 'none';
+                elements.showFiltersBtn.classList.add('hidden');
+                elements.hideFiltersBtnMain.classList.remove('hidden');
 
-                // انیمیشن اسکرول به بخش فیلترها
                 elements.filtersContainer.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
             });
 
-            elements.hideFiltersBtn.addEventListener('click', function() {
+            elements.hideFiltersBtnMain.addEventListener('click', function() {
                 elements.filtersContainer.style.display = 'none';
-                elements.showFiltersBtn.style.display = 'block';
+                elements.showFiltersBtn.classList.remove('hidden');
+                elements.hideFiltersBtnMain.classList.add('hidden');
             });
+        }
+
+        // ==================== TESTIMONIALS FUNCTIONS ====================
+        function handleViewMoreTestimonials() {
+            showToast('نمایش نظرات بیشتر به زودی فعال خواهد شد', 'info');
+        }
+
+        function handleAddTestimonial() {
+            showToast('افزودن نظر جدید به زودی فعال خواهد شد', 'info');
+        }
+
+        // ==================== SEARCH FUNCTIONALITY ====================
+        function handleCompactSearch() {
+            const searchTerm = elements.compactSearchInput.value.trim().toLowerCase();
+            currentState.activeFilters.searchTerm = searchTerm;
+            applyAllFilters();
+        }
+
+        function handleQuickSearch(e) {
+            const searchTerm = e.target.dataset.search;
+            elements.compactSearchInput.value = searchTerm;
+            currentState.activeFilters.searchTerm = searchTerm;
+            applyAllFilters();
         }
 
         // ==================== MOBILE MENU ====================
@@ -587,27 +1073,12 @@
             }
         }
 
-        // ==================== SEARCH FUNCTIONALITY ====================
-        function handleSearch() {
-            const searchTerm = elements.mainSearchInput.value.trim().toLowerCase();
-            currentState.activeFilters.searchTerm = searchTerm;
-            applyAllFilters();
-        }
-
-        function handleQuickSearch(e) {
-            const searchTerm = e.target.dataset.search;
-            elements.mainSearchInput.value = searchTerm;
-            currentState.activeFilters.searchTerm = searchTerm;
-            applyAllFilters();
-        }
-
         // ==================== FILTER FUNCTIONS ====================
         function handleCategoryFilter(e) {
             const value = e.target.value;
             const isChecked = e.target.checked;
 
             if (value === 'all' && isChecked) {
-                // If "all" is checked, uncheck others
                 elements.categoryCheckboxes.forEach(checkbox => {
                     if (checkbox.value !== 'all') {
                         checkbox.checked = false;
@@ -615,7 +1086,6 @@
                 });
                 currentState.activeFilters.categories = ['all'];
             } else if (value !== 'all' && isChecked) {
-                // If specific category is checked, uncheck "all"
                 const allCheckbox = document.querySelector('input[name="category"][value="all"]');
                 allCheckbox.checked = false;
 
@@ -623,10 +1093,8 @@
                     currentState.activeFilters.categories.push(value);
                 }
             } else if (value !== 'all' && !isChecked) {
-                // If specific category is unchecked, remove it
                 currentState.activeFilters.categories = currentState.activeFilters.categories.filter(cat => cat !== value);
 
-                // If no categories selected, check "all"
                 if (currentState.activeFilters.categories.length === 0) {
                     const allCheckbox = document.querySelector('input[name="category"][value="all"]');
                     allCheckbox.checked = true;
@@ -650,7 +1118,6 @@
             elements.maxPrice.value = max;
             currentState.activeFilters.priceRange = { min, max };
 
-            // Update preset buttons active state
             elements.pricePresets.forEach(preset => {
                 preset.classList.remove('active');
             });
@@ -686,28 +1153,22 @@
         }
 
         function resetAllFilters() {
-            // Reset checkboxes
             elements.categoryCheckboxes.forEach(checkbox => {
                 checkbox.checked = checkbox.value === 'all';
             });
 
-            // Reset price inputs
             elements.minPrice.value = '';
             elements.maxPrice.value = '';
             elements.pricePresets.forEach(preset => preset.classList.remove('active'));
 
-            // Reset features
             elements.featureCheckboxes.forEach(checkbox => {
                 checkbox.checked = false;
             });
 
-            // Reset sort
             elements.sortBy.value = 'newest';
 
-            // Reset search
-            elements.mainSearchInput.value = '';
+            elements.compactSearchInput.value = '';
 
-            // Reset state
             currentState.activeFilters = {
                 categories: ['all'],
                 priceRange: { min: 0, max: 1000000 },
@@ -717,7 +1178,6 @@
                 layout: 'grid'
             };
 
-            // Reset layout
             elements.layoutBtns.forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.layout === 'grid');
             });
@@ -728,19 +1188,16 @@
 
         function applyAllFilters() {
             let filteredTemplates = templatesData.filter(template => {
-                // Category filter
                 if (!currentState.activeFilters.categories.includes('all') &&
                     !currentState.activeFilters.categories.includes(template.category)) {
                     return false;
                 }
 
-                // Price filter
                 if (template.price < currentState.activeFilters.priceRange.min ||
                     template.price > currentState.activeFilters.priceRange.max) {
                     return false;
                 }
 
-                // Features filter
                 if (currentState.activeFilters.features.length > 0) {
                     const hasAllFeatures = currentState.activeFilters.features.every(feature =>
                         template.features.includes(feature)
@@ -748,7 +1205,6 @@
                     if (!hasAllFeatures) return false;
                 }
 
-                // Search filter
                 if (currentState.activeFilters.searchTerm) {
                     const searchableText = template.title + ' ' + template.description + ' ' + template.category;
                     if (!searchableText.toLowerCase().includes(currentState.activeFilters.searchTerm.toLowerCase())) {
@@ -759,7 +1215,6 @@
                 return true;
             });
 
-            // Sort templates
             filteredTemplates.sort((a, b) => {
                 switch (currentState.activeFilters.sortBy) {
                     case 'price-low':
@@ -787,7 +1242,7 @@
         // ==================== PRICE DISPLAY FORMAT ====================
         function formatPrice(price) {
             const dollar = price.toLocaleString('fa-IR');
-            const rial = (price * 50000).toLocaleString('fa-IR'); // نرخ تبدیل دلار به ریال
+            const rial = (price * 50000).toLocaleString('fa-IR');
             return `
                 <div class="price-display">
                     <span class="price-dollar">${dollar} دلار</span>
@@ -829,7 +1284,6 @@
                     <div class="template-image">
                         <img src="${template.image}" alt="${template.title}" class="template-img">
                         <div class="template-overlay">
-                            <!-- حذف دکمه‌های مشاهده سریع و جزئیات کامل -->
                         </div>
                         <div class="template-badges">
                             ${template.badges.map(badge => `<span class="badge badge--primary">${badge}</span>`).join('')}
@@ -877,7 +1331,6 @@
         function updateActiveFiltersDisplay() {
             const activeFilters = [];
 
-            // Category filters
             if (!currentState.activeFilters.categories.includes('all')) {
                 currentState.activeFilters.categories.forEach(cat => {
                     activeFilters.push({
@@ -888,7 +1341,6 @@
                 });
             }
 
-            // Price filter
             if (currentState.activeFilters.priceRange.min > 0 || currentState.activeFilters.priceRange.max < 1000000) {
                 activeFilters.push({
                     text: `قیمت: ${currentState.activeFilters.priceRange.min.toLocaleString('fa-IR')} - ${currentState.activeFilters.priceRange.max.toLocaleString('fa-IR')} دلار`,
@@ -896,7 +1348,6 @@
                 });
             }
 
-            // Feature filters
             if (currentState.activeFilters.features.length > 0) {
                 const featureNames = {
                     'responsive': 'واکنش‌گرا',
@@ -915,7 +1366,6 @@
                 });
             }
 
-            // Search term
             if (currentState.activeFilters.searchTerm) {
                 activeFilters.push({
                     text: `جستجو: "${currentState.activeFilters.searchTerm}"`,
@@ -923,7 +1373,6 @@
                 });
             }
 
-            // Update display
             if (activeFilters.length === 0) {
                 elements.activeFiltersContainer.style.display = 'none';
             } else {
@@ -998,7 +1447,7 @@
                     break;
 
                 case 'search':
-                    elements.mainSearchInput.value = '';
+                    elements.compactSearchInput.value = '';
                     currentState.activeFilters.searchTerm = '';
                     break;
             }
@@ -1011,7 +1460,6 @@
         };
 
         function showToast(message, type = 'info') {
-            // Simple toast implementation
             const toast = document.createElement('div');
             toast.className = `toast toast--${type}`;
             toast.textContent = message;
@@ -1056,6 +1504,3 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
     {% endblock %}
-
-</body>
-</html>

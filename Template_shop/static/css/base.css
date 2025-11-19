@@ -63,8 +63,8 @@
 
 @font-face {
   font-family: 'Sahel';
-  src: url('static/fonts/Sahel.ttf') format('woff2'),
-       url('static/fonts/Sahel.ttf') format('truetype');
+  src: url('/Fonts/Sahel.ttf') format('woff2'),
+       url('/Fonts/Sahel.ttf') format('truetype');
   font-weight: 300 900;
   font-display: swap;
 }
@@ -1446,4 +1446,99 @@ select:focus-visible {
     border-top: 2px solid transparent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+}
+
+/* ==================== YOUTUBE ADSENSE PAGE ==================== */
+.youtube-adsense-hero {
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.analysis-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-200);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.analysis-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.analysis-icon {
+    font-size: 3rem;
+    color: #ff0000;
+    margin-bottom: 1rem;
+}
+
+.analysis-card h3 {
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.analysis-card p {
+    color: var(--gray-600);
+    line-height: 1.6;
+}
+
+/* ==================== FEEDBACK PAGE ==================== */
+.feedback-hero {
+    background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+}
+
+.feedback-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.feedback-type-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.feedback-type-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 1rem;
+    border: 2px solid var(--gray-300);
+    background: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.feedback-type-btn.active {
+    border-color: var(--primary-500);
+    background: var(--primary-50);
+    color: var(--primary-700);
+}
+
+.feedback-type-btn i {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
 }

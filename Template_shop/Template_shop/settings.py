@@ -81,7 +81,7 @@ DATABASES = {
     }
 }
 
-
+AUTH_USER_MODEL = 'Shopping.CustomUser'
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -121,6 +121,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Your global static folder
 ]
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/login/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
