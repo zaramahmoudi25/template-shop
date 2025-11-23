@@ -3,453 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحلیل درآمد یوتیوب و ادسنس - قالب‌شاپ</title>
+    <title>تحلیل درآمد یوتیوب و ادسنس - ایران اد پی</title>
     <meta name="description" content="تحلیل و بررسی درآمد یوتیوب و سیستم ادسنس برای کاربران ایرانی">
     <link rel="stylesheet" href="/CSS/base.css">
     <link rel="stylesheet" href="/CSS/components.css">
     <link rel="stylesheet" href="/CSS/layouts.css">
     <link rel="stylesheet" href="/CSS/responsive.css">
     <link rel="stylesheet" href="/CSS/utilities.css">
+    <link rel="stylesheet" href="/CSS/youtube-adsense.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <style>
-              .services-hero {
-            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-            color: white;
-            padding: 6rem 0 4rem;
-            text-align: center;
-        }
-        
-        .services-hero__title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-        
-        .services-hero__subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            color: white;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .youtube-adsense-hero {
-            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .main-tabs {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem auto 3rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 800px;
-        }
-        
-        .main-tab {
-            padding: 1.2rem 2.5rem;
-            background: white;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--border-radius-lg);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 700;
-            color: var(--gray-800);
-            font-size: 1.1rem;
-            text-align: center;
-            flex: 1;
-            min-width: 250px;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .main-tab.active {
-            background: var(--primary-500);
-            color: white;
-            border-color: var(--primary-500);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .main-tab:hover:not(.active) {
-            border-color: var(--primary-500);
-            transform: translateY(-2px);
-        }
-        
-        .calculator-content {
-            display: none;
-            background: white;
-            padding: 2.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .calculator-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: var(--gray-900);
-            text-align: center;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--primary-500);
-            display: inline-block;
-            width: 100%;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--gray-800);
-            font-size: 1rem;
-        }
-        
-        .form-input, .form-select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: var(--primary-500);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .checkbox-group input {
-            width: auto;
-        }
-        
-        .adsense-calculator {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            .adsense-calculator {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .slider-section {
-            background: var(--gray-50);
-            padding: 2rem;
-            border-radius: var(--border-radius-lg);
-            border: 1px solid var(--gray-200);
-        }
-        
-        .slider-container {
-            margin: 2rem 0;
-        }
-        
-        .slider-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .slider-value {
-            font-weight: 700;
-            color: var(--primary-500);
-            font-size: 1.5rem;
-        }
-        
-        .slider-label {
-            font-size: 1rem;
-            color: var(--gray-700);
-        }
-        
-        .slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: var(--gray-300);
-            outline: none;
-        }
-        
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--primary-500);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .slider::-webkit-slider-thumb:hover {
-            background: var(--primary-600);
-            transform: scale(1.1);
-        }
-        
-        .slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--primary-500);
-            cursor: pointer;
-            border: none;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .results-section {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius-lg);
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .results-title {
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--gray-800);
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .result-item {
-            padding: 1.5rem;
-            background: var(--gray-50);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--gray-200);
-            text-align: center;
-        }
-        
-        .result-label {
-            font-size: 1rem;
-            color: var(--gray-600);
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-500);
-        }
-        
-        .info-box {
-            background: var(--primary-50);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            border-right: 4px solid var(--primary-500);
-            margin-top: 1.5rem;
-        }
-        
-        .info-title {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--gray-800);
-        }
-        
-        .info-text {
-            color: var(--gray-700);
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-        
-        .categories-section {
-            margin-top: 1.5rem;
-        }
-        
-        .categories-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-        }
-        
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        
-        .category-option {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem;
-            border: 1px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-        
-        .category-option:hover {
-            background: var(--gray-50);
-            border-color: var(--primary-300);
-        }
-        
-        .category-option.selected {
-            background: var(--primary-50);
-            border-color: var(--primary-500);
-            color: var(--primary-700);
-        }
-        
-        .category-option input {
-            display: none;
-        }
-        
-        .category-option .checkmark {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--gray-400);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        
-        .category-option.selected .checkmark {
-            background: var(--primary-500);
-            border-color: var(--primary-500);
-        }
-        
-        .category-option.selected .checkmark::after {
-            content: '✓';
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .file-upload {
-            border: 2px dashed var(--gray-300);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-        
-        .file-upload:hover {
-            border-color: var(--primary-500);
-            background: var(--primary-50);
-        }
-        
-        .file-upload i {
-            font-size: 2rem;
-            color: var(--gray-500);
-            margin-bottom: 1rem;
-        }
-        
-        .file-upload p {
-            color: var(--gray-600);
-            margin-bottom: 0.5rem;
-        }
-        
-        .file-upload span {
-            color: var(--primary-500);
-            font-size: 0.9rem;
-        }
-        
-        .ai-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: var(--gray-50);
-            border-radius: var(--border-radius);
-        }
-        
-        .youtube-form-container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .main-tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .main-tab {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .calculator-content {
-                padding: 1.5rem;
-            }
-            
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
     <header class="header">
@@ -457,8 +20,8 @@
             <div class="header__inner">
                 <div class="header__logo">
                     <a href="/Pages/index.html" class="logo-link">
-                        <img src="/Images and SVGs/logo.png" alt="قالب‌شاپ" class="logo">
-                        <span class="logo-text">قالب‌شاپ</span>
+                        <!-- <img src="/Images and SVGs/logo.png" alt="ایران اد پی" class="logo"> -->
+                        <span class="logo-text">ایران اد پی</span>
                     </a>
                 </div>
 
@@ -477,9 +40,7 @@
                         <li class="nav-item">
                             <a href="/Pages/about.html" class="nav-link">درباره ما</a>
                         </li>
-                          <li class="nav-item">
-                            <a href="/Pages/feedback.html" class="nav-link">پیشنهادات و انتقادات</a>
-                        </li>
+                      
                         <li class="nav-item">
                             <a href="/Pages/contact.html" class="nav-link">تماس با ما</a>
                         </li>
@@ -504,14 +65,14 @@
     </header>
 
     <main class="main">
-            <section class="services-hero">
+        <section class="services-hero">
             <div class="container">
                 <h1 class="services-hero__title">تحلیل درآمد یوتیوب و ادسنس</h1>
                 <p class="services-hero__subtitle">
-محاسبه پتانسیل درآمدزایی از کانال یوتیوب و وبسایت شما              </p>
+                    محاسبه پتانسیل درآمدزایی از کانال یوتیوب و وبسایت شما
+                </p>
             </div>
         </section>
-    
 
         <section class="container" style="padding: 2rem 0 4rem;">
             <div class="main-tabs">
@@ -540,7 +101,7 @@
                         
                         <div class="checkbox-group">
                             <input type="checkbox" id="no-copyright">
-                            <label for="no-copyright">باکس کپی رایت ندارم</label>
+                            <label for="no-copyright">کپی رایت ندارم</label>
                         </div>
                         
                         <div class="form-group">
@@ -630,6 +191,87 @@
                             محاسبه درآمد
                         </button>
                     </form>
+
+                    <!-- بخش محاسبه درآمد ادسنس در تب یوتیوب -->
+                    <div class="adsense-calculator" style="margin-top: 3rem; border-top: 2px solid var(--gray-200); padding-top: 2rem;">
+                        <div class="slider-section">
+                            <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--gray-800);">
+                                محاسبه درآمد کانال یوتیوب
+                            </h3>
+                            <p style="text-align: center; color: var(--gray-600); margin-bottom: 2rem;">
+                                اسلایدر را به چپ و راست بکشید تا پتانسیل های درآمدزایی محاسبه شود.
+                            </p>
+                            
+                            <div class="form-group">
+                                <label class="slider-label">میزان بازدید روزانه را وارد نمایید</label>
+                                <div class="slider-container">
+                                    <div class="slider-header">
+                                        <span>View/Day</span>
+                                        <span class="slider-value" id="youtube-viewsValue">368,400</span>
+                                    </div>
+                                    <input type="range" min="1000" max="1000000" value="368400" class="slider" id="youtube-viewsSlider">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">موضوع فعالیت کانال</label>
+                                <select class="form-select" id="youtube-category">
+                                    <option value="film-music">فیلم و موسیقی</option>
+                                    <option value="cars">خودرو</option>
+                                    <option value="animals">حیوانات</option>
+                                    <option value="sports">ورزشی</option>
+                                    <option value="travel">سفر</option>
+                                    <option value="gaming">گیمینگ</option>
+                                    <option value="general">عمومی و مردم</option>
+                                    <option value="comedy">کمدی</option>
+                                    <option value="entertainment">سرگرمی</option>
+                                    <option value="news">اخبار</option>
+                                    <option value="fashion">لباس و استایل</option>
+                                    <option value="education">آموزشی</option>
+                                    <option value="tech">علم و تکنولوژی</option>
+                                    <option value="other">سایر</option>
+                                </select>
+                                
+                                <!-- <div class="cpm-info">
+                                    <div class="info-text">
+                                        نرخ CPM فعلی: <span class="cpm-rate" id="youtube-cpm-rate">$4</span> به ازای هر 1000 بازدید
+                                    </div>
+                                </div> -->
+                                
+                                <div class="form-group" id="youtube-other-category-input" style="display: none; margin-top: 1rem;">
+                                    <input type="text" class="form-input" placeholder="موضوع فعالیت خود را وارد کنید">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="results-section">
+                            <h3 class="results-title">نتایج تحلیل درآمد یوتیوب</h3>
+                            
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <div class="result-label">درآمد تقریبی روزانه</div>
+                                    <div class="result-value" id="youtube-daily">$65.89</div>
+                                </div>
+                                
+                                <div class="result-item">
+                                    <div class="result-label">درآمد تقریبی ماهانه</div>
+                                    <div class="result-value" id="youtube-monthly">$1,976.70</div>
+                                </div>
+                                
+                                <div class="result-item">
+                                    <div class="result-label">درآمد تقریبی سالانه</div>
+                                    <div class="result-value" id="youtube-yearly">$23,720.40</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-box">
+                                <div class="info-title">نکات مهم درآمدزایی یوتیوب</div>
+                                <div class="info-text">
+                                    درآمد یوتیوب بر اساس نرخ CPM (هزینه به ازای هر 1000 بازدید) محاسبه می‌شود. موضوع کانال، کیفیت محتوا، نرخ تعامل و موقعیت جغرافیایی مخاطبان بر روی درآمد شما تاثیر مستقیم دارد.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -639,7 +281,7 @@
                 <div class="adsense-calculator">
                     <div class="slider-section">
                         <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--gray-800);">
-                            محاسبه درآمد کانال یوتیوب
+                            محاسبه درآمد وبسایت
                         </h3>
                         <p style="text-align: center; color: var(--gray-600); margin-bottom: 2rem;">
                             اسلایدر را به چپ و راست بکشید تا پتانسیل های درآمدزایی محاسبه شود.
@@ -650,20 +292,9 @@
                             <div class="slider-container">
                                 <div class="slider-header">
                                     <span>View/Day</span>
-                                    <span class="slider-value" id="viewsValue">368,400</span>
+                                    <span class="slider-value" id="adsense-viewsValue">368,400</span>
                                 </div>
-                                <input type="range" min="1000" max="1000000" value="368400" class="slider" id="viewsSlider">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="slider-label">میانگین نرخ تعامل بازدیدکنندگان</label>
-                            <div class="slider-container">
-                                <div class="slider-header">
-                                    <span>Engagement Rate</span>
-                                    <span class="slider-value" id="engagementValue">11%</span>
-                                </div>
-                                <input type="range" min="1" max="20" value="11" class="slider" id="engagementSlider">
+                                <input type="range" min="1000" max="1000000" value="368400" class="slider" id="adsense-viewsSlider">
                             </div>
                         </div>
                         
@@ -686,6 +317,12 @@
                                 <option value="other">سایر</option>
                             </select>
                             
+                            <!-- <div class="cpm-info">
+                                <div class="info-text">
+                                    نرخ CPM فعلی: <span class="cpm-rate" id="adsense-cpm-rate">$4</span> به ازای هر 1000 بازدید
+                                </div>
+                            </div> -->
+                            
                             <div class="form-group" id="adsense-other-category-input" style="display: none; margin-top: 1rem;">
                                 <input type="text" class="form-input" placeholder="موضوع فعالیت خود را وارد کنید">
                             </div>
@@ -698,31 +335,31 @@
                     </div>
                     
                     <div class="results-section">
-                        <h3 class="results-title">نتایج تحلیل درآمد</h3>
+                        <h3 class="results-title">نتایج تحلیل درآمد ادسنس</h3>
                         
                         <div class="results-grid">
                             <div class="result-item">
                                 <div class="result-label">درآمد تقریبی روزانه</div>
-                                <div class="result-value" id="adsense-daily">¥65,890.4</div>
+                                <div class="result-value" id="adsense-daily">$65.89</div>
                             </div>
                             
                             <div class="result-item">
                                 <div class="result-label">درآمد تقریبی ماهانه</div>
-                                <div class="result-value" id="adsense-monthly">¥517,680.3</div>
+                                <div class="result-value" id="adsense-monthly">$1,976.70</div>
                             </div>
                             
                             <div class="result-item">
                                 <div class="result-label">درآمد تقریبی سالانه</div>
-                                <div class="result-value" id="adsense-yearly">¥6,212,163.6</div>
+                                <div class="result-value" id="adsense-yearly">$23,720.40</div>
                             </div>
                         </div>
                         
-                        <div class="info-box">
-                            <div class="info-title">میانگین نرخ تعامل بازدیدکنندگان</div>
+                        <!-- <div class="info-box">
+                            <div class="info-title">نکات مهم درآمدزایی ادسنس</div>
                             <div class="info-text">
-                                هر چه تعامل بازدیدکنندگان نظیر لایک، کامنت بیشتر باشد و همچنین اکشن‌های مونتیزیشن را روی کانال فعال کرده باشید این نرخ بالاتر خواهد بود و بر روی درآمد شما تاثیر مستقیم خواهد داشت.
+                                درآمد گوگل ادسنس بر اساس نرخ CPM (هزینه به ازای هر 1000 بازدید) محاسبه می‌شود. موضوع وبسایت، کیفیت محتوا، ترافیک و موقعیت جغرافیایی بازدیدکنندگان بر روی درآمد شما تاثیر مستقیم دارد.
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -819,6 +456,25 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // نرخ CPM بر اساس موضوع (دلار به ازای هر 1000 بازدید)
+            const cpmRates = {
+                'film-music': 4,
+                'cars': 4,
+                'animals': 2,
+                'sports': 3,
+                'travel': 3,
+                'gaming': 1,
+                'general': 4,
+                'comedy': 4,
+                'entertainment': 4,
+                'news': 4,
+                'fashion': 6,
+                'education': 10,
+                'tech': 10,
+                'other': 4
+            };
+
+            // Tab Switching
             const mainTabs = document.querySelectorAll('.main-tab');
             const contents = document.querySelectorAll('.calculator-content');
             
@@ -834,38 +490,77 @@
                 });
             });
             
-            const viewsSlider = document.getElementById('viewsSlider');
-            const viewsValue = document.getElementById('viewsValue');
-            const engagementSlider = document.getElementById('engagementSlider');
-            const engagementValue = document.getElementById('engagementValue');
+            // YouTube Sliders and Elements
+            const youtubeViewsSlider = document.getElementById('youtube-viewsSlider');
+            const youtubeViewsValue = document.getElementById('youtube-viewsValue');
+            const youtubeCategory = document.getElementById('youtube-category');
+            const youtubeCpmRate = document.getElementById('youtube-cpm-rate');
             
-            viewsSlider.addEventListener('input', function() {
+            // AdSense Sliders and Elements
+            const adsenseViewsSlider = document.getElementById('adsense-viewsSlider');
+            const adsenseViewsValue = document.getElementById('adsense-viewsValue');
+            const adsenseCategory = document.getElementById('adsense-category');
+            const adsenseCpmRate = document.getElementById('adsense-cpm-rate');
+            
+            // YouTube Event Listeners
+            youtubeViewsSlider.addEventListener('input', function() {
                 const value = parseInt(this.value).toLocaleString('fa-IR');
-                viewsValue.textContent = value;
+                youtubeViewsValue.textContent = value;
+                calculateYouTubeRevenue();
+            });
+            
+            youtubeCategory.addEventListener('change', function() {
+                const rate = cpmRates[this.value];
+                youtubeCpmRate.textContent = `$${rate}`;
+                calculateYouTubeRevenue();
+            });
+            
+            // AdSense Event Listeners
+            adsenseViewsSlider.addEventListener('input', function() {
+                const value = parseInt(this.value).toLocaleString('fa-IR');
+                adsenseViewsValue.textContent = value;
                 calculateAdsenseRevenue();
             });
             
-            engagementSlider.addEventListener('input', function() {
-                const value = `${this.value}%`;
-                engagementValue.textContent = value;
+            adsenseCategory.addEventListener('change', function() {
+                const rate = cpmRates[this.value];
+                adsenseCpmRate.textContent = `$${rate}`;
                 calculateAdsenseRevenue();
             });
+            
+            // *********************محاسبه درآمد یوتیوب**********************
+            function calculateYouTubeRevenue() {
+                const views = parseInt(youtubeViewsSlider.value);
+                const category = youtubeCategory.value;
+                const cpm = cpmRates[category];
+                
+                // محاسبه درآمد بر اساس CPM
+                const dailyRevenue = (views * cpm / 1000).toFixed(2);
+                const monthlyRevenue = (dailyRevenue * 30).toFixed(2);
+                const yearlyRevenue = (monthlyRevenue * 12).toFixed(2);
+                
+                document.getElementById('youtube-daily').textContent = `$${dailyRevenue}`;
+                document.getElementById('youtube-monthly').textContent = `$${monthlyRevenue}`;
+                document.getElementById('youtube-yearly').textContent = `$${yearlyRevenue}`;
+            }
             
             // *********************محاسبه درآمد ادسنس**********************
             function calculateAdsenseRevenue() {
-                const views = parseInt(viewsSlider.value);
-                const engagement = parseInt(engagementSlider.value);
+                const views = parseInt(adsenseViewsSlider.value);
+                const category = adsenseCategory.value;
+                const cpm = cpmRates[category];
                 
-                // ******************نمونه محاسبات که باید عوض شوند***********************
-                const dailyRevenue = (views * engagement * 0.0001).toFixed(1);
-                const monthlyRevenue = (dailyRevenue * 30).toFixed(1);
-                const yearlyRevenue = (monthlyRevenue * 12).toFixed(1);
+                // محاسبه درآمد بر اساس CPM
+                const dailyRevenue = (views * cpm / 1000).toFixed(2);
+                const monthlyRevenue = (dailyRevenue * 30).toFixed(2);
+                const yearlyRevenue = (monthlyRevenue * 12).toFixed(2);
                 
-                document.getElementById('adsense-daily').textContent = `¥${dailyRevenue.replace('.', ',')}`;
-                document.getElementById('adsense-monthly').textContent = `¥${monthlyRevenue.replace('.', ',')}`;
-                document.getElementById('adsense-yearly').textContent = `¥${yearlyRevenue.replace('.', ',')}`;
+                document.getElementById('adsense-daily').textContent = `$${dailyRevenue}`;
+                document.getElementById('adsense-monthly').textContent = `$${monthlyRevenue}`;
+                document.getElementById('adsense-yearly').textContent = `$${yearlyRevenue}`;
             }
             
+            // Other functionality
             const otherCategory = document.getElementById('other-category');
             const otherCategoryInput = document.getElementById('other-category-input');
             
@@ -878,8 +573,16 @@
                 }
             });
             
-            const adsenseCategory = document.getElementById('adsense-category');
+            const youtubeOtherCategoryInput = document.getElementById('youtube-other-category-input');
             const adsenseOtherCategoryInput = document.getElementById('adsense-other-category-input');
+            
+            youtubeCategory.addEventListener('change', function() {
+                if (this.value === 'other') {
+                    youtubeOtherCategoryInput.style.display = 'block';
+                } else {
+                    youtubeOtherCategoryInput.style.display = 'none';
+                }
+            });
             
             adsenseCategory.addEventListener('change', function() {
                 if (this.value === 'other') {
@@ -959,6 +662,8 @@
                 });
             }
             
+            // Initialize calculations
+            calculateYouTubeRevenue();
             calculateAdsenseRevenue();
         });
     </script>

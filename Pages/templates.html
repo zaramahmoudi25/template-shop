@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/CSS/responsive.css">
     <link rel="stylesheet" href="/CSS/utilities.css">
     <link rel="stylesheet" href="/CSS/dashboard.css">
+    <link rel="stylesheet" href="/CSS/templates.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
@@ -134,36 +135,38 @@
 
         /* استایل‌های جدید */
         .search-hero-section {
-            padding: 2rem 0;
+            padding:2px 2;
+            padding-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
             color: white;
         }
 
         .search-hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center; /* اضافه شد */
+}
 
-        @media (min-width: 768px) {
-            .search-hero-content {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                gap: 3rem;
-            }
-        }
+@media (min-width: 768px) {
+    .search-hero-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center; /* اضافه شد */
+        gap: 3rem;
+    }
+}
+       .search-hero-text {
+    text-align: center;
+    flex: 1;
+}
 
-        .search-hero-text {
-            text-align: center;
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .search-hero-text {
-                text-align: right;
-            }
-        }
+@media (min-width: 768px) {
+    .search-hero-text {
+        text-align: right;
+        flex: 1; /* اضافه شد */
+    }
+}
 
         .shopify-text {
             display: block;
@@ -202,55 +205,57 @@
             }
         }
 
-        .search-form-container {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+      .search-form-container {
+    flex: 1;
+    max-width: 700px; /* از 500px به 600px افزایش یافت */
+    margin: 0 auto;
+    width: 100%;
+}
 
-        @media (min-width: 768px) {
-            .search-form-container {
-                margin: 0;
-                max-width: 400px;
-            }
-        }
+@media (min-width: 768px) {
+    .search-form-container {
+        margin: 0;
+        max-width: 500px; /* از 400px به 500px افزایش یافت */
+    }
+}
 
-        .search-form-compact {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            background: white;
-            padding: 0.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-        }
+       .search-form-compact {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: white;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    width: 100%; /* اضافه شد */
+}
 
-        .search-input-compact {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 0.9rem;
-            background: transparent;
-            min-width: 0;
-        }
+   .search-input-compact {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    background: transparent;
+    min-width: 0;
+    width: 200%; /* اضافه شد */
+}
 
         .search-input-compact:focus {
             outline: none;
         }
-
-        .search-btn-compact {
-            padding: 0.75rem 1.25rem;
-            background: var(--primary-500);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            font-size: 0.9rem;
-        }
-
+.search-btn-compact {
+    padding: 0.75rem 1.5rem; /* از 1.25rem به 1.5rem افزایش یافت */
+    background: var(--primary-500);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    min-width: 50px; /* اضافه شد */
+}
         .search-btn-compact:hover {
             background: var(--primary-600);
             transform: translateY(-1px);
@@ -456,8 +461,8 @@
             <div class="header__inner">
                 <div class="header__logo">
                     <a href="/Pages/index.html" class="logo-link">
-                        <img src="/Images and SVGs/logo.png" alt="قالب‌شاپ" class="logo">
-                        <span class="logo-text">قالب‌شاپ</span>
+                        <!-- <img src="/Images and SVGs/logo.png" alt="ایران اد پی" class="logo"> -->
+                        <span class="logo-text">ایران اد پی</span>
                     </a>
                 </div>
 
@@ -476,9 +481,7 @@
                         <li class="nav-item">
                             <a href="/Pages/about.html" class="nav-link">درباره ما</a>
                         </li>
-                           <li class="nav-item">
-                            <a href="/Pages/feedback.html" class="nav-link">پیشنهادات و انتقادات</a>
-                        </li>
+                     
                         <li class="nav-item">
                             <a href="/Pages/contact.html" class="nav-link">تماس با ما</a>
                         </li>
@@ -508,9 +511,7 @@
                 <div class="search-hero-content">
                     <!-- متن در سمت راست -->
                     <div class="search-hero-text">
-                        <span class="shopify-text">
-                            قالب‌های شاپیفای
-                        </span>
+                    
                         <br>
                         <h1 class="search-hero-title">قالب های شاپیفای</h1>
                         <p class="search-hero-subtitle">قالب مناسب خود را انتخاب کنید.</p>
@@ -870,8 +871,8 @@
         <div class="footer__content">
             <div class="footer__col">
                 <div class="footer__logo">
-                    <img src="/Images and SVGs/logo.png" alt="قالب‌شاپ" class="footer-logo">
-                    <span class="footer-logo-text">قالب‌شاپ</span>
+                    <!-- <img src="/Images and SVGs/logo.png" alt="ایران اد پی" class="footer-logo"> -->
+                    <span class="footer-logo-text">ایران اد پی</span>
                 </div>
                 <p class="footer__description">
                     ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
@@ -940,7 +941,7 @@
         <div class="footer__bottom">
             <div class="footer-bottom__content">
                 <p class="copyright">
-                    &copy; ۱۴۰۳ قالب‌شاپ. تمامی حقوق محفوظ است.
+                    &copy; ۱۴۰۳ ایران اد پی. تمامی حقوق محفوظ است.
                 </p>
                 <div class="footer-bottom__links">
                     <a href="/Pages/privacy.html" class="footer-bottom__link">حریم خصوصی</a>
@@ -964,7 +965,6 @@
                 title: "قالب فروشگاهی مدرن",
                 description: "قالب کاملاً واکنش‌گرا با امکانات کامل فروشگاهی و طراحی مدرن برای راه‌اندازی فروشگاه آنلاین حرفه‌ای",
                 price: 50000,
-                originalPrice: 75000,
                 category: "shopify",
                 sales: 89,
                 image: "/Images and SVGs/hero-template-1.png",
@@ -1000,7 +1000,6 @@
                 title: "قالب بلاگ مدرن",
                 description: "طراحی زیبا و بهینه برای وبلاگ‌نویسی با سرعت بارگذاری بالا و امکانات مدیریت محتوای پیشرفته",
                 price: 45000,
-                originalPrice: 60000,
                 category: "blog",
                 sales: 34,
                 image: "/Images and SVGs/hero-template-1.png",
@@ -1024,7 +1023,6 @@
                 title: "قالب آموزشی",
                 description: "قالب مناسب برای سایت‌های آموزشی با امکانات پیشرفته دوره‌های آنلاین و سیستم مدیریت آموزش",
                 price: 65000,
-                originalPrice: 80000,
                 category: "education",
                 sales: 42,
                 image: "/Images and SVGs/hero-template-3.png",
