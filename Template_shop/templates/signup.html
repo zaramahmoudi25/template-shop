@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قالب‌ها - فروشگاه قالب</title>
+    <title>قالب‌ها - ایران اد پی</title>
     <meta name="description" content="مجموعه کامل قالب‌های وبسایت برای انواع کسب‌وکارها">
 
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -76,103 +76,6 @@
             padding: 0 1rem;
         }
 
-        @media (max-width: 768px) {
-            .auth-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        /* Multi-step form styles */
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .step-indicator::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            right: 0;
-            left: 0;
-            height: 2px;
-            background: var(--gray-300);
-            z-index: 1;
-        }
-
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--gray-300);
-            color: var(--gray-600);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .step.active .step-number {
-            background: var(--primary-500);
-            color: white;
-        }
-
-        .step.completed .step-number {
-            background: var(--success-500);
-            color: white;
-        }
-
-        .step-text {
-            font-size: 0.875rem;
-            color: var(--gray-600);
-            font-weight: 500;
-        }
-
-        .step.active .step-text {
-            color: var(--primary-600);
-            font-weight: 600;
-        }
-
-        .form-steps {
-            display: none;
-        }
-
-        .form-steps.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Phone input with country code */
-        .phone-input-group {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .country-code {
-            flex: 0 0 100px;
-        }
-
-        .phone-number {
-            flex: 1;
-        }
-
         .form-hint {
             display: block;
             margin-top: 0.25rem;
@@ -180,271 +83,10 @@
             color: var(--gray-500);
         }
 
-        /* Verification styles */
-        .verification-methods {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .verification-method {
-            flex: 1;
-            text-align: center;
-            padding: 1rem;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .verification-method:hover {
-            border-color: var(--primary-300);
-            transform: translateY(-2px);
-        }
-
-        .verification-method.active {
-            border-color: var(--primary-500);
-            background: var(--primary-50);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-        }
-
-        .verification-method i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .verification-method.whatsapp i {
-            color: #25D366;
-        }
-
-        .verification-method.telegram i {
-            color: #0088cc;
-        }
-
-        .verification-method .method-name {
-            font-weight: 600;
-            color: var(--gray-800);
-        }
-
-        .verification-method .method-desc {
-            font-size: 0.75rem;
-            color: var(--gray-600);
-            margin-top: 0.25rem;
-        }
-
-        .otp-inputs {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin: 1.5rem 0;
-        }
-
-        .otp-input {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-        }
-
-        .otp-input:focus {
-            border-color: var(--primary-500);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-            outline: none;
-        }
-
-        .resend-code {
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .resend-code a {
-            color: var(--primary-600);
-            text-decoration: none;
-        }
-
-        .resend-code a:hover {
-            text-decoration: underline;
-        }
-
-        .resend-code a.disabled {
-            color: var(--gray-500);
-            pointer-events: none;
-        }
-
-        /* Document upload styles */
-        .upload-area {
-            border: 2px dashed var(--gray-300);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary-300);
-        }
-
-        .upload-area.dragover {
-            border-color: var(--primary-500);
-            background: var(--primary-50);
-        }
-
-        .upload-icon {
-            font-size: 3rem;
-            color: var(--gray-400);
-            margin-bottom: 1rem;
-        }
-
-        .upload-text {
-            color: var(--gray-600);
-            margin-bottom: 0.5rem;
-        }
-
-        .upload-hint {
-            font-size: 0.875rem;
-            color: var(--gray-500);
-        }
-
-        .upload-preview {
-            margin-top: 1rem;
-            display: none;
-            text-align: center;
-        }
-
-        .upload-preview img {
-            max-width: 200px;
-            border-radius: var(--border-radius);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Video recording styles */
-        .video-container {
-            background: var(--gray-100);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .video-preview {
-            width: 100%;
-            max-width: 400px;
-            background: black;
-            border-radius: var(--border-radius);
-            margin: 0 auto 1rem;
-        }
-
-        .video-instructions {
-            background: var(--warning-50);
-            border: 1px solid var(--warning-200);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            text-align: right;
-        }
-
-        .video-instructions h4 {
-            color: var(--warning-700);
-            margin-bottom: 0.5rem;
-        }
-
-        .video-instructions p {
-            color: var(--warning-600);
-            line-height: 1.6;
-        }
-
-        .video-controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .declaration-text {
-            background: var(--gray-50);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: center;
-            font-weight: 600;
-            color: var(--gray-700);
-            line-height: 1.8;
-        }
-
-        /* Success check */
-        .success-check {
-            text-align: center;
-            padding: 2rem;
-            background: var(--success-50);
-            border: 1px solid var(--success-200);
-            border-radius: var(--border-radius);
-            margin-bottom: 2rem;
-        }
-
-        .success-check i {
-            font-size: 4rem;
-            color: var(--success-500);
-            margin-bottom: 1rem;
-        }
-
-        .success-check h3 {
-            color: var(--success-700);
-            margin-bottom: 0.5rem;
-        }
-
-        .success-check p {
-            color: var(--success-600);
-        }
-
-        /* Form actions */
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .btn--success {
-            background: var(--success-500);
-            color: white;
-        }
-
-        .btn--success:hover {
-            background: var(--success-600);
-        }
-
         @media (max-width: 768px) {
-            .step-indicator {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .verification-methods {
-                flex-direction: column;
-            }
-
-            .phone-input-group {
-                flex-direction: column;
-            }
-
-            .country-code {
-                flex: 1;
-            }
-
-            .form-actions {
-                flex-direction: column;
-            }
-
-            .video-controls {
-                flex-direction: column;
+            .auth-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
     </style>
@@ -465,29 +107,13 @@
                 <div class="auth-container">
                     <!-- Auth Card -->
                     <div class="auth-card">
-                        <!-- Step Indicator -->
-                        <div class="step-indicator">
-                            <div class="step active" data-step="1">
-                                <div class="step-number">1</div>
-                                <span class="step-text">اطلاعات اولیه</span>
-                            </div>
-                            <div class="step" data-step="2">
-                                <div class="step-number">2</div>
-                                <span class="step-text">احراز هویت</span>
-                            </div>
-                            <div class="step" data-step="3">
-                                <div class="step-number">3</div>
-                                <span class="step-text">تکمیل ثبت‌نام</span>
-                            </div>
+                        <div class="auth-header">
+                            <h1 class="auth-title">ایجاد حساب کاربری</h1>
+                            <p class="auth-subtitle">لطفاً اطلاعات خود را وارد کنید</p>
                         </div>
 
-                        <!-- Step 1: Basic Information -->
-                        <form class="form-steps active" id="step1">
-                            <div class="auth-header">
-                                <h1 class="auth-title">اطلاعات اولیه</h1>
-                                <p class="auth-subtitle">لطفاً اطلاعات شخصی خود را وارد کنید</p>
-                            </div>
-
+                        <!-- Registration Form -->
+                        <form class="auth-form" id="registrationForm">
                             <div class="form-group">
                                 <label for="username" class="form-label">نام کاربری *</label>
                                 <input type="text" id="username" name="username" class="form-control" placeholder="نام کاربری خود را وارد کنید" required>
@@ -496,20 +122,7 @@
                             <div class="form-group">
                                 <label for="email" class="form-label">ایمیل *</label>
                                 <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="phone" class="form-label">شماره تلفن *</label>
-                                <div class="phone-input-group">
-                                                                        <input type="tel" id="phone" name="phone" class="form-control phone-number" placeholder="912 345 6789" required>
-
-                                    <select class="form-control country-code" id="countryCode" required>
-                                        <option value="+98">ایران (+98)</option>
-                                        <option value="+93">افغانستان (+93)</option>
-
-                                    </select>
-                                </div>
-                                <small class="form-hint">شماره تلفن شما برای ارسال کد تأیید استفاده می‌شود</small>
+                                <small class="form-hint">ایمیل معتبر خود را وارد کنید</small>
                             </div>
 
                             <div class="form-group">
@@ -538,131 +151,6 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn--primary btn--lg w-full next-step" data-next="2">
-                                ادامه
-                                <i class="fas fa-arrow-left"></i>
-                            </button>
-                        </form>
-
-                        <!-- Step 2: Verification -->
-                        <form class="form-steps" id="step2">
-                            <div class="auth-header">
-                                <h1 class="auth-title">احراز هویت</h1>
-                                <p class="auth-subtitle">لطفاً هویت خود را تأیید کنید</p>
-                            </div>
-
-                            <!-- Phone Verification -->
-                            <div class="form-group">
-                                <label class="form-label">روش دریافت کد تأیید</label>
-                                <div class="verification-methods">
-                                    <div class="verification-method whatsapp active" data-method="whatsapp">
-                                        <i class="fab fa-whatsapp"></i>
-                                        <div class="method-name">واتساپ</div>
-                                    </div>
-                                    <div class="verification-method telegram" data-method="telegram">
-                                        <i class="fab fa-telegram"></i>
-                                        <div class="method-name">تلگرام</div>
-                                    </div>
-                                      <div class="verification-method sms" data-method="sms">
-                                        <i class="fas fa-sms"></i>
-                                        <div class="method-name">پیامک</div>
-                                    </div>
-                                </div>
-
-                                <button type="button" class="btn btn--primary w-full" id="sendCodeBtn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    ارسال کد تأیید
-                                </button>
-                                <small class="form-hint">کد ۶ رقمی به شماره <span id="phonePreview"></span> ارسال خواهد شد</small>
-                            </div>
-
-                            <div class="form-group" id="verificationCodeGroup" style="display: none;">
-                                <label for="verificationCode" class="form-label">کد تأیید ارسال شده</label>
-                                <div class="otp-inputs">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="1" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="2" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="3" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="4" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="5" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="6" inputmode="numeric">
-                                </div>
-                                <div class="resend-code">
-                                    <span>کد را دریافت نکردید؟ </span>
-                                    <a href="#" id="resendCode" class="disabled">ارسال مجدد (۱:۳۰)</a>
-                                </div>
-                            </div>
-
-                            <!-- National Card Upload -->
-                            <div class="form-group">
-                                <label class="form-label">آپلود کارت ملی</label>
-                                <div class="upload-area" id="nationalCardUpload">
-                                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                                    <p class="upload-text">کارت ملی خود را آپلود کنید</p>
-                                    <p class="upload-hint">فرمت‌های مجاز: JPG, PNG, PDF (حداکثر ۵MB)</p>
-                                    <input type="file" id="nationalCard" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
-                                </div>
-                                <div class="upload-preview" id="nationalCardPreview"></div>
-                            </div>
-
-                            <!-- Video Recording -->
-                            <div class="form-group">
-                                <label class="form-label">تأیید هویت با ویدیو</label>
-
-                                <div class="video-instructions">
-                                    <h4>📝 راهنمای ضبط ویدیو:</h4>
-                                    <p>لطفاً یک ویدیو از خودتان ضبط کنید که در آن:</p>
-                                    <p>1. کارت ملی خود را در دست داشته باشید</p>
-                                    <p>2. جمله زیر را با صدای بلند بخوانید</p>
-                                </div>
-
-                                <div class="declaration-text">
-                                    "من به عنوان کاربر سایت قالب‌شاپ، رسماً اعلام می‌کنم که با شرکت ایران اد پی همکاری داشته و کلیه مسئولیت‌های ناشی از این همکاری را به طور کامل می‌پذیرم. متعهد می‌شوم تمام فعالیت‌هایم مطابق با قوانین جمهوری اسلامی ایران باشد."
-                                </div>
-
-                                <div class="video-container">
-                                    <video class="video-preview" id="videoPreview" muted></video>
-                                    <div class="video-controls">
-                                        <button type="button" class="btn btn--primary" id="startRecording">
-                                            <i class="fas fa-record-vinyl"></i>
-                                            شروع ضبط
-                                        </button>
-                                        <button type="button" class="btn btn--outline" id="stopRecording" disabled>
-                                            <i class="fas fa-stop"></i>
-                                            توقف ضبط
-                                        </button>
-                                        <button type="button" class="btn btn--outline" id="playRecording" disabled>
-                                            <i class="fas fa-play"></i>
-                                            پخش
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="button" class="btn btn--outline prev-step" data-prev="1">
-                                    <i class="fas fa-arrow-right"></i>
-                                    مرحله قبل
-                                </button>
-                                <button type="button" class="btn btn--primary next-step" data-next="3" id="step2Next" disabled>
-                                    ادامه
-                                    <i class="fas fa-arrow-left"></i>
-                                </button>
-                            </div>
-                        </form>
-
-                        <!-- Step 3: Final Registration -->
-                        <form class="form-steps" id="step3">
-                            <div class="auth-header">
-                                <h1 class="auth-title">تکمیل ثبت‌نام</h1>
-                                <p class="auth-subtitle">مراحل نهایی ثبت‌نام</p>
-                            </div>
-
-                            <div class="success-check">
-                                <i class="fas fa-check-circle"></i>
-                                <h3>احراز هویت با موفقیت انجام شد</h3>
-                                <p>اطلاعات شما تأیید شده است. حالا می‌توانید ثبت‌نام را تکمیل کنید.</p>
-                            </div>
-
                             <div class="form-group">
                                 <label class="checkbox-label">
                                     <input type="checkbox" name="terms" required>
@@ -687,41 +175,38 @@
                                 </label>
                             </div>
 
-                            <div class="form-actions">
-                                <button type="button" class="btn btn--outline prev-step" data-prev="2">
-                                    <i class="fas fa-arrow-right"></i>
-                                    مرحله قبل
-                                </button>
-                                <button type="submit" class="btn btn--success btn--lg">
-                                    <i class="fas fa-user-plus"></i>
-                                    ایجاد حساب کاربری
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn--primary btn--lg w-full">
+                                <i class="fas fa-user-plus"></i>
+                                ایجاد حساب کاربری
+                            </button>
                         </form>
+
+                        <div class="auth-divider">
+                            <span>یا</span>
+                        </div>
+
+                        <div class="social-auth">
+                            <button type="button" class="btn btn--outline btn--lg w-full social-btn google-btn">
+                                <i class="fab fa-google"></i>
+                                ثبت‌نام با گوگل
+                            </button>
+                        </div>
+
+                        <div class="auth-footer">
+                            <p>قبلاً حساب دارید؟
+                                <a href="/login/" class="auth-link">وارد شوید</a>
+                            </p>
+                        </div>
                     </div>
 
                     <!-- Auth Benefits -->
                     <div class="auth-benefits">
-                        <h2 class="benefits-title">مزایای ثبت‌نام امن</h2>
+                        <h2 class="benefits-title">مزایای ثبت‌نام</h2>
                         <div class="benefits-list">
                             <div class="benefit-item">
                                 <i class="fas fa-shield-alt"></i>
                                 <div class="benefit-content">
-                                    <h3>احراز هویت چند مرحله‌ای</h3>
-                                    <p>سیستم امنیتی پیشرفته با تأیید واتساپ/تلگرام</p>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <i class="fas fa-id-card"></i>
-                                <div class="benefit-content">
-                                    <h3>تأیید هویت تصویری</h3>
-                                    <p>احراز هویت مطمئن با آپلود مدارک و ضبط ویدیو</p>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <i class="fas fa-lock"></i>
-                                <div class="benefit-content">
-                                    <h3>حفاظت از اطلاعات</h3>
+                                    <h3>امنیت بالا</h3>
                                     <p>اطلاعات شما با استانداردهای امنیتی بالا محافظت می‌شود</p>
                                 </div>
                             </div>
@@ -729,7 +214,21 @@
                                 <i class="fas fa-bolt"></i>
                                 <div class="benefit-content">
                                     <h3>ورود سریع و آسان</h3>
-                                    <p>پس از تأیید، با یک کلیک وارد حساب خود شوید</p>
+                                    <p>با ایمیل و رمز عبور به راحتی وارد حساب خود شوید</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-gift"></i>
+                                <div class="benefit-content">
+                                    <h3>تخفیف‌های ویژه</h3>
+                                    <p>از تخفیف‌های ویژه اعضا بهره‌مند شوید</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-headset"></i>
+                                <div class="benefit-content">
+                                    <h3>پشتیبانی اختصاصی</h3>
+                                    <p>پشتیبانی ۲۴ ساعته برای کاربران ثبت‌نام شده</p>
                                 </div>
                             </div>
                         </div>
@@ -740,165 +239,64 @@
     </main>
 
     <script>
-        // Multi-step form functionality
-        let currentStep = 1;
-        const totalSteps = 3;
-        let resendTimer = 90; // 1.5 minutes
-        let resendInterval;
+        // Registration form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        // Initialize steps
-        function initializeSteps() {
-            // Update phone preview
-            updatePhonePreview();
-
-            // Next step buttons
-            document.querySelectorAll('.next-step').forEach(button => {
-                button.addEventListener('click', function() {
-                    const nextStep = parseInt(this.dataset.next);
-                    if (validateStep(currentStep)) {
-                        goToStep(nextStep);
-                    }
-                });
-            });
-
-            // Previous step buttons
-            document.querySelectorAll('.prev-step').forEach(button => {
-                button.addEventListener('click', function() {
-                    const prevStep = parseInt(this.dataset.prev);
-                    goToStep(prevStep);
-                });
-            });
-
-            // Phone number change listener
-            document.getElementById('phone').addEventListener('input', updatePhonePreview);
-            document.getElementById('countryCode').addEventListener('change', updatePhonePreview);
-        }
-
-        function updatePhonePreview() {
-            const countryCode = document.getElementById('countryCode').value;
-            const phone = document.getElementById('phone').value;
-            document.getElementById('phonePreview').textContent = countryCode + phone;
-        }
-
-        function goToStep(step) {
-            // Hide current step
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
-
-            // Show new step
-            document.getElementById(`step${step}`).classList.add('active');
-            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
-
-            // Mark previous steps as completed
-            for (let i = 1; i < step; i++) {
-                document.querySelector(`.step[data-step="${i}"]`).classList.add('completed');
-            }
-
-            currentStep = step;
-
-            // If going to step 2, update phone preview
-            if (step === 2) {
-                updatePhonePreview();
-            }
-        }
-
-        function validateStep(step) {
-            switch (step) {
-                case 1:
-                    return validateStep1();
-                case 2:
-                    return validateStep2();
-                case 3:
-                    return validateStep3();
-                default:
-                    return true;
-            }
-        }
-
-        function validateStep1() {
             const username = document.getElementById('username').value.trim();
             const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.querySelector('input[name="terms"]').checked;
+            const privacy = document.querySelector('input[name="privacy"]').checked;
 
             if (!username) {
                 alert('لطفاً نام کاربری را وارد کنید');
-                return false;
+                return;
             }
 
             if (username.length < 3) {
                 alert('نام کاربری باید حداقل ۳ کاراکتر باشد');
-                return false;
+                return;
             }
 
             if (!email || !isValidEmail(email)) {
                 alert('لطفاً یک ایمیل معتبر وارد کنید');
-                return false;
-            }
-
-            if (!phone) {
-                alert('لطفاً شماره تلفن را وارد کنید');
-                return false;
-            }
-
-            if (phone.length < 10) {
-                alert('شماره تلفن باید حداقل ۱۰ رقم باشد');
-                return false;
+                return;
             }
 
             if (password.length < 8) {
                 alert('رمز عبور باید حداقل ۸ کاراکتر باشد');
-                return false;
+                return;
             }
 
             if (password !== confirmPassword) {
                 alert('رمز عبور و تکرار آن مطابقت ندارند');
-                return false;
+                return;
             }
-
-            return true;
-        }
-
-        function validateStep2() {
-            const verificationCode = getVerificationCode();
-            const nationalCard = document.getElementById('nationalCard').files[0];
-
-            if (!verificationCode || verificationCode.length !== 6) {
-                alert('لطفاً کد تأیید را کامل وارد کنید');
-                return false;
-            }
-
-            if (!nationalCard) {
-                alert('لطفاً کارت ملی خود را آپلود کنید');
-                return false;
-            }
-
-            // In real app, you would verify the code with server
-            if (verificationCode !== '123456') { // Demo code
-                alert('کد تأیید نامعتبر است');
-                return false;
-            }
-
-            return true;
-        }
-
-        function validateStep3() {
-            const terms = document.querySelector('input[name="terms"]').checked;
-            const privacy = document.querySelector('input[name="privacy"]').checked;
 
             if (!terms) {
                 alert('لطفاً با قوانین و مقررات موافقت کنید');
-                return false;
+                return;
             }
 
             if (!privacy) {
                 alert('لطفاً با سیاست حفظ حریم خصوصی موافقت کنید');
-                return false;
+                return;
             }
 
-            return true;
-        }
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ایجاد حساب...';
+            submitBtn.disabled = true;
+
+            // Simulate registration process
+            setTimeout(() => {
+                alert('حساب کاربری با موفقیت ایجاد شد!');
+                window.location.href = 'dashboard/';
+            }, 2000);
+        });
 
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -958,247 +356,9 @@
             });
         });
 
-        // Verification methods
-        let selectedMethod = 'whatsapp';
-        document.querySelectorAll('.verification-method').forEach(method => {
-            method.addEventListener('click', function() {
-                document.querySelectorAll('.verification-method').forEach(m => m.classList.remove('active'));
-                this.classList.add('active');
-                selectedMethod = this.dataset.method;
-            });
-        });
-
-        // Send verification code
-        document.getElementById('sendCodeBtn').addEventListener('click', function() {
-            const phone = document.getElementById('phone').value;
-            const countryCode = document.getElementById('countryCode').value;
-
-            if (!phone) {
-                alert('لطفاً شماره تلفن را وارد کنید');
-                return;
-            }
-
-            const fullPhone = countryCode + phone;
-
-            // Simulate sending code
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
-            this.disabled = true;
-
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-check"></i> کد ارسال شد';
-                document.getElementById('verificationCodeGroup').style.display = 'block';
-
-                // Start resend timer
-                startResendTimer();
-
-                // Enable next button after 3 seconds
-                setTimeout(() => {
-                    document.getElementById('step2Next').disabled = false;
-                }, 3000);
-            }, 2000);
-        });
-
-        function startResendTimer() {
-            resendTimer = 90;
-            const resendLink = document.getElementById('resendCode');
-            resendLink.classList.add('disabled');
-
-            clearInterval(resendInterval);
-            resendInterval = setInterval(() => {
-                const minutes = Math.floor(resendTimer / 60);
-                const seconds = resendTimer % 60;
-
-                resendLink.innerHTML = `ارسال مجدد (${minutes}:${seconds.toString().padStart(2, '0')})`;
-
-                if (resendTimer <= 0) {
-                    clearInterval(resendInterval);
-                    resendLink.classList.remove('disabled');
-                    resendLink.innerHTML = 'ارسال مجدد';
-                }
-
-                resendTimer--;
-            }, 1000);
-        }
-
-        // OTP input handling
-        const otpInputs = document.querySelectorAll('.otp-input');
-        otpInputs.forEach((input, index) => {
-            input.addEventListener('input', function() {
-                if (this.value.length === 1) {
-                    if (index < otpInputs.length - 1) {
-                        otpInputs[index + 1].focus();
-                    }
-                }
-            });
-
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && this.value.length === 0) {
-                    if (index > 0) {
-                        otpInputs[index - 1].focus();
-                    }
-                }
-            });
-        });
-
-        function getVerificationCode() {
-            return Array.from(otpInputs).map(input => input.value).join('');
-        }
-
-        // File upload functionality
-        const nationalCardUpload = document.getElementById('nationalCardUpload');
-        const nationalCardInput = document.getElementById('nationalCard');
-        const nationalCardPreview = document.getElementById('nationalCardPreview');
-
-        nationalCardUpload.addEventListener('click', () => nationalCardInput.click());
-
-        nationalCardUpload.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            nationalCardUpload.classList.add('dragover');
-        });
-
-        nationalCardUpload.addEventListener('dragleave', () => {
-            nationalCardUpload.classList.remove('dragover');
-        });
-
-        nationalCardUpload.addEventListener('drop', (e) => {
-            e.preventDefault();
-            nationalCardUpload.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFileUpload(files[0]);
-            }
-        });
-
-        nationalCardInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileUpload(e.target.files[0]);
-            }
-        });
-
-        function handleFileUpload(file) {
-            if (file.size > 5 * 1024 * 1024) {
-                alert('حجم فایل نباید بیشتر از ۵ مگابایت باشد');
-                return;
-            }
-
-            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
-            if (!validTypes.includes(file.type)) {
-                alert('فرمت فایل مجاز نیست. لطفاً از فرمت‌های JPG, PNG, PDF استفاده کنید');
-                return;
-            }
-
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    nationalCardPreview.innerHTML = `
-                        <img src="${e.target.result}" alt="پیش‌نمایش کارت ملی">
-                        <p>${file.name}</p>
-                    `;
-                    nationalCardPreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                nationalCardPreview.innerHTML = `
-                    <i class="fas fa-file-pdf" style="font-size: 3rem; color: #ef4444;"></i>
-                    <p>${file.name}</p>
-                `;
-                nationalCardPreview.style.display = 'block';
-            }
-        }
-
-        // Video recording functionality
-        let mediaRecorder;
-        let recordedChunks = [];
-        let stream;
-
-        document.getElementById('startRecording').addEventListener('click', startRecording);
-        document.getElementById('stopRecording').addEventListener('click', stopRecording);
-        document.getElementById('playRecording').addEventListener('click', playRecording);
-
-        async function startRecording() {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({
-                    video: true,
-                    audio: true
-                });
-
-                const videoPreview = document.getElementById('videoPreview');
-                videoPreview.srcObject = stream;
-                videoPreview.play();
-
-                mediaRecorder = new MediaRecorder(stream);
-                recordedChunks = [];
-
-                mediaRecorder.ondataavailable = (e) => {
-                    if (e.data.size > 0) {
-                        recordedChunks.push(e.data);
-                    }
-                };
-
-                mediaRecorder.onstop = () => {
-                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                    const url = URL.createObjectURL(blob);
-                    videoPreview.srcObject = null;
-                    videoPreview.src = url;
-
-                    document.getElementById('playRecording').disabled = false;
-                    document.getElementById('step2Next').disabled = false;
-                };
-
-                mediaRecorder.start();
-
-                document.getElementById('startRecording').disabled = true;
-                document.getElementById('stopRecording').disabled = false;
-
-            } catch (error) {
-                alert('دسترسی به دوربین و میکروفون امکان‌پذیر نیست. لطفاً مجوزهای لازم را صادر کنید.');
-                console.error('Error accessing media devices:', error);
-            }
-        }
-
-        function stopRecording() {
-            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-                mediaRecorder.stop();
-                stream.getTracks().forEach(track => track.stop());
-
-                document.getElementById('startRecording').disabled = false;
-                document.getElementById('stopRecording').disabled = true;
-            }
-        }
-
-        function playRecording() {
-            const videoPreview = document.getElementById('videoPreview');
-            videoPreview.play();
-        }
-
-        // Form submission
-        document.getElementById('step3').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ایجاد حساب...';
-            submitBtn.disabled = true;
-
-            // Simulate registration process
-            setTimeout(() => {
-                alert('حساب کاربری با موفقیت ایجاد شد!');
-                window.location.href = '/Pages/dashboard.html';
-            }, 2000);
-        });
-
-        // Resend code
-        document.getElementById('resendCode').addEventListener('click', function(e) {
-            e.preventDefault();
-            if (!this.classList.contains('disabled')) {
-                document.getElementById('sendCodeBtn').click();
-            }
-        });
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeSteps();
+        // Social registration
+        document.querySelector('.google-btn').addEventListener('click', function() {
+            alert('ثبت‌نام با گوگل - این قابلیت به زودی فعال خواهد شد');
         });
     </script>
 </body>

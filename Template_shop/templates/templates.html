@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
+{% load humanize %}
 
 {% block title %}قالب‌ها - فروشگاه قالب{% endblock %}
 {% block description %}مجموعه کامل قالب‌های وبسایت برای انواع کسب‌ و کارها{% endblock %}
@@ -11,6 +13,7 @@
     <link rel="stylesheet" href="{% static "css/layouts.css" %}">
     <link rel="stylesheet" href="{% static "css/responsive.css" %}">
     <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    <link rel="stylesheet" href="{% static "css/templates.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
@@ -134,36 +137,38 @@
 
         /* استایل‌های جدید */
         .search-hero-section {
-            padding: 2rem 0;
+            padding:2px 2;
+            padding-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
             color: white;
         }
 
         .search-hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center; /* اضافه شد */
+}
 
-        @media (min-width: 768px) {
-            .search-hero-content {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                gap: 3rem;
-            }
-        }
+@media (min-width: 768px) {
+    .search-hero-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center; /* اضافه شد */
+        gap: 3rem;
+    }
+}
+       .search-hero-text {
+    text-align: center;
+    flex: 1;
+}
 
-        .search-hero-text {
-            text-align: center;
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .search-hero-text {
-                text-align: right;
-            }
-        }
+@media (min-width: 768px) {
+    .search-hero-text {
+        text-align: right;
+        flex: 1; /* اضافه شد */
+    }
+}
 
         .shopify-text {
             display: block;
@@ -202,55 +207,57 @@
             }
         }
 
-        .search-form-container {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+      .search-form-container {
+    flex: 1;
+    max-width: 600px; /* از 500px به 600px افزایش یافت */
+    margin: 0 auto;
+    width: 100%;
+}
 
-        @media (min-width: 768px) {
-            .search-form-container {
-                margin: 0;
-                max-width: 400px;
-            }
-        }
+@media (min-width: 768px) {
+    .search-form-container {
+        margin: 0;
+        max-width: 500px; /* از 400px به 500px افزایش یافت */
+    }
+}
 
-        .search-form-compact {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            background: white;
-            padding: 0.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-        }
+       .search-form-compact {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: white;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    width: 100%; /* اضافه شد */
+}
 
-        .search-input-compact {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 0.9rem;
-            background: transparent;
-            min-width: 0;
-        }
+   .search-input-compact {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    background: transparent;
+    min-width: 0;
+    width: 200%; /* اضافه شد */
+}
 
         .search-input-compact:focus {
             outline: none;
         }
-
-        .search-btn-compact {
-            padding: 0.75rem 1.25rem;
-            background: var(--primary-500);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            font-size: 0.9rem;
-        }
-
+.search-btn-compact {
+    padding: 0.75rem 1.5rem; /* از 1.25rem به 1.5rem افزایش یافت */
+    background: var(--primary-500);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    min-width: 50px; /* اضافه شد */
+}
         .search-btn-compact:hover {
             background: var(--primary-600);
             transform: translateY(-1px);
@@ -454,14 +461,15 @@
     {% block content %}
     <main class="main">
         <!-- Search Hero Section با تغییرات جدید -->
-        <section class="search-hero-section">
+        <section class="search-hero-section" style="
+    padding-bottom: 0px;
+    padding-top: 80px;
+    border-bottom-width: 20px;" >
             <div class="container">
                 <div class="search-hero-content">
                     <!-- متن در سمت راست -->
                     <div class="search-hero-text">
-                        <span class="shopify-text">
-                            قالب‌های شاپیفای
-                        </span>
+
                         <br>
                         <h1 class="search-hero-title">قالب های شاپیفای</h1>
                         <p class="search-hero-subtitle">قالب مناسب خود را انتخاب کنید.</p>
@@ -469,13 +477,13 @@
 
                     <!-- فرم جستجو در سمت چپ -->
                     <div class="search-form-container">
-                        <div class="search-form-compact">
-                            <input type="text" id="compactSearchInput" placeholder="جستجوی قالب..." class="search-input-compact">
-                            <button class="search-btn-compact" id="compactSearchBtn">
+                        <form method="get" action="{% url 'templates_list' %}" class="search-form-compact">
+                            <input type="text" name="q" value="{{ search_query }}" placeholder="جستجوی قالب..." class="search-input-compact">
+                            <button type="submit" class="search-btn-compact">
                                 <i class="fas fa-search"></i>
                                 جستجو
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -655,7 +663,7 @@
                 <div class="results-header">
                     <div class="results-info">
                         <h2 class="results-title">همه قالب‌ها</h2>
-                        <span class="results-count" id="resultsCount">۱۲ قالب</span>
+                        <span class="results-count" id="resultsCount">{{ items.count }} قالب</span>
                     </div>
                     <div class="results-actions">
                         <button class="btn btn--outline btn--sm" id="compareTemplates">
@@ -667,7 +675,62 @@
 
                 <div class="templates-container">
                     <div class="templates-grid" id="templatesGrid" data-layout="grid">
-                        <!-- Templates will be loaded here by JavaScript -->
+                        {% for item in items %}
+                            <div class="template-card">
+                                <div class="template-image">
+                                    <a href="/templates/{{ item.slug }}/">
+                                        <img src="
+                                        {% if item.template_type == 'themeforest' %}
+                                            {{ item.main_image.url }}
+                                        {% else %}
+                                            {{ item.thumbnail.url }}
+                                        {% endif %}
+                                        " class="template-main-img">
+
+                                        <div class="template-overlay"></div>
+
+                                        <div class="template-badges">
+                                            {% if item.sales and item.sales > 100 %}
+                                                <span class="badge badge--primary">پرفروش</span>
+                                            {% endif %}
+                                            {% if item.rating and item.rating > 4 %}
+                                                <span class="badge badge--primary">پرامتیاز</span>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="template-content">
+                                    <h3 class="template-title">{{ item.title }}</h3>
+
+                                    <p class="template-description">
+                                        {{ item.description|truncatechars:120 }}
+                                    </p>
+
+                                    <div class="template-meta">
+                                        <span class="template-category">{{ item.category }}</span>
+                                    </div>
+
+                                    <div class="template-footer">
+                                        <div class="template-price">
+                                            <div class="price-display">
+                                                <span class="price-dollar">
+                                                   {{ item.price|floatformat:0 }} دلار
+                                                </span>
+                                                <span class="price-rial">
+                                                    {{ item.price|mul:100000|intcomma }} تومان
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <a href="{% url 'template_detail' slug=item.slug %}" class="view-btn">
+                                            <i class="fas fa-eye"></i>
+                                            مشاهده
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -823,85 +886,13 @@
 
     {% block extra_js %}
     <script>
+    console.log("JS is running");
         // ==================== DATA ====================
-        const templatesData = [
-            {
-                id: 1,
-                title: "قالب فروشگاهی مدرن",
-                description: "قالب کاملاً واکنش‌گرا با امکانات کامل فروشگاهی و طراحی مدرن برای راه‌اندازی فروشگاه آنلاین حرفه‌ای",
-                price: 50000,
-                originalPrice: 75000,
-                category: "shopify",
-                sales: 89,
-                image: "{% static "images/hero-template-1.png" %}",
-                badges: ["پرفروش", "جدید"],
-                features: ["responsive", "seo", "support", "customizable"]
-            },
-            {
-                id: 2,
-                title: "قالب شرکتی حرفه‌ای",
-                description: "طراحی سازمانی مدرن با قابلیت‌های پیشرفته و رابط کاربری زیبا برای شرکت‌ها و سازمان‌ها",
-                price: 75000,
-                originalPrice: null,
-                category: "company",
-                sales: 67,
-                image: "{% static "images/hero-template-2.png" %}",
-                badges: ["پرامتیاز"],
-                features: ["responsive", "seo", "support", "fast"]
-            },
-            {
-                id: 3,
-                title: "قالب شخصی خلاق",
-                description: "طراحی مینیمال و خلاقانه برای افراد با قابلیت‌های شخصی‌سازی پیشرفته برای رزومه و نمونه کار",
-                price: 35000,
-                originalPrice: null,
-                category: "personal",
-                sales: 45,
-                image: "{% static "images/hero-template-3.png" %}",
-                badges: ["اقتصادی"],
-                features: ["responsive", "customizable"]
-            },
-            {
-                id: 4,
-                title: "قالب بلاگ مدرن",
-                description: "طراحی زیبا و بهینه برای وبلاگ‌نویسی با سرعت بارگذاری بالا و امکانات مدیریت محتوای پیشرفته",
-                price: 45000,
-                originalPrice: 60000,
-                category: "blog",
-                sales: 34,
-                image: "{% static "images/hero-template-1.png" %}",
-                badges: ["جدید"],
-                features: ["responsive", "seo", "support", "fast"]
-            },
-            {
-                id: 5,
-                title: "قالب نمونه کار",
-                description: "قالب حرفه‌ای برای نمایش نمونه کارها با گالری زیبا و امکانات نمایش پیشرفته آثار هنری و طراحی",
-                price: 55000,
-                originalPrice: null,
-                category: "portfolio",
-                sales: 56,
-                image: "{% static "images/hero-template-2.png" %}",
-                badges: ["پرفروش"],
-                features: ["responsive", "seo", "customizable"]
-            },
-            {
-                id: 6,
-                title: "قالب آموزشی",
-                description: "قالب مناسب برای سایت‌های آموزشی با امکانات پیشرفته دوره‌های آنلاین و سیستم مدیریت آموزش",
-                price: 65000,
-                originalPrice: 80000,
-                category: "education",
-                sales: 42,
-                image: "{% static "images/hero-template-3.png" %}",
-                badges: ["جدید", "پرامتیاز"],
-                features: ["responsive", "seo", "support", "fast", "customizable"]
-            }
-        ];
+
 
         // ==================== STATE MANAGEMENT ====================
         let currentState = {
-            templates: [...templatesData],
+            templates: [],
             displayedCount: 6,
             activeFilters: {
                 categories: ['all'],
@@ -919,9 +910,6 @@
             mobileMenuBtn: document.getElementById('mobileMenuBtn'),
             mainNav: document.getElementById('mainNav'),
 
-            // Search جدید
-            compactSearchInput: document.getElementById('compactSearchInput'),
-            compactSearchBtn: document.getElementById('compactSearchBtn'),
 
             // Testimonials جدید
             viewMoreTestimonials: document.getElementById('viewMoreTestimonials'),
@@ -956,7 +944,6 @@
         function init() {
             setupEventListeners();
             setupFiltersToggle();
-            renderTemplates();
             updateActiveFiltersDisplay();
         }
 
@@ -965,9 +952,6 @@
             // Mobile Menu
             elements.mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
-            // Search جدید
-            elements.compactSearchInput.addEventListener('input', debounce(handleCompactSearch, 300));
-            elements.compactSearchBtn.addEventListener('click', handleCompactSearch);
 
             // Testimonials جدید
             elements.viewMoreTestimonials.addEventListener('click', handleViewMoreTestimonials);
@@ -1045,18 +1029,7 @@
         }
 
         // ==================== SEARCH FUNCTIONALITY ====================
-        function handleCompactSearch() {
-            const searchTerm = elements.compactSearchInput.value.trim().toLowerCase();
-            currentState.activeFilters.searchTerm = searchTerm;
-            applyAllFilters();
-        }
 
-        function handleQuickSearch(e) {
-            const searchTerm = e.target.dataset.search;
-            elements.compactSearchInput.value = searchTerm;
-            currentState.activeFilters.searchTerm = searchTerm;
-            applyAllFilters();
-        }
 
         // ==================== MOBILE MENU ====================
         function toggleMobileMenu() {
@@ -1235,7 +1208,6 @@
 
             currentState.templates = filteredTemplates;
             currentState.displayedCount = 6;
-            renderTemplates();
             updateActiveFiltersDisplay();
         }
 
@@ -1263,57 +1235,6 @@
         }
 
         // ==================== TEMPLATE RENDERING ====================
-        function renderTemplates() {
-            const templatesToShow = currentState.templates.slice(0, currentState.displayedCount);
-
-            if (templatesToShow.length === 0) {
-                elements.templatesGrid.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <h3>هیچ قالبی یافت نشد</h3>
-                        <p>لطفاً فیلترهای جستجو را تغییر دهید یا عبارت دیگری را امتحان کنید</p>
-                    </div>
-                `;
-                elements.resultsCount.textContent = '۰ قالب';
-                elements.loadMoreBtn.style.display = 'none';
-                return;
-            }
-
-            elements.templatesGrid.innerHTML = templatesToShow.map(template => `
-                <div class="template-card" data-template-id="${template.id}">
-                    <div class="template-image">
-                        <img src="${template.image}" alt="${template.title}" class="template-img">
-                        <div class="template-overlay">
-                        </div>
-                        <div class="template-badges">
-                            ${template.badges.map(badge => `<span class="badge badge--primary">${badge}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div class="template-content">
-                        <h3 class="template-title">${template.title}</h3>
-                        <p class="template-description">${template.description}</p>
-
-                        <div class="template-meta">
-                            <span class="template-category">${getCategoryName(template.category)}</span>
-                        </div>
-
-                        <div class="template-footer">
-                            <div class="template-price">
-                                ${formatPrice(template.price)}
-                                ${template.originalPrice ? formatOldPrice(template.originalPrice) : ''}
-                            </div>
-                            <a href="/template-detail/?id=${template.id}" class="view-btn">
-                                <i class="fas fa-eye"></i>
-                                مشاهده
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            elements.resultsCount.textContent = `${currentState.templates.length.toLocaleString('fa-IR')} قالب`;
-            elements.loadMoreBtn.style.display = currentState.templates.length > currentState.displayedCount ? 'block' : 'none';
-        }
 
         function getCategoryName(category) {
             const categories = {
@@ -1403,7 +1324,6 @@
 
         function loadMoreTemplates() {
             currentState.displayedCount += 6;
-            renderTemplates();
         }
 
         function toggleScrollToTop() {

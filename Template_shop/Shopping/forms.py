@@ -9,7 +9,28 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = [
+            'username',
+            'email',
+            'password1',
+            'password2',
+            'phone',
+            'country_code',
+            'national_card',
+            'verification_video',
+            'newsletter',
+        ]
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.username = self.cleaned_data['username']
+        user.phone = self.cleaned_data.get('phone')
+        user.country_code = self.cleaned_data.get('country_code')
+        user.newsletter = self.cleaned_data.get('newsletter', False)
+        if commit:
+            user.save()
+        return user
 
 
 class EmailLoginForm(forms.Form):
@@ -20,8 +41,9 @@ class EmailLoginForm(forms.Form):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
 
-        user = authenticate(email=email, password=password)
+        user = authenticate(username=email, password=password)
         if not user:
-            raise forms.ValidationError("Invalid email or password")
+            raise forms.ValidationError("ایمیل یا رمز اشتباه است")
+
         self.user = user
         return self.cleaned_data

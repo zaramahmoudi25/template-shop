@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ورود - فروشگاه قالب</title>
+    <title>ورود - ایران اد پی</title>
     <meta name="description" content="ورود به حساب کاربری فروشگاه قالب">
 
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -73,20 +73,6 @@
             padding: 0 1rem;
         }
 
-        /* Phone input with country code */
-        .phone-input-group {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .country-code {
-            flex: 0 0 100px;
-        }
-
-        .phone-number {
-            flex: 1;
-        }
-
         .form-hint {
             display: block;
             margin-top: 0.25rem;
@@ -94,158 +80,10 @@
             color: var(--gray-500);
         }
 
-        /* Login methods */
-        .login-methods {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .login-method {
-            flex: 1;
-            text-align: center;
-            padding: 1rem;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-            font-weight: 500;
-        }
-
-        .login-method:hover {
-            border-color: var(--primary-300);
-        }
-
-        .login-method.active {
-            border-color: var(--primary-500);
-            background: var(--primary-50);
-            color: var(--primary-700);
-        }
-
-        .login-method i {
-            margin-bottom: 0.5rem;
-            display: block;
-            font-size: 1.25rem;
-        }
-
-        /* Verification styles */
-        .verification-methods {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .verification-method {
-            flex: 1;
-            text-align: center;
-            padding: 1rem;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .verification-method:hover {
-            border-color: var(--primary-300);
-            transform: translateY(-2px);
-        }
-
-        .verification-method.active {
-            border-color: var(--primary-500);
-            background: var(--primary-50);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-        }
-
-        .verification-method i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .verification-method.whatsapp i {
-            color: #25D366;
-        }
-
-        .verification-method.telegram i {
-            color: #0088cc;
-        }
-
-        .verification-method .method-name {
-            font-weight: 600;
-            color: var(--gray-800);
-        }
-
-        .verification-method .method-desc {
-            font-size: 0.75rem;
-            color: var(--gray-600);
-            margin-top: 0.25rem;
-        }
-
-        .otp-inputs {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin: 1.5rem 0;
-        }
-
-        .otp-input {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-        }
-
-        .otp-input:focus {
-            border-color: var(--primary-500);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-            outline: none;
-        }
-
-        .resend-code {
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .resend-code a {
-            color: var(--primary-600);
-            text-decoration: none;
-        }
-
-        .resend-code a:hover {
-            text-decoration: underline;
-        }
-
-        .resend-code a.disabled {
-            color: var(--gray-500);
-            pointer-events: none;
-        }
-
         @media (max-width: 768px) {
             .auth-container {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-
-            .phone-input-group {
-                flex-direction: column;
-            }
-
-            .country-code {
-                flex: 1;
-            }
-
-            .login-methods {
-                flex-direction: column;
-            }
-
-            .verification-methods {
-                flex-direction: column;
             }
         }
     </style>
@@ -268,94 +106,22 @@
                     <div class="auth-card">
                         <div class="auth-header">
                             <h1 class="auth-title">ورود به حساب کاربری</h1>
-                            <p class="auth-subtitle">خوش آمدید! لطفاً وارد حساب خود شوید</p>
+                            <p class="auth-subtitle">خوش آمدید! لطفاً با ایمیل وارد شوید</p>
                         </div>
-
-                        <!-- Login Methods -->
-                        <div class="login-methods">
-                            <button type="button" class="login-method active" data-method="phone">
-                                <i class="fas fa-mobile-alt"></i>
-                                با شماره تلفن
-                            </button>
-                            <button type="button" class="login-method" data-method="email">
-                                <i class="fas fa-envelope"></i>
-                                با ایمیل
-                            </button>
-                        </div>
-
-                        <!-- Phone Login Form -->
-                        <form class="auth-form" id="phoneLoginForm">
-                            <div class="form-group">
-                                <label for="phone" class="form-label">شماره تلفن</label>
-                                <div class="phone-input-group">
-                                                                        <input type="tel" id="phone" name="phone" class="form-control phone-number" placeholder="912 345 6789" required>
-
-                                    <select class="form-control country-code" id="countryCode" required>
-                                        <option value="+98">ایران (+98)</option>
-                                        <option value="+93">افغانستان (+93)</option>
-
-                                    </select>
-                                </div>
-                                <small class="form-hint">شماره تلفن شما برای ارسال کد تأیید استفاده می‌شود</small>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">روش دریافت کد تأیید</label>
-                                <div class="verification-methods">
-                                    <div class="verification-method whatsapp active" data-method="whatsapp">
-                                        <i class="fab fa-whatsapp"></i>
-                                        <div class="method-name">واتساپ</div>
-                                    </div>
-                                    <div class="verification-method telegram" data-method="telegram">
-                                        <i class="fab fa-telegram"></i>
-                                        <div class="method-name">تلگرام</div>
-                                    </div>
-                                      <div class="verification-method sms" data-method="sms">
-                                        <i class="fas fa-sms"></i>
-                                        <div class="method-name">پیامک</div>
-                                    </div>
-                                </div>
-
-                                <button type="button" class="btn btn--primary w-full" id="sendCodeBtn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    ارسال کد تأیید
-                                </button>
-                                <small class="form-hint">کد ۶ رقمی به شماره <span id="phonePreview"></span> ارسال خواهد شد</small>
-                            </div>
-
-                            <div class="form-group" id="verificationCodeGroup" style="display: none;">
-                                <label for="verificationCode" class="form-label">کد تأیید ارسال شده</label>
-                                <div class="otp-inputs">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="1" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="2" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="3" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="4" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="5" inputmode="numeric">
-                                    <input type="text" class="otp-input" maxlength="1" data-index="6" inputmode="numeric">
-                                </div>
-                                <div class="resend-code">
-                                    <span>کد را دریافت نکردید؟ </span>
-                                    <a href="#" id="resendCode" class="disabled">ارسال مجدد (۱:۳۰)</a>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn--primary btn--lg w-full" id="loginBtn" disabled>
-                                <i class="fas fa-sign-in-alt"></i>
-                                ورود به حساب
-                            </button>
-                        </form>
 
                         <!-- Email Login Form -->
-                        <form class="auth-form" id="emailLoginForm" style="display: none;">
+                        <form class="auth-form" id="emailLoginForm" method="post" action="{% url 'login' %}" autocomplete="off">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label for="email" class="form-label">ایمیل</label>
                                 <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
+                                <small class="form-hint">ایمیل خود را که با آن ثبت‌نام کرده‌اید وارد کنید</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="password" class="form-label">رمز عبور</label>
                                 <div class="password-input">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="رمز عبور خود را وارد کنید" required>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="رمز عبور خود را وارد کنید" autocomplete="off" required>
                                     <button type="button" class="password-toggle" aria-label="نمایش رمز عبور">
                                         <i class="fas fa-eye"></i>
                                     </button>
@@ -419,189 +185,9 @@
     </main>
 
     <script>
-        // Login method switching
-        document.querySelectorAll('.login-method').forEach(method => {
-            method.addEventListener('click', function() {
-                document.querySelectorAll('.login-method').forEach(m => m.classList.remove('active'));
-                this.classList.add('active');
-
-                const methodType = this.dataset.method;
-
-                if (methodType === 'phone') {
-                    document.getElementById('phoneLoginForm').style.display = 'block';
-                    document.getElementById('emailLoginForm').style.display = 'none';
-                    updatePhonePreview();
-                } else {
-                    document.getElementById('phoneLoginForm').style.display = 'none';
-                    document.getElementById('emailLoginForm').style.display = 'block';
-                }
-            });
-        });
-
-        // Update phone preview
-        function updatePhonePreview() {
-            const countryCode = document.getElementById('countryCode').value;
-            const phone = document.getElementById('phone').value;
-            document.getElementById('phonePreview').textContent = countryCode + phone;
-        }
-
-        // Phone number change listener
-        document.getElementById('phone').addEventListener('input', updatePhonePreview);
-        document.getElementById('countryCode').addEventListener('change', updatePhonePreview);
-
-        // Verification methods
-        let selectedMethod = 'whatsapp';
-        document.querySelectorAll('.verification-method').forEach(method => {
-            method.addEventListener('click', function() {
-                document.querySelectorAll('.verification-method').forEach(m => m.classList.remove('active'));
-                this.classList.add('active');
-                selectedMethod = this.dataset.method;
-            });
-        });
-
-        // Send verification code
-        let resendTimer = 90;
-        let resendInterval;
-
-        document.getElementById('sendCodeBtn').addEventListener('click', function() {
-            const phone = document.getElementById('phone').value;
-            const countryCode = document.getElementById('countryCode').value;
-
-            if (!phone) {
-                alert('لطفاً شماره تلفن را وارد کنید');
-                return;
-            }
-
-            if (phone.length < 10) {
-                alert('شماره تلفن باید حداقل ۱۰ رقم باشد');
-                return;
-            }
-
-            const fullPhone = countryCode + phone;
-
-            // Simulate sending code
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
-            this.disabled = true;
-
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-check"></i> کد ارسال شد';
-                document.getElementById('verificationCodeGroup').style.display = 'block';
-
-                // Start resend timer
-                startResendTimer();
-
-                // Enable login button after 3 seconds
-                setTimeout(() => {
-                    document.getElementById('loginBtn').disabled = false;
-                }, 3000);
-            }, 2000);
-        });
-
-        function startResendTimer() {
-            resendTimer = 90;
-            const resendLink = document.getElementById('resendCode');
-            resendLink.classList.add('disabled');
-
-            clearInterval(resendInterval);
-            resendInterval = setInterval(() => {
-                const minutes = Math.floor(resendTimer / 60);
-                const seconds = resendTimer % 60;
-
-                resendLink.innerHTML = `ارسال مجدد (${minutes}:${seconds.toString().padStart(2, '0')})`;
-
-                if (resendTimer <= 0) {
-                    clearInterval(resendInterval);
-                    resendLink.classList.remove('disabled');
-                    resendLink.innerHTML = 'ارسال مجدد';
-                }
-
-                resendTimer--;
-            }, 1000);
-        }
-
-        // OTP input handling
-        const otpInputs = document.querySelectorAll('.otp-input');
-        otpInputs.forEach((input, index) => {
-            input.addEventListener('input', function() {
-                if (this.value.length === 1) {
-                    if (index < otpInputs.length - 1) {
-                        otpInputs[index + 1].focus();
-                    }
-                }
-            });
-
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && this.value.length === 0) {
-                    if (index > 0) {
-                        otpInputs[index - 1].focus();
-                    }
-                }
-            });
-        });
-
-        function getVerificationCode() {
-            return Array.from(otpInputs).map(input => input.value).join('');
-        }
-
-        // Phone login form submission
-        document.getElementById('phoneLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const verificationCode = getVerificationCode();
-
-            if (!verificationCode || verificationCode.length !== 6) {
-                alert('لطفاً کد تأیید را کامل وارد کنید');
-                return;
-            }
-
-            // In real app, you would verify the code with server
-            if (verificationCode !== '123456') { // Demo code
-                alert('کد تأیید نامعتبر است');
-                return;
-            }
-
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ورود...';
-            submitBtn.disabled = true;
-
-            // Simulate login process
-            setTimeout(() => {
-                alert('با موفقیت وارد شدید!');
-                window.location.href = '/dashboard/';
-            }, 2000);
-        });
 
         // Email login form submission
-        document.getElementById('emailLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-
-            if (!email || !isValidEmail(email)) {
-                alert('لطفاً یک ایمیل معتبر وارد کنید');
-                return;
-            }
-
-            if (!password) {
-                alert('لطفاً رمز عبور را وارد کنید');
-                return;
-            }
-
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ورود...';
-            submitBtn.disabled = true;
-
-            // Simulate login process
-            setTimeout(() => {
-                alert('با موفقیت وارد شدید!');
-                window.location.href = '/dashboard/';
-            }, 2000);
-        });
 
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -631,18 +217,6 @@
             alert('ورود با گوگل - این قابلیت به زودی فعال خواهد شد');
         });
 
-        // Resend code
-        document.getElementById('resendCode').addEventListener('click', function(e) {
-            e.preventDefault();
-            if (!this.classList.contains('disabled')) {
-                document.getElementById('sendCodeBtn').click();
-            }
-        });
-
-        // Initialize phone preview
-        document.addEventListener('DOMContentLoaded', function() {
-            updatePhonePreview();
-        });
     </script>
 </body>
 </html>

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load split_tags %}
 
-{% block title %}قالب فروشگاهی مدرن - جزئیات قالب{% endblock %}
-{% block description %}قالب فروشگاهی مدرن - کاملاً واکنش‌گرا با امکانات کامل برای فروشگاه اینترنتی{% endblock %}
+{% block title %}{{ item.title }} - جزئیات قالب{% endblock %}
+{% block description %}{{ item.description|truncatewords:20 }}{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="{% static "css/layouts.css" %}">
     <link rel="stylesheet" href="{% static "css/responsive.css" %}">
     <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    <link rel="stylesheet" href="{% static "css/templates.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
@@ -43,7 +45,7 @@
             margin-bottom: 2rem;
         }
 
-        .template-main-image {
+        .template-main-img {
             width: 100%;
             height: auto;
             display: block;
@@ -57,6 +59,11 @@
             align-items: center;
         }
 
+        .template-category-wrapper {
+            margin: 1rem 0 1rem;
+            text-align: center; /* centered under image */
+        }
+
         .template-category {
             background: var(--primary-50);
             color: var(--primary-700);
@@ -64,6 +71,7 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
+            display: inline-block;
         }
 
         .template-rating {
@@ -364,49 +372,68 @@
                     <div class="template-main-content">
                         <!-- Template Image -->
                         <div class="template-image-container">
-                            <img src="{% static "images/hero-template-1.png" %}" alt="قالب فروشگاهی مدرن" class="template-main-image">
+
+                            <img src="
+                            {% if template_type == 'themeforest' %}
+                                {{ template.main_image.url }}
+                            {% else %}
+                                {{ template.thumbnail.url }}
+                            {% endif %}
+                            " class="template-main-img">
                         </div>
 
                         <!-- Template Meta -->
                         <div class="template-meta">
-                            <span class="template-category">فروشگاهی</span>
+                            <span class="template-category">
+                                {{ template.category }}
+                            </span>
+
+                            {% if template.tags %}
+                            <div class="template-tags-wrapper">
+                                {% for tag in template.tags|split:"," %}
+                                    <span class="template-tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
                             <div class="template-rating">
                                 <span class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
+                                    {% with rating=item.rating|default:0 %}
+                                        {% for i in "12345" %}
+                                            {% if rating >= forloop.counter %}
+                                                <i class="fas fa-star"></i>
+
+                                            {% elif rating >= forloop.counter|add:"-0.5" %}
+                                                <i class="fas fa-star-half-alt"></i>
+
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endwith %}
                                 </span>
-                                <span class="rating-text">۴.۵ از ۱۲۴ نظر</span>
+                                <span class="rating-text">{{ item.rating }} از {{ item.rating_count }} نظر</span>
                             </div>
                         </div>
 
-                        <!-- Template Tags -->
-                        <!-- <div class="template-tags">
-                            <span class="template-tag">واکنش‌گرا</span>
-                            <span class="template-tag">مدرن</span>
-                            <span class="template-tag">فروشگاهی</span>
-                            <span class="template-tag">شاپیفای</span>
-                            <span class="template-tag">سئو بهینه</span>
-                            <span class="template-tag">سرعت بالا</span>
-                        </div>
-                         -->
+
                         <!-- Template Title -->
-                        <h1 class="template-title">قالب فروشگاهی مدرن</h1>
+                        <h1 class="template-title">{{ item.title }}</h1>
 
                         <!-- Template Description -->
                         <div class="template-description">
-                            <p>قالب فروشگاهی مدرن یک راه‌حل جامع و حرفه‌ای برای ایجاد فروشگاه اینترنتی است. این قالب با طراحی زیبا و کاربرپسند، تجربه خرید آنلاین را برای مشتریان شما بهینه می‌کند.</p>
-
-                            <p>این قالب کاملاً واکنش‌گرا بوده و در تمام دستگاه‌ها از جمله موبایل، تبلت و دسکتاپ به بهترین شکل نمایش داده می‌شود. با استفاده از این قالب می‌توانید در کمترین زمان فروشگاه اینترنتی خود را راه‌اندازی کنید.</p>
+                            <p>{{ item.description|linebreaks }}</p>
                         </div>
 
                         <!-- Shopify Button -->
                         <div class="shopify-btn-container">
-                            <a href="https://shopify.com" target="_blank" class="shopify-btn">
+                            <a href="{{ item.themeforest_url }}" target="_blank" class="shopify-btn">
                                 <i class="fab fa-shopify"></i>
-                                مشاهده قالب در شاپیفای
+                                مشاهده قالب در ThemeForest
+                            </a>
+                            <a href="{{ item.live_preview_url }}" target="_blank" class="shopify-btn">
+                                <i class="fab fa-shopify"></i>
+                                مشاهده لایو پیش‌نمایش
                             </a>
                         </div>
 
@@ -415,19 +442,19 @@
                             <div class="info-grid">
                                 <div class="info-item">
                                     <span class="info-label">نسخه</span>
-                                    <span class="info-value">۲.۱.۰</span>
+                                    <span class="info-value">{{ item.version }}</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">آخرین بروزرسانی</span>
-                                    <span class="info-value">۱۴۰۲/۱۰/۱۵</span>
+                                    <span class="info-value">{{ item.last_update }}</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">تعداد فروش</span>
-                                    <span class="info-value">۱,۲۴۷ عدد</span>
+                                    <span class="info-value">{{ item.sales }}</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">امتیاز</span>
-                                    <span class="info-value">۴.۵ از ۵</span>
+                                    <span class="info-value">{{ item.rating }} از 5</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">پشتیبانی</span>
@@ -435,7 +462,7 @@
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">سازگاری</span>
-                                    <span class="info-value">شاپیفای ۴.۰+</span>
+                                    <span class="info-value">{{ item.compatible_with }}</span>
                                 </div>
                             </div>
                         </div>
@@ -483,7 +510,7 @@
                         <div class="reviews-header">
                             <h2>نظرات کاربران</h2>
                             <div class="rating-summary">
-                                <span class="average-rating">۴.۵</span>
+                                <span class="average-rating">{{ item.rating }}</span>
                                 <div>
                                     <div class="stars">
                                         <i class="fas fa-star"></i>
@@ -492,7 +519,7 @@
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star-half-alt"></i>
                                     </div>
-                                    <span class="rating-count">بر اساس ۱۲۴ نظر</span>
+                                    <span class="rating-count">بر اساس {{ item.rating_count }} نظر</span>
                                 </div>
                             </div>
                         </div>

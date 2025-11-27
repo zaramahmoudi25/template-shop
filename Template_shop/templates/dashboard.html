@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل کاربری - فروشگاه قالب</title>
-    <meta name="description" content="پنل مدیریت کاربری فروشگاه قالب">
+    <title>پنل کاربری - ایران اد پی</title>
+    <meta name="description" content="پنل مدیریت کاربری ایران اد پی">
 
     <link rel="stylesheet" href="{% static "css/base.css" %}">
     <link rel="stylesheet" href="{% static "css/components.css" %}">
@@ -17,560 +17,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <style>
-        .dashboard-layout {
-            background: var(--gray-50);
-            min-height: 100vh;
-            padding-top: 0;
-        }
+<style>
+    .template-card {
+        width: 250px;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .template-card img.template-thumb {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .user-templates {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+</style>
 
-        .sidebar-layout {
-            display: flex;
-            gap: 2rem;
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            width: 280px;
-            background: white;
-            border-left: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-lg);
-            padding: 2rem 0;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            transition: all 0.3s ease;
-        }
-
-        .dashboard-main {
-            flex: 1;
-            padding: 2rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .summary-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .summary-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .summary-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .summary-upload .summary-icon {
-            background: var(--primary-50);
-            color: var(--primary-600);
-        }
-
-        .summary-earnings .summary-icon {
-            background: var(--success-50);
-            color: var(--success-600);
-        }
-
-        .summary-customers .summary-icon {
-            background: var(--warning-50);
-            color: var(--warning-600);
-        }
-
-        .summary-templates .summary-icon {
-            background: var(--info-50);
-            color: var(--info-600);
-        }
-
-        .back-to-home {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--primary-500);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .back-to-home:hover {
-            background: var(--primary-600);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .copy-warning {
-            color: var(--error-500);
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .copy-warning i {
-            color: var(--error-500);
-        }
-
-        .upload-options {
-            background: var(--gray-50);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--gray-200);
-            margin-bottom: 1.5rem;
-        }
-
-        .upload-option {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: white;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--gray-300);
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-option:hover {
-            border-color: var(--primary-500);
-            background: var(--primary-50);
-        }
-
-        .upload-option i {
-            color: var(--primary-500);
-            font-size: 1.25rem;
-        }
-
-        .upload-option-content {
-            flex: 1;
-        }
-
-        .upload-option-title {
-            font-weight: 600;
-            color: var(--gray-900);
-            margin-bottom: 0.25rem;
-        }
-
-        .upload-option-description {
-            color: var(--gray-600);
-            font-size: 0.875rem;
-        }
-
-        .terms-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .terms-modal.show {
-            display: flex;
-        }
-
-        .terms-content {
-            background: white;
-            border-radius: var(--border-radius-lg);
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .terms-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .terms-body {
-            line-height: 1.6;
-            color: var(--gray-700);
-        }
-
-        .terms-body h3 {
-            color: var(--gray-900);
-            margin: 1.5rem 0 0.5rem 0;
-        }
-
-        .terms-body p {
-            margin-bottom: 1rem;
-        }
-
-        .terms-body ul {
-            margin: 0.5rem 0;
-            padding-right: 1.5rem;
-        }
-
-        .terms-body li {
-            margin-bottom: 0.5rem;
-        }
-
-        .price-suggestion {
-            background: var(--warning-50);
-            border: 1px solid var(--warning-200);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .price-suggestion p {
-            color: var(--warning-700);
-            margin: 0;
-            font-size: 0.875rem;
-        }
-
-        .price-suggestion strong {
-            color: var(--warning-900);
-        }
-
-        .mobile-header {
-            display: none;
-            background: white;
-            padding: 1rem;
-            border-bottom: 1px solid var(--gray-200);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .mobile-header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mobile-menu-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--gray-700);
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .mobile-user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        /* استایل‌های ریسپانسیو برای دسکتاپ کوچک و تبلت */
-        @media (max-width: 1199.98px) {
-            .sidebar {
-                width: 250px;
-            }
-
-            .dashboard-summary {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 991.98px) {
-            .sidebar-layout {
-                position: relative;
-            }
-
-            .sidebar {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 300px;
-                height: 100vh;
-                z-index: 1000;
-                transition: right 0.3s ease;
-            }
-
-            .sidebar.active {
-                right: 0;
-            }
-
-            .dashboard-main {
-                width: 100%;
-                padding: 1rem 0;
-            }
-
-            .mobile-header {
-                display: block;
-            }
-
-            .back-to-home {
-                top: 1rem;
-                left: 1rem;
-                width: 45px;
-                height: 45px;
-            }
-
-            .dashboard-summary {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-                padding: 1.5rem;
-            }
-
-            .summary-card {
-                padding: 1.25rem;
-            }
-
-            .summary-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.25rem;
-            }
-
-            .summary-number {
-                font-size: 1.5rem;
-            }
-
-            .dashboard-charts {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-
-            .chart-container {
-                padding: 1.25rem;
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .container {
-                padding: 0 0.75rem;
-            }
-
-            .dashboard-header {
-                padding: 1.5rem 1rem 1rem;
-            }
-
-            .dashboard-header h1 {
-                font-size: 1.75rem;
-            }
-
-            .dashboard-summary {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .summary-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.5rem 1rem;
-            }
-
-            .summary-content {
-                text-align: center;
-            }
-
-            .dashboard-charts,
-            .recent-activity,
-            .upload-form-container,
-            .user-templates {
-                padding: 1rem;
-            }
-
-            .chart-container {
-                padding: 1rem;
-            }
-
-            .activity-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.75rem;
-                padding: 1rem;
-            }
-
-            .upload-option {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.25rem;
-            }
-
-            .form-row {
-                flex-direction: column;
-            }
-
-            .form-actions {
-                flex-direction: column;
-            }
-
-            .form-actions .btn {
-                width: 100%;
-            }
-
-            .back-to-home {
-                width: 40px;
-                height: 40px;
-                top: 0.5rem;
-                left: 0.5rem;
-            }
-
-            .mobile-header {
-                padding: 0.75rem;
-            }
-
-            .sidebar {
-                width: 280px;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .dashboard-header h1 {
-                font-size: 1.5rem;
-            }
-
-            .dashboard-header p {
-                font-size: 0.9rem;
-            }
-
-            .summary-card {
-                padding: 1rem;
-            }
-
-            .summary-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
-
-            .summary-number {
-                font-size: 1.25rem;
-            }
-
-            .summary-label {
-                font-size: 0.8rem;
-            }
-
-            .upload-form-container {
-                padding: 0.5rem;
-            }
-
-            .upload-options {
-                padding: 1rem;
-            }
-
-            .terms-content {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-
-            .mobile-user-info h3 {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 767.98px) and (orientation: landscape) {
-            .sidebar {
-                height: 100vh;
-                overflow-y: auto;
-            }
-
-            .dashboard-main {
-                padding: 0.5rem 0;
-            }
-
-            .dashboard-header {
-                padding: 1rem 0.5rem 0.5rem;
-            }
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            .summary-card:hover {
-                transform: none;
-            }
-
-            .sidebar-link:hover {
-                background: transparent;
-            }
-
-            .upload-option:hover {
-                background: white;
-                border-color: var(--gray-300);
-            }
-
-            .btn {
-                min-height: 44px;
-            }
-
-            .sidebar-link {
-                min-height: 44px;
-            }
-
-            .upload-option {
-                min-height: 60px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .sidebar,
-            .summary-card,
-            .sidebar-link,
-            .upload-option {
-                transition: none;
-            }
-
-            .summary-card:hover {
-                transform: none;
-            }
-        }
-    </style>
 </head>
-
 <body>
     <div class="mobile-header">
         <div class="mobile-header-content">
@@ -578,9 +51,9 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="mobile-user-info">
-                <img src="{% static "images/user-avatar.jpg" %}" alt="علی محمدی" class="mobile-user-avatar">
+                <img src="{% static "images/user-icon.svg" %}" alt="default-user" class="mobile-user-avatar">
                 <div>
-                    <h3 style="margin: 0; font-size: 1rem;">علی محمدی</h3>
+                    <h3 style="margin: 0; font-size: 1rem;">{{ user.username }}</h3>
                     <p style="margin: 0; font-size: 0.8rem; color: var(--gray-600);">پنل کاربری</p>
                 </div>
             </div>
@@ -600,10 +73,10 @@
                     <!-- Sidebar -->
                     <aside class="sidebar" id="sidebar">
                         <div class="sidebar-user">
-                            <img src="{% static "images/user-avatar.jpg" %}" alt="علی محمدی" class="user-avatar">
+                            <img src="{% static "images/user-icon.svg" %}" alt="default-user" class="user-avatar">
                             <div class="user-info">
-                                <h3 class="user-name">علی محمدی</h3>
-                                <p class="user-email">ali.mohammadi@email.com</p>
+                                <h3 class="user-name">{{ user.username }}</h3>
+                                <p class="user-email">{{ user.email }}</p>
                                 <a href="/profile/" class="edit-profile">
                                     <i class="fas fa-edit"></i>
                                     ویرایش پروفایل
@@ -649,10 +122,10 @@
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <button class="sidebar-link logout-btn">
+                                <a href="{% url 'logout' %}" class="sidebar-link logout-btn">
                                     <i class="fas fa-sign-out-alt"></i>
                                     خروج از حساب
-                                </button>
+                                </a>
                             </li>
                         </ul>
                     </aside>
@@ -672,7 +145,7 @@
                                         <i class="fas fa-cloud-upload-alt"></i>
                                     </div>
                                     <div class="summary-content">
-                                        <div class="summary-number">۱۲</div>
+                                        <div class="summary-number">{{ total_uploaded }}</div>
                                         <div class="summary-label">قالب آپلود شده</div>
                                     </div>
                                 </div>
@@ -682,7 +155,7 @@
                                         <i class="fas fa-palette"></i>
                                     </div>
                                     <div class="summary-content">
-                                        <div class="summary-number">۲۴</div>
+                                        <div class="summary-number">{{ total_active }}</div>
                                         <div class="summary-label">قالب فعال</div>
                                     </div>
                                 </div>
@@ -692,7 +165,7 @@
                                         <i class="fas fa-wallet"></i>
                                     </div>
                                     <div class="summary-content">
-                                        <div class="summary-number">۲,۵۴۰,۰۰۰</div>
+                                        <div class="summary-number">{{ total_revenue }}</div>
                                         <div class="summary-label">درآمد کل (تومان)</div>
                                     </div>
                                 </div>
@@ -771,7 +244,7 @@
                                         <i class="fas fa-wallet"></i>
                                     </div>
                                     <div class="summary-content">
-                                        <div class="summary-number">۲,۵۴۰,۰۰۰</div>
+                                        <div class="summary-number">{{ total_revenue }}</div>
                                         <div class="summary-label">درآمد کل</div>
                                     </div>
                                 </div>
@@ -827,7 +300,8 @@
                             </div>
 
                             <div class="upload-form-container">
-                                <form id="templateUploadForm" enctype="multipart/form-data">
+                                <form id="templateUploadForm" method="post" enctype="multipart/form-data" action="/upload-template/">
+                                    {% csrf_token %}
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="templateTitle" class="form-label">عنوان قالب (فقط انگلیسی) *</label>
@@ -874,7 +348,7 @@
                                                 <div class="upload-option-title">آپلود تصاویر از صفحات قالب</div>
                                                 <div class="upload-option-description">تصاویر با کیفیت از صفحات مختلف قالب خود را آپلود کنید</div>
                                             </div>
-                                            <input type="file" id="templateImages" multiple accept="image/*" style="display: none;">
+                                            <input type="file" id="templateImages" name="images" multiple accept="image/*" style="display: none;">
                                         </div>
 
                                         <div class="upload-option" onclick="startScreenRecording()">
@@ -1005,13 +479,32 @@
                         </section>
 
                         <!-- Templates Section -->
-                        <section id="section-templates" class="dashboard-section" style="display: none;">
+                        <section id="section-templates" class="dashboard-section" style="display:none;">
                             <div class="dashboard-header">
                                 <h1>قالب‌های من</h1>
-                                <p>مدیریت قالب‌های آپلود شده</p>
+                                <p>قالب‌هایی که خودتان آپلود کرده‌اید</p>
                             </div>
+
                             <div class="user-templates">
-                                <p>محتوای بخش قالب‌های من به زودی اضافه خواهد شد.</p>
+                                {% if user_templates %}
+                                    {% for t in user_templates %}
+                                        <div class="template-card">
+                                            <img src="{{ t.thumbnail.url }}" class="template-thumb">
+                                            <h3>{{ t.title }}</h3>
+                                            <p>{{ t.category }}</p>
+                                            <p>
+                                                وضعیت:
+                                                {% if t.approved %}
+                                                    <span style="color: green;">تایید شده</span>
+                                                {% else %}
+                                                    <span style="color: orange;">در انتظار تایید</span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>هنوز هیچ قالبی آپلود نکرده‌اید.</p>
+                                {% endif %}
                             </div>
                         </section>
 
@@ -1261,13 +754,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Earnings Chart
             const earningsCtx = document.getElementById('earningsChart').getContext('2d');
+
             new Chart(earningsCtx, {
                 type: 'line',
                 data: {
-                    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+                    labels: {{ earning_labels|safe }},
                     datasets: [{
-                        label: 'درآمد (هزار تومان)',
-                        data: [1200, 1900, 1500, 2500, 2200, 3000],
+                        label: 'درآمد (تومان)',
+                        data: {{ earning_values|safe }},
                         borderColor: '#3b82f6',
                         backgroundColor: 'rgba(59, 130, 246, 0.1)',
                         tension: 0.4,
@@ -1277,36 +771,34 @@
                 options: {
                     responsive: true,
                     plugins: {
-                        legend: {
-                            rtl: true
-                        }
+                        legend: { rtl: true }
                     }
                 }
             });
 
             // Sales Chart
             const salesCtx = document.getElementById('salesChart').getContext('2d');
+
             new Chart(salesCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['فروشگاهی', 'شخصی', 'شرکتی', 'بلاگ'],
+                    labels: {{ category_labels|safe }},
                     datasets: [{
-                        data: [40, 25, 20, 15],
+                        data: {{ category_values|safe }},
                         backgroundColor: [
                             '#3b82f6',
                             '#10b981',
                             '#f59e0b',
-                            '#8b5cf6'
+                            '#8b5cf6',
+                            '#ef4444',
+                            '#14b8a6'
                         ]
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
-                        legend: {
-                            position: 'bottom',
-                            rtl: true
-                        }
+                        legend: { position: 'bottom', rtl: true }
                     }
                 }
             });
@@ -1366,7 +858,7 @@
         document.querySelectorAll('.logout-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (confirm('آیا از حساب کاربری خود خارج می‌شوید؟')) {
-                    window.location.href = '/Pages/index.html';
+                    window.location.href = '/index/';
                 }
             });
         });
@@ -1386,6 +878,38 @@
         }
 
         window.addEventListener('resize', handleResize);
+
+
+    document.getElementById("templateUploadForm").addEventListener("submit", async function (e) {
+        e.preventDefault(); // prevent form from navigating away
+
+        const form = this;
+        const formData = new FormData(form);
+
+        // Collect features
+        const features = [...document.querySelectorAll(".feature-tag")].map(f =>
+            f.childNodes[0].textContent.trim()
+        );
+        formData.append("features", JSON.stringify(features));
+
+        try {
+            const response = await fetch("/upload-template/", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.status === "success") {
+                alert("قالب با موفقیت آپلود شد!");
+                window.location.href = "/dashboard/#section-templates";
+            } else {
+                alert("خطا: " + result.message);
+            }
+        } catch (error) {
+            alert("خطا هنگام ارسال اطلاعات");
+        }
+    });
     </script>
 </body>
 </html>

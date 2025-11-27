@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه قالب | مرجع تخصصی قالب‌های وبسایت</title>
+    <title>ایران اد پی - مرجع تخصصی قالب‌های وبسایت</title>
     <meta name="description" content="دسترسی به بهترین قالب‌های سایت‌های خارجی برای کاربران ایرانی">
 
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -18,8 +18,8 @@
         <div class="header__inner">
             <div class="header__logo">
                 <a href="/index/" class="logo-link">
-                    <img src="{% static "images/logo.png" %}" alt="قالب‌شاپ" class="logo">
-                    <span class="logo-text">قالب‌شاپ</span>
+                    <!-- <img src="/Images and SVGs/logo.png" alt="ایران اد پی" class="logo"> -->
+                    <span class="logo-text">ایران اد پی</span>
                 </a>
             </div>
 
@@ -36,9 +36,7 @@
                     <li class="nav-item">
                         <a href="/about/" class="nav-link">درباره ما</a>
                     </li>
-                      <li class="nav-item">
-                        <a href="/feedback/" class="nav-link">پیشنهادات و انتقادات</a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="/contact/" class="nav-link">تماس با ما</a>
                     </li>
@@ -47,8 +45,13 @@
 
             <div class="header__actions">
                 <div class="auth-buttons">
-                    <a href="/login/" class="btn btn-outline">ورود</a>
-                    <a href="/signup/" class="btn btn-primary">ثبت‌نام</a>
+                    {% if user.is_authenticated %}
+                        <a href="/dashboard/" class="btn btn-primary">پنل کاربری</a>
+                        <a href="/logout/" class="btn btn-outline">خروج</a>
+                    {% else %}
+                        <a href="/login/" class="btn btn-outline">ورود</a>
+                        <a href="/signup/" class="btn btn-primary">ثبت‌نام</a>
+                    {% endif %}
                 </div>
 
 

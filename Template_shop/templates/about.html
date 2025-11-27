@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}درباره ما - فروشگاه قالب{% endblock %}
-{% block description %}درباره فروشگاه قالب و ارزش‌های ما{% endblock %}
+{% block title %}درباره ما - ایران اد پی{% endblock %}
+{% block description %}درباره ایران ادپی و ارزش‌های ما{% endblock %}
 
     {% block extra_css %}
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -11,29 +11,7 @@
     <link rel="stylesheet" href="{% static "css/responsive.css" %}">
     <link rel="stylesheet" href="{% static "css/utilities.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-     <style>
-                .services-hero {
-            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-            color: white;
-            padding: 6rem 0 4rem;
-            text-align: center;
-        }
 
-        .services-hero__title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .services-hero__subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            color: white;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-    </style>
     {% endblock %}
 
     {% block content %}
@@ -133,3 +111,53 @@
         </section>
     </main>
     {% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Mobile Menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const body = document.body;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mainNav.classList.contains('active');
+
+            if (isOpen) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('menu-open');
+            } else {
+                mainNav.classList.add('active');
+                mobileMenuBtn.classList.add('active');
+                body.classList.add('menu-open');
+            }
+        });
+
+        // Close menu when clicking on links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+
+        // Scroll to Top
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+{% endblock extra_js %}
