@@ -14,9 +14,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-   
+  
 </head>
 <body>
+    <!-- نوار ارز کامپکت -->
+    <div class="compact-currency-bar" id="compactCurrencyBar">
+        <div class="compact-currency-container">
+            <div class="compact-currency-items">
+                <div class="compact-currency-item">
+                    <div class="currency-info">
+                        <span class="currency-flag">🇺🇸</span>
+                        <span class="currency-name">دلار</span>
+                    </div>
+                    <span class="currency-value" id="usdRate">--</span>
+                </div>
+                <div class="compact-currency-item">
+                    <div class="currency-info">
+                        <span class="currency-flag">🇹🇷</span>
+                        <span class="currency-name">لیر</span>
+                    </div>
+                    <span class="currency-value" id="tryRate">--</span>
+                </div>
+                <div class="compact-currency-item">
+                    <div class="currency-info">
+                        <span class="currency-flag">🇦🇫</span>
+                        <span class="currency-name">افغانی</span>
+                    </div>
+                    <span class="currency-value" id="afnRate">--</span>
+                </div>
+            </div>
+            <div class="currency-update-compact">
+                <span id="lastUpdate">در حال بارگذاری...</span>
+                <button class="refresh-btn-compact" id="refreshCurrency" title="بروزرسانی نرخ ارز">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="mobile-header">
         <div class="mobile-header-content">
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -63,16 +98,33 @@
                                     خلاصه فعالیت‌ها
                                 </a>
                             </li>
+                            
+                            <li class="sidebar-item dropdown">
+                                <a href="javascript:void(0)" class="sidebar-link dropdown-toggle" onclick="toggleDropdown(this)">
+                                    <i class="fas fa-chart-pie"></i>
+                                    آمار و درآمد
+                                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="#section-templates-stats" class="dropdown-item" data-section="templates-stats">
+                                        <i class="fas fa-palette"></i>
+                                        آمار قالب‌ها
+                                    </a>
+                                    <a href="#section-youtube-stats" class="dropdown-item" data-section="youtube-stats">
+                                        <i class="fab fa-youtube"></i>
+                                        آمار یوتیوب
+                                    </a>
+                                    <a href="#section-adsense-stats" class="dropdown-item" data-section="adsense-stats">
+                                        <i class="fas fa-globe"></i>
+                                        آمار ادسنس
+                                    </a>
+                                </div>
+                            </li>
+
                             <li class="sidebar-item">
                                 <a href="#section-templates" class="sidebar-link" data-section="templates">
                                     <i class="fas fa-palette"></i>
                                     قالب‌های من
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#section-analytics" class="sidebar-link" data-section="analytics">
-                                    <i class="fas fa-chart-pie"></i>
-                                    آمار و درآمد
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -108,30 +160,10 @@
                         <section id="section-summary" class="dashboard-section">
                             <div class="dashboard-header">
                                 <h1>خلاصه فعالیت‌ها</h1>
-                                <p>نمای کلی از عملکرد و فعالیت‌های شما</p>
+                                <p>نمای کلی از عملکرد و فعالیت‌های شما در تمام بخش‌ها</p>
                             </div>
 
-                            <div class="dashboard-summary">
-                                <div class="summary-card summary-upload">
-                                    <div class="summary-icon">
-                                        <i class="fas fa-cloud-upload-alt"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-number">۱۲</div>
-                                        <div class="summary-label">قالب آپلود شده</div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-card summary-templates">
-                                    <div class="summary-icon">
-                                        <i class="fas fa-palette"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-number">۲۴</div>
-                                        <div class="summary-label">قالب فعال</div>
-                                    </div>
-                                </div>
-
+                            <div class="dashboard-summary-grid">
                                 <div class="summary-card summary-earnings">
                                     <div class="summary-icon">
                                         <i class="fas fa-wallet"></i>
@@ -142,13 +174,33 @@
                                     </div>
                                 </div>
 
-                                <div class="summary-card summary-customers">
+                                <div class="summary-card summary-templates">
                                     <div class="summary-icon">
-                                        <i class="fas fa-users"></i>
+                                        <i class="fas fa-palette"></i>
                                     </div>
                                     <div class="summary-content">
-                                        <div class="summary-number">۴۷</div>
-                                        <div class="summary-label">مشتری</div>
+                                        <div class="summary-number">۳۶</div>
+                                        <div class="summary-label">قالب‌های فعال</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card">
+                                    <div class="summary-icon" style="background: var(--error-50); color: var(--error-600);">
+                                        <i class="fab fa-youtube"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۸</div>
+                                        <div class="summary-label">کانال‌های یوتیوب</div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-card">
+                                    <div class="summary-icon" style="background: var(--success-50); color: var(--success-600);">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <div class="summary-number">۱۲</div>
+                                        <div class="summary-label">وب‌سایت‌های ادسنس</div>
                                     </div>
                                 </div>
                             </div>
@@ -156,12 +208,12 @@
                             <!-- Charts -->
                             <div class="dashboard-charts">
                                 <div class="chart-container">
-                                    <h3>درآمد ماهانه</h3>
-                                    <canvas id="earningsChart"></canvas>
+                                    <h3>درآمد ماهانه از تمام بخش‌ها</h3>
+                                    <canvas id="totalEarningsChart"></canvas>
                                 </div>
                                 <div class="chart-container">
-                                    <h3>فروش بر اساس دسته‌بندی</h3>
-                                    <canvas id="salesChart"></canvas>
+                                    <h3>توزیع درآمد بر اساس پلتفرم</h3>
+                                    <canvas id="platformDistributionChart"></canvas>
                                 </div>
                             </div>
 
@@ -182,20 +234,20 @@
 
                                     <div class="activity-item">
                                         <div class="activity-icon info">
-                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <i class="fab fa-youtube"></i>
                                         </div>
                                         <div class="activity-content">
-                                            <p>قالب جدید <strong>شرکتی حرفه‌ای</strong> آپلود شد</p>
+                                            <p>ویدیو جدید در کانال یوتیوب آپلود شد</p>
                                             <span class="activity-time">۱ روز پیش</span>
                                         </div>
                                     </div>
 
                                     <div class="activity-item">
                                         <div class="activity-icon warning">
-                                            <i class="fas fa-download"></i>
+                                            <i class="fas fa-globe"></i>
                                         </div>
                                         <div class="activity-content">
-                                            <p>قالب <strong>شخصی خلاق</strong> دانلود شد</p>
+                                            <p>درآمد جدید از وب‌سایت ادسنس دریافت شد</p>
                                             <span class="activity-time">۲ روز پیش</span>
                                         </div>
                                     </div>
@@ -203,63 +255,221 @@
                             </div>
                         </section>
 
-                        <!-- Analytics Section -->
-                        <section id="section-analytics" class="dashboard-section" style="display: none;">
+                        <!-- آمار قالب‌ها -->
+                        <section id="section-templates-stats" class="dashboard-section" style="display: none;">
                             <div class="dashboard-header">
-                                <h1>آمار و درآمد</h1>
-                                <p>تحلیل کامل عملکرد فروش و درآمد شما</p>
+                                <h1>آمار قالب‌ها</h1>
+                                <p>تحلیل کامل عملکرد فروش و درآمد از قالب‌ها</p>
                             </div>
 
-                            <div class="dashboard-summary">
-                                <div class="summary-card summary-earnings">
-                                    <div class="summary-icon">
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon templates">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <div class="stat-number">۳۶</div>
+                                    <div class="stat-label">قالب‌های فعال</div>
+                                    <div class="stat-change positive">+۱۲٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>رشد نسبت به ماه قبل</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon templates">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="stat-number">۸۹</div>
+                                    <div class="stat-label">فروش کل</div>
+                                    <div class="stat-change positive">+۸٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۲۴ فروش این ماه</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon earnings">
                                         <i class="fas fa-wallet"></i>
                                     </div>
-                                    <div class="summary-content">
-                                        <div class="summary-number">۲,۵۴۰,۰۰۰</div>
-                                        <div class="summary-label">درآمد کل</div>
+                                    <div class="stat-number">۱,۲۵۰,۰۰۰</div>
+                                    <div class="stat-label">درآمد قالب‌ها</div>
+                                    <div class="stat-change positive">+۱۵٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۳۲۰,۰۰۰ تومان رشد</span>
                                     </div>
                                 </div>
 
-                                <div class="summary-card">
-                                    <div class="summary-icon" style="background: var(--primary-50); color: var(--primary-600);">
-                                        <i class="fas fa-chart-line"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-number">۸۹</div>
-                                        <div class="summary-label">فروش کل</div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-card">
-                                    <div class="summary-icon" style="background: var(--success-50); color: var(--success-600);">
+                                <div class="stat-card">
+                                    <div class="stat-icon templates">
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <div class="summary-content">
-                                        <div class="summary-number">۴.۸</div>
-                                        <div class="summary-label">میانگین امتیاز</div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-card">
-                                    <div class="summary-icon" style="background: var(--warning-50); color: var(--warning-600);">
-                                        <i class="fas fa-eye"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-number">۱,۲۴۷</div>
-                                        <div class="summary-label">بازدید کل</div>
+                                    <div class="stat-number">۴.۸</div>
+                                    <div class="stat-label">میانگین امتیاز</div>
+                                    <div class="stat-change positive">+۰.۲</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۴۸ نظر مثبت</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="dashboard-charts">
-                                <div class="chart-container">
-                                    <h3>روند فروش ۶ ماه گذشته</h3>
-                                    <canvas id="salesTrendChart"></canvas>
+                            <div class="charts-container">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title">روند فروش ماهانه قالب‌ها</div>
+                                    <canvas id="templatesSalesChart"></canvas>
                                 </div>
-                                <div class="chart-container">
-                                    <h3>توزیع درآمد بر اساس قالب</h3>
-                                    <canvas id="revenueDistributionChart"></canvas>
+                                <div class="chart-wrapper">
+                                    <div class="chart-title">فروش بر اساس دسته‌بندی</div>
+                                    <canvas id="templatesCategoryChart"></canvas>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- آمار یوتیوب -->
+                        <section id="section-youtube-stats" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>آمار یوتیوب</h1>
+                                <p>تحلیل عملکرد کانال‌های یوتیوب و درآمد</p>
+                            </div>
+
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon youtube">
+                                        <i class="fab fa-youtube"></i>
+                                    </div>
+                                    <div class="stat-number">۸</div>
+                                    <div class="stat-label">کانال‌های فعال</div>
+                                    <div class="stat-change positive">+۲</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۲ کانال جدید</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon youtube">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <div class="stat-number">۱۵۶</div>
+                                    <div class="stat-label">ویدیوها</div>
+                                    <div class="stat-change positive">+۲۳</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۱۸ ویدیو این ماه</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon youtube">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div class="stat-number">۴۵.۲K</div>
+                                    <div class="stat-label">بازدید ماهانه</div>
+                                    <div class="stat-change positive">+۱۲٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۴,۸۰۰ بازدید جدید</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon earnings">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div class="stat-number">۸۵۰,۰۰۰</div>
+                                    <div class="stat-label">درآمد یوتیوب</div>
+                                    <div class="stat-change positive">+۱۸٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۱۳۰,۰۰۰ تومان رشد</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="charts-container">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title">روند رشد بازدید ماهانه</div>
+                                    <canvas id="youtubeViewsChart"></canvas>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div class="chart-title">توزیع درآمد بر اساس کانال</div>
+                                    <canvas id="youtubeRevenueChart" style="display: block;box-sizing: border-box;height: 740.8px;width: 740.8px;padding-top: 100px;padding-right: 100px;padding-left: 100px;padding-bottom: 100px"></canvas>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- آمار ادسنس -->
+                        <section id="section-adsense-stats" class="dashboard-section" style="display: none;">
+                            <div class="dashboard-header">
+                                <h1>آمار ادسنس</h1>
+                                <p>تحلیل عملکرد وب‌سایت‌ها و درآمد ادسنس</p>
+                            </div>
+
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon adsense">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div class="stat-number">۱۲</div>
+                                    <div class="stat-label">وب‌سایت‌های فعال</div>
+                                    <div class="stat-change positive">+۳</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۳ سایت جدید</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon adsense">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                    <div class="stat-number">۱۲۴.۵K</div>
+                                    <div class="stat-label">بازدید ماهانه</div>
+                                    <div class="stat-change positive">+۸٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۹,۲۰۰ بازدید جدید</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon adsense">
+                                        <i class="fas fa-mouse-pointer"></i>
+                                    </div>
+                                    <div class="stat-number">۲.۸٪</div>
+                                    <div class="stat-label">CTR متوسط</div>
+                                    <div class="stat-change positive">+۰.۴٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>بهبود عملکرد</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon earnings">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div class="stat-number">۴۴۰,۰۰۰</div>
+                                    <div class="stat-label">درآمد ادسنس</div>
+                                    <div class="stat-change positive">+۲۲٪</div>
+                                    <div class="stat-trend">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>۸۰,۰۰۰ تومان رشد</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="charts-container">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title">روند درآمد ماهانه ادسنس</div>
+                                    <canvas id="adsenseRevenueChart"></canvas>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div class="chart-title">عملکرد بر اساس وب‌سایت</div>
+                                    <canvas id="adsensePerformanceChart"></canvas>
                                 </div>
                             </div>
                         </section>
@@ -279,15 +489,15 @@
                                             <input type="text" id="templateTitle" name="title" class="form-control" pattern="[A-Za-z0-9\s]+" title="لطفاً فقط از حروف انگلیسی و اعداد استفاده کنید" required>
                                             <small style="color: var(--gray-500); font-size: 0.8rem;">فقط حروف انگلیسی و اعداد مجاز است</small>
                                         </div>
-                                        <div class="form-group">
+                                        
+                                    </div>
+<div class="form-group">
                                             <label for="templatePrice" class="form-label">قیمت پیشنهادی (تومان)</label>
                                             <div class="price-suggestion">
                                                 <p>💰 <strong>توجه:</strong> قیمت نهایی توسط کارشناسان سایت تعیین خواهد شد. این قیمت فقط به عنوان پیشنهاد شما در نظر گرفته می‌شود.</p>
                                             </div>
-                                            <input type="number" id="templatePrice" name="price" class="form-control" min="0" placeholder="قیمت پیشنهادی خود را وارد کنید">
+                                            <input type="number" id="templatePrice" name="price" class="form-control" min="0" placeholder="قیمت پیشنهادی خود را وارد کنید(به دلار)">
                                         </div>
-                                    </div>
-
                                     <div class="form-group">
                                         <label for="templateDescription" class="form-label">توضیحات *</label>
                                         <textarea id="templateDescription" name="description" rows="4" class="form-control" required></textarea>
@@ -310,9 +520,11 @@
                                         </div>
                                     </div>
 
+                                    <!-- بخش افزودن تصاویر از قالب -->
                                     <div class="upload-options">
                                         <h4 style="margin-bottom: 1rem;">افزودن تصاویر از قالب</h4>
                                         
+                                        <!-- گزینه اول: آپلود تصاویر از صفحات قالب -->
                                         <div class="upload-option" onclick="document.getElementById('templateImages').click()">
                                             <i class="fas fa-images"></i>
                                             <div class="upload-option-content">
@@ -322,6 +534,17 @@
                                             <input type="file" id="templateImages" multiple accept="image/*" style="display: none;">
                                         </div>
 
+                                        <!-- گزینه دوم: تصویر شاخص -->
+                                        <div class="upload-option" onclick="document.getElementById('templateThumbnail').click()">
+                                            <i class="fas fa-image"></i>
+                                            <div class="upload-option-content">
+                                                <div class="upload-option-title">تصویر شاخص قالب</div>
+                                                <div class="upload-option-description">تصویر اصلی و نماینده قالب خود را انتخاب کنید</div>
+                                            </div>
+                                            <input type="file" id="templateThumbnail" name="thumbnail" accept="image/*" style="display: none;" required>
+                                        </div>
+
+                                        <!-- گزینه سوم: ضبط صفحه از قالب -->
                                         <div class="upload-option" onclick="startScreenRecording()">
                                             <i class="fas fa-video"></i>
                                             <div class="upload-option-content">
@@ -329,6 +552,94 @@
                                                 <div class="upload-option-description">از صفحات قالب خود اسکرین‌شات یا ویدیو ضبط کنید</div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <!-- بخش رزومه (فقط برای اولین بار) -->
+                                    <div class="resume-section" id="resumeSection">
+                                        <h4><i class="fas fa-file-alt"></i> ارسال رزومه (فقط برای اولین بار)</h4>
+                                        <p style="color: var(--gray-600); margin-bottom: 1rem; font-size: 0.9rem;">
+                                            برای تأیید هویت و تخصص شما، لطفاً رزومه خود را ارسال کنید. این اطلاعات فقط یکبار ذخیره می‌شوند و قابل ویرایش خواهند بود.
+                                        </p>
+                                        
+                                        <div class="resume-options">
+                                            <label class="resume-option">
+                                                <input type="checkbox" name="resumeType" value="image" onchange="toggleResumeInput('image')">
+                                                <span class="checkbox-checkmark"></span>
+                                                <span class="resume-option-text">
+                                                    <strong>آپلود تصویر رزومه</strong>
+                                                    <small style="display: block; color: var(--gray-500);">فرمت‌های JPG, PNG, GIF</small>
+                                                </span>
+                                            </label>
+                                            
+                                            <label class="resume-option">
+                                                <input type="checkbox" name="resumeType" value="github" onchange="toggleResumeInput('github')">
+                                                <span class="checkbox-checkmark"></span>
+                                                <span class="resume-option-text">
+                                                    <strong>لینک گیت‌هاب</strong>
+                                                    <small style="display: block; color: var(--gray-500);">آدرس پروفایل گیت‌هاب شما</small>
+                                                </span>
+                                            </label>
+                                            
+                                            <label class="resume-option">
+                                                <input type="checkbox" name="resumeType" value="website" onchange="toggleResumeInput('website')">
+                                                <span class="checkbox-checkmark"></span>
+                                                <span class="resume-option-text">
+                                                    <strong>لینک وبسایت شخصی</strong>
+                                                    <small style="display: block; color: var(--gray-500);">آدرس وبسایت یا پورتفولیوی شما</small>
+                                                </span>
+                                            </label>
+                                            
+                                            <label class="resume-option">
+                                                <input type="checkbox" name="resumeType" value="pdf" onchange="toggleResumeInput('pdf')">
+                                                <span class="checkbox-checkmark"></span>
+                                                <span class="resume-option-text">
+                                                    <strong>آپلود فایل PDF</strong>
+                                                    <small style="display: block; color: var(--gray-500);">رزومه به صورت فایل PDF</small>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        
+                                        <!-- فیلدهای ورودی رزومه -->
+                                        <div class="resume-input" id="resumeImageInput">
+                                            <label class="form-label">آپلود تصویر رزومه</label>
+                                            <input type="file" class="form-control" accept="image/*">
+                                            <small style="color: var(--gray-500);">حداکثر حجم: 5MB</small>
+                                        </div>
+                                        
+                                        <div class="resume-input" id="resumeGithubInput">
+                                            <label class="form-label">لینک گیت‌هاب</label>
+                                            <input type="url" class="form-control" placeholder="https://github.com/username">
+                                        </div>
+                                        
+                                        <div class="resume-input" id="resumeWebsiteInput">
+                                            <label class="form-label">لینک وبسایت شخصی</label>
+                                            <input type="url" class="form-control" placeholder="https://yourwebsite.com">
+                                        </div>
+                                        
+                                        <div class="resume-input" id="resumePdfInput">
+                                            <label class="form-label">آپلود فایل PDF</label>
+                                            <input type="file" class="form-control" accept=".pdf">
+                                            <small style="color: var(--gray-500);">حداکثر حجم: 10MB</small>
+                                        </div>
+                                        
+                                        <!-- نمایش رزومه آپلود شده -->
+                                        <div class="uploaded-resume" id="uploadedResume">
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <div>
+                                                    <strong>رزومه شما ذخیره شده است</strong>
+                                                    <p style="margin: 0.25rem 0 0 0; color: var(--gray-600); font-size: 0.9rem;" id="resumeInfo"></p>
+                                                </div>
+                                                <div class="resume-actions">
+                                                    <button type="button" class="btn btn--outline btn--sm" onclick="editResume()">ویرایش</button>
+                                                    <button type="button" class="btn btn--outline btn--sm" onclick="viewResume()">مشاهده</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- دکمه ذخیره رزومه -->
+                                        <button type="button" class="btn btn--primary" onclick="saveResume()" style="margin-top: 1rem;">
+                                            <i class="fas fa-save"></i> ذخیره رزومه
+                                        </button>
                                     </div>
 
                                     <div class="form-group">
@@ -340,14 +651,20 @@
                                         <div class="features-list" id="featuresList"></div>
                                     </div>
 
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="templateThumbnail" class="form-label">تصویر شاخص *</label>
-                                            <input type="file" id="templateThumbnail" name="thumbnail" accept="image/*" class="form-control" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="templateFile" class="form-label">فایل قالب (ZIP) *</label>
-                                            <input type="file" id="templateFile" name="file" accept=".zip" class="form-control" required>
+                                    <div class="form-group">
+                                        <label for="templateFile" class="form-label">فایل قالب (ZIP) *</label>
+                                        <input type="file" id="templateFile" name="file" accept=".zip" class="form-control" required>
+                                    </div>
+
+                                    <!-- تیک عدم نمایش قالب در سایت -->
+                                    <div class="hidden-template-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="hideTemplate" id="hideTemplate">
+                                            <span class="checkmark"></span>
+                                            من نمی‌خواهم این قالب در سایت نمایش داده شود
+                                        </label>
+                                        <div class="checkbox-description">
+                                            با فعال کردن این گزینه، قالب شما در سایت نمایش داده نخواهد شد و فقط برای بررسی توسط مدیران سایت قابل دسترسی خواهد بود.
                                         </div>
                                     </div>
 
@@ -383,91 +700,34 @@
                             </div>
                         </section>
 
-                        <!-- Messages Section -->
+                        <!-- سایر بخش‌ها -->
                         <section id="section-messages" class="dashboard-section" style="display: none;">
                             <div class="dashboard-header">
                                 <h1>پیام‌های مدیر</h1>
                                 <p>پیام‌ها و اطلاعیه‌های سیستم</p>
                             </div>
                             <div class="user-templates">
-                                <div class="message-list">
-                                    <div class="message-item">
-                                        <div class="message-header">
-                                            <h4>قالب شما تایید شد</h4>
-                                            <span class="message-time">۲ ساعت پیش</span>
-                                        </div>
-                                        <p class="message-content">قالب "فروشگاهی مدرن" شما توسط کارشناسان بررسی و تایید شد. هم اکنون در فروشگاه قابل مشاهده است.</p>
-                                    </div>
-                                    <div class="message-item">
-                                        <div class="message-header">
-                                            <h4>پرداخت جدید</h4>
-                                            <span class="message-time">۱ روز پیش</span>
-                                        </div>
-                                        <p class="message-content">مبلغ ۵۰,۰۰۰ تومان از فروش قالب "شرکتی حرفه‌ای" به حساب شما واریز شد.</p>
-                                    </div>
-                                    <div class="message-item">
-                                        <div class="message-header">
-                                            <h4>به‌روزرسانی قوانین</h4>
-                                            <span class="message-time">۳ روز پیش</span>
-                                        </div>
-                                        <p class="message-content">قوانین جدید آپلود قالب به‌روزرسانی شد. لطفاً قبل از آپلود قالب جدید، قوانین را مطالعه کنید.</p>
-                                    </div>
-                                </div>
+                                <p>لیست پیام‌ها در اینجا نمایش داده می‌شود...</p>
                             </div>
                         </section>
 
-                        <!-- Payments Section -->
                         <section id="section-payments" class="dashboard-section" style="display: none;">
                             <div class="dashboard-header">
                                 <h1>رسید پرداخت‌ها</h1>
                                 <p>تاریخچه واریزی‌ها و تراکنش‌های شما</p>
                             </div>
                             <div class="user-templates">
-                                <div class="payment-list">
-                                    <div class="payment-item">
-                                        <div class="payment-info">
-                                            <h4>فروش قالب "فروشگاهی مدرن"</h4>
-                                            <span class="payment-date">۱۴۰۳/۰۱/۱۵ - ۱۴:۳۰</span>
-                                        </div>
-                                        <div class="payment-amount success">+۵۰,۰۰۰ تومان</div>
-                                    </div>
-                                    <div class="payment-item">
-                                        <div class="payment-info">
-                                            <h4>فروش قالب "شرکتی حرفه‌ای"</h4>
-                                            <span class="payment-date">۱۴۰۳/۰۱/۱۴ - ۰۹:۱۵</span>
-                                        </div>
-                                        <div class="payment-amount success">+۷۵,۰۰۰ تومان</div>
-                                    </div>
-                                    <div class="payment-item">
-                                        <div class="payment-info">
-                                            <h4>فروش قالب "شخصی خلاق"</h4>
-                                            <span class="payment-date">۱۴۰۳/۰۱/۱۲ - ۱۶:۴۵</span>
-                                        </div>
-                                        <div class="payment-amount success">+۳۵,۰۰۰ تومان</div>
-                                    </div>
-                                </div>
+                                <p>لیست پرداخت‌ها در اینجا نمایش داده می‌شود...</p>
                             </div>
                         </section>
 
-                        <!-- Templates Section -->
                         <section id="section-templates" class="dashboard-section" style="display: none;">
                             <div class="dashboard-header">
                                 <h1>قالب‌های من</h1>
                                 <p>مدیریت قالب‌های آپلود شده</p>
                             </div>
                             <div class="user-templates">
-                                <p>محتوای بخش قالب‌های من به زودی اضافه خواهد شد.</p>
-                            </div>
-                        </section>
-
-                        <!-- Settings Section -->
-                        <section id="section-settings" class="dashboard-section" style="display: none;">
-                            <div class="dashboard-header">
-                                <h1>تنظیمات حساب کاربری</h1>
-                                <p>مدیریت تنظیمات پروفایل و حساب کاربری</p>
-                            </div>
-                            <div class="user-templates">
-                                <p>محتوای بخش تنظیمات به زودی اضافه خواهد شد.</p>
+                                <p>لیست قالب‌ها در اینجا نمایش داده می‌شود...</p>
                             </div>
                         </section>
                     </div>
@@ -505,332 +765,8 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__content">
-                <div class="footer__col">
-                    <div class="footer__logo">
-                        <!-- <img src="/Images and SVGs/logo.png" alt="ایران اد پی" class="footer-logo"> -->
-                        <span class="footer-logo-text">ایران اد پی</span>
-                    </div>
-                    <p class="footer__description">
-                        ارائه بهترین قالب‌های وبسایت با کیفیت عالی و پشتیبانی ۲۴ ساعته
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" class="social-link" aria-label="اینستاگرام">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="تلگرام">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="توییتر">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="لینکدین">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">لینک‌های سریع</h3>
-                    <ul class="footer__links">
-                        <li><a href="/Pages/index.html" class="footer__link">خانه</a></li>
-                        <li><a href="/Pages/templates.html" class="footer__link">قالب‌ها</a></li>
-                        <li><a href="/Pages/about.html" class="footer__link">درباره ما</a></li>
-                        <li><a href="/Pages/contact.html" class="footer__link">تماس با ما</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">تماس با ما</h3>
-                    <div class="footer__contact">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>آدرس</strong>
-                                <span>تهران، خیابان ولیعصر</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>تلفن</strong>
-                                <a href="tel:+982122345678">۰۲۱-۲۲۳۴۵۶۷۸</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ایمیل</strong>
-                                <a href="mailto:info@webtemplate.ir">info@webtemplate.ir</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock contact-icon"></i>
-                            <div class="contact-info">
-                                <strong>ساعات کاری</strong>
-                                <span>شنبه تا چهارشنبه: ۸:۰۰ - ۱۷:۰۰</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer__bottom">
-                <div class="footer-bottom__content">
-                    <p class="copyright">
-                        &copy; ۱۴۰۳ ایران اد پی. تمامی حقوق محفوظ است.
-                    </p>
-                    <div class="footer-bottom__links">
-                        <a href="/Pages/privacy.html" class="footer-bottom__link">حریم خصوصی</a>
-                        <a href="/Pages/terms.html" class="footer-bottom__link">قوانین و مقررات</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-        function toggleSidebar() {
-            sidebar.classList.toggle('active');
-            sidebarOverlay.classList.toggle('active');
-            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
-        }
-
-        mobileMenuBtn.addEventListener('click', toggleSidebar);
-        sidebarOverlay.addEventListener('click', toggleSidebar);
-
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 991.98) {
-                    toggleSidebar();
-                }
-            });
-        });
-
-        // Dashboard navigation
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.classList.contains('logout-btn')) return;
-                
-                e.preventDefault();
-                
-                // Remove active class from all links
-                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('sidebar-link--active'));
-                
-                // Add active class to clicked link
-                this.classList.add('sidebar-link--active');
-                
-                // Hide all sections
-                document.querySelectorAll('.dashboard-section').forEach(section => {
-                    section.style.display = 'none';
-                });
-                
-                // Show target section
-                const sectionId = this.getAttribute('data-section');
-                const targetSection = document.getElementById(`section-${sectionId}`);
-                if (targetSection) {
-                    targetSection.style.display = 'block';
-                }
-            });
-        });
-
-        // Features management
-        const featuresList = document.getElementById('featuresList');
-        const addFeatureBtn = document.getElementById('addFeature');
-        const featureInput = document.getElementById('featureInput');
-
-        addFeatureBtn.addEventListener('click', function() {
-            const feature = featureInput.value.trim();
-            if (feature) {
-                const featureElement = document.createElement('div');
-                featureElement.className = 'feature-tag';
-                featureElement.innerHTML = `
-                    ${feature}
-                    <button type="button" class="remove-feature">
-                        <i class="fas fa-times"></i>
-                    </button>
-                `;
-                featuresList.appendChild(featureElement);
-                featureInput.value = '';
-                
-                // Add remove functionality
-                featureElement.querySelector('.remove-feature').addEventListener('click', function() {
-                    featureElement.remove();
-                });
-            }
-        });
-
-        // Validate title (English only)
-        const titleInput = document.getElementById('templateTitle');
-        titleInput.addEventListener('input', function() {
-            const englishOnly = /^[A-Za-z0-9\s]*$/;
-            if (!englishOnly.test(this.value)) {
-                this.value = this.value.replace(/[^A-Za-z0-9\s]/g, '');
-            }
-        });
-
-        // Check agreement checkboxes
-        const agreeTerms = document.getElementById('agreeTerms');
-        const notCopied = document.getElementById('notCopied');
-        const submitBtn = document.getElementById('submitBtn');
-
-        function checkAgreements() {
-            submitBtn.disabled = !(agreeTerms.checked && notCopied.checked);
-        }
-
-        agreeTerms.addEventListener('change', checkAgreements);
-        notCopied.addEventListener('change', checkAgreements);
-
-        // Terms modal functions
-        function showTerms() {
-            document.getElementById('termsModal').classList.add('show');
-        }
-
-        function hideTerms() {
-            document.getElementById('termsModal').classList.remove('show');
-        }
-
-        // Screen recording function (placeholder)
-        function startScreenRecording() {
-            alert('قابلیت ضبط صفحه به زودی اضافه خواهد شد. در حال حاضر می‌توانید از گزینه آپلود تصاویر استفاده کنید.');
-        }
-
-        // Initialize charts
-        document.addEventListener('DOMContentLoaded', function() {
-            // Earnings Chart
-            const earningsCtx = document.getElementById('earningsChart').getContext('2d');
-            new Chart(earningsCtx, {
-                type: 'line',
-                data: {
-                    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
-                    datasets: [{
-                        label: 'درآمد (هزار تومان)',
-                        data: [1200, 1900, 1500, 2500, 2200, 3000],
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            rtl: true
-                        }
-                    }
-                }
-            });
-
-            // Sales Chart
-            const salesCtx = document.getElementById('salesChart').getContext('2d');
-            new Chart(salesCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['فروشگاهی', 'شخصی', 'شرکتی', 'بلاگ'],
-                    datasets: [{
-                        data: [40, 25, 20, 15],
-                        backgroundColor: [
-                            '#3b82f6',
-                            '#10b981',
-                            '#f59e0b',
-                            '#8b5cf6'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            rtl: true
-                        }
-                    }
-                }
-            });
-
-            // Sales Trend Chart
-            const salesTrendCtx = document.getElementById('salesTrendChart').getContext('2d');
-            new Chart(salesTrendCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
-                    datasets: [{
-                        label: 'تعداد فروش',
-                        data: [12, 19, 8, 15, 7, 14],
-                        backgroundColor: '#3b82f6'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            rtl: true
-                        }
-                    }
-                }
-            });
-
-            // Revenue Distribution Chart
-            const revenueCtx = document.getElementById('revenueDistributionChart').getContext('2d');
-            new Chart(revenueCtx, {
-                type: 'pie',
-                data: {
-                    labels: ['فروشگاهی', 'شرکتی', 'شخصی', 'بلاگ', 'آموزشی'],
-                    datasets: [{
-                        data: [35, 25, 15, 15, 10],
-                        backgroundColor: [
-                            '#3b82f6',
-                            '#10b981',
-                            '#f59e0b',
-                            '#8b5cf6',
-                            '#ec4899'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            rtl: true
-                        }
-                    }
-                }
-            });
-        });
-
-        // Logout functionality
-        document.querySelectorAll('.logout-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('آیا از حساب کاربری خود خارج می‌شوید؟')) {
-                    window.location.href = '/Pages/index.html';
-                }
-            });
-        });
-
-        document.getElementById('termsModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideTerms();
-            }
-        });
-
-        function handleResize() {
-            if (window.innerWidth > 991.98) {
-                sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        window.addEventListener('resize', handleResize);
-    </script>
+  <script src="/js/currency.js"></script>
+<script src="/js/dashboard.js"></script><script src="/js/currency.js"></script>
+<script src="/js/dashboard.js"></script>
 </body>
 </html>

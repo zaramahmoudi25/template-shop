@@ -14,446 +14,7 @@
     <link rel="stylesheet" href="/CSS/templates.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <style>
-        .price-display {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        
-        .price-dollar {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-        
-        .price-rial {
-            font-size: 0.875rem;
-            color: var(--gray-500);
-        }
-        
-        .old-price .price-dollar {
-            color: var(--gray-500);
-            text-decoration: line-through;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-        
-        .old-price .price-rial {
-            color: var(--gray-400);
-            font-size: 0.75rem;
-        }
-        
-        .template-rating {
-            display: none !important;
-        }
-        
-        .view-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary-500);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 0.875rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-        
-        .view-btn:hover {
-            background: var(--primary-600);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-            color: white;
-        }
-        
-        .filters-toggle-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        
-        .filters-container {
-            display: none;
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-            margin-bottom: 2rem;
-        }
-        
-        .filters-container.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(-10px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-        
-        .template-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: auto;
-        }
-        
-        .template-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .template-card:hover .template-overlay {
-            opacity: 1;
-        }
-
-        /* استایل‌های جدید */
-        .search-hero-section {
-            padding:2px 2;
-            padding-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-            color: white;
-        }
-
-        .search-hero-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center; /* اضافه شد */
-}
-
-@media (min-width: 768px) {
-    .search-hero-content {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center; /* اضافه شد */
-        gap: 3rem;
-    }
-}
-       .search-hero-text {
-    text-align: center;
-    flex: 1;
-}
-
-@media (min-width: 768px) {
-    .search-hero-text {
-        text-align: right;
-        flex: 1; /* اضافه شد */
-    }
-}
-
-        .shopify-text {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .search-hero-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-            line-height: 1.3;
-        }
-
-        @media (min-width: 768px) {
-            .search-hero-title {
-                font-size: 2rem;
-            }
-        }
-
-        .search-hero-subtitle {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
-            color: white;
-            line-height: 1.6;
-        }
-
-        @media (min-width: 768px) {
-            .search-hero-subtitle {
-                font-size: 1.1rem;
-                margin-bottom: 2rem;
-            }
-        }
-
-      .search-form-container {
-    flex: 1;
-    max-width: 600px; /* از 500px به 600px افزایش یافت */
-    margin: 0 auto;
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .search-form-container {
-        margin: 0;
-        max-width: 500px; /* از 400px به 500px افزایش یافت */
-    }
-}
-
-       .search-form-compact {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    background: white;
-    padding: 0.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    width: 100%; /* اضافه شد */
-}
-
-   .search-input-compact {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 0.9rem;
-    background: transparent;
-    min-width: 0;
-    width: 200%; /* اضافه شد */
-}
-
-        .search-input-compact:focus {
-            outline: none;
-        }
-.search-btn-compact {
-    padding: 0.75rem 1.5rem; /* از 1.25rem به 1.5rem افزایش یافت */
-    background: var(--primary-500);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    font-size: 0.9rem;
-    min-width: 50px; /* اضافه شد */
-}
-        .search-btn-compact:hover {
-            background: var(--primary-600);
-            transform: translateY(-1px);
-        }
-
-        /* بخش نظرات */
-        .testimonials-section {
-            background: var(--gray-50);
-            padding: 3rem 0;
-            margin-top: 2rem;
-        }
-
-        .testimonials-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .testimonials-header {
-                flex-direction: row;
-                gap: 0;
-            }
-        }
-
-        .testimonials-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-
-        .testimonials-actions {
-            display: flex;
-            gap: 1rem;
-            width: 100%;
-            justify-content: center;
-        }
-
-        @media (min-width: 768px) {
-            .testimonials-actions {
-                width: auto;
-                justify-content: flex-start;
-            }
-        }
-
-        .testimonials-row {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            padding: 1rem 0;
-            scrollbar-width: thin;
-        }
-
-        .testimonials-row::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .testimonials-row::-webkit-scrollbar-track {
-            background: var(--gray-200);
-            border-radius: 3px;
-        }
-
-        .testimonials-row::-webkit-scrollbar-thumb {
-            background: var(--primary-500);
-            border-radius: 3px;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-            min-width: 280px;
-            flex-shrink: 0;
-        }
-
-        @media (min-width: 768px) {
-            .testimonial-card {
-                min-width: 300px;
-            }
-        }
-
-        .testimonial-text {
-            color: var(--gray-700);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: var(--gray-200);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-600);
-            font-size: 0.9rem;
-        }
-
-        .author-info h4 {
-            margin: 0;
-            color: var(--gray-900);
-            font-size: 0.9rem;
-        }
-
-        .author-info span {
-            color: var(--gray-600);
-            font-size: 0.8rem;
-        }
-
-        /* بخش همکاران */
-        .partners-section {
-            background: white;
-            padding: 3rem 0;
-        }
-
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 480px) {
-            .partners-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .partner-card {
-            text-align: center;
-            padding: 1.5rem;
-            background: var(--gray-50);
-            border-radius: var(--border-radius-lg);
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
-        }
-
-        .partner-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .partner-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-500);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .partner-name {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--gray-900);
-        }
-
-        .partner-description {
-            color: var(--gray-600);
-            line-height: 1.6;
-            font-size: 0.8rem;
-        }
-
-        /* فیلترها */
-        .filters-toggle-section {
-            position: relative;
-        }
-
-        .toggle-filters-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-filters-btn.hidden {
-            display: none;
-        }
-    </style>
+  
 </head>
 <body>
     <header class="header">
@@ -461,7 +22,6 @@
             <div class="header__inner">
                 <div class="header__logo">
                     <a href="/Pages/index.html" class="logo-link">
-                        <!-- <img src="/Images and SVGs/logo.png" alt="ایران اد پی" class="logo"> -->
                         <span class="logo-text">ایران اد پی</span>
                     </a>
                 </div>
@@ -489,6 +49,15 @@
                 </nav>
 
                 <div class="header__actions">
+                    <div class="header-search">
+                        <form class="header-search-form">
+                            <input type="text" placeholder="جستجوی قالب..." class="header-search-input">
+                            <button type="submit" class="header-search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+
                     <div class="auth-buttons">
                         <a href="/Pages/login.html" class="btn btn-outline">ورود</a>
                         <a href="/Pages/signup.html" class="btn btn-primary">ثبت‌نام</a>
@@ -505,32 +74,12 @@
     </header>
 
     <main class="main">
-        <!-- Search Hero Section با تغییرات جدید -->
-        <section class="search-hero-section" style="
-    padding-bottom: 0px;
-    padding-top: 80px;
-    border-bottom-width: 20px;" >
+      <!-- Hero Section -->
+        <section class="services-hero">
             <div class="container">
-                <div class="search-hero-content">
-                    <!-- متن در سمت راست -->
-                    <div class="search-hero-text">
-                    
-                        <br>
-                        <h1 class="search-hero-title">قالب های شاپیفای</h1>
-                        <p class="search-hero-subtitle">قالب مناسب خود را انتخاب کنید.</p>
-                    </div>
-                    
-                    <!-- فرم جستجو در سمت چپ -->
-                    <div class="search-form-container">
-                        <div class="search-form-compact">
-                            <input type="text" id="compactSearchInput" placeholder="جستجوی قالب..." class="search-input-compact">
-                            <button class="search-btn-compact" id="compactSearchBtn">
-                                <i class="fas fa-search"></i>
-                                جستجو
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="services-hero__title">درآمد دلاری ویژه توسعه دهندگان و طراحان قالب</h1>
+                <p class="services-hero__subtitle">
+اگر توسعه دهنده قالب هستید ، همین حالا درآمد دلاری را با ما شروع کنید. </p>
             </div>
         </section>
 
@@ -734,7 +283,6 @@
             </div>
         </section>
 
-        <!-- بخش نظرات جدید - زیر قالب‌ها -->
         <section class="testimonials-section">
             <div class="container">
                 <div class="testimonials-header">
@@ -874,7 +422,6 @@
         <div class="footer__content">
             <div class="footer__col">
                 <div class="footer__logo">
-                    <!-- <img src="/Images and SVGs/logo.png" alt="ایران اد پی" class="footer-logo"> -->
                     <span class="footer-logo-text">ایران اد پی</span>
                 </div>
                 <p class="footer__description">
@@ -1054,9 +601,9 @@
             mobileMenuBtn: document.getElementById('mobileMenuBtn'),
             mainNav: document.getElementById('mainNav'),
             
-            // Search جدید
-            compactSearchInput: document.getElementById('compactSearchInput'),
-            compactSearchBtn: document.getElementById('compactSearchBtn'),
+            // سرچ جدید در هدر
+            headerSearchInput: document.querySelector('.header-search-input'),
+            headerSearchForm: document.querySelector('.header-search-form'),
             
             // Testimonials جدید
             viewMoreTestimonials: document.getElementById('viewMoreTestimonials'),
@@ -1100,9 +647,9 @@
             // Mobile Menu
             elements.mobileMenuBtn.addEventListener('click', toggleMobileMenu);
             
-            // Search جدید
-            elements.compactSearchInput.addEventListener('input', debounce(handleCompactSearch, 300));
-            elements.compactSearchBtn.addEventListener('click', handleCompactSearch);
+            // سرچ جدید در هدر
+            elements.headerSearchForm.addEventListener('submit', handleHeaderSearch);
+            elements.headerSearchInput.addEventListener('input', debounce(handleHeaderSearchInput, 300));
             
             // Testimonials جدید
             elements.viewMoreTestimonials.addEventListener('click', handleViewMoreTestimonials);
@@ -1170,6 +717,32 @@
             });
         }
 
+        // ==================== SEARCH FUNCTIONALITY ====================
+        function handleHeaderSearch(e) {
+            e.preventDefault();
+            const searchTerm = elements.headerSearchInput.value.trim().toLowerCase();
+            currentState.activeFilters.searchTerm = searchTerm;
+            applyAllFilters();
+            
+            // اسکرول به بخش نتایج
+            document.querySelector('.templates-results-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function handleHeaderSearchInput() {
+            const searchTerm = elements.headerSearchInput.value.trim().toLowerCase();
+            currentState.activeFilters.searchTerm = searchTerm;
+            applyAllFilters();
+        }
+
+        function handleQuickSearch(e) {
+            const searchTerm = e.target.dataset.search;
+            elements.headerSearchInput.value = searchTerm;
+            currentState.activeFilters.searchTerm = searchTerm;
+            applyAllFilters();
+        }
+
         // ==================== TESTIMONIALS FUNCTIONS ====================
         function handleViewMoreTestimonials() {
             showToast('نمایش نظرات بیشتر به زودی فعال خواهد شد', 'info');
@@ -1177,20 +750,6 @@
 
         function handleAddTestimonial() {
             showToast('افزودن نظر جدید به زودی فعال خواهد شد', 'info');
-        }
-
-        // ==================== SEARCH FUNCTIONALITY ====================
-        function handleCompactSearch() {
-            const searchTerm = elements.compactSearchInput.value.trim().toLowerCase();
-            currentState.activeFilters.searchTerm = searchTerm;
-            applyAllFilters();
-        }
-
-        function handleQuickSearch(e) {
-            const searchTerm = e.target.dataset.search;
-            elements.compactSearchInput.value = searchTerm;
-            currentState.activeFilters.searchTerm = searchTerm;
-            applyAllFilters();
         }
 
         // ==================== MOBILE MENU ====================
@@ -1302,7 +861,7 @@
             
             elements.sortBy.value = 'newest';
             
-            elements.compactSearchInput.value = '';
+            elements.headerSearchInput.value = '';
             
             currentState.activeFilters = {
                 categories: ['all'],
@@ -1582,7 +1141,7 @@
                     break;
                     
                 case 'search':
-                    elements.compactSearchInput.value = '';
+                    elements.headerSearchInput.value = '';
                     currentState.activeFilters.searchTerm = '';
                     break;
             }

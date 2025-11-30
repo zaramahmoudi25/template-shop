@@ -598,6 +598,15 @@ class App {
     refreshData() {
         this.templateFilter.applyFilters();
     }
+
+
+
+
+
+
+
+
+    
 }
 
 // ==================== APP INITIALIZATION ====================
@@ -616,6 +625,8 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
     });
 });
+
+
 
 
 export { AppState, SearchManager, TemplateFilter };

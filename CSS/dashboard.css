@@ -1266,4 +1266,924 @@
                 transform: none;
             }
         }
-  
+        /* ==================== IMPROVED CURRENCY BAR ==================== */
+        .compact-currency-bar {
+            background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+            color: white;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--primary-400);
+            direction: ltr;
+        }
+
+        /* استیکی فقط در دسکتاپ */
+        @media (min-width: 769px) {
+            .compact-currency-bar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .compact-currency-bar {
+                position: relative;
+                top: auto;
+            }
+        }
+
+        .compact-currency-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            gap: 1rem;
+        }
+
+        .compact-currency-items {
+            display: flex;
+            gap: 1rem;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .compact-currency-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            min-width: 100px;
+            justify-content: space-between;
+        }
+
+        .currency-info {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            flex: 1;
+        }
+
+        .currency-flag {
+            font-size: 0.8rem;
+        }
+
+        .currency-name {
+            font-weight: 500;
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+
+        .currency-value {
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            direction: rtl;
+            font-size: 0.75rem;
+            min-width: 50px;
+            text-align: left;
+        }
+
+        .currency-update-compact {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .refresh-btn-compact {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.65rem;
+        }
+
+        .refresh-btn-compact:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(180deg);
+        }
+
+        .refresh-btn-compact.loading {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ==================== FIX DASHBOARD SIZING ==================== */
+        .dashboard-section {
+            min-height: 600px;
+            padding-bottom: 2rem;
+        }
+
+        .dashboard-main {
+            min-height: calc(100vh - 60px);
+        }
+
+        /* ==================== IMPROVED CHARTS SECTION ==================== */
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 0 2rem;
+        }
+
+        .chart-wrapper {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-100);
+        }
+
+        /* ==================== RESPONSIVE IMPROVEMENTS ==================== */
+        @media (max-width: 768px) {
+            .compact-currency-bar {
+                padding: 0.3rem 0;
+            }
+
+            .compact-currency-container {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0 0.5rem;
+            }
+
+            .compact-currency-items {
+                gap: 0.5rem;
+                width: 100%;
+                order: 2;
+            }
+
+            .compact-currency-item {
+                min-width: 90px;
+                padding: 0.2rem 0.4rem;
+                flex: 1;
+                justify-content: center;
+            }
+
+            .currency-name {
+                font-size: 0.65rem;
+            }
+
+            .currency-value {
+                font-size: 0.7rem;
+                min-width: 45px;
+            }
+
+            .currency-update-compact {
+                order: 1;
+                width: 100%;
+                justify-content: space-between;
+                padding: 0.2rem 0;
+                font-size: 0.65rem;
+            }
+
+            .charts-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .chart-wrapper {
+                padding: 1rem;
+            }
+
+            .dashboard-section {
+                min-height: 500px;
+                padding-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .compact-currency-items {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 0.2rem 0;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .compact-currency-item {
+                min-width: 85px;
+                flex-shrink: 0;
+            }
+
+            .currency-name {
+                display: none;
+            }
+
+            .charts-container {
+                padding: 0 0.5rem;
+            }
+        }
+
+        /* بهبود بخش آمار و درآمد */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-200);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+        }
+
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+        }
+
+        .stat-icon.templates {
+            background: var(--primary-50);
+            color: var(--primary-600);
+        }
+
+        .stat-icon.youtube {
+            background: var(--error-50);
+            color: var(--error-600);
+        }
+
+        .stat-icon.adsense {
+            background: var(--success-50);
+            color: var(--success-600);
+        }
+
+        .stat-icon.earnings {
+            background: var(--warning-50);
+            color: var(--warning-600);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .stat-change.positive {
+            background: var(--success-50);
+            color: var(--success-700);
+        }
+
+        .stat-change.negative {
+            background: var(--error-50);
+            color: var(--error-700);
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* استایل‌های جدید برای بخش‌های اضافه شده */
+        .resume-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .resume-section h4 {
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .resume-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .resume-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-300);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .resume-option:hover {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+        }
+        
+        .resume-option input[type="checkbox"] {
+            display: none;
+        }
+        
+        .resume-option .checkbox-checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-400);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .resume-option input[type="checkbox"]:checked + .checkbox-checkmark {
+            background: var(--primary-500);
+            border-color: var(--primary-500);
+        }
+        
+        .resume-option input[type="checkbox"]:checked + .checkbox-checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .resume-input {
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .resume-input.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .uploaded-resume {
+            background: var(--success-50);
+            border: 1px solid var(--success-200);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .uploaded-resume.active {
+            display: block;
+        }
+        
+        .resume-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .hidden-template-checkbox {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--warning-50);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--warning-200);
+        }
+        
+        .hidden-template-checkbox .checkbox-label {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .hidden-template-checkbox .checkbox-description {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* استایل‌های جدید برای بخش خلاصه */
+        .dashboard-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        /* استایل برای dropdown درآمد */
+        .revenue-filter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+        }
+
+        .revenue-filter label {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .revenue-filter select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            background: white;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-item.dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .dropdown-toggle.active .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            background: var(--gray-50);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .dropdown-menu.show {
+            max-height: 200px;
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            border-right: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background: var(--primary-50);
+            color: var(--primary-700);
+            border-right-color: var(--primary-500);
+        }
+
+        .dropdown-item.active {
+            background: var(--primary-100);
+            color: var(--primary-700);
+            border-right-color: var(--primary-500);
+            font-weight: 600;
+        }
+
+        /* ریسپانسیو برای grid آمار */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .dashboard-summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* بهبود منوی داشبورد */
+        .sidebar {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* استایل‌های فرم آپلود */
+        .upload-form-container {
+            padding: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .price-suggestion {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-200);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-suggestion p {
+            margin: 0;
+            color: var(--primary-700);
+            font-size: 0.9rem;
+        }
+
+        .upload-options {
+            margin: 2rem 0;
+        }
+
+        .upload-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .upload-option:hover {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+        }
+
+        .upload-option i {
+            font-size: 1.5rem;
+            color: var(--primary-500);
+        }
+
+        .upload-option-content {
+            flex: 1;
+        }
+
+        .upload-option-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--gray-800);
+        }
+
+        .upload-option-description {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .features-input {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .feature-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-100);
+            color: var(--primary-700);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .remove-feature {
+            background: none;
+            border: none;
+            color: var(--primary-700);
+            cursor: pointer;
+            padding: 0;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .copy-warning {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: var(--warning-50);
+            border: 1px solid var(--warning-200);
+            border-radius: var(--border-radius);
+            color: var(--warning-700);
+            font-size: 0.9rem;
+        }
+
+        /* استایل‌های مودال */
+        .terms-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .terms-modal.show {
+            display: flex;
+        }
+
+        .terms-content {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .terms-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .terms-body {
+            padding: 1.5rem;
+        }
+
+        .terms-body h3 {
+            color: var(--gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .terms-body p {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .terms-body ul {
+            color: var(--gray-600);
+            padding-right: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .terms-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* استایل‌های دکمه‌ها */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn--primary {
+            background: var(--primary-500);
+            color: white;
+        }
+
+        .btn--primary:hover {
+            background: var(--primary-600);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--primary-500);
+            border: 1px solid var(--primary-500);
+        }
+
+        .btn--outline:hover {
+            background: var(--primary-50);
+        }
+
+        .btn--ghost {
+            background: transparent;
+            color: var(--gray-600);
+            border: none;
+        }
+
+        .btn--ghost:hover {
+            background: var(--gray-100);
+        }
+
+        .btn--lg {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn--sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* استایل‌های چک‌باکس */
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-400);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + .checkmark {
+            background: var(--primary-500);
+            border-color: var(--primary-500);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .text-link {
+            color: var(--primary-500);
+            text-decoration: none;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
