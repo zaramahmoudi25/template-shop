@@ -5,12 +5,8 @@
 {% block description %}خدمات تخصصی طراحی و توسعه قالب‌های وبسایت{% endblock %}
 
 {% block extra_css %}
-
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/components.css" %}">
-    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
-    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
-    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/templates.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 {% endblock %}

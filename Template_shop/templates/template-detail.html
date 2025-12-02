@@ -6,512 +6,177 @@
 {% block description %}{{ item.description|truncatewords:20 }}{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/components.css" %}">
-    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
-    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
-    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    {{ block.super }}
     <link rel="stylesheet" href="{% static "css/templates.css" %}">
+    <link rel="stylesheet" href="{% static "css/template-detail.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        .template-detail-section {
-            padding: 6rem 0 4rem;
-            background: var(--gray-50);
-            min-height: 100vh;
-        }
-
-        .template-simple-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
-
-        .template-main-content {
-            background: white;
-            border-radius: var(--border-radius-lg);
-            padding: 3rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-        }
-
-        .template-image-container {
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--gray-200);
-            margin-bottom: 2rem;
-        }
-
-        .template-main-img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .template-meta {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .template-category-wrapper {
-            margin: 1rem 0 1rem;
-            text-align: center; /* centered under image */
-        }
-
-        .template-category {
-            background: var(--primary-50);
-            color: var(--primary-700);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .template-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .stars {
-            color: var(--warning-500);
-        }
-
-        .rating-text {
-            color: var(--gray-600);
-            font-size: 0.9rem;
-        }
-
-        .template-tags {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .template-tag {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            padding: 0.5rem 1rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .template-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .template-description {
-            color: var(--gray-700);
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-            text-align: center;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .template-features {
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .template-features h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--gray-900);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .feature-item {
-            background: var(--gray-50);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            border: 1px solid var(--gray-200);
-        }
-
-        .feature-item i {
-            font-size: 2rem;
-            color: var(--primary-500);
-            margin-bottom: 1rem;
-        }
-
-        .feature-item h4 {
-            color: var(--gray-900);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .feature-item p {
-            color: var(--gray-600);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .shopify-btn-container {
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .shopify-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1.25rem 3rem;
-            background: var(--primary-500);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 1.2rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .shopify-btn:hover {
-            background: var(--primary-600);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-            color: white;
-        }
-
-        .template-info {
-            background: var(--gray-50);
-            border-radius: var(--border-radius-lg);
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .info-item {
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .info-label {
-            display: block;
-            color: var(--gray-600);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-value {
-            display: block;
-            color: var(--gray-900);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .reviews-section {
-            background: white;
-            border-radius: var(--border-radius-lg);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-            margin-top: 2rem;
-        }
-
-        .reviews-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .rating-summary {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            background: var(--gray-50);
-            padding: 1.5rem 2rem;
-            border-radius: var(--border-radius-lg);
-        }
-
-        .average-rating {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-
-        .review-item {
-            border-bottom: 1px solid var(--gray-200);
-            padding: 1.5rem 0;
-        }
-
-        .review-item:last-child {
-            border-bottom: none;
-        }
-
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .reviewer-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .reviewer-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--primary-100);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-600);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .review-stars {
-            color: var(--warning-500);
-        }
-
-        .review-date {
-            color: var(--gray-500);
-            font-size: 0.9rem;
-        }
-
-        .review-text {
-            color: var(--gray-700);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .template-detail-section {
-                padding: 4rem 0 2rem;
-            }
-
-            .template-main-content {
-                padding: 2rem;
-            }
-
-            .template-title {
-                font-size: 2rem;
-            }
-
-            .template-meta {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .info-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .shopify-btn {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .template-main-content {
-                padding: 1.5rem;
-            }
-
-            .template-title {
-                font-size: 1.75rem;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .reviews-section {
-                padding: 1.5rem;
-            }
-        }
-    </style>
 {% endblock extra_css %}
 
 {% block content %}
     <main class="main">
-        <!-- Template Detail Section -->
         <section class="template-detail-section">
-            <div class="container">
-                <div class="template-simple-container">
-                    <!-- Main Content -->
-                    <div class="template-main-content">
-                        <!-- Template Image -->
-                        <div class="template-image-container">
+            <div class="template-container">
+                <div class="template-main-card">
+                    <div class="template-content">
+                        <!-- اسلایدر عکس در سمت چپ -->
+                        <div class="template-gallery">
+                            <div class="slider-container">
+                                <div class="slider-track" id="sliderTrack">
+                                    <div class="slide">
+                                        <img src="/Images and SVGs/hero-template-1.png" alt="نمای اصلی قالب">
+                                    </div>
+                                    <div class="slide">
+                                        <img src="/Images and SVGs/hero-template-2.png" alt="صفحه محصولات">
+                                    </div>
+                                    <div class="slide">
+                                        <img src="/Images and SVGs/hero-template-3.png" alt="نمای موبایل">
+                                    </div>
+                                    <div class="slide">
+                                        <img src="/Images and SVGs/hero-template-4.png" alt="صفحه درباره ما">
+                                    </div>
+                                </div>
 
-                            <img src="
-                            {% if template_type == 'themeforest' %}
-                                {{ template.main_image.url }}
-                            {% else %}
-                                {{ template.thumbnail.url }}
-                            {% endif %}
-                            " class="template-main-img">
-                        </div>
-
-                        <!-- Template Meta -->
-                        <div class="template-meta">
-                            <span class="template-category">
-                                {{ template.category }}
-                            </span>
-
-                            {% if template.tags %}
-                            <div class="template-tags-wrapper">
-                                {% for tag in template.tags|split:"," %}
-                                    <span class="template-tag">{{ tag }}</span>
-                                {% endfor %}
+                                <button class="slider-nav slider-prev" id="sliderPrev">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                                <button class="slider-nav slider-next" id="sliderNext">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
                             </div>
-                            {% endif %}
 
-                            <div class="template-rating">
-                                <span class="stars">
-                                    {% with rating=item.rating|default:0 %}
-                                        {% for i in "12345" %}
-                                            {% if rating >= forloop.counter %}
-                                                <i class="fas fa-star"></i>
-
-                                            {% elif rating >= forloop.counter|add:"-0.5" %}
-                                                <i class="fas fa-star-half-alt"></i>
-
-                                            {% else %}
-                                                <i class="far fa-star"></i>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endwith %}
-                                </span>
-                                <span class="rating-text">{{ item.rating }} از {{ item.rating_count }} نظر</span>
+                            <div class="slider-dots" id="sliderDots">
                             </div>
                         </div>
 
-
-                        <!-- Template Title -->
-                        <h1 class="template-title">{{ item.title }}</h1>
-
-                        <!-- Template Description -->
-                        <div class="template-description">
-                            <p>{{ item.description|linebreaks }}</p>
-                        </div>
-
-                        <!-- Shopify Button -->
-                        <div class="shopify-btn-container">
-                            <a href="{{ item.themeforest_url }}" target="_blank" class="shopify-btn">
-                                <i class="fab fa-shopify"></i>
-                                مشاهده قالب در ThemeForest
-                            </a>
-                            <a href="{{ item.live_preview_url }}" target="_blank" class="shopify-btn">
-                                <i class="fab fa-shopify"></i>
-                                مشاهده لایو پیش‌نمایش
-                            </a>
-                        </div>
-
-                        <!-- Template Info -->
                         <div class="template-info">
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <span class="info-label">نسخه</span>
-                                    <span class="info-value">{{ item.version }}</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">آخرین بروزرسانی</span>
-                                    <span class="info-value">{{ item.last_update }}</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">تعداد فروش</span>
-                                    <span class="info-value">{{ item.sales }}</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">امتیاز</span>
-                                    <span class="info-value">{{ item.rating }} از 5</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">پشتیبانی</span>
-                                    <span class="info-value">۶ ماه رایگان</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">سازگاری</span>
-                                    <span class="info-value">{{ item.compatible_with }}</span>
+                            <div class="template-meta">
+                                <span class="template-category">فروشگاهی</span>
+                                <div class="template-rating">
+                                    <span class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </span>
+                                    <span class="rating-text">۴.۵ (۱۲۴ نظر)</span>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Template Features -->
-                        <div class="template-features">
-                            <h3>ویژگی‌های اصلی قالب</h3>
-                            <div class="features-grid">
-                                <div class="feature-item">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <h4>واکنش‌گرا</h4>
-                                    <p>سازگار با تمام دستگاه‌های موبایل و تبلت</p>
+                            <h1 class="template-title">قالب فروشگاهی مدرن</h1>
+
+                            <div class="template-description">
+                                <p>قالب فروشگاهی مدرن یک راه‌حل جامع و حرفه‌ای برای ایجاد فروشگاه اینترنتی است. این قالب با طراحی زیبا و کاربرپسند، تجربه خرید آنلاین را برای مشتریان شما بهینه می‌کند.</p>
+                            </div>
+
+                            <ul class="features-list">
+                                <li><i class="fas fa-check"></i> طراحی کاملاً واکنش‌گرا</li>
+                                <li><i class="fas fa-check"></i> سرعت لود فوق‌العاده</li>
+                                <li><i class="fas fa-check"></i> سئو بهینه شده</li>
+                                <li><i class="fas fa-check"></i> پشتیبانی ۲۴ ساعته</li>
+                                <li><i class="fas fa-check"></i> سازگار با آخرین نسخه شاپیفای</li>
+                            </ul>
+
+                            <div class="purchase-section">
+                                <div class="price-display">
+                                    <span class="price-dollar">$49.00</span>
+                                    <span class="price-toman">(۲۹۰,۰۰۰ تومان)</span>
                                 </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-bolt"></i>
-                                    <h4>سرعت بالا</h4>
-                                    <p>لود سریع صفحات و بهینه‌سازی performance</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-search"></i>
-                                    <h4>سئو بهینه</h4>
-                                    <p>بهینه‌شده برای موتورهای جستجو</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <h4>فروشگاهی</h4>
-                                    <p>امکانات کامل برای فروشگاه اینترنتی</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-palette"></i>
-                                    <h4>قالب‌بندی آسان</h4>
-                                    <p>سازگار با صفحه‌سازهای مختلف</p>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-headset"></i>
-                                    <h4>پشتیبانی</h4>
-                                    <p>پشتیبانی ۲۴ ساعته و به‌روزرسانی رایگان</p>
-                                </div>
+
+                                <a href="https://shopify.com" target="_blank" class="shopify-btn">
+                                    <i class="fab fa-shopify"></i>
+                                    مشاهده قالب در شاپیفای
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs-container">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="features">ویژگی‌ها</button>
+                        <button class="tab-btn" data-tab="specs">مشخصات فنی</button>
+                        <button class="tab-btn" data-tab="reviews">نظرات (۱۲۴)</button>
+                    </div>
+
+                    <div class="tab-panel active" id="features">
+                        <h3>ویژگی‌های کامل قالب</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h4>واکنش‌گرا</h4>
+                                <p>سازگار با تمام دستگاه‌های موبایل و تبلت</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-bolt"></i>
+                                <h4>سرعت بالا</h4>
+                                <p>لود سریع صفحات و بهینه‌سازی performance</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-search"></i>
+                                <h4>سئو بهینه</h4>
+                                <p>بهینه‌شده برای موتورهای جستجو</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-shopping-cart"></i>
+                                <h4>فروشگاهی</h4>
+                                <p>امکانات کامل برای فروشگاه اینترنتی</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-palette"></i>
+                                <h4>قالب‌بندی آسان</h4>
+                                <p>سازگار با صفحه‌ساز المنتور</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-plug"></i>
+                                <h4>سازگاری افزونه</h4>
+                                <p>سازگار با افزونه‌های محبوب ووکامرس</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Reviews Section -->
-                    <div class="reviews-section">
-                        <div class="reviews-header">
-                            <h2>نظرات کاربران</h2>
-                            <div class="rating-summary">
-                                <span class="average-rating">{{ item.rating }}</span>
-                                <div>
+                    <div class="tab-panel" id="specs">
+                        <h3>مشخصات فنی</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <i class="fas fa-code"></i>
+                                <h4>فریمورک</h4>
+                                <p>Bootstrap 5.3</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fab fa-js"></i>
+                                <h4>جاوااسکریپت</h4>
+                                <p>ES6+ Vanilla JS</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fab fa-css3-alt"></i>
+                                <h4>CSS</h4>
+                                <p>CSS3 + Flexbox + Grid</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-file-code"></i>
+                                <h4>فایل‌ها</h4>
+                                <p>HTML, CSS, JS, PHP</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-images"></i>
+                                <h4>تصاویر</h4>
+                                <p>شامل دمو و تصاویر نمونه</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-book"></i>
+                                <h4>مستندات</h4>
+                                <p>مستندات کامل فارسی</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="reviews">
+                        <div class="reviews-container">
+                            <div class="reviews-header">
+                                <div class="overall-rating">
+                                    <div class="rating-score">۴.۵</div>
                                     <div class="stars">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -519,20 +184,16 @@
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star-half-alt"></i>
                                     </div>
-                                    <span class="rating-count">بر اساس {{ item.rating_count }} نظر</span>
+                                    <div class="rating-count">بر اساس ۱۲۴ نظر</div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="reviews-list">
-                            <!-- Review 1 -->
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <div class="reviewer-info">
-                                        <div class="reviewer-avatar">م.ح</div>
-                                        <div>
+                            <div class="reviews-list">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="reviewer-info">
                                             <div class="reviewer-name">محمد حسینی</div>
-                                            <div class="review-stars">
+                                            <div class="stars">
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -540,45 +201,16 @@
                                                 <i class="fas fa-star"></i>
                                             </div>
                                         </div>
+                                        <span class="review-date">۲ هفته پیش</span>
                                     </div>
-                                    <span class="review-date">۲ هفته پیش</span>
+                                    <p class="review-text">قالب بسیار عالی و حرفه‌ای. طراحی زیبا و امکانات کامل. پشتیبانی عالی داشتند و در کمترین زمان پاسخگو بودند.</p>
                                 </div>
-                                <div class="review-text">
-                                    قالب بسیار عالی و حرفه‌ای. طراحی زیبا و امکانات کامل. پشتیبانی عالی داشتند و در کمترین زمان پاسخگو بودند. برای فروشگاه اینترنتی بسیار مناسب است.
-                                </div>
-                            </div>
 
-                            <!-- Review 2 -->
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <div class="reviewer-info">
-                                        <div class="reviewer-avatar">ف.ر</div>
-                                        <div>
-                                            <div class="reviewer-name">فاطمه رضایی</div>
-                                            <div class="review-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span class="review-date">۱ ماه پیش</span>
-                                </div>
-                                <div class="review-text">
-                                    قالب خوبیه اما نیاز به کمی تنظیمات داره. پشتیبانی پاسخگو بود و مشکلاتم رو حل کردن. سرعت لود خوبی داره و در موبایل خیلی خوب نمایش داده میشه.
-                                </div>
-                            </div>
-
-                            <!-- Review 3 -->
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <div class="reviewer-info">
-                                        <div class="reviewer-avatar">ع.ک</div>
-                                        <div>
-                                            <div class="reviewer-name">علی کریمی</div>
-                                            <div class="review-stars">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="reviewer-info">
+                                            <div class="reviewer-name">فاطمه محمدی</div>
+                                            <div class="stars">
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -586,11 +218,9 @@
                                                 <i class="fas fa-star"></i>
                                             </div>
                                         </div>
+                                        <span class="review-date">۱ ماه پیش</span>
                                     </div>
-                                    <span class="review-date">۲ ماه پیش</span>
-                                </div>
-                                <div class="review-text">
-                                    بهترین قالبی که تا حالا استفاده کردم. امکانات کامل، طراحی مدرن و پشتیبانی فوق‌العاده. فروشگاهم رو با این قالب راه‌اندازی کردم و راضی هستم.
+                                    <p class="review-text">از خرید این قالب بسیار راضی هستم. سرعت لود عالی و طراحی بسیار کاربرپسند داره. به همه توصیه می‌کنم.</p>
                                 </div>
                             </div>
                         </div>
@@ -603,56 +233,178 @@
 
 {% block extra_js %}
     <script>
-        // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        const body = document.body;
+        class TemplateSlider {
+            constructor() {
+                this.sliderTrack = document.getElementById('sliderTrack');
+                this.sliderPrev = document.getElementById('sliderPrev');
+                this.sliderNext = document.getElementById('sliderNext');
+                this.sliderDots = document.getElementById('sliderDots');
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.slideCount = this.slides.length;
+                this.autoSlideInterval = null;
 
-        mobileMenuBtn.addEventListener('click', () => {
-            const isOpen = mainNav.classList.contains('active');
-
-            if (isOpen) {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                body.classList.remove('menu-open');
-            } else {
-                mainNav.classList.add('active');
-                mobileMenuBtn.classList.add('active');
-                body.classList.add('menu-open');
+                this.init();
             }
-        });
 
-        // Close menu when clicking on links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                body.classList.remove('menu-open');
-            });
-        });
-
-        // Scroll to Top
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
+            init() {
+                this.createDots();
+                this.setupEventListeners();
+                this.startAutoSlide();
+                this.updateSlider();
             }
-        });
 
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            createDots() {
+                for (let i = 0; i < this.slideCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'slider-dot';
+                    dot.setAttribute('data-slide', i);
+                    dot.innerHTML = '<span class="sr-only">اسلاید ' + (i + 1) + '</span>';
+
+                    dot.addEventListener('click', () => {
+                        this.goToSlide(i);
+                    });
+
+                    this.sliderDots.appendChild(dot);
+                }
+            }
+
+            setupEventListeners() {
+                this.sliderPrev.addEventListener('click', () => {
+                    this.prevSlide();
+                });
+
+                this.sliderNext.addEventListener('click', () => {
+                    this.nextSlide();
+                });
+
+                // توقف اسلایدر هنگام هاور
+                this.sliderTrack.addEventListener('mouseenter', () => {
+                    this.stopAutoSlide();
+                });
+
+                this.sliderTrack.addEventListener('mouseleave', () => {
+                    this.startAutoSlide();
+                });
+
+                // اسلایدر با کیبورد
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight') {
+                        this.prevSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        this.nextSlide();
+                    }
+                });
+            }
+
+            goToSlide(slideIndex) {
+                this.currentSlide = slideIndex;
+                this.updateSlider();
+            }
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.slideCount;
+                this.updateSlider();
+            }
+
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.slideCount) % this.slideCount;
+                this.updateSlider();
+            }
+
+            updateSlider() {
+                const translateX = -this.currentSlide * 100;
+                this.sliderTrack.style.transform = `translateX(${translateX}%)`;
+
+                // آپدیت dots
+                const dots = this.sliderDots.querySelectorAll('.slider-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            startAutoSlide() {
+                this.autoSlideInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 5000);
+            }
+
+            stopAutoSlide() {
+                if (this.autoSlideInterval) {
+                    clearInterval(this.autoSlideInterval);
+                    this.autoSlideInterval = null;
+                }
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // اسلایدر
+            new TemplateSlider();
+
+            // مدیریت تب‌ها
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+
+                    // حذف کلاس active از همه دکمه‌ها و پنل‌ها
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabPanels.forEach(p => p.classList.remove('active'));
+
+                    // اضافه کردن کلاس active به دکمه و پنل انتخاب شده
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
             });
-        });
 
-        // Shopify Button Click Tracking
-        document.querySelector('.shopify-btn').addEventListener('click', function() {
-            console.log('Shopify preview opened');
-            // Analytics tracking
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const body = document.body;
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isOpen = mainNav.classList.contains('active');
+
+                if (isOpen) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    body.classList.remove('menu-open');
+                } else {
+                    mainNav.classList.add('active');
+                    mobileMenuBtn.classList.add('active');
+                    body.classList.add('menu-open');
+                }
+            });
+
+            // Close menu when clicking on links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    body.classList.remove('menu-open');
+                });
+            });
+
+            // Scroll to Top
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 {% endblock %}

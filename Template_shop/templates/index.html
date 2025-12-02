@@ -56,11 +56,11 @@
 
 
 
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <!-- <button class="mobile-menu-btn" id="mobileMenuBtn">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </button>
+                    </button> -->
             </div>
         </div>
     </div>
@@ -127,33 +127,6 @@
     <!-- JavaScript -->
     <script src="{% static "js/landing.js" %}">
 
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-
-        if (mobileMenuBtn && mainNav) {
-            mobileMenuBtn.addEventListener('click', function() {
-                const isOpen = mainNav.classList.contains('active');
-
-                if (isOpen) {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                } else {
-                    mainNav.classList.add('active');
-                    mobileMenuBtn.classList.add('active');
-                    document.body.classList.add('menu-open');
-                }
-            });
-        }
-        // Close menu when clicking on links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                body.classList.remove('menu-open');
-            });
-        });
     </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, ThemeForestItem, UserTemplate
 from django.core.files.base import ContentFile
 from django.utils.html import format_html
+from django.utils.text import slugify
 import requests
 import mimetypes
 
@@ -37,7 +38,19 @@ class ThemeForestItemAdmin(admin.ModelAdmin):
     search_fields = ("title", "category")
     prepopulated_fields = {"slug": ("title",)}
 
-    readonly_fields = ["image_preview"]
+    readonly_fields = (
+        "themeforest_url",
+        "live_preview_url",
+        "main_image_url",
+        "price",
+        "sales",
+        "rating",
+        "rating_count",
+        "version",
+        "last_update",
+        "compatible_with",
+        "image_preview"
+    )
 
     fieldsets = (
         (None, {

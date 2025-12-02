@@ -48,6 +48,7 @@ class AppState {
         this.saveState();
         this.notifySubscribers();
     }
+    
 
 
     saveState() {
@@ -69,7 +70,7 @@ class AppState {
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
-            this.state.cart.push({...template, quantity: 1});
+            this.state.cart.push({ ...template, quantity: 1 });
         }
         this.saveState();
         this.notifySubscribers();
@@ -593,6 +594,15 @@ class App {
     refreshData() {
         this.templateFilter.applyFilters();
     }
+
+
+
+
+
+
+
+
+
 }
 
 // ==================== APP INITIALIZATION ====================
@@ -611,6 +621,8 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
     });
 });
+
+
 
 
 export { AppState, SearchManager, TemplateFilter };

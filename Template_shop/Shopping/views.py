@@ -9,6 +9,7 @@ from .models import UserTemplate
 from django.http import JsonResponse
 from django.db.models.functions import TruncMonth
 from django.db.models import Sum, Count
+from django.template.loader import render_to_string
 import json
 
 
@@ -92,18 +93,17 @@ def services(request):
 
 
 def template_detail(request, slug):
-    # Try to find a ThemeForest template first
+    # Try ThemeForest first
     try:
-        template = ThemeForestItem.objects.get(slug=slug)
-        template_type = "themeforest"
+        item = ThemeForestItem.objects.get(slug=slug)
+        item.template_type = "themeforest"
     except ThemeForestItem.DoesNotExist:
-        # If not found, try user templates
-        template = get_object_or_404(UserTemplate, slug=slug)
-        template_type = "user"
+        # Try user templates
+        item = UserTemplate.objects.get(slug=slug)
+        item.template_type = "user"
 
     return render(request, "template-detail.html", {
-        "template": template,
-        "template_type": template_type,
+        "item": item
     })
 
 
@@ -116,20 +116,24 @@ def template_detail(request, slug):
 
 
 def templates_list(request):
+
+    # how many templates to show?
+    limit = 9
+
     # Get ThemeForest items
-    theme_items = ThemeForestItem.objects.all()
+    theme_items = ThemeForestItem.objects.all().order_by('-sales')
     for t in theme_items:
-        t.template_type = "themeforest"  # <- annotate each ThemeForest item
+        t.template_type = "themeforest"
 
     # Get approved User templates
     user_items = UserTemplate.objects.filter(approved=True)
     for u in user_items:
-        u.template_type = "user"  # <- annotate each User template
+        u.template_type = "user"
 
     # Combine them
     combined = list(theme_items) + list(user_items)
 
-    # Handle search query
+    # Search filter
     search_query = request.GET.get('q', '')
     if search_query:
         theme_items = theme_items.filter(
@@ -152,10 +156,19 @@ def templates_list(request):
 
         combined = list(theme_items) + list(user_items)
 
+    # Sort again after search
+    combined = sorted(combined, key=lambda x: x.sales if hasattr(x, "sales") else 0, reverse=True)
+
+    # Apply LIMIT → show only N items
+    total_count = len(combined)
+    combined = combined[:limit]
+
     # Pass to template
     return render(request, 'templates.html', {
         'items': combined,
         'search_query': search_query,
+        'limit': limit,
+        'total_count': total_count,
     })
 
 
@@ -253,3 +266,31 @@ def upload_template(request):
     template.save()
 
     return JsonResponse({"status": "success", "message": "Template uploaded successfully!"})
+
+
+def load_more_templates(request):
+    offset = int(request.GET.get("offset", 0))
+    limit = int(request.GET.get("limit", 9))
+
+    # Fetch all combined items (same logic as before)
+    theme_items = ThemeForestItem.objects.all().order_by('-sales')
+    for t in theme_items:
+        t.template_type = "themeforest"
+
+    user_items = UserTemplate.objects.filter(approved=True)
+    for u in user_items:
+        u.template_type = "user"
+
+    combined = list(theme_items) + list(user_items)
+    combined = sorted(combined, key=lambda x: x.sales if hasattr(x, "sales") else 0, reverse=True)
+
+    # Slice the next batch
+    next_items = combined[offset:offset + limit]
+
+    # Render ONLY the HTML for the items (no full page)
+    html = render_to_string("template_card.html", {"items": next_items})
+
+    return JsonResponse({
+        "html": html,
+        "has_more": (offset + limit) < len(combined)
+    })

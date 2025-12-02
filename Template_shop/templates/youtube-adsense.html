@@ -6,11 +6,8 @@
 
 {% block extra_css %}
 
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/components.css" %}">
-    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
-    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
-    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/templates.css" %}">
     <link rel="stylesheet" href="{% static "css/youtube-adsense.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -29,15 +26,17 @@
 
         <section class="container" style="padding: 2rem 0 4rem;">
             <div class="main-tabs">
-                <div class="main-tab active" data-tab="youtube">نقد کردن درآمد یوتیوب</div>
-                <div class="main-tab" data-tab="adsense">نقد کردن درآمد ادسنس</div>
+                <div class="main-tab active" data-tab="youtube-cash">نقد کردن درآمد یوتیوب</div>
+                <div class="main-tab" data-tab="adsense-cash">نقد کردن درآمد ادسنس</div>
+                <div class="main-tab" data-tab="youtube-calc">محاسبه درآمد یوتیوب</div>
             </div>
 
-            <div class="calculator-content active" id="youtube-content">
-                <h2 class="section-title">تحلیل درآمد کانال یوتیوب</h2>
+            <!-- تب نقد کردن درآمد یوتیوب -->
+            <div class="calculator-content active" id="youtube-cash-content">
+                <h2 class="section-title">نقد کردن درآمد کانال یوتیوب</h2>
 
                 <div class="youtube-form-container">
-                    <form id="youtube-form">
+                    <form id="youtube-cash-form">
                         <div class="form-group">
                             <label class="form-label">آدرس کانال یوتیوب</label>
                             <input type="text" class="form-input" placeholder="https://youtube.com/@channelname" required>
@@ -139,102 +138,158 @@
                             </div>
                         </div>
 
+                        <!-- بخش تماس کاربر -->
+                        <div class="contact-section" style="margin-top: 2rem; padding: 2rem; background: var(--gray-50); border-radius: var(--border-radius); border: 1px solid var(--gray-200);">
+                            <h3 style="text-align: center; margin-bottom: 1rem; color: var(--gray-800);">
+                                شماره تماس برای ارتباط با شما
+                            </h3>
+                            <div class="form-group">
+                                <input type="tel" class="form-input" placeholder="شماره تلفن خود را وارد کنید" required style="text-align: center; font-size: 1.1rem;">
+                            </div>
+                            <p style="text-align: center; color: var(--gray-600); margin-top: 1rem;">
+                                کارشناسان ما به زودی با شما تماس خواهند گرفت
+                            </p>
+                        </div>
+
                         <button type="submit" class="btn btn--primary btn--lg" style="width: 100%; margin-top: 2rem;">
-                            <i class="fas fa-calculator"></i>
-                            محاسبه درآمد
+                            <i class="fas fa-paper-plane"></i>
+                            ارسال اطلاعات برای تحلیل
                         </button>
                     </form>
+                </div>
+            </div>
 
-                    <!-- بخش محاسبه درآمد ادسنس در تب یوتیوب -->
-                    <div class="adsense-calculator" style="margin-top: 3rem; border-top: 2px solid var(--gray-200); padding-top: 2rem;">
-                        <div class="slider-section">
-                            <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--gray-800);">
-                                محاسبه درآمد کانال یوتیوب
-                            </h3>
-                            <p style="text-align: center; color: var(--gray-600); margin-bottom: 2rem;">
-                                اسلایدر را به چپ و راست بکشید تا پتانسیل های درآمدزایی محاسبه شود.
-                            </p>
+            <!-- تب نقد کردن درآمد ادسنس -->
+            <div class="calculator-content" id="adsense-cash-content">
+                <h2 class="section-title">نقد کردن درآمد ادسنس</h2>
 
-                            <div class="form-group">
-                                <label class="slider-label">میزان بازدید روزانه را وارد نمایید</label>
-                                <div class="slider-container">
-                                    <div class="slider-header">
-                                        <span>View/Day</span>
-                                        <span class="slider-value" id="youtube-viewsValue">368,400</span>
-                                    </div>
-                                    <input type="range" min="1000" max="1000000" value="368400" class="slider" id="youtube-viewsSlider">
-                                </div>
+                <div class="youtube-form-container">
+                    <form id="adsense-cash-form">
+                        <div class="form-group">
+                            <label class="form-label">آدرس وبسایت</label>
+                            <input type="text" class="form-input" placeholder="https://example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">اسکرین شات از داشبورد ادسنس</label>
+                            <div class="file-upload" id="adsense-screenshot">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>اسکرین شات را اینجا رها کنید یا برای آپلود کلیک کنید</p>
+                                <span>حداکثر حجم: 5MB</span>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="form-label">موضوع فعالیت کانال</label>
-                                <select class="form-select" id="youtube-category">
-                                    <option value="film-music">فیلم و موسیقی</option>
-                                    <option value="cars">خودرو</option>
-                                    <option value="animals">حیوانات</option>
-                                    <option value="sports">ورزشی</option>
-                                    <option value="travel">سفر</option>
-                                    <option value="gaming">گیمینگ</option>
-                                    <option value="general">عمومی و مردم</option>
-                                    <option value="comedy">کمدی</option>
-                                    <option value="entertainment">سرگرمی</option>
-                                    <option value="news">اخبار</option>
-                                    <option value="fashion">لباس و استایل</option>
-                                    <option value="education">آموزشی</option>
-                                    <option value="tech">علم و تکنولوژی</option>
-                                    <option value="other">سایر</option>
-                                </select>
+                        <div class="form-group">
+                            <div class="categories-section">
+                                <label class="categories-title">موضوع فعالیت وبسایت</label>
+                                <div class="categories-grid">
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="film-music">
+                                        <span class="checkmark"></span>
+                                        <span>فیلم و موسیقی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="cars">
+                                        <span class="checkmark"></span>
+                                        <span>خودرو</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="animals">
+                                        <span class="checkmark"></span>
+                                        <span>حیوانات</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="sports">
+                                        <span class="checkmark"></span>
+                                        <span>ورزشی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="travel">
+                                        <span class="checkmark"></span>
+                                        <span>سفر</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="gaming">
+                                        <span class="checkmark"></span>
+                                        <span>گیمینگ</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="general">
+                                        <span class="checkmark"></span>
+                                        <span>عمومی و مردم</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="comedy">
+                                        <span class="checkmark"></span>
+                                        <span>کمدی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="entertainment">
+                                        <span class="checkmark"></span>
+                                        <span>سرگرمی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="news">
+                                        <span class="checkmark"></span>
+                                        <span>اخبار</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="fashion">
+                                        <span class="checkmark"></span>
+                                        <span>لباس و استایل</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="education">
+                                        <span class="checkmark"></span>
+                                        <span>آموزشی</span>
+                                    </label>
+                                    <label class="category-option">
+                                        <input type="checkbox" name="category" value="tech">
+                                        <span class="checkmark"></span>
+                                        <span>علم و تکنولوژی</span>
+                                    </label>
+                                    <label class="category-option" id="adsense-other-category">
+                                        <input type="checkbox" name="category" value="other">
+                                        <span class="checkmark"></span>
+                                        <span>سایر</span>
+                                    </label>
+                                </div>
 
-                                <!-- <div class="cpm-info">
-                                    <div class="info-text">
-                                        نرخ CPM فعلی: <span class="cpm-rate" id="youtube-cpm-rate">$4</span> به ازای هر 1000 بازدید
-                                    </div>
-                                </div> -->
-
-                                <div class="form-group" id="youtube-other-category-input" style="display: none; margin-top: 1rem;">
+                                <div class="form-group" id="adsense-other-category-input" style="display: none; margin-top: 1rem;">
                                     <input type="text" class="form-input" placeholder="موضوع فعالیت خود را وارد کنید">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="results-section">
-                            <h3 class="results-title">نتایج تحلیل درآمد یوتیوب</h3>
-
-                            <div class="results-grid">
-                                <div class="result-item">
-                                    <div class="result-label">درآمد تقریبی روزانه</div>
-                                    <div class="result-value" id="youtube-daily">$65.89</div>
-                                </div>
-
-                                <div class="result-item">
-                                    <div class="result-label">درآمد تقریبی ماهانه</div>
-                                    <div class="result-value" id="youtube-monthly">$1,976.70</div>
-                                </div>
-
-                                <div class="result-item">
-                                    <div class="result-label">درآمد تقریبی سالانه</div>
-                                    <div class="result-value" id="youtube-yearly">$23,720.40</div>
-                                </div>
+                        <!-- بخش تماس کاربر -->
+                        <div class="contact-section" style="margin-top: 2rem; padding: 2rem; background: var(--gray-50); border-radius: var(--border-radius); border: 1px solid var(--gray-200);">
+                            <h3 style="text-align: center; margin-bottom: 1rem; color: var(--gray-800);">
+                                شماره تماس برای ارتباط با شما
+                            </h3>
+                            <div class="form-group">
+                                <input type="tel" class="form-input" placeholder="شماره تلفن خود را وارد کنید" required style="text-align: center; font-size: 1.1rem;">
                             </div>
-
-                            <div class="info-box">
-                                <div class="info-title">نکات مهم درآمدزایی یوتیوب</div>
-                                <div class="info-text">
-                                    درآمد یوتیوب بر اساس نرخ CPM (هزینه به ازای هر 1000 بازدید) محاسبه می‌شود. موضوع کانال، کیفیت محتوا، نرخ تعامل و موقعیت جغرافیایی مخاطبان بر روی درآمد شما تاثیر مستقیم دارد.
-                                </div>
-                            </div>
+                            <p style="text-align: center; color: var(--gray-600); margin-top: 1rem;">
+                                کارشناسان ما به زودی با شما تماس خواهند گرفت
+                            </p>
                         </div>
-                    </div>
+
+                        <button type="submit" class="btn btn--primary btn--lg" style="width: 100%; margin-top: 2rem;">
+                            <i class="fas fa-paper-plane"></i>
+                            ارسال اطلاعات برای تحلیل
+                        </button>
+                    </form>
                 </div>
             </div>
 
-            <div class="calculator-content" id="adsense-content">
-                <h2 class="section-title">تحلیل درآمد ادسنس</h2>
+            <!-- تب محاسبه درآمد یوتیوب -->
+            <div class="calculator-content" id="youtube-calc-content">
+                <h2 class="section-title">محاسبه درآمد کانال یوتیوب</h2>
 
                 <div class="adsense-calculator">
                     <div class="slider-section">
                         <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--gray-800);">
-                            محاسبه درآمد وبسایت
+                            محاسبه درآمد کانال یوتیوب
                         </h3>
                         <p style="text-align: center; color: var(--gray-600); margin-bottom: 2rem;">
                             اسلایدر را به چپ و راست بکشید تا پتانسیل های درآمدزایی محاسبه شود.
@@ -245,74 +300,71 @@
                             <div class="slider-container">
                                 <div class="slider-header">
                                     <span>View/Day</span>
-                                    <span class="slider-value" id="adsense-viewsValue">368,400</span>
+                                    <span class="slider-value" id="youtube-calc-viewsValue">368,400</span>
                                 </div>
-                                <input type="range" min="1000" max="1000000" value="368400" class="slider" id="adsense-viewsSlider">
+                                <input type="range" min="1000" max="1000000" value="368400" class="slider" id="youtube-calc-viewsSlider">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">موضوع فعالیت وبسایت</label>
-                            <select class="form-select" id="adsense-category">
-                                <option value="film-music">فیلم و موسیقی</option>
-                                <option value="cars">خودرو</option>
-                                <option value="animals">حیوانات</option>
-                                <option value="sports">ورزشی</option>
-                                <option value="travel">سفر</option>
-                                <option value="gaming">گیمینگ</option>
-                                <option value="general">عمومی و مردم</option>
-                                <option value="comedy">کمدی</option>
-                                <option value="entertainment">سرگرمی</option>
-                                <option value="news">اخبار</option>
-                                <option value="fashion">لباس و استایل</option>
-                                <option value="education">آموزشی</option>
-                                <option value="tech">علم و تکنولوژی</option>
-                                <option value="other">سایر</option>
+                            <label class="form-label">موضوع فعالیت کانال</label>
+                            <select class="form-select custom-select" id="youtube-calc-category">
+                                <option value="film-music">فیلم و موسیکی </option>
+                                <option value="cars">خودرو </option>
+                                <option value="animals">حیوانات </option>
+                                <option value="sports">ورزشی </option>
+                                <option value="travel">سفر </option>
+                                <option value="gaming">گیمینگ </option>
+                                <option value="general">عمومی و مردم </option>
+                                <option value="comedy">کمدی </option>
+                                <option value="entertainment">سرگرمی </option>
+                                <option value="news">اخبار </option>
+                                <option value="fashion">لباس و استایل </option>
+                                <option value="education">آموزشی </option>
+                                <option value="tech">علم و تکنولوژی </option>
+                                <option value="other">سایر </option>
                             </select>
 
-                                 <!-- <div class="cpm-info">
-                                <div class="info-text">
-                                    نرخ CPM فعلی: <span class="cpm-rate" id="adsense-cpm-rate">$4</span> به ازای هر 1000 بازدید
+                             <div class="cpm-display">
+                                <div class="cpm-info">
+                                    <div class="info-text">
+                                        نرخ CPM فعلی: <span class="cpm-rate" id="youtube-calc-cpm-rate">$4</span> به ازای هر 1000 بازدید
+                                    </div>
                                 </div>
-                            </div> -->
+                            </div>
 
-                            <div class="form-group" id="adsense-other-category-input" style="display: none; margin-top: 1rem;">
+                            <div class="form-group" id="youtube-calc-other-category-input" style="display: none; margin-top: 1rem;">
                                 <input type="text" class="form-input" placeholder="موضوع فعالیت خود را وارد کنید">
                             </div>
-                        </div>
-
-                        <div class="ai-checkbox">
-                            <input type="checkbox" id="ai-content">
-                            <label for="ai-content">مطالب با هوش مصنوعی تولید شده‌اند</label>
                         </div>
                     </div>
 
                     <div class="results-section">
-                        <h3 class="results-title">نتایج تحلیل ادسنس</h3>
+                        <h3 class="results-title">نتایج تحلیل درآمد یوتیوب</h3>
 
                         <div class="results-grid">
                             <div class="result-item">
                                 <div class="result-label">درآمد تقریبی روزانه</div>
-                                <div class="result-value" id="adsense-daily">$65.89</div>
+                                <div class="result-value" id="youtube-calc-daily">$1,473.60</div>
                             </div>
 
                             <div class="result-item">
                                 <div class="result-label">درآمد تقریبی ماهانه</div>
-                                <div class="result-value" id="adsense-monthly">$1,976.70</div>
+                                <div class="result-value" id="youtube-calc-monthly">$44,208.00</div>
                             </div>
 
                             <div class="result-item">
                                 <div class="result-label">درآمد تقریبی سالانه</div>
-                                <div class="result-value" id="adsense-yearly">$23,720.40</div>
+                                <div class="result-value" id="youtube-calc-yearly">$530,496.00</div>
                             </div>
                         </div>
 
-                        <!-- <div class="info-box">
-                            <div class="info-title">نکات مهم درآمدزایی ادسنس</div>
+                        <div class="info-box">
+                            <div class="info-title">نکات مهم درآمدزایی یوتیوب</div>
                             <div class="info-text">
-                                درآمد گوگل ادسنس بر اساس نرخ CPM (هزینه به ازای هر 1000 بازدید) محاسبه می‌شود. موضوع وبسایت، کیفیت محتوا، ترافیک و موقعیت جغرافیایی بازدیدکنندگان بر روی درآمد شما تاثیر مستقیم دارد.
+                                درآمد یوتیوب بر اساس نرخ CPM (هزینه به ازای هر 1000 بازدید) محاسبه می‌شود. موضوع کانال، کیفیت محتوا، نرخ تعامل و موقعیت جغرافیایی مخاطبان بر روی درآمد شما تاثیر مستقیم دارد.
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -321,8 +373,10 @@
 {% endblock %}
 
 {% block extra_js %}
+    <script src="{% static 'js/main.js' %}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+
+
             // نرخ CPM بر اساس موضوع (دلار به ازای هر 1000 بازدید)
             const cpmRates = {
                 'film-music': 4,
@@ -357,48 +411,37 @@
                 });
             });
 
-            // YouTube Sliders and Elements
-            const youtubeViewsSlider = document.getElementById('youtube-viewsSlider');
-            const youtubeViewsValue = document.getElementById('youtube-viewsValue');
-            const youtubeCategory = document.getElementById('youtube-category');
-            const youtubeCpmRate = document.getElementById('youtube-cpm-rate');
+            // YouTube Calc Sliders and Elements
+            const youtubeCalcViewsSlider = document.getElementById('youtube-calc-viewsSlider');
+            const youtubeCalcViewsValue = document.getElementById('youtube-calc-viewsValue');
+            const youtubeCalcCategory = document.getElementById('youtube-calc-category');
+            const youtubeCalcCpmRate = document.getElementById('youtube-calc-cpm-rate');
 
-            // AdSense Sliders and Elements
-            const adsenseViewsSlider = document.getElementById('adsense-viewsSlider');
-            const adsenseViewsValue = document.getElementById('adsense-viewsValue');
-            const adsenseCategory = document.getElementById('adsense-category');
-            const adsenseCpmRate = document.getElementById('adsense-cpm-rate');
-
-            // YouTube Event Listeners
-            youtubeViewsSlider.addEventListener('input', function() {
+            // YouTube Calc Event Listeners
+            youtubeCalcViewsSlider.addEventListener('input', function() {
                 const value = parseInt(this.value).toLocaleString('fa-IR');
-                youtubeViewsValue.textContent = value;
-                calculateYouTubeRevenue();
+                youtubeCalcViewsValue.textContent = value;
+                calculateYouTubeCalcRevenue();
             });
 
-            youtubeCategory.addEventListener('change', function() {
-                const rate = cpmRates[this.value];
-                youtubeCpmRate.textContent = `$${rate}`;
-                calculateYouTubeRevenue();
+            youtubeCalcCategory.addEventListener('change', function() {
+                const selectedValue = this.value;
+                const cpm = cpmRates[selectedValue];
+                youtubeCalcCpmRate.textContent = `$${cpm}`;
+                calculateYouTubeCalcRevenue();
+
+                // نمایش فیلد سایر
+                if (selectedValue === 'other') {
+                    document.getElementById('youtube-calc-other-category-input').style.display = 'block';
+                } else {
+                    document.getElementById('youtube-calc-other-category-input').style.display = 'none';
+                }
             });
 
-            // AdSense Event Listeners
-            adsenseViewsSlider.addEventListener('input', function() {
-                const value = parseInt(this.value).toLocaleString('fa-IR');
-                adsenseViewsValue.textContent = value;
-                calculateAdsenseRevenue();
-            });
-
-            adsenseCategory.addEventListener('change', function() {
-                const rate = cpmRates[this.value];
-                adsenseCpmRate.textContent = `$${rate}`;
-                calculateAdsenseRevenue();
-            });
-
-            // *********************محاسبه درآمد یوتیوب**********************
-            function calculateYouTubeRevenue() {
-                const views = parseInt(youtubeViewsSlider.value);
-                const category = youtubeCategory.value;
+            // محاسبه درآمد تب محاسبه یوتیوب
+            function calculateYouTubeCalcRevenue() {
+                const views = parseInt(youtubeCalcViewsSlider.value);
+                const category = youtubeCalcCategory.value;
                 const cpm = cpmRates[category];
 
                 // محاسبه درآمد بر اساس CPM
@@ -406,25 +449,9 @@
                 const monthlyRevenue = (dailyRevenue * 30).toFixed(2);
                 const yearlyRevenue = (monthlyRevenue * 12).toFixed(2);
 
-                document.getElementById('youtube-daily').textContent = `$${dailyRevenue}`;
-                document.getElementById('youtube-monthly').textContent = `$${monthlyRevenue}`;
-                document.getElementById('youtube-yearly').textContent = `$${yearlyRevenue}`;
-            }
-
-            // *********************محاسبه درآمد ادسنس**********************
-            function calculateAdsenseRevenue() {
-                const views = parseInt(adsenseViewsSlider.value);
-                const category = adsenseCategory.value;
-                const cpm = cpmRates[category];
-
-                // محاسبه درآمد بر اساس CPM
-                const dailyRevenue = (views * cpm / 1000).toFixed(2);
-                const monthlyRevenue = (dailyRevenue * 30).toFixed(2);
-                const yearlyRevenue = (monthlyRevenue * 12).toFixed(2);
-
-                document.getElementById('adsense-daily').textContent = `$${dailyRevenue}`;
-                document.getElementById('adsense-monthly').textContent = `$${monthlyRevenue}`;
-                document.getElementById('adsense-yearly').textContent = `$${yearlyRevenue}`;
+                document.getElementById('youtube-calc-daily').textContent = `$${dailyRevenue}`;
+                document.getElementById('youtube-calc-monthly').textContent = `$${monthlyRevenue}`;
+                document.getElementById('youtube-calc-yearly').textContent = `$${yearlyRevenue}`;
             }
 
             // Other functionality
@@ -440,19 +467,12 @@
                 }
             });
 
-            const youtubeOtherCategoryInput = document.getElementById('youtube-other-category-input');
+            const adsenseOtherCategory = document.getElementById('adsense-other-category');
             const adsenseOtherCategoryInput = document.getElementById('adsense-other-category-input');
 
-            youtubeCategory.addEventListener('change', function() {
-                if (this.value === 'other') {
-                    youtubeOtherCategoryInput.style.display = 'block';
-                } else {
-                    youtubeOtherCategoryInput.style.display = 'none';
-                }
-            });
-
-            adsenseCategory.addEventListener('change', function() {
-                if (this.value === 'other') {
+            adsenseOtherCategory.addEventListener('click', function() {
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                if (checkbox.checked) {
                     adsenseOtherCategoryInput.style.display = 'block';
                 } else {
                     adsenseOtherCategoryInput.style.display = 'none';
@@ -480,9 +500,10 @@
                 });
             });
 
-            const fileUpload = document.getElementById('youtube-screenshot');
+            // File upload for YouTube Cash
+            const youtubeFileUpload = document.getElementById('youtube-screenshot');
 
-            fileUpload.addEventListener('click', function() {
+            youtubeFileUpload.addEventListener('click', function() {
                 const input = document.createElement('input');
                 input.type = 'file';
                 input.accept = 'image/*';
@@ -493,7 +514,7 @@
                             alert('حجم فایل نباید بیشتر از 5MB باشد.');
                             return;
                         }
-                        fileUpload.innerHTML = `
+                        youtubeFileUpload.innerHTML = `
                             <i class="fas fa-check-circle" style="color: #10b981;"></i>
                             <p>فایل با موفقیت آپلود شد</p>
                             <span>${file.name}</span>
@@ -503,13 +524,45 @@
                 input.click();
             });
 
-            const youtubeForm = document.getElementById('youtube-form');
+            // File upload for AdSense Cash
+            const adsenseFileUpload = document.getElementById('adsense-screenshot');
 
-            youtubeForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('تحلیل درآمد یوتیوب با موفقیت انجام شد!');
+            adsenseFileUpload.addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('حجم فایل نباید بیشتر از 5MB باشد.');
+                            return;
+                        }
+                        adsenseFileUpload.innerHTML = `
+                            <i class="fas fa-check-circle" style="color: #10b981;"></i>
+                            <p>فایل با موفقیت آپلود شد</p>
+                            <span>${file.name}</span>
+                        `;
+                    }
+                };
+                input.click();
             });
 
+            // Form submissions
+            const youtubeCashForm = document.getElementById('youtube-cash-form');
+            const adsenseCashForm = document.getElementById('adsense-cash-form');
+
+            youtubeCashForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('اطلاعات کانال یوتیوب با موفقیت ارسال شد! کارشناسان ما به زودی با شما تماس خواهند گرفت.');
+            });
+
+            adsenseCashForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('اطلاعات وبسایت با موفقیت ارسال شد! کارشناسان ما به زودی با شما تماس خواهند گرفت.');
+            });
+
+            // Mobile menu
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
 
@@ -529,9 +582,9 @@
                 });
             }
 
+
             // Initialize calculations
-            calculateYouTubeRevenue();
-            calculateAdsenseRevenue();
-        });
+            calculateYouTubeCalcRevenue();
+        ;
     </script>
 {% endblock extra_js %}

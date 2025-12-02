@@ -4,15 +4,12 @@
 {% block title %}درباره ما - ایران اد پی{% endblock %}
 {% block description %}درباره ایران ادپی و ارزش‌های ما{% endblock %}
 
-    {% block extra_css %}
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/components.css" %}">
-    <link rel="stylesheet" href="{% static "css/layouts.css" %}">
-    <link rel="stylesheet" href="{% static "css/responsive.css" %}">
-    <link rel="stylesheet" href="{% static "css/utilities.css" %}">
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/templates.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    {% endblock %}
+{% endblock %}
 
     {% block content %}
     <main class="main">
@@ -29,8 +26,7 @@
             <div class="container">
                 <h1 class="services-hero__title">درباره ما و ارزش‌های ما</h1>
                 <p class="services-hero__subtitle">
-ما باور داریم که هر کسب‌وکاری سزاوار یک وبسایت حرفه‌ای است.
-                        با تیمی متخصص و تجربه‌ای چندساله، بهترین راه‌حل‌ها را ارائه می‌دهیم                </p>
+                        با تیمی متخصص و تجربه‌ای چندساله، بهترین راه‌حل‌ها را ارائه می‌دهیم</p>
             </div>
         </section>
         <section class="page-section values-section">

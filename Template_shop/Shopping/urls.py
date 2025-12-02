@@ -20,5 +20,6 @@ urlpatterns = [
 
     path("templates/<slug:slug>/", template_detail, name="template_detail"),
     path("upload-template/", views.upload_template, name="upload_template"),
+    path("load-more-templates/", views.load_more_templates, name="load_more_templates"),
 
 ]

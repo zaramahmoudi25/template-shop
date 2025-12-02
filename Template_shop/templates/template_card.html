@@ -1,0 +1,77 @@
+{% load custom_filters %}
+{% load humanize %}
+                        {% for item in items %}
+                            <div class="template-card">
+                                <div class="template-image">
+                                    <a href="{% url 'template_detail' slug=item.slug %}">
+                                        <img src="
+                                        {% if item.template_type == 'themeforest' %}
+                                            {% if item.main_image %}
+                                                {{ item.main_image.url }}
+                                            {% else %}
+                                                {{ item.main_image_url }}
+                                            {% endif %}
+                                        {% else %}
+                                            {{ item.thumbnail.url }}
+                                        {% endif %}
+                                        " class="template-main-img">
+
+                                        <div class="template-overlay"></div>
+
+                                        <div class="template-badges">
+                                            {% if item.sales and item.sales > 100 %}
+                                                <span class="badge badge--primary">پرفروش</span>
+                                            {% endif %}
+                                            {% if item.rating and item.rating > 4 %}
+                                                <span class="badge badge--primary">پرامتیاز</span>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="template-content">
+                                    <h3 class="template-title">{{ item.title }}</h3>
+
+                                    <p class="template-description">
+                                        {{ item.description|truncatechars:120 }}
+                                    </p>
+
+                                    <div class="template-meta">
+                                        <span class="template-category">{{ item.category }}</span>
+                                    </div>
+
+                                    <div class="template-footer">
+
+                                        <div class="template-price">
+                                            <div class="price-display">
+                                                <span class="price-dollar">
+                                                   {{ item.price|floatformat:0 }} دلار
+                                                </span>
+                                                <span class="price-rial">
+                                                    {{ item.price|mul:100000|intcomma }} تومان
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="template-stats">
+                                            {% if item.rating %}
+                                                <span class="stat rating">
+                                                    ⭐ {{ item.rating|floatformat:1 }}
+                                                </span>
+                                            {% endif %}
+                                            {% if item.sales %}
+                                                <span class="stat sales">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                    {{ item.sales|intcomma }}
+                                                </span>
+                                            {% endif %}
+                                        </div>
+
+                                        <a href="{% url 'template_detail' slug=item.slug %}" class="view-btn">
+                                            <i class="fas fa-eye"></i>
+                                            مشاهده
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
