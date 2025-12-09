@@ -10,7 +10,7 @@ class ProfessionalLanding {
         this.setupMouseEffects();
         this.setupLoadingAnimation();
         this.setupMobileMenu();
-        this.setupAuthLinks(); // اضافه شد
+        this.setupAuthLinks();
     }
 
     setupMobileMenu() {
@@ -46,23 +46,19 @@ class ProfessionalLanding {
     }
 
     setupAuthLinks() {
-        // مدیریت کلیک روی لینک‌های احراز هویت در منوی موبایل
         const authLinks = document.querySelectorAll('#mainNav .auth-link, #mainNav .nav-link[href*="login"], #mainNav .nav-link[href*="register"]');
         
         authLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 console.log('Auth link clicked:', link.href);
                 
-                // بستن منوی موبایل پس از کلیک
                 this.closeMobileMenu();
                 
-                // اگر لینک داخلی است، از پیش‌فرض جلوگیری نکن
                 if (link.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
                     const targetSection = link.getAttribute('href').substring(1);
                     this.navigateToSection(targetSection);
                 }
-                // برای لینک‌های خارجی، اجازه دهید به صورت طبیعی کار کنند
             });
         });
     }
@@ -76,7 +72,6 @@ class ProfessionalLanding {
             mobileMenuBtn.classList.add('active');
             document.body.classList.add('menu-open');
             
-            // اضافه کردن انیمیشن به لینک‌ها
             const navLinks = mainNav.querySelectorAll('.nav-link, .auth-link');
             navLinks.forEach((link, index) => {
                 link.style.animationDelay = `${index * 0.1}s`;
@@ -94,7 +89,6 @@ class ProfessionalLanding {
             mobileMenuBtn.classList.remove('active');
             document.body.classList.remove('menu-open');
             
-            // حذف انیمیشن از لینک‌ها
             const navLinks = mainNav.querySelectorAll('.nav-link, .auth-link');
             navLinks.forEach(link => {
                 link.classList.remove('slide-in');
@@ -106,7 +100,6 @@ class ProfessionalLanding {
     navigateToSection(sectionId) {
         console.log('Navigating to section:', sectionId);
         
-        // اسکرول به بخش مورد نظر
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
             targetSection.scrollIntoView({
@@ -129,7 +122,7 @@ class ProfessionalLanding {
     }
 
     handleCardHover(e, card) {
-        if (window.innerWidth > 768) { // فقط در دسکتاپ
+        if (window.innerWidth > 768) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -160,7 +153,26 @@ class ProfessionalLanding {
     handleCardClick(e, card) {
         e.preventDefault();
         
-        // افکت ripple
+        // اگر کارت YouTube است
+        if (card.id === 'youtubeCard' || card.querySelector('.fa-youtube')) {
+            this.showComingSoonAlert("خدمات تحلیل یوتیوب و ادسنس");
+            return;
+        }
+        
+        // اگر کارت "به زودی" است
+        if (card.classList.contains('coming-soon')) {
+            this.showComingSoonAlert("این پلتفرم");
+            return;
+        }
+        
+        // اگر کارت قالب‌ها است (با آیکون palette)
+        if (card.querySelector('.fa-palette')) {
+            // هدایت به صفحه قالب‌ها
+            window.location.href = '/Pages/templates.html';
+            return;
+        }
+        
+        // افکت ripple برای کارت‌های دیگر
         const ripple = document.createElement('span');
         const rect = card.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -186,12 +198,39 @@ class ProfessionalLanding {
             ripple.remove();
         }, 600);
         
-        // هدایت پس از انیمیشن
+        // هدایت برای سایر لینک‌ها
         setTimeout(() => {
-            if (card.href) {
+            if (card.href && !card.href.includes('#') && !card.querySelector('.fa-youtube') && !card.classList.contains('coming-soon')) {
                 window.location.href = card.href;
             }
         }, 300);
+    }
+
+    showComingSoonAlert(title = "این سرویس") {
+        // استفاده از SweetAlert2
+        Swal.fire({
+            title: 'به زودی فعال می‌شود!',
+            html: `
+                <div style="text-align: center; direction: rtl;">
+                   
+                    <p style="color: var(--gray-600); line-height: 1.6;">${title} در آینده نزدیک فعال خواهد شد</p>
+                </div>
+            `,
+            icon: 'info',
+            confirmButtonText: 'متوجه شدم',
+            confirmButtonColor: 'var(--primary-500)',
+            customClass: {
+                popup: 'rtl-popup',
+                title: 'rtl-title',
+                htmlContainer: 'rtl-text'
+            },
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
     }
 
     setupAnimations() {
@@ -210,7 +249,6 @@ class ProfessionalLanding {
             observer.observe(el);
         });
 
-        // اضافه کردن استایل‌های CSS برای انیمیشن‌ها
         this.addAnimationStyles();
     }
 
@@ -239,7 +277,6 @@ class ProfessionalLanding {
                 }
             }
             
-            /* انیمیشن لینک‌های منوی موبایل */
             .nav-link.slide-in, .auth-link.slide-in {
                 animation: slideInRight 0.3s ease-out forwards;
                 opacity: 0;
@@ -253,7 +290,6 @@ class ProfessionalLanding {
                 }
             }
             
-            /* استایل‌های منوی موبایل */
             .menu-open {
                 overflow: hidden;
             }
@@ -266,6 +302,32 @@ class ProfessionalLanding {
             
             #mainNav {
                 transition: all 0.3s ease-in-out;
+            }
+            
+            /* استایل‌های SweetAlert فارسی */
+            .rtl-popup {
+                direction: rtl !important;
+                text-align: right !important;
+                font-family: 'Sahel', Tahoma, sans-serif !important;
+                border-radius: 1rem !important;
+                border: 3px solid var(--primary-500) !important;
+            }
+            
+            .rtl-title {
+                font-family: 'Sahel', Tahoma, sans-serif !important;
+                font-weight: 700 !important;
+                color: var(--gray-900) !important;
+            }
+            
+            .rtl-text {
+                font-family: 'Sahel', Tahoma, sans-serif !important;
+            }
+            
+            .swal2-confirm {
+                font-family: 'Sahel', Tahoma, sans-serif !important;
+                font-weight: 600 !important;
+                padding: 0.75rem 2rem !important;
+                border-radius: 0.5rem !important;
             }
         `;
         document.head.appendChild(style);

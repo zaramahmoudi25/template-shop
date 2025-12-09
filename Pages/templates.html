@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="/CSS/dashboard.css">
     <link rel="stylesheet" href="/CSS/templates.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-  
 </head>
 <body>
     <header class="header">
@@ -279,6 +277,12 @@
                         <i class="fas fa-plus"></i>
                         نمایش قالب‌های بیشتر
                     </button>
+                    
+                    <!-- دکمه کوچک برای تم فارست -->
+                    <a href="https://themeforest.net" target="_blank" class="btn btn--outline btn--sm themeforest-btn-small">
+                        <i class="fas fa-external-link-alt"></i>
+                        نمایش قالب‌های بیشتر در تم فارست
+                    </a>
                 </div>
             </div>
         </section>
@@ -358,58 +362,6 @@
                                 <span>طراح UI/UX</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش همکاران جدید -->
-        <section class="partners-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">لورم ایپسوم</h2>
-                    <p class="section-subtitle">با بهترین‌ها همکاری می‌کنیم</p>
-                </div>
-                
-                <div class="partners-grid">
-                    <div class="partner-card">
-                        <div class="partner-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3 class="partner-name">لورم ایپسوم</h3>
-                        <p class="partner-description">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                        </p>
-                    </div>
-                    
-                    <div class="partner-card">
-                        <div class="partner-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <h3 class="partner-name">لورم ایپسوم</h3>
-                        <p class="partner-description">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                        </p>
-                    </div>
-                    
-                    <div class="partner-card">
-                        <div class="partner-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3 class="partner-name">لورم ایپسوم</h3>
-                        <p class="partner-description">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                        </p>
-                    </div>
-                    
-                    <div class="partner-card">
-                        <div class="partner-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3 class="partner-name">لورم ایپسوم</h3>
-                        <p class="partner-description">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -519,7 +471,11 @@
                 sales: 89,
                 image: "/Images and SVGs/hero-template-1.png",
                 badges: ["پرفروش", "جدید"],
-                features: ["responsive", "seo", "support", "customizable"]
+                features: ["responsive", "seo", "support", "customizable"],
+                source: "shopify",
+                origin: "admin",
+                templateSource: "ایران ادپی",
+                buyCount: "89"
             },
             {
                 id: 2,
@@ -531,7 +487,11 @@
                 sales: 67,
                 image: "/Images and SVGs/hero-template-2.png",
                 badges: ["پرامتیاز"],
-                features: ["responsive", "seo", "support", "fast"]
+                features: ["responsive", "seo", "support", "fast"],
+                source: "wordpress",
+                origin: "themeforest",
+                templateSource: "تم فارست",
+                buyCount: "67"
             },
             {
                 id: 3,
@@ -543,7 +503,11 @@
                 sales: 45,
                 image: "/Images and SVGs/hero-template-3.png",
                 badges: ["اقتصادی"],
-                features: ["responsive", "customizable"]
+                features: ["responsive", "customizable"],
+                source: "html",
+                origin: "admin",
+                templateSource: "ایران ادپی",
+                buyCount: "45"
             },
             {
                 id: 4,
@@ -554,7 +518,11 @@
                 sales: 34,
                 image: "/Images and SVGs/hero-template-1.png",
                 badges: ["جدید"],
-                features: ["responsive", "seo", "support", "fast"]
+                features: ["responsive", "seo", "support", "fast"],
+                source: "wordpress",
+                origin: "themeforest",
+                templateSource: "تم فارست",
+                buyCount: "34"
             },
             {
                 id: 5,
@@ -566,7 +534,11 @@
                 sales: 56,
                 image: "/Images and SVGs/hero-template-2.png",
                 badges: ["پرفروش"],
-                features: ["responsive", "seo", "customizable"]
+                features: ["responsive", "seo", "customizable"],
+                source: "react",
+                origin: "admin",
+                templateSource: "ایران ادپی",
+                buyCount: "56"
             },
             {
                 id: 6,
@@ -577,7 +549,11 @@
                 sales: 42,
                 image: "/Images and SVGs/hero-template-3.png",
                 badges: ["جدید", "پرامتیاز"],
-                features: ["responsive", "seo", "support", "fast", "customizable"]
+                features: ["responsive", "seo", "support", "fast", "customizable"],
+                source: "wordpress",
+                origin: "themeforest",
+                templateSource: "تم فارست",
+                buyCount: "42"
             }
         ];
 
@@ -597,23 +573,14 @@
 
         // ==================== DOM ELEMENTS ====================
         const elements = {
-            // Mobile Menu
             mobileMenuBtn: document.getElementById('mobileMenuBtn'),
             mainNav: document.getElementById('mainNav'),
-            
-            // سرچ جدید در هدر
             headerSearchInput: document.querySelector('.header-search-input'),
             headerSearchForm: document.querySelector('.header-search-form'),
-            
-            // Testimonials جدید
             viewMoreTestimonials: document.getElementById('viewMoreTestimonials'),
             addTestimonial: document.getElementById('addTestimonial'),
-            
-            // Filter Toggle جدید
             showFiltersBtn: document.getElementById('showFiltersBtn'),
             hideFiltersBtnMain: document.getElementById('hideFiltersBtnMain'),
-            
-            // بقیه المنت‌ها
             searchTags: document.querySelectorAll('.search-tag'),
             categoryCheckboxes: document.querySelectorAll('input[name="category"]'),
             minPrice: document.getElementById('minPrice'),
@@ -644,28 +611,20 @@
 
         // ==================== EVENT LISTENERS ====================
         function setupEventListeners() {
-            // Mobile Menu
             elements.mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            
-            // سرچ جدید در هدر
             elements.headerSearchForm.addEventListener('submit', handleHeaderSearch);
             elements.headerSearchInput.addEventListener('input', debounce(handleHeaderSearchInput, 300));
-            
-            // Testimonials جدید
             elements.viewMoreTestimonials.addEventListener('click', handleViewMoreTestimonials);
             elements.addTestimonial.addEventListener('click', handleAddTestimonial);
             
-            // Quick Search Tags
             elements.searchTags.forEach(tag => {
                 tag.addEventListener('click', handleQuickSearch);
             });
             
-            // Category Filters
             elements.categoryCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', handleCategoryFilter);
             });
             
-            // Price Filters
             elements.minPrice.addEventListener('input', debounce(handlePriceFilter, 500));
             elements.maxPrice.addEventListener('input', debounce(handlePriceFilter, 500));
             
@@ -673,26 +632,19 @@
                 preset.addEventListener('click', handlePricePreset);
             });
             
-            // Feature Filters
             elements.featureCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', handleFeatureFilter);
             });
             
-            // Sort and Layout
             elements.sortBy.addEventListener('change', handleSort);
             elements.layoutBtns.forEach(btn => {
                 btn.addEventListener('click', handleLayoutChange);
             });
             
-            // Filter Actions
             elements.resetAllFilters.addEventListener('click', resetAllFilters);
             elements.applyFilters.addEventListener('click', applyAllFilters);
-            
-            // Results Actions
             elements.loadMoreBtn.addEventListener('click', loadMoreTemplates);
             elements.compareTemplates.addEventListener('click', handleCompare);
-            
-            // Scroll to Top
             window.addEventListener('scroll', toggleScrollToTop);
             elements.scrollToTop.addEventListener('click', scrollToTop);
         }
@@ -724,7 +676,6 @@
             currentState.activeFilters.searchTerm = searchTerm;
             applyAllFilters();
             
-            // اسکرول به بخش نتایج
             document.querySelector('.templates-results-section').scrollIntoView({
                 behavior: 'smooth'
             });
@@ -933,6 +884,19 @@
             updateActiveFiltersDisplay();
         }
 
+        // ==================== HELPER FUNCTIONS ====================
+        function getCategoryName(category) {
+            const categories = {
+                'shopify': 'فروشگاهی',
+                'company': 'شرکتی',
+                'personal': 'شخصی',
+                'blog': 'بلاگ',
+                'portfolio': 'نمونه کار',
+                'education': 'آموزشی'
+            };
+            return categories[category] || category;
+        }
+
         // ==================== PRICE DISPLAY FORMAT ====================
         function formatPrice(price) {
             const dollar = price.toLocaleString('fa-IR');
@@ -978,6 +942,13 @@
                     <div class="template-image">
                         <img src="${template.image}" alt="${template.title}" class="template-img">
                         <div class="template-overlay">
+                            <!-- اطلاعات هاور جدید -->
+                            <div class="template-hover-info">
+                                <div class="hover-info-item">
+                                    <i class="fas fa-tag"></i>
+                                    <span>منبع: ${template.templateSource}</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="template-badges">
                             ${template.badges.map(badge => `<span class="badge badge--primary">${badge}</span>`).join('')}
@@ -989,6 +960,10 @@
                         
                         <div class="template-meta">
                             <span class="template-category">${getCategoryName(template.category)}</span>
+                            <div class="template-buy-info">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>${template.buyCount}+ خرید</span>
+                            </div>
                         </div>
 
                         <div class="template-footer">
@@ -1007,18 +982,6 @@
             
             elements.resultsCount.textContent = `${currentState.templates.length.toLocaleString('fa-IR')} قالب`;
             elements.loadMoreBtn.style.display = currentState.templates.length > currentState.displayedCount ? 'block' : 'none';
-        }
-
-        function getCategoryName(category) {
-            const categories = {
-                'shopify': 'فروشگاهی',
-                'company': 'شرکتی',
-                'personal': 'شخصی',
-                'blog': 'بلاگ',
-                'portfolio': 'نمونه کار',
-                'education': 'آموزشی'
-            };
-            return categories[category] || category;
         }
 
         // ==================== ACTIVE FILTERS DISPLAY ====================

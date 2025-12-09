@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصفیه حساب - ایران اد پی</title>
+    <link rel="stylesheet" href="/CSS/base.css">
+    <link rel="stylesheet" href="/CSS/components.css">
+    <link rel="stylesheet" href="/CSS/layouts.css">
+    <link rel="stylesheet" href="/CSS/responsive.css">
+    <link rel="stylesheet" href="/CSS/utilities.css">
+    <link rel="stylesheet" href="/CSS/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* استایل‌های فشرده صفحه تصفیه حساب */
+        .settlement-page {
+            background: var(--gray-50);
+            min-height: 100vh;
+            padding: 80px 0 30px;
+        }
+        
+        .settlement-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .settlement-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .settlement-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .settlement-header h1 {
+            color: var(--gray-900);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .settlement-header p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+        
+        /* بخش موجودی‌ها */
+        .balance-section {
+            margin-bottom: 2rem;
+        }
+        
+        .balance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .balance-card {
+            background: var(--gray-50);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .balance-card.total {
+            background: var(--success-50);
+            border: 1px solid var(--success-200);
+        }
+        
+        .balance-card.withdrawable {
+            background: var(--warning-50);
+            border: 1px solid var(--warning-200);
+        }
+        
+        .balance-label {
+            color: var(--gray-700);
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+            display: block;
+            font-weight: 600;
+        }
+        
+        .balance-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            direction: ltr;
+            display: block;
+        }
+        
+        .balance-card.total .balance-amount {
+            color: var(--success-700);
+        }
+        
+        .balance-card.withdrawable .balance-amount {
+            color: var(--warning-700);
+        }
+        
+        .balance-note {
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+        
+        .settlement-form {
+            margin-top: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .form-info {
+            color: var(--gray-500);
+            font-size: 0.75rem;
+            margin-top: 0.2rem;
+        }
+        
+        .settlement-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: white;
+            color: var(--primary-500);
+            border: 1px solid var(--primary-500);
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary-50);
+        }
+        
+        /* استایل دکمه ثبت درخواست */
+        .submit-btn {
+            background: linear-gradient(145deg, #FFD43B, #FAB005);
+            color: #3D2800;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 3px 6px rgba(250, 176, 5, 0.3),
+                0 1px 0px #E6B400,
+                inset 0 1px 0px rgba(255, 255, 255, 0.4);
+            flex: 1;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(145deg, #FAB005, #F08C00);
+            transform: translateY(-1px);
+            box-shadow: 
+                0 4px 8px rgba(250, 176, 5, 0.4),
+                0 2px 0px #E6B400,
+                inset 0 1px 0px rgba(255, 255, 255, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0px);
+            box-shadow: 
+                0 1px 3px rgba(250, 176, 5, 0.2),
+                0 1px 0px #E6B400,
+                inset 0 1px 0px rgba(255, 255, 255, 0.4);
+        }
+        
+        .cancel-btn {
+            flex: 1;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .settlement-page {
+                padding: 70px 0 20px;
+            }
+            
+            .settlement-card {
+                padding: 1.5rem;
+            }
+            
+            .settlement-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .balance-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .balance-amount {
+                font-size: 1.4rem;
+            }
+            
+            .back-btn {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .settlement-container {
+                padding: 0 0.75rem;
+            }
+            
+            .settlement-card {
+                padding: 1.2rem;
+                border-radius: var(--border-radius);
+            }
+            
+            .settlement-header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .settlement-header p {
+                font-size: 0.85rem;
+            }
+            
+            .balance-card {
+                padding: 1rem;
+            }
+            
+            .balance-amount {
+                font-size: 1.3rem;
+            }
+            
+            .settlement-actions {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            
+            .form-control {
+                padding: 0.5rem 0.7rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settlement-page">
+        <button class="btn back-btn" onclick="window.location.href='/Pages/dashboard.html'">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت
+        </button>
+        
+        <div class="settlement-container">
+            <div class="settlement-card">
+                <div class="settlement-header">
+                    <h1>تصفیه حساب</h1>
+                    <p>درخواست واریز موجودی حساب</p>
+                </div>
+                
+                <!-- بخش موجودی‌ها -->
+                <div class="balance-section">
+                    <div class="balance-grid">
+                        <div class="balance-card total">
+                            <span class="balance-label">موجودی کل</span>
+                            <span class="balance-amount">۳,۸۷۵,۰۰۰ تومان</span>
+                        </div>
+                        
+                        <div class="balance-card withdrawable">
+                            <span class="balance-label">قابل برداشت</span>
+                            <span class="balance-amount">۲,۵۴۰,۰۰۰ تومان</span>
+                        </div>
+                    </div>
+                    
+                    <div class="balance-note">
+                        <i class="fas fa-info-circle"></i>
+                        فقط موجودی قابل برداشت قابل واریز است
+                    </div>
+                </div>
+                
+                <form class="settlement-form" id="settlementForm">
+                    <div class="form-group">
+                        <label class="form-label">مبلغ درخواستی (تومان)</label>
+                        <input type="number" class="form-control" 
+                               placeholder="مبلغ مورد نظر" 
+                               min="100000" 
+                               max="2540000" 
+                               value="2540000" 
+                               required
+                               id="withdrawAmount">
+                        <div class="form-info">
+                            حداقل: ۱۰۰,۰۰۰ تومان
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">شماره کارت بانکی</label>
+                        <input type="text" class="form-control" 
+                               placeholder="6037-XXXX-XXXX-XXXX" 
+                               pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}"
+                               required
+                               id="cardNumber">
+                        <div class="form-info">
+                            شماره کارت ۱۶ رقمی
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">توضیحات (اختیاری)</label>
+                        <textarea class="form-control" rows="2" 
+                                  placeholder="توضیحاتی در مورد درخواست..."
+                                  id="description"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label" style="font-size: 0.85rem;">
+                            <input type="checkbox" required id="agreeTerms">
+                            <span class="checkmark"></span>
+                            با <a href="#" class="text-link" onclick="showTerms()">قوانین</a> برداشت موافقم
+                        </label>
+                    </div>
+                    
+                    <div class="settlement-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-check-circle"></i>
+                            ثبت درخواست
+                        </button>
+                        <button type="button" class="btn btn--outline cancel-btn" onclick="window.location.href='/Pages/dashboard.html'">
+                            <i class="fas fa-times"></i>
+                            انصراف
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // اعتبارسنجی مبلغ
+        const withdrawAmountInput = document.getElementById('withdrawAmount');
+        const maxAmount = 2540000;
+        const minAmount = 100000;
+        
+        withdrawAmountInput.addEventListener('change', function() {
+            const value = parseInt(this.value);
+            
+            if (value > maxAmount) {
+                this.value = maxAmount;
+                alert(`حداکثر مبلغ قابل برداشت ${maxAmount.toLocaleString('fa-IR')} تومان است.`);
+            } else if (value < minAmount) {
+                this.value = minAmount;
+                alert(`حداقل مبلغ قابل برداشت ${minAmount.toLocaleString('fa-IR')} تومان است.`);
+            }
+        });
+        
+        // اعتبارسنجی شماره کارت
+        const cardNumberInput = document.getElementById('cardNumber');
+        
+        cardNumberInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^\d]/g, '');
+            
+            if (value.length > 0) {
+                value = value.match(new RegExp('.{1,4}', 'g')).join('-');
+            }
+            
+            this.value = value;
+            
+            const digitsOnly = value.replace(/-/g, '');
+            if (digitsOnly.length > 16) {
+                this.value = value.substring(0, 19);
+            }
+        });
+        
+        // مدیریت فرم
+        document.getElementById('settlementForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const amount = parseInt(withdrawAmountInput.value);
+            const cardNumber = cardNumberInput.value;
+            
+            if (!cardNumber.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/)) {
+                alert('لطفاً شماره کارت را به صورت صحیح وارد کنید.');
+                cardNumberInput.focus();
+                return;
+            }
+            
+            if (amount < minAmount || amount > maxAmount) {
+                alert(`مبلغ باید بین ${minAmount.toLocaleString('fa-IR')} تا ${maxAmount.toLocaleString('fa-IR')} تومان باشد.`);
+                withdrawAmountInput.focus();
+                return;
+            }
+            
+            alert(`درخواست تصفیه حساب به مبلغ ${amount.toLocaleString('fa-IR')} تومان ثبت شد.\n\nشماره کارت: ${cardNumber}\n\nدرخواست شما در حال بررسی است و طی ۲۴ ساعت کاری آینده واریز خواهد شد.`);
+            
+            setTimeout(() => {
+                window.location.href = '/Pages/dashboard.html';
+            }, 2000);
+        });
+        
+        // نمایش قوانین
+        function showTerms() {
+            alert('قوانین و مقررات برداشت:\n\n1. برداشت فقط به شماره کارت خود کاربر امکان‌پذیر است.\n2. حداقل مبلغ برداشت ۱۰۰,۰۰۰ تومان است.\n3. واریزها طی ۲۴ ساعت کاری انجام می‌شوند.');
+            return false;
+        }
+    </script>
+</body>
+</html>

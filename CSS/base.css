@@ -1940,3 +1940,49 @@ select:focus-visible {
                 gap: 2rem;
             }
         }
+
+
+/* ئکمه ثبت نام و وورئ منوی موبایل */
+
+@media (max-width: 768px) {
+    .auth-buttons {
+        display: flex !important;
+        gap: 8px;
+        margin-left: 15px;
+        z-index: 1001;
+        position: relative;
+    }
+    
+    .auth-buttons .btn {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        min-width: 80px !important;
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 1002;
+    }
+    
+    .mobile-menu-btn {
+        z-index: 1000;
+    }
+    
+    body.menu-open .header__actions {
+        position: relative;
+    }
+    
+    body.menu-open .auth-buttons {
+        display: flex !important;
+    }
+    
+    .header-search {
+        display: none !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .auth-buttons {
+        display: flex;
+        gap: 10px;
+    }
+}
+

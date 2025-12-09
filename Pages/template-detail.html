@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="/CSS/template-detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-  
 </head>
 <body>
     <!-- Header -->
@@ -67,79 +66,72 @@
     <main class="main">
         <section class="template-detail-section">
             <div class="template-container">
-                <div class="template-main-card">
+                <div class="template-main-card" style="    margin-top: 25px;
+">
                     <div class="template-content">
-                        <!-- اسلایدر عکس در سمت چپ -->
+                        <!-- بخش عکس سمت چپ -->
                         <div class="template-gallery">
-                            <div class="slider-container">
-                                <div class="slider-track" id="sliderTrack">
-                                    <div class="slide">
-                                        <img src="/Images and SVGs/hero-template-1.png" alt="نمای اصلی قالب">
-                                    </div>
-                                    <div class="slide">
-                                        <img src="/Images and SVGs/hero-template-2.png" alt="صفحه محصولات">
-                                    </div>
-                                    <div class="slide">
-                                        <img src="/Images and SVGs/hero-template-3.png" alt="نمای موبایل">
-                                    </div>
-                                    <div class="slide">
-                                        <img src="/Images and SVGs/hero-template-4.png" alt="صفحه درباره ما">
-                                    </div>
-                                </div>
-                                
-                                <button class="slider-nav slider-prev" id="sliderPrev">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                                <button class="slider-nav slider-next" id="sliderNext">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
+                            <div class="single-image-container">
+                                <img src="/Images and SVGs/hero-template-1.png" alt="نمای اصلی قالب" class="main-template-image">
                             </div>
                             
-                            <div class="slider-dots" id="sliderDots">
-                            </div>
-                        </div>
-                        
-                        <div class="template-info">
-                            <div class="template-meta">
-                                <span class="template-category">فروشگاهی</span>
-                                <div class="template-rating">
-                                    <span class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </span>
-                                    <span class="rating-text">۴.۵ (۱۲۴ نظر)</span>
-                                </div>
-                            </div>
-                            
-                            <h1 class="template-title">قالب فروشگاهی مدرن</h1>
-                            
-                            <div class="template-description">
-                                <p>قالب فروشگاهی مدرن یک راه‌حل جامع و حرفه‌ای برای ایجاد فروشگاه اینترنتی است. این قالب با طراحی زیبا و کاربرپسند، تجربه خرید آنلاین را برای مشتریان شما بهینه می‌کند.</p>
-                            </div>
-                            
-                            <ul class="features-list">
-                                <li><i class="fas fa-check"></i> طراحی کاملاً واکنش‌گرا</li>
-                                <li><i class="fas fa-check"></i> سرعت لود فوق‌العاده</li>
-                                <li><i class="fas fa-check"></i> سئو بهینه شده</li>
-                                <li><i class="fas fa-check"></i> پشتیبانی ۲۴ ساعته</li>
-                                <li><i class="fas fa-check"></i> سازگار با آخرین نسخه شاپیفای</li>
-                            </ul>
-                            
-                            <div class="purchase-section">
+                            <div class="gallery-footer">
                                 <div class="price-display">
-                                    <span class="price-dollar">$49.00</span>
+                                    <span class="price-dollar">49.00دلار</span>
                                     <span class="price-toman">(۲۹۰,۰۰۰ تومان)</span>
                                 </div>
                                 
-                                <a href="https://shopify.com" target="_blank" class="shopify-btn">
-                                    <i class="fab fa-shopify"></i>
-                                    مشاهده قالب در شاپیفای
-                                </a>
+                                 <div class="action-buttons">
+        <a href="https://shopify.com" target="_blank" class="shopify-btn under-image-btn">
+            <i class="fab fa-shopify"></i>
+            مشاهده در شاپیفای
+        </a>
+        <a href="#" target="_blank" class="live-btn under-image-btn">
+            <i class="fas fa-eye"></i>
+            مشاهده لایو
+        </a>
+    </div>
                             </div>
                         </div>
+                        
+                       <div class="template-info">
+    <div class="template-meta">
+        <span class="template-category">فروشگاهی</span>
+        <div class="template-rating">
+            <span class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </span>
+            <span class="rating-text">۴.۵ (۱۲۴ نظر)</span>
+        </div>
+    </div>
+    
+    <h1 class="template-title">قالب فروشگاهی مدرن</h1>
+    
+    <div class="template-description">
+        <p class="description-text">
+            قالب فروشگاهی مدرن یک راه‌حل جامع و حرفه‌ای برای ایجاد فروشگاه اینترنتی است. این قالب با طراحی زیبا و کاربرپسند، تجربه خرید آنلاین را برای مشتریان شما بهینه می‌کند.
+        </p>
+        
+        <div class="description-full" id="fullDescription">
+            <ul class="features-list">
+                <li><i class="fas fa-check"></i> طراحی کاملاً واکنش‌گرا</li>
+                <li><i class="fas fa-check"></i> سرعت لود فوق‌العاده</li>
+                <li><i class="fas fa-check"></i> سئو بهینه شده</li>
+                <li><i class="fas fa-check"></i> پشتیبانی ۲۴ ساعته</li>
+                <li><i class="fas fa-check"></i> سازگار با آخرین نسخه شاپیفای</li>
+            </ul>
+        </div>
+        
+        <button class="read-more-btn" id="readMoreBtn">
+            <span class="btn-text">ادامه مطلب</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+</div>
                     </div>
                 </div>
                 
@@ -147,38 +139,36 @@
                     <div class="tabs-header">
                         <button class="tab-btn active" data-tab="features">ویژگی‌ها</button>
                         <button class="tab-btn" data-tab="specs">مشخصات فنی</button>
-                        <button class="tab-btn" data-tab="reviews">نظرات (۱۲۴)</button>
                     </div>
                     
                     <div class="tab-panel active" id="features">
-                        <h3>ویژگی‌های کامل قالب</h3>
-                        <div class="features-grid">
-                            <div class="feature-item">
+                        <div class="features-grid compact-features">
+                            <div class="feature-item compact">
                                 <i class="fas fa-mobile-alt"></i>
                                 <h4>واکنش‌گرا</h4>
                                 <p>سازگار با تمام دستگاه‌های موبایل و تبلت</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fas fa-bolt"></i>
                                 <h4>سرعت بالا</h4>
                                 <p>لود سریع صفحات و بهینه‌سازی performance</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fas fa-search"></i>
                                 <h4>سئو بهینه</h4>
                                 <p>بهینه‌شده برای موتورهای جستجو</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fas fa-shopping-cart"></i>
                                 <h4>فروشگاهی</h4>
                                 <p>امکانات کامل برای فروشگاه اینترنتی</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fas fa-palette"></i>
                                 <h4>قالب‌بندی آسان</h4>
                                 <p>سازگار با صفحه‌ساز المنتور</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fas fa-plug"></i>
                                 <h4>سازگاری افزونه</h4>
                                 <p>سازگار با افزونه‌های محبوب ووکامرس</p>
@@ -187,92 +177,33 @@
                     </div>
                     
                     <div class="tab-panel" id="specs">
-                        <h3>مشخصات فنی</h3>
-                        <div class="features-grid">
-                            <div class="feature-item">
+                        <div class="features-grid compact-features">
+                            <div class="feature-item compact">
                                 <i class="fas fa-code"></i>
                                 <h4>فریمورک</h4>
                                 <p>Bootstrap 5.3</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fab fa-js"></i>
                                 <h4>جاوااسکریپت</h4>
                                 <p>ES6+ Vanilla JS</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fab fa-css3-alt"></i>
                                 <h4>CSS</h4>
                                 <p>CSS3 + Flexbox + Grid</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fas fa-file-code"></i>
                                 <h4>فایل‌ها</h4>
                                 <p>HTML, CSS, JS, PHP</p>
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item compact">
                                 <i class="fas fa-images"></i>
                                 <h4>تصاویر</h4>
                                 <p>شامل دمو و تصاویر نمونه</p>
                             </div>
-                            <div class="feature-item">
-                                <i class="fas fa-book"></i>
-                                <h4>مستندات</h4>
-                                <p>مستندات کامل فارسی</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tab-panel" id="reviews">
-                        <div class="reviews-container">
-                            <div class="reviews-header">
-                                <div class="overall-rating">
-                                    <div class="rating-score">۴.۵</div>
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <div class="rating-count">بر اساس ۱۲۴ نظر</div>
-                                </div>
-                            </div>
-                            
-                            <div class="reviews-list">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="reviewer-info">
-                                            <div class="reviewer-name">محمد حسینی</div>
-                                            <div class="stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <span class="review-date">۲ هفته پیش</span>
-                                    </div>
-                                    <p class="review-text">قالب بسیار عالی و حرفه‌ای. طراحی زیبا و امکانات کامل. پشتیبانی عالی داشتند و در کمترین زمان پاسخگو بودند.</p>
-                                </div>
-                                
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="reviewer-info">
-                                            <div class="reviewer-name">فاطمه محمدی</div>
-                                            <div class="stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <span class="review-date">۱ ماه پیش</span>
-                                    </div>
-                                    <p class="review-text">از خرید این قالب بسیار راضی هستم. سرعت لود عالی و طراحی بسیار کاربرپسند داره. به همه توصیه می‌کنم.</p>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -328,116 +259,7 @@
     </button>
 
     <script>
-        class TemplateSlider {
-            constructor() {
-                this.sliderTrack = document.getElementById('sliderTrack');
-                this.sliderPrev = document.getElementById('sliderPrev');
-                this.sliderNext = document.getElementById('sliderNext');
-                this.sliderDots = document.getElementById('sliderDots');
-                this.slides = document.querySelectorAll('.slide');
-                this.currentSlide = 0;
-                this.slideCount = this.slides.length;
-                this.autoSlideInterval = null;
-                
-                this.init();
-            }
-            
-            init() {
-                this.createDots();
-                this.setupEventListeners();
-                this.startAutoSlide();
-                this.updateSlider();
-            }
-            
-            createDots() {
-                for (let i = 0; i < this.slideCount; i++) {
-                    const dot = document.createElement('button');
-                    dot.className = 'slider-dot';
-                    dot.setAttribute('data-slide', i);
-                    dot.innerHTML = '<span class="sr-only">اسلاید ' + (i + 1) + '</span>';
-                    
-                    dot.addEventListener('click', () => {
-                        this.goToSlide(i);
-                    });
-                    
-                    this.sliderDots.appendChild(dot);
-                }
-            }
-            
-            setupEventListeners() {
-                this.sliderPrev.addEventListener('click', () => {
-                    this.prevSlide();
-                });
-                
-                this.sliderNext.addEventListener('click', () => {
-                    this.nextSlide();
-                });
-                
-                // توقف اسلایدر هنگام هاور
-                this.sliderTrack.addEventListener('mouseenter', () => {
-                    this.stopAutoSlide();
-                });
-                
-                this.sliderTrack.addEventListener('mouseleave', () => {
-                    this.startAutoSlide();
-                });
-                
-                // اسلایدر با کیبورد
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowRight') {
-                        this.prevSlide();
-                    } else if (e.key === 'ArrowLeft') {
-                        this.nextSlide();
-                    }
-                });
-            }
-            
-            goToSlide(slideIndex) {
-                this.currentSlide = slideIndex;
-                this.updateSlider();
-            }
-            
-            nextSlide() {
-                this.currentSlide = (this.currentSlide + 1) % this.slideCount;
-                this.updateSlider();
-            }
-            
-            prevSlide() {
-                this.currentSlide = (this.currentSlide - 1 + this.slideCount) % this.slideCount;
-                this.updateSlider();
-            }
-            
-            updateSlider() {
-                const translateX = -this.currentSlide * 100;
-                this.sliderTrack.style.transform = `translateX(${translateX}%)`;
-                
-                // آپدیت dots
-                const dots = this.sliderDots.querySelectorAll('.slider-dot');
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === this.currentSlide);
-                });
-            }
-            
-            startAutoSlide() {
-                this.autoSlideInterval = setInterval(() => {
-                    this.nextSlide();
-                }, 5000);
-            }
-            
-            stopAutoSlide() {
-                if (this.autoSlideInterval) {
-                    clearInterval(this.autoSlideInterval);
-                    this.autoSlideInterval = null;
-                }
-            }
-        }
-
-        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // اسلایدر
-            new TemplateSlider();
-            
-            // مدیریت تب‌ها
             const tabBtns = document.querySelectorAll('.tab-btn');
             const tabPanels = document.querySelectorAll('.tab-panel');
             
@@ -445,11 +267,9 @@
                 btn.addEventListener('click', function() {
                     const targetTab = this.getAttribute('data-tab');
                     
-                    // حذف کلاس active از همه دکمه‌ها و پنل‌ها
                     tabBtns.forEach(b => b.classList.remove('active'));
                     tabPanels.forEach(p => p.classList.remove('active'));
                     
-                    // اضافه کردن کلاس active به دکمه و پنل انتخاب شده
                     this.classList.add('active');
                     document.getElementById(targetTab).classList.add('active');
                 });
@@ -501,6 +321,30 @@
                 });
             });
         });
+        // Read More/Less functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const fullDescription = document.getElementById('fullDescription');
+    const btnText = readMoreBtn.querySelector('.btn-text');
+    
+    if (readMoreBtn && fullDescription) {
+        readMoreBtn.addEventListener('click', function() {
+            const isExpanded = fullDescription.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapse
+                fullDescription.classList.remove('expanded');
+                readMoreBtn.classList.remove('expanded');
+                btnText.textContent = 'ادامه مطلب';
+            } else {
+                // Expand
+                fullDescription.classList.add('expanded');
+                readMoreBtn.classList.add('expanded');
+                btnText.textContent = 'بستن';
+            }
+        });
+    }
+});
     </script>
 </body>
 </html>

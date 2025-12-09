@@ -445,3 +445,575 @@
 
 
 
+/* ==================== TEMPLATE HOVER INFO ==================== */
+.template-hover-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.hover-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hover-info-item i {
+    color: var(--primary-300);
+    font-size: 1rem;
+    width: 20px;
+}
+
+/* اطلاعات تعداد خرید */
+.template-buy-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--success-50);
+    color: var(--success-700);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.template-buy-info i {
+    font-size: 0.7rem;
+    color: var(--success-600);
+}
+
+/* دکمه کوچک تم فارست - همرنگ سایت */
+.themeforest-btn-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: var(--primary-500);
+    border: 1px solid var(--primary-500);
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.themeforest-btn-small:hover {
+    background: var(--primary-500);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.themeforest-btn-small i {
+    font-size: 0.8rem;
+}
+
+/* بخش Load More */
+.load-more-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+/* استایل‌های مربوط به سرچ در هدر */
+.header-search {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.header-search-form {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    max-width: 300px;
+}
+
+.header-search-form:focus-within {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.header-search-input {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    width: 200px;
+    font-size: 0.875rem;
+}
+
+.header-search-input:focus {
+    outline: none;
+}
+
+.header-search-btn {
+    padding: 1rem;
+    background: var(--primary-500);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+}
+
+.header-search-btn:hover {
+    background: var(--primary-600);
+}
+
+/* استایل‌های مربوط به صفحه */
+.price-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.price-dollar {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.price-rial {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.old-price .price-dollar {
+    color: var(--gray-500);
+    text-decoration: line-through;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.old-price .price-rial {
+    color: var(--gray-400);
+    font-size: 0.75rem;
+}
+
+.template-rating {
+    display: none !important;
+}
+
+.filters-toggle-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.filters-container {
+    display: none;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 2rem;
+}
+
+.filters-container.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.template-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.template-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.template-card:hover .template-overlay {
+    opacity: 1;
+}
+
+/* استایل‌های اضافی برای نمایش بهتر */
+.template-card:hover .template-hover-info {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* رسپانسیو برای سرچ در هدر */
+@media (max-width: 768px) {
+    .header-search {
+        display: none;
+    }
+}
+
+/* رسپانسیو برای اطلاعات هاور */
+@media (max-width: 768px) {
+    .template-hover-info {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+    
+    .hover-info-item {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .hover-info-item i {
+        font-size: 0.8rem;
+    }
+}
+
+/* بهبود نمایش در موبایل */
+@media (max-width: 576px) {
+    .template-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .template-buy-info {
+        align-self: flex-start;
+    }
+}
+
+/* رسپانسیو برای دکمه‌ها */
+@media (max-width: 768px) {
+    .template-buy-info {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+    }
+    
+    .themeforest-btn-small {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+    
+    .load-more-section {
+        gap: 0.75rem;
+        padding: 1.5rem 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .template-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .template-buy-info {
+        align-self: flex-start;
+    }
+    
+    .load-more-section {
+        padding: 1rem 0;
+    }
+}
+
+/* استایل‌های مربوط به کارت قالب */
+.template-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    border: 1px solid var(--gray-200);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-200);
+}
+
+.template-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.template-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.template-card:hover .template-img {
+    transform: scale(1.05);
+}
+
+.template-badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.template-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.template-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--gray-900);
+}
+
+.template-description {
+    color: var(--gray-600);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.template-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.template-category {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+
+/* ==================== دکمه تم فارست بهبود یافته ==================== */
+.themeforest-btn-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-500);
+    color: white;
+    border: 2px solid var(--primary-500);
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.75rem;
+    min-width: 200px;
+    box-shadow: var(--shadow-md);
+}
+
+.themeforest-btn-small:hover {
+    background: white;
+    color: var(--primary-600);
+    border-color: var(--primary-600);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.themeforest-btn-small i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.themeforest-btn-small:hover i {
+    transform: translateX(3px);
+}
+
+/* بخش Load More بهبود یافته */
+.load-more-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 3rem;
+    padding: 2.5rem 0;
+    background: linear-gradient(to bottom, transparent, var(--gray-50));
+    border-radius: var(--border-radius-lg);
+    border-top: 1px solid var(--gray-200);
+}
+
+/* دکمه اصلی Load More */
+#loadMoreBtn {
+    min-width: 200px;
+    transition: all 0.3s ease;
+}
+
+#loadMoreBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* رسپانسیو برای دکمه‌ها */
+@media (max-width: 768px) {
+    .themeforest-btn-small {
+        width: 90%;
+        max-width: 280px;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .load-more-section {
+        gap: 1rem;
+        padding: 2rem 1rem;
+        margin-top: 2rem;
+    }
+    
+    #loadMoreBtn {
+        width: 90%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .themeforest-btn-small {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    #loadMoreBtn {
+        width: 100%;
+        padding: 0.875rem;
+    }
+    
+    .load-more-section {
+        padding: 1.5rem 0.75rem;
+        margin-top: 1.5rem;
+    }
+}
+
+/* انیمیشن برای دکمه‌ها */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+    }
+}
+
+.themeforest-btn-small {
+    animation: pulse 2s infinite;
+}
+
+.themeforest-btn-small:hover {
+    animation: none;
+}
+
+/* افکت glow هنگام هاور */
+.themeforest-btn-small::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0);
+    transition: box-shadow 0.3s ease;
+    z-index: -1;
+}
+
+.themeforest-btn-small:hover::after {
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+}
+
+/* موقعیت نسبی برای افکت */
+.themeforest-btn-small {
+    position: relative;
+    z-index: 1;
+}
+
+/* بهبود فاصله‌ها */
+.load-more-section > * {
+    margin: 0;
+}
+
+/* استایل برای نشان دادن تفاوت دکمه‌ها */
+#loadMoreBtn {
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+}
+
+.themeforest-btn-small {
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+}
+
+.themeforest-btn-small:hover {
+    background: white;
+    background-image: linear-gradient(135deg, white, white);
+}

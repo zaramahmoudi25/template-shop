@@ -18,39 +18,47 @@
 </head>
 <body>
     <!-- نوار ارز کامپکت -->
-    <div class="compact-currency-bar" id="compactCurrencyBar">
-        <div class="compact-currency-container">
-            <div class="compact-currency-items">
-                <div class="compact-currency-item">
-                    <div class="currency-info">
-                        <span class="currency-flag">🇺🇸</span>
-                        <span class="currency-name">دلار</span>
-                    </div>
-                    <span class="currency-value" id="usdRate">--</span>
+  <!-- نوار ارز کامپکت -->
+<div class="compact-currency-bar" id="compactCurrencyBar">
+    <div class="compact-currency-container">
+        <!-- دکمه تصفیه حساب در سمت چپ -->
+        <button class="settlement-btn" id="settlementBtn" onclick="window.location.href='/Pages/settlement.html'">
+            <i class="fas fa-coins"></i>
+            <span>تصفیه حساب</span>
+        </button>
+        
+        <div class="compact-currency-items">
+            <div class="compact-currency-item">
+                <div class="currency-info">
+                    <span class="currency-flag">🇺🇸</span>
+                    <span class="currency-name">دلار</span>
                 </div>
-                <div class="compact-currency-item">
-                    <div class="currency-info">
-                        <span class="currency-flag">🇹🇷</span>
-                        <span class="currency-name">لیر</span>
-                    </div>
-                    <span class="currency-value" id="tryRate">--</span>
-                </div>
-                <div class="compact-currency-item">
-                    <div class="currency-info">
-                        <span class="currency-flag">🇦🇫</span>
-                        <span class="currency-name">افغانی</span>
-                    </div>
-                    <span class="currency-value" id="afnRate">--</span>
-                </div>
+                <span class="currency-value" id="usdRate">--</span>
             </div>
-            <div class="currency-update-compact">
-                <span id="lastUpdate">در حال بارگذاری...</span>
-                <button class="refresh-btn-compact" id="refreshCurrency" title="بروزرسانی نرخ ارز">
-                    <i class="fas fa-redo"></i>
-                </button>
+            <div class="compact-currency-item">
+                <div class="currency-info">
+                    <span class="currency-flag">🇹🇷</span>
+                    <span class="currency-name">لیر</span>
+                </div>
+                <span class="currency-value" id="tryRate">--</span>
+            </div>
+            <div class="compact-currency-item">
+                <div class="currency-info">
+                    <span class="currency-flag">🇦🇫</span>
+                    <span class="currency-name">افغانی</span>
+                </div>
+                <span class="currency-value" id="afnRate">--</span>
             </div>
         </div>
+        
+        <div class="currency-update-compact">
+            <span id="lastUpdate">در حال بارگذاری...</span>
+            <button class="refresh-btn-compact" id="refreshCurrency" title="بروزرسانی نرخ ارز">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
     </div>
+</div>
 
     <div class="mobile-header">
         <div class="mobile-header-content">
@@ -88,6 +96,18 @@
                                     <i class="fas fa-edit"></i>
                                     ویرایش پروفایل
                                 </a>
+                               <!-- در بخش سایدبار، زیر ویرایش پروفایل -->
+<div class="user-verification-status">
+    <div class="verification-badge" id="verificationBadge">
+        <i class="fas fa-shield-alt"></i>
+        <span>احراز هویت: <span id="verificationLevelText">تکمیل نشده</span></span>
+    </div>
+    <button class="verification-btn" onclick="openVerificationModal()">
+        <i class="fas fa-user-check"></i>
+        تکمیل احراز هویت
+    </button>
+</div>
+
                             </div>
                         </div>
 
@@ -110,14 +130,14 @@
                                         <i class="fas fa-palette"></i>
                                         آمار قالب‌ها
                                     </a>
-                                    <a href="#section-youtube-stats" class="dropdown-item" data-section="youtube-stats">
+                                    <!-- <a href="#section-youtube-stats" class="dropdown-item" data-section="youtube-stats">
                                         <i class="fab fa-youtube"></i>
                                         آمار یوتیوب
                                     </a>
                                     <a href="#section-adsense-stats" class="dropdown-item" data-section="adsense-stats">
                                         <i class="fas fa-globe"></i>
                                         آمار ادسنس
-                                    </a>
+                                    </a> -->
                                 </div>
                             </li>
 
@@ -656,17 +676,7 @@
                                         <input type="file" id="templateFile" name="file" accept=".zip" class="form-control" required>
                                     </div>
 
-                                    <!-- تیک عدم نمایش قالب در سایت -->
-                                    <div class="hidden-template-checkbox">
-                                        <label class="checkbox-label">
-                                            <input type="checkbox" name="hideTemplate" id="hideTemplate">
-                                            <span class="checkmark"></span>
-                                            من نمی‌خواهم این قالب در سایت نمایش داده شود
-                                        </label>
-                                        <div class="checkbox-description">
-                                            با فعال کردن این گزینه، قالب شما در سایت نمایش داده نخواهد شد و فقط برای بررسی توسط مدیران سایت قابل دسترسی خواهد بود.
-                                        </div>
-                                    </div>
+                                   
 
                                     <!-- تیک‌های تایید -->
                                     <div class="form-group">
@@ -765,8 +775,352 @@
         </div>
     </div>
 
+<!-- مودال احراز هویت (در انتهای body قبل از اسکریپت‌ها) -->
+<div class="verification-modal" id="verificationModal">
+    <div class="verification-modal-content">
+        <div class="verification-modal-header">
+            <h2>
+                <i class="fas fa-user-shield"></i>
+                احراز هویت سه‌مرحله‌ای
+            </h2>
+            <button class="modal-close-btn" onclick="closeVerificationModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="verification-modal-body">
+            <!-- نوار پیشرفت -->
+            <div class="verification-progress">
+                <div class="progress-bar">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-circle">۱</div>
+                        <div class="step-label">اطلاعات اولیه</div>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-circle">۲</div>
+                        <div class="step-label">مدارک شناسایی</div>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-circle">۳</div>
+                        <div class="step-label">تأیید ویدیویی</div>
+                    </div>
+                </div>
+                <div class="progress-line">
+                    <div class="progress-fill" id="verificationProgressFill"></div>
+                </div>
+            </div>
+
+            <!-- مرحله ۱: اطلاعات اولیه -->
+            <div class="verification-step active" id="modalStep1">
+                <div class="step-header">
+                    <h3><i class="fas fa-id-card"></i> مرحله ۱: اطلاعات اولیه</h3>
+                    <div class="step-status-badge" id="step1StatusBadge">
+                        <span class="status-dot"></span>
+                        در انتظار تکمیل
+                    </div>
+                </div>
+                
+                <div class="step-content">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="modalPhoneNumber" class="form-label">
+                                <i class="fas fa-mobile-alt"></i>
+                                شماره موبایل *
+                            </label>
+                            <input type="tel" id="modalPhoneNumber" class="form-control" 
+                                   placeholder="09123456789" dir="ltr" maxlength="11">
+                            <small class="form-hint">شماره موبایل باید با نام مالک حساب یکسان باشد</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modalCardNumber" class="form-label">
+                                <i class="fas fa-credit-card"></i>
+                                شماره کارت بانکی *
+                            </label>
+                            <input type="text" id="modalCardNumber" class="form-control" 
+                                   placeholder="6037-XXXX-XXXX-XXXX" dir="ltr" maxlength="19">
+                            <small class="form-hint">شماره ۱۶ رقمی کارت بانکی</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modalBankName" class="form-label">
+                            <i class="fas fa-university"></i>
+                            نام بانک *
+                        </label>
+                        <select id="modalBankName" class="form-control">
+                            <option value="">انتخاب بانک</option>
+                            <option value="melli">بانک ملی ایران</option>
+                            <option value="mellat">بانک ملت</option>
+                            <option value="saderat">بانک صادرات ایران</option>
+                            <option value="tejarat">بانک تجارت</option>
+                            <option value="sepah">بانک سپه</option>
+                            <option value="keshavarzi">بانک کشاورزی</option>
+                            <option value="maskan">بانک مسکن</option>
+                            <option value="saman">بانک سامان</option>
+                            <option value="pasargad">بانک پاسارگاد</option>
+                            <option value="ayande">بانک آینده</option>
+                            <option value="other">سایر بانک‌ها</option>
+                        </select>
+                    </div>
+                    
+                    <div class="info-alert">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="alert-content">
+                            <strong>توجه:</strong> اطلاعات وارد شده باید دقیقاً متعلق به صاحب حساب باشد. 
+                            در صورت مغایرت، احراز هویت رد خواهد شد.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-footer">
+                    <button class="btn btn--primary btn--lg" onclick="submitModalStep1()">
+                        <i class="fas fa-arrow-right"></i>
+                        ادامه به مرحله بعد
+                    </button>
+                </div>
+            </div>
+
+            <!-- مرحله ۲: مدارک شناسایی -->
+            <div class="verification-step" id="modalStep2">
+                <div class="step-header">
+                    <h3><i class="fas fa-id-card-alt"></i> مرحله ۲: مدارک شناسایی</h3>
+                    <div class="step-status-badge locked" id="step2StatusBadge">
+                        <span class="status-dot"></span>
+                        قفل شده
+                    </div>
+                </div>
+                
+                <div class="step-content">
+                    <div class="upload-section">
+                        <h4>بارگذاری مدارک شناسایی</h4>
+                        
+                        <div class="upload-grid">
+                            <div class="upload-item" onclick="openFileUpload('nationalCardFront')">
+                                <div class="upload-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="upload-info">
+                                    <div class="upload-title">روی کارت ملی</div>
+                                    <div class="upload-subtitle">تصویر واضح از روی کارت ملی</div>
+                                </div>
+                                <div class="upload-preview" id="modalCardFrontPreview">
+                                    <div class="preview-placeholder">
+                                        <i class="fas fa-upload"></i>
+                                        <span>بارگذاری تصویر</span>
+                                    </div>
+                                </div>
+                                <input type="file" id="modalNationalCardFront" accept="image/*" 
+                                       style="display: none;" onchange="previewImage(this, 'modalCardFrontPreview')">
+                            </div>
+                            
+                            <div class="upload-item" onclick="openFileUpload('nationalCardBack')">
+                                <div class="upload-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="upload-info">
+                                    <div class="upload-title">پشت کارت ملی</div>
+                                    <div class="upload-subtitle">تصویر واضح از پشت کارت ملی</div>
+                                </div>
+                                <div class="upload-preview" id="modalCardBackPreview">
+                                    <div class="preview-placeholder">
+                                        <i class="fas fa-upload"></i>
+                                        <span>بارگذاری تصویر</span>
+                                    </div>
+                                </div>
+                                <input type="file" id="modalNationalCardBack" accept="image/*" 
+                                       style="display: none;" onchange="previewImage(this, 'modalCardBackPreview')">
+                            </div>
+                        </div>
+                        
+                        <div class="upload-requirements">
+                            <h5><i class="fas fa-clipboard-check"></i> شرایط تصاویر:</h5>
+                            <ul class="requirements-list">
+                                <li><i class="fas fa-check-circle"></i> فرمت‌های مجاز: JPG, PNG, JPEG</li>
+                                <li><i class="fas fa-check-circle"></i> حداکثر حجم: ۵ مگابایت</li>
+                                <li><i class="fas fa-check-circle"></i> تصویر باید واضح و خوانا باشد</li>
+                                <li><i class="fas fa-check-circle"></i> تمامی اطلاعات کارت ملی باید مشخص باشد</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-alert">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="alert-content">
+                            <strong>هشدار:</strong> مدارک ارسالی باید متعلق به صاحب حساب باشد. 
+                            در صورت ارسال مدارک جعلی، حساب شما مسدود خواهد شد.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-footer">
+                    <div class="step-actions">
+                        <button class="btn btn--outline" onclick="goToModalStep(1)">
+                            <i class="fas fa-arrow-right"></i>
+                            مرحله قبل
+                        </button>
+                        <button class="btn btn--primary" id="submitModalStep2Btn" disabled 
+                                onclick="submitModalStep2()">
+                            <i class="fas fa-check"></i>
+                            تأیید و ادامه
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مرحله ۳: تأیید ویدیویی -->
+            <div class="verification-step" id="modalStep3">
+                <div class="step-header">
+                    <h3><i class="fas fa-video"></i> مرحله ۳: تأیید ویدیویی</h3>
+                    <div class="step-status-badge locked" id="step3StatusBadge">
+                        <span class="status-dot"></span>
+                        قفل شده
+                    </div>
+                </div>
+                
+                <div class="step-content">
+                    <div class="video-section">
+                        <div class="video-recorder" id="modalVideoRecorder">
+                            <div class="video-preview" id="modalVideoPreview">
+                                <div class="video-placeholder">
+                                    <i class="fas fa-video-slash"></i>
+                                    <p>دوربین فعال نشده</p>
+                                </div>
+                                <video id="modalRecordedVideo" style="display: none;"></video>
+                            </div>
+                            
+                            <div class="video-controls">
+                                <button class="btn btn--outline btn--icon" id="modalStartRecordingBtn" 
+                                        onclick="startModalRecording()">
+                                    <i class="fas fa-record-vinyl"></i>
+                                    <span>شروع ضبط</span>
+                                </button>
+                                <button class="btn btn--outline btn--icon" id="modalStopRecordingBtn" 
+                                        disabled onclick="stopModalRecording()">
+                                    <i class="fas fa-stop"></i>
+                                    <span>توقف</span>
+                                </button>
+                                <button class="btn btn--outline btn--icon" id="modalPlayRecordingBtn" 
+                                        disabled onclick="playModalRecording()">
+                                    <i class="fas fa-play"></i>
+                                    <span>پخش</span>
+                                </button>
+                                <button class="btn btn--outline btn--icon" id="modalRetryRecordingBtn" 
+                                        onclick="retryModalRecording()">
+                                    <i class="fas fa-redo"></i>
+                                    <span>ضبط مجدد</span>
+                                </button>
+                            </div>
+                            
+                            <div class="recording-timer" id="modalRecordingTimer" style="display: none;">
+                                <i class="fas fa-clock"></i>
+                                <span id="modalTimerDisplay">00:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-to-read-section">
+                            <h5><i class="fas fa-microphone"></i> متن باید خوانده شود:</h5>
+                            <div class="verification-text">
+                                <p>«من به عنوان کاربر سایت ایران اد پی رسماً اعلام می‌کنم که با شرکت ایران اد پی همکاری داشته و کلیه مسئولیت‌های ناشی از این همکاری را به طور کامل می‌پذیرم. متعهد می‌شوم تمام فعالیت‌هایم مطابق با قوانین جمهوری اسلامی ایران باشد.»</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recording-instructions">
+                            <h5><i class="fas fa-clipboard-list"></i> دستورالعمل:</h5>
+                            <ul class="instructions-list">
+                                <li><i class="fas fa-user-circle"></i> چهره شما باید کاملاً مشخص باشد</li>
+                                <li><i class="fas fa-volume-up"></i> متن بالا را با صدای واضح بخوانید</li>
+                                <li><i class="fas fa-clock"></i> مدت ویدیو: ۱۵ تا ۳۰ ثانیه</li>
+                                <li><i class="fas fa-sun"></i> از محیطی با نور مناسب استفاده کنید</li>
+                                <li><i class="fas fa-id-card"></i> کارت ملی را در ابتدای ویدیو نشان دهید</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="success-alert">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="alert-content">
+                            <strong>توجه:</strong> پس از تأیید ویدیو توسط ادمین، احراز هویت شما تکمیل خواهد شد.
+                            معمولاً این فرآیند ۲۴ تا ۴۸ ساعت کاری طول می‌کشد.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-footer">
+                    <div class="step-actions">
+                        <button class="btn btn--outline" onclick="goToModalStep(2)">
+                            <i class="fas fa-arrow-right"></i>
+                            مرحله قبل
+                        </button>
+                        <button class="btn btn--primary" id="submitModalStep3Btn" disabled 
+                                onclick="submitModalStep3()">
+                            <i class="fas fa-paper-plane"></i>
+                            ارسال برای بررسی
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- وضعیت احراز هویت -->
+            <div class="verification-status-summary">
+                <h4><i class="fas fa-chart-line"></i> وضعیت احراز هویت شما</h4>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-icon level1">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="status-info">
+                            <div class="status-title">مرحله ۱</div>
+                            <div class="status-value" id="modalStatusStep1">در انتظار</div>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-icon level2">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="status-info">
+                            <div class="status-title">مرحله ۲</div>
+                            <div class="status-value" id="modalStatusStep2">قفل شده</div>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-icon level3">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="status-info">
+                            <div class="status-title">مرحله ۳</div>
+                            <div class="status-value" id="modalStatusStep3">قفل شده</div>
+                        </div>
+                    </div>
+                    <div class="status-item overall">
+                        <div class="status-icon overall-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="status-info">
+                            <div class="status-title">وضعیت کلی</div>
+                            <div class="status-value" id="modalOverallStatus">تکمیل نشده</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="verification-modal-footer">
+            <div class="footer-actions">
+                <button class="btn btn--ghost" onclick="closeVerificationModal()">
+                    <i class="fas fa-times"></i>
+                    بستن
+                </button>
+                <div class="footer-info">
+                    <i class="fas fa-headset"></i>
+                    <span>نیاز به راهنمایی دارید؟</span>
+                    <a href="javascript:void(0)" onclick="openVerificationSupport()">تماس با پشتیبانی</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
   <script src="/js/currency.js"></script>
-<script src="/js/dashboard.js"></script><script src="/js/currency.js"></script>
 <script src="/js/dashboard.js"></script>
 </body>
 </html>

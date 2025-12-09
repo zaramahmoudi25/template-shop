@@ -1,490 +1,673 @@
-        /* استایل‌های اصلی صفحه */
-        .template-detail-section {
-            padding: 4rem 0 2rem;
-            background: var(--gray-50);
-            min-height: 100vh;
-        }
-        
-        .template-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        /* طرح‌بندی اصلی - یک کارت یکپارچه */
-        .template-main-card {
-            background: white;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--gray-200);
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-        
-        .template-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            min-height: 400px;
-        }
-        
-        /* اسلایدر عکس در سمت چپ */
-        .template-gallery {
-            background: var(--gray-100);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 400px;
-        }
-        
-        .slider-container {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .slider-track {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            height: 100%;
-        }
-        
-        .slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            padding: 1rem;
-        }
-        
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1rem;
-            color: var(--gray-700);
-            transition: all 0.3s ease;
-            z-index: 10;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .slider-nav:hover {
-            background: var(--primary-500);
-            color: white;
-        }
-        
-        .slider-prev {
-            right: 0.5rem;
-        }
-        
-        .slider-next {
-            left: 0.5rem;
-        }
-        
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem;
-            background: white;
-            border-top: 1px solid var(--gray-200);
-        }
-        
-        .slider-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            border: none;
-            background: var(--gray-300);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .slider-dot.active {
-            background: var(--primary-500);
-            transform: scale(1.2);
-        }
-        
-        /* اطلاعات قالب در سمت راست */
-        .template-info {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .template-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-        
-        .template-category {
-            background: var(--primary-50);
-            color: var(--primary-700);
-            padding: 0.4rem 1rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .template-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .stars {
-            color: var(--warning-500);
-            font-size: 0.9rem;
-        }
-        
-        .rating-text {
-            color: var(--gray-600);
-            font-size: 0.8rem;
-        }
-        
-        .template-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-        
-        .template-description {
-            color: var(--gray-700);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-        
-        /* ویژگی‌های اصلی */
-        .features-list {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 1.5rem;
-        }
-        
-        .features-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--gray-700);
-            font-size: 0.9rem;
-        }
-        
-        .features-list li i {
-            color: var(--success-500);
-            width: 16px;
-            font-size: 0.8rem;
-        }
-        
-        /* بخش قیمت و دکمه */
-        .purchase-section {
-            margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--gray-200);
-        }
-        
-        .price-display {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .price-dollar {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-        
-        .price-toman {
-            font-size: 1rem;
-            color: var(--gray-600);
-        }
-        
-        .shopify-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary-500);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-            width: 100%;
-            text-align: center;
-        }
-        
-        .shopify-btn:hover {
-            background: var(--primary-600);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            color: white;
-        }
-        
-        /* تب‌های اطلاعات بیشتر */
-        .tabs-container {
-            background: white;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--gray-200);
-            overflow: hidden;
-        }
-        
-        .tabs-header {
-            display: flex;
-            border-bottom: 1px solid var(--gray-200);
-            background: var(--gray-50);
-            flex-wrap: wrap;
-        }
-        
-        .tab-btn {
-            padding: 0.75rem 1.5rem;
-            background: none;
-            border: none;
-            color: var(--gray-600);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-            flex: 1;
-            min-width: 100px;
-            font-size: 0.9rem;
-        }
-        
-        .tab-btn.active {
-            color: var(--primary-600);
-            border-bottom-color: var(--primary-600);
-            background: white;
-        }
-        
-        .tab-btn:hover:not(.active) {
-            color: var(--gray-900);
-            background: var(--gray-100);
-        }
-        
-        .tab-panel {
-            display: none;
-            padding: 1.5rem;
-        }
-        
-        .tab-panel.active {
-            display: block;
-        }
-        
-        /* ویژگی‌های کامل */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .feature-item {
-            background: var(--gray-50);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .feature-item i {
-            font-size: 1.5rem;
-            color: var(--primary-500);
-            margin-bottom: 0.75rem;
-        }
-        
-        .feature-item h4 {
-            color: var(--gray-900);
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-        
-        .feature-item p {
-            color: var(--gray-600);
-            font-size: 0.8rem;
-            line-height: 1.4;
-        }
-        
-        /* نظرات زیباتر */
-        .reviews-container {
-            margin-top: 1.5rem;
-        }
-        
-        .reviews-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--gray-200);
-        }
-        
-        .overall-rating {
-            text-align: center;
-        }
-        
-        .rating-score {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            line-height: 1;
-        }
-        
-        .rating-count {
-            color: var(--gray-600);
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .reviews-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .review-item {
-            background: var(--gray-50);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--gray-200);
-        }
-        
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.75rem;
-        }
-        
-        .reviewer-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        
-        .reviewer-name {
-            font-weight: 600;
-            color: var(--gray-900);
-            font-size: 0.95rem;
-        }
-        
-        .review-date {
-            color: var(--gray-500);
-            font-size: 0.8rem;
-        }
-        
-        .review-text {
-            color: var(--gray-700);
-            line-height: 1.5;
-            margin: 0;
-            font-size: 0.9rem;
-        }
-        
-        /* ریسپانسیو */
-        @media (max-width: 1024px) {
-            .template-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .template-gallery {
-                height: 350px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .template-detail-section {
-                padding: 3rem 0 1rem;
-            }
-            
-            .template-info {
-                padding: 1.5rem;
-            }
-            
-            .template-title {
-                font-size: 1.3rem;
-            }
-            
-            .tabs-header {
-                flex-direction: column;
-            }
-            
-            .tab-btn {
-                border-bottom: 1px solid var(--gray-200);
-                border-left: 3px solid transparent;
-            }
-            
-            .tab-btn.active {
-                border-left-color: var(--primary-500);
-                border-bottom-color: var(--gray-200);
-            }
-            
-            .reviews-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .template-container {
-                padding: 0 0.5rem;
-            }
-            
-            .template-info {
-                padding: 1rem;
-            }
-            
-            .template-title {
-                font-size: 1.2rem;
-            }
-            
-            .price-display {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-            
-            .template-gallery {
-                height: 300px;
-            }
-        }
+/* ==================== TEMPLATE DETAIL PAGE STYLES ==================== */
+
+/* استایل‌های اصلی صفحه */
+.template-detail-section {
+    padding: 4rem 0 2rem;
+    background: var(--gray-50);
+    min-height: 100vh;
+}
+
+.template-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* طرح‌بندی اصلی - یک کارت یکپارچه */
+.template-main-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* طرح‌بندی محتوا - دو ستون هم‌سطح */
+.template-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 550px;
+}
+
+/* ==================== LEFT SIDE - IMAGE SECTION ==================== */
+.template-gallery {
+    background: var(--gray-100);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* کانتینر عکس */
+.single-image-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.main-template-image {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease;
+}
+
+.main-template-image:hover {
+    transform: scale(1.02);
+}
+
+/* ==================== GALLERY FOOTER - PRICE & BUTTONS ==================== */
+.gallery-footer {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* نمایش قیمت */
+.price-display {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.price-dollar {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.price-toman {
+    font-size: 1rem;
+    color: var(--gray-600);
+}
+
+/* دکمه‌های کنار هم */
+.action-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.under-image-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    min-height: 44px;
+    flex-shrink: 0;
+}
+
+.under-image-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.shopify-btn {
+    background: #96BF48;
+    color: white;
+}
+
+.shopify-btn:hover {
+    background: #7da63a;
+    color: white;
+}
+
+.live-btn {
+    background: var(--primary-600);
+    color: white;
+}
+
+.live-btn:hover {
+    background: var(--primary-700);
+    color: white;
+}
+
+/* ==================== RIGHT SIDE - INFO SECTION ==================== */
+.template-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* متادیتای قالب */
+.template-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.template-category {
+    background: var(--primary-50);
+    color: var(--primary-700);
+    padding: 0.4rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.template-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stars {
+    color: var(--warning-500);
+    font-size: 0.9rem;
+}
+
+.rating-text {
+    color: var(--gray-600);
+    font-size: 0.8rem;
+}
+
+.template-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.template-description {
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-top: auto;
+}
+
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+}
+
+.features-list li i {
+    color: var(--success-500);
+    width: 16px;
+    font-size: 0.8rem;
+}
+
+/* ==================== TABS SECTION ==================== */
+.tabs-container {
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+/* هدر تب‌ها */
+.tabs-header {
+    display: flex;
+    border-bottom: 1px solid var(--gray-200);
+    background: var(--gray-50);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    flex: 1;
+    min-width: 100px;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.tab-btn.active {
+    color: var(--primary-600);
+    border-bottom-color: var(--primary-600);
+    background: white;
+}
+
+.tab-btn.active::before {
+    opacity: 0.1;
+}
+
+.tab-btn:hover:not(.active) {
+    color: var(--gray-900);
+    background: var(--gray-100);
+}
+
+/* پنل‌های تب */
+.tab-panel {
+    display: none;
+    padding: 1.5rem;
+    animation: tabFade 0.3s ease-out;
+}
+
+@keyframes tabFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* ==================== COMPACT FEATURES GRID ==================== */
+.compact-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.feature-item.compact {
+    background: var(--gray-50);
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid var(--gray-200);
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 150px;
+    max-width: 180px;
+}
+
+.feature-item.compact:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--primary-300);
+}
+
+.feature-item.compact i {
+    font-size: 1.2rem;
+    color: var(--primary-500);
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.feature-item.compact:hover i {
+    transform: scale(1.1);
+}
+
+.feature-item.compact h4 {
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.feature-item.compact p {
+    color: var(--gray-600);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* تبلت و لپتاپ کوچک */
+@media (max-width: 1024px) {
+    .template-content {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 1rem;
+    }
+    
+    .template-gallery {
+        height: 500px;
+    }
+    
+    .single-image-container {
+        padding: 1.5rem;
+    }
+    
+    .main-template-image {
+        max-height: 350px;
+    }
+    
+    .gallery-footer {
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .compact-features {
+        gap: 0.5rem;
+    }
+    
+    .feature-item.compact {
+        min-width: 130px;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .template-detail-section {
+        padding: 3rem 0 1rem;
+    }
+    
+    .template-info {
+        padding: 1.5rem;
+    }
+    
+    .template-title {
+        font-size: 1.3rem;
+    }
+    
+    .template-gallery {
+        height: 450px;
+    }
+    
+    .tabs-header {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        border-bottom: 1px solid var(--gray-200);
+        border-left: 3px solid transparent;
+        text-align: right;
+    }
+    
+    .tab-btn.active {
+        border-left-color: var(--primary-500);
+        border-bottom-color: var(--gray-200);
+    }
+    
+    .compact-features {
+        justify-content: center;
+    }
+    
+    .feature-item.compact {
+        min-width: 140px;
+        flex: 0 0 calc(50% - 0.5rem);
+    }
+    
+    /* دکمه‌ها در تبلت */
+    .action-buttons {
+        gap: 0.75rem;
+    }
+    
+    .under-image-btn {
+        min-width: 130px;
+        padding: 0.7rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* موبایل */
+@media (max-width: 480px) {
+    .template-container {
+        padding: 0 0.5rem;
+    }
+    
+    .template-info {
+        padding: 1rem;
+    }
+    
+    .template-title {
+        font-size: 1.2rem;
+    }
+    
+    .template-gallery {
+        height: 400px;
+    }
+    
+    .single-image-container {
+        padding: 1rem;
+    }
+    
+    .gallery-footer {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .price-display {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .compact-features {
+        gap: 0.5rem;
+    }
+    
+    .feature-item.compact {
+        min-width: 120px;
+        flex: 0 0 calc(50% - 0.5rem);
+    }
+    
+    .feature-item.compact h4 {
+        font-size: 0.8rem;
+    }
+    
+    .feature-item.compact p {
+        font-size: 0.7rem;
+    }
+    
+    /* دکمه‌ها در موبایل */
+    .action-buttons {
+        flex-direction: row !important;
+        gap: 0.5rem;
+    }
+    
+    .under-image-btn {
+        min-width: 0;
+        flex: 1;
+        font-size: 0.75rem;
+        padding: 0.65rem 0.75rem;
+    }
+    
+    .under-image-btn i {
+        font-size: 0.85rem;
+    }
+}
+
+/* موبایل خیلی کوچک */
+@media (max-width: 360px) {
+    .feature-item.compact {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .compact-features {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tab-btn {
+        min-width: auto;
+        padding: 0.75rem 1rem;
+    }
+    
+    /* دکمه‌ها در موبایل خیلی کوچک */
+    .action-buttons {
+        flex-direction: column !important;
+        gap: 0.5rem;
+    }
+    
+    .under-image-btn {
+        width: 100%;
+    }
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+    .template-detail-section {
+        background: white;
+        padding: 1rem 0;
+    }
+    
+    .template-main-card,
+    .tabs-container {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .under-image-btn {
+        display: none;
+    }
+}
+
+
+/* ==================== TEMPLATE DESCRIPTION WITH READ MORE ==================== */
+.template-description {
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.description-text {
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.description-full {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0;
+}
+
+.description-full.expanded {
+    max-height: 500px;
+    opacity: 1;
+    margin-bottom: 1.5rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: var(--gray-50);
+}
+
+.features-list li:hover {
+    background: var(--gray-100);
+    transform: translateX(-5px);
+}
+
+.features-list li i {
+    color: var(--success-500);
+    width: 16px;
+    font-size: 0.8rem;
+}
+
+/* Read More Button */
+.read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: var(--primary-600);
+    border: 1px solid var(--primary-200);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.read-more-btn:hover {
+    background: var(--primary-50);
+    border-color: var(--primary-300);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.read-more-btn i {
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.read-more-btn.expanded i {
+    transform: rotate(180deg);
+}
+
+/* For smooth transition */
+.template-description {
+    overflow: hidden;
+}
