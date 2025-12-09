@@ -65,13 +65,13 @@
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="mobile-user-info">
+            <!-- <div class="mobile-user-info">
                 <img src="../assets/images/user-avatar.jpg" alt="علی محمدی" class="mobile-user-avatar">
                 <div>
                     <h3 style="margin: 0; font-size: 1rem;">علی محمدی</h3>
                     <p style="margin: 0; font-size: 0.8rem; color: var(--gray-600);">پنل کاربری</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -96,7 +96,6 @@
                                     <i class="fas fa-edit"></i>
                                     ویرایش پروفایل
                                 </a>
-                               <!-- در بخش سایدبار، زیر ویرایش پروفایل -->
 <div class="user-verification-status">
     <div class="verification-badge" id="verificationBadge">
         <i class="fas fa-shield-alt"></i>
@@ -775,7 +774,7 @@
         </div>
     </div>
 
-<!-- مودال احراز هویت (در انتهای body قبل از اسکریپت‌ها) -->
+<!-- مودال احراز هویت  -->
 <div class="verification-modal" id="verificationModal">
     <div class="verification-modal-content">
         <div class="verification-modal-header">
@@ -820,6 +819,42 @@
                     </div>
                 </div>
                 
+                <!-- بخش انتخاب ملیت -->
+                <div class="nationality-selector" id="nationalitySection">
+                    <h4><i class="fas fa-globe-asia"></i> انتخاب ملیت</h4>
+                    <p style="margin-bottom: 1rem; color: var(--gray-600);">لطفاً ملیت خود را انتخاب کنید:</p>
+                    
+                    <div class="nationality-options">
+                        <label class="nationality-option">
+                            <input type="radio" name="nationality" value="iranian" checked onchange="handleNationalityChange(this)">
+                            <div class="nationality-card">
+                                <div class="nationality-flag">🇮🇷</div>
+                                <div class="nationality-info">
+                                    <div class="nationality-title">ایرانی</div>
+                                    <div class="nationality-desc">احراز هویت با کارت ملی</div>
+                                </div>
+                                <div class="nationality-check">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                        </label>
+                        
+                        <label class="nationality-option">
+                            <input type="radio" name="nationality" value="afghan" onchange="handleNationalityChange(this)">
+                            <div class="nationality-card">
+                                <div class="nationality-flag">🇦🇫</div>
+                                <div class="nationality-info">
+                                    <div class="nationality-title">افغانستانی</div>
+                                    <div class="nationality-desc">احراز هویت با تذکره</div>
+                                </div>
+                                <div class="nationality-check">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
                 <div class="step-content">
                     <div class="form-grid">
                         <div class="form-group">
@@ -843,27 +878,6 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="modalBankName" class="form-label">
-                            <i class="fas fa-university"></i>
-                            نام بانک *
-                        </label>
-                        <select id="modalBankName" class="form-control">
-                            <option value="">انتخاب بانک</option>
-                            <option value="melli">بانک ملی ایران</option>
-                            <option value="mellat">بانک ملت</option>
-                            <option value="saderat">بانک صادرات ایران</option>
-                            <option value="tejarat">بانک تجارت</option>
-                            <option value="sepah">بانک سپه</option>
-                            <option value="keshavarzi">بانک کشاورزی</option>
-                            <option value="maskan">بانک مسکن</option>
-                            <option value="saman">بانک سامان</option>
-                            <option value="pasargad">بانک پاسارگاد</option>
-                            <option value="ayande">بانک آینده</option>
-                            <option value="other">سایر بانک‌ها</option>
-                        </select>
-                    </div>
-                    
                     <div class="info-alert">
                         <i class="fas fa-info-circle"></i>
                         <div class="alert-content">
@@ -875,8 +889,8 @@
                 
                 <div class="step-footer">
                     <button class="btn btn--primary btn--lg" onclick="submitModalStep1()">
-                        <i class="fas fa-arrow-right"></i>
                         ادامه به مرحله بعد
+                        <i class="fas fa-arrow-left"></i>
                     </button>
                 </div>
             </div>
@@ -956,8 +970,8 @@
                 <div class="step-footer">
                     <div class="step-actions">
                         <button class="btn btn--outline" onclick="goToModalStep(1)">
-                            <i class="fas fa-arrow-right"></i>
                             مرحله قبل
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                         <button class="btn btn--primary" id="submitModalStep2Btn" disabled 
                                 onclick="submitModalStep2()">
@@ -1049,57 +1063,14 @@
                 <div class="step-footer">
                     <div class="step-actions">
                         <button class="btn btn--outline" onclick="goToModalStep(2)">
-                            <i class="fas fa-arrow-right"></i>
                             مرحله قبل
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                         <button class="btn btn--primary" id="submitModalStep3Btn" disabled 
                                 onclick="submitModalStep3()">
                             <i class="fas fa-paper-plane"></i>
                             ارسال برای بررسی
                         </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- وضعیت احراز هویت -->
-            <div class="verification-status-summary">
-                <h4><i class="fas fa-chart-line"></i> وضعیت احراز هویت شما</h4>
-                <div class="status-grid">
-                    <div class="status-item">
-                        <div class="status-icon level1">
-                            <i class="fas fa-id-card"></i>
-                        </div>
-                        <div class="status-info">
-                            <div class="status-title">مرحله ۱</div>
-                            <div class="status-value" id="modalStatusStep1">در انتظار</div>
-                        </div>
-                    </div>
-                    <div class="status-item">
-                        <div class="status-icon level2">
-                            <i class="fas fa-images"></i>
-                        </div>
-                        <div class="status-info">
-                            <div class="status-title">مرحله ۲</div>
-                            <div class="status-value" id="modalStatusStep2">قفل شده</div>
-                        </div>
-                    </div>
-                    <div class="status-item">
-                        <div class="status-icon level3">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <div class="status-info">
-                            <div class="status-title">مرحله ۳</div>
-                            <div class="status-value" id="modalStatusStep3">قفل شده</div>
-                        </div>
-                    </div>
-                    <div class="status-item overall">
-                        <div class="status-icon overall-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="status-info">
-                            <div class="status-title">وضعیت کلی</div>
-                            <div class="status-value" id="modalOverallStatus">تکمیل نشده</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1111,11 +1082,6 @@
                     <i class="fas fa-times"></i>
                     بستن
                 </button>
-                <div class="footer-info">
-                    <i class="fas fa-headset"></i>
-                    <span>نیاز به راهنمایی دارید؟</span>
-                    <a href="javascript:void(0)" onclick="openVerificationSupport()">تماس با پشتیبانی</a>
-                </div>
             </div>
         </div>
     </div>

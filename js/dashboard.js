@@ -547,13 +547,15 @@
 
 
         // سیستم احراز هویت مودال
+// سیستم احراز هویت مودال - VERSION 2.0
 class VerificationSystem {
     constructor() {
         this.currentStep = 1;
         this.userVerificationData = {
             step1: null,
             step2: null,
-            step3: null
+            step3: null,
+            nationality: 'iranian' // مقدار پیش‌فرض
         };
         this.loadVerificationData();
         this.initEventListeners();
@@ -561,6 +563,17 @@ class VerificationSystem {
 
     init() {
         this.updateVerificationStatus();
+        this.initializeNationality();
+    }
+
+    initializeNationality() {
+        // تنظیم انتخاب ملیت بر اساس داده‌های ذخیره شده
+        const nationality = this.userVerificationData.nationality || 'iranian';
+        const radio = document.querySelector(`input[name="nationality"][value="${nationality}"]`);
+        if (radio) {
+            radio.checked = true;
+            handleNationalityChange(radio);
+        }
     }
 
     loadVerificationData() {
@@ -603,62 +616,33 @@ class VerificationSystem {
 
     updateModalStatus() {
         // مرحله ۱
-        const step1Status = document.getElementById('modalStatusStep1');
-        const step1Badge = document.getElementById('step1StatusBadge');
+        const step1Status = document.getElementById('step1StatusBadge');
         
         if (this.userVerificationData.step1) {
-            step1Status.textContent = 'تکمیل شده';
-            step1Status.style.color = 'var(--success-600)';
-            step1Badge.className = 'step-status-badge completed';
-            step1Badge.innerHTML = '<span class="status-dot"></span> تکمیل شده';
+            step1Status.className = 'step-status-badge completed';
+            step1Status.innerHTML = '<span class="status-dot"></span> تکمیل شده';
         }
 
         // مرحله ۲
-        const step2Status = document.getElementById('modalStatusStep2');
-        const step2Badge = document.getElementById('step2StatusBadge');
+        const step2Status = document.getElementById('step2StatusBadge');
         
         if (this.userVerificationData.step2) {
-            step2Status.textContent = 'تکمیل شده';
-            step2Status.style.color = 'var(--success-600)';
-            step2Badge.className = 'step-status-badge completed';
-            step2Badge.innerHTML = '<span class="status-dot"></span> تکمیل شده';
+            step2Status.className = 'step-status-badge completed';
+            step2Status.innerHTML = '<span class="status-dot"></span> تکمیل شده';
         } else if (this.userVerificationData.step1) {
-            step2Status.textContent = 'در انتظار';
-            step2Status.style.color = 'var(--warning-600)';
-            step2Badge.className = 'step-status-badge pending';
-            step2Badge.innerHTML = '<span class="status-dot"></span> در انتظار';
+            step2Status.className = 'step-status-badge pending';
+            step2Status.innerHTML = '<span class="status-dot"></span> در انتظار';
         }
 
         // مرحله ۳
-        const step3Status = document.getElementById('modalStatusStep3');
-        const step3Badge = document.getElementById('step3StatusBadge');
+        const step3Status = document.getElementById('step3StatusBadge');
         
         if (this.userVerificationData.step3) {
-            step3Status.textContent = 'تکمیل شده';
-            step3Status.style.color = 'var(--success-600)';
-            step3Badge.className = 'step-status-badge completed';
-            step3Badge.innerHTML = '<span class="status-dot"></span> تکمیل شده';
+            step3Status.className = 'step-status-badge completed';
+            step3Status.innerHTML = '<span class="status-dot"></span> تکمیل شده';
         } else if (this.userVerificationData.step2) {
-            step3Status.textContent = 'در انتظار';
-            step3Status.style.color = 'var(--warning-600)';
-            step3Badge.className = 'step-status-badge pending';
-            step3Badge.innerHTML = '<span class="status-dot"></span> در انتظار';
-        }
-
-        // وضعیت کلی
-        const overallStatus = document.getElementById('modalOverallStatus');
-        if (this.userVerificationData.step3) {
-            overallStatus.textContent = 'تکمیل شده 🎉';
-            overallStatus.style.color = 'var(--success-600)';
-        } else if (this.userVerificationData.step2) {
-            overallStatus.textContent = 'در حال تکمیل';
-            overallStatus.style.color = 'var(--warning-600)';
-        } else if (this.userVerificationData.step1) {
-            overallStatus.textContent = 'شروع شده';
-            overallStatus.style.color = 'var(--primary-600)';
-        } else {
-            overallStatus.textContent = 'شروع نشده';
-            overallStatus.style.color = 'var(--gray-600)';
+            step3Status.className = 'step-status-badge pending';
+            step3Status.innerHTML = '<span class="status-dot"></span> در انتظار';
         }
     }
 
@@ -726,11 +710,11 @@ class VerificationSystem {
     submitStep1() {
         const phoneNumber = document.getElementById('modalPhoneNumber').value.trim();
         const cardNumber = document.getElementById('modalCardNumber').value.trim();
-        const bankName = document.getElementById('modalBankName').value;
+        const nationality = document.querySelector('input[name="nationality"]:checked').value;
         
         // اعتبارسنجی
-        if (!phoneNumber || !/^09\d{9}$/.test(phoneNumber)) {
-            alert('لطفاً شماره موبایل معتبر وارد کنید (09123456789)');
+        if (!phoneNumber) {
+            alert('لطفاً شماره موبایل وارد کنید');
             return;
         }
         
@@ -739,16 +723,11 @@ class VerificationSystem {
             return;
         }
         
-        if (!bankName) {
-            alert('لطفاً نام بانک را انتخاب کنید.');
-            return;
-        }
-        
         // ذخیره داده‌ها
         this.userVerificationData.step1 = {
             phoneNumber,
             cardNumber,
-            bankName,
+            nationality,
             submittedAt: new Date().toISOString()
         };
         
@@ -769,7 +748,7 @@ class VerificationSystem {
         const cardBack = document.getElementById('modalNationalCardBack');
         
         if (!cardFront.files[0] || !cardBack.files[0]) {
-            alert('لطفاً هر دو تصویر کارت ملی را بارگذاری کنید.');
+            alert('لطفاً هر دو تصویر مدارک شناسایی را بارگذاری کنید.');
             return;
         }
         
@@ -1003,30 +982,78 @@ class VerificationSystem {
             }
         }
     }
-
-    downloadVerificationData() {
-        const data = {
-            userInfo: this.userVerificationData,
-            timestamp: new Date().toISOString(),
-            verificationLevel: this.getVerificationLevel().text
-        };
-        
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `verification-data-${Date.now()}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
 }
 
 // متغیرهای جهانی
 let verificationSystem = null;
 
-// توابع عمومی
+// ==================== توابع عمومی ====================
+
+// تابع مدیریت تغییر ملیت
+function handleNationalityChange(radio) {
+    const nationality = radio.value;
+    const uploadItems = document.querySelectorAll('.upload-item');
+    const step2Header = document.querySelector('#modalStep2 .step-header h3');
+    const step2Icon = document.querySelector('#modalStep2 .step-header h3 i');
+    
+    if (nationality === 'afghan') {
+        // تغییر آیکون و عنوان مرحله ۲
+        if (step2Icon) step2Icon.className = 'fas fa-passport';
+        if (step2Header) step2Header.innerHTML = '<i class="fas fa-passport"></i> مرحله ۲: مدارک تذکره';
+        
+        // تغییر متن برای افغانستانی‌ها
+        document.querySelector('[for="modalPhoneNumber"]').innerHTML = 
+            '<i class="fas fa-mobile-alt"></i> شماره موبایل (افغانستان) *';
+        
+        // تغییر متن مدارک
+        uploadItems[0].querySelector('.upload-title').textContent = 'روی تذکره';
+        uploadItems[0].querySelector('.upload-subtitle').textContent = 'تصویر واضح از روی تذکره';
+        uploadItems[1].querySelector('.upload-title').textContent = 'پشت تذکره';
+        uploadItems[1].querySelector('.upload-subtitle').textContent = 'تصویر واضح از پشت تذکره';
+        
+        // تغییر متن ویدیو
+        const textToRead = document.querySelector('.verification-text p');
+        if (textToRead) {
+            textToRead.textContent = '«من به عنوان کاربر افغانستانی سایت ایران اد پی رسماً اعلام می‌کنم که با شرکت ایران اد پی همکاری داشته و کلیه مسئولیت‌های ناشی از این همکاری را به طور کامل می‌پذیرم. متعهد می‌شوم تمام فعالیت‌هایم مطابق با قوانین جمهوری اسلامی ایران باشد.»';
+        }
+        
+        // تغییر دستورالعمل ویدیو
+        const videoInstructions = document.querySelectorAll('.instructions-list li');
+        if (videoInstructions[4]) {
+            videoInstructions[4].innerHTML = '<i class="fas fa-passport"></i> تذکره را در ابتدای ویدیو نشان دهید';
+        }
+        
+    } else {
+        // بازگشت به حالت ایرانی
+        if (step2Icon) step2Icon.className = 'fas fa-id-card-alt';
+        if (step2Header) step2Header.innerHTML = '<i class="fas fa-id-card-alt"></i> مرحله ۲: مدارک شناسایی';
+        
+        document.querySelector('[for="modalPhoneNumber"]').innerHTML = 
+            '<i class="fas fa-mobile-alt"></i> شماره موبایل *';
+        
+        uploadItems[0].querySelector('.upload-title').textContent = 'روی کارت ملی';
+        uploadItems[0].querySelector('.upload-subtitle').textContent = 'تصویر واضح از روی کارت ملی';
+        uploadItems[1].querySelector('.upload-title').textContent = 'پشت کارت ملی';
+        uploadItems[1].querySelector('.upload-subtitle').textContent = 'تصویر واضح از پشت کارت ملی';
+        
+        const textToRead = document.querySelector('.verification-text p');
+        if (textToRead) {
+            textToRead.textContent = '«من به عنوان کاربر سایت ایران اد پی رسماً اعلام می‌کنم که با شرکت ایران اد پی همکاری داشته و کلیه مسئولیت‌های ناشی از این همکاری را به طور کامل می‌پذیرم. متعهد می‌شوم تمام فعالیت‌هایم مطابق با قوانین جمهوری اسلامی ایران باشد.»';
+        }
+        
+        const videoInstructions = document.querySelectorAll('.instructions-list li');
+        if (videoInstructions[4]) {
+            videoInstructions[4].innerHTML = '<i class="fas fa-id-card"></i> کارت ملی را در ابتدای ویدیو نشان دهید';
+        }
+    }
+    
+    // ذخیره انتخاب ملیت
+    if (verificationSystem) {
+        verificationSystem.userVerificationData.nationality = nationality;
+        verificationSystem.saveVerificationData();
+    }
+}
+
 function openVerificationModal() {
     const modal = document.getElementById('verificationModal');
     modal.classList.add('show');
@@ -1035,6 +1062,7 @@ function openVerificationModal() {
     // مقداردهی اولیه سیستم
     if (!verificationSystem) {
         verificationSystem = new VerificationSystem();
+        verificationSystem.init();
     }
     
     // رفتن به آخرین مرحله تکمیل شده
@@ -1150,10 +1178,6 @@ function retryModalRecording() {
     if (verificationSystem) {
         verificationSystem.retryRecording();
     }
-}
-
-function openVerificationSupport() {
-    alert('برای دریافت راهنمایی درباره احراز هویت، می‌توانید از طریق:\n\n📧 ایمیل: support@iranadpi.ir\n📞 تلفن: ۰۲۱-۱۲۳۴۵۶۷۸\n💬 پیام درون‌برنامه\n\nبا پشتیبانی تماس بگیرید.');
 }
 
 // بستن مودال با کلیک خارج

@@ -13,7 +13,6 @@
 
 /* ==================== SIDEBAR STYLES ==================== */
 .sidebar {
-    width: 280px;
     background: white;
     border-left: 1px solid var(--gray-200);
     box-shadow: var(--shadow-lg);
@@ -23,6 +22,10 @@
     height: 100vh;
     overflow-y: auto;
     transition: all 0.3s ease;
+    width: 280px !important; /* عرض ثابت */
+    min-width: 280px !important;
+    max-width: 280px !important;
+    flex: 0 0 280px !important; /* جلوگیری از انعطاف */
 }
 
 .sidebar-user {
@@ -2129,7 +2132,6 @@
 }
 
 
-/* برای احراز هویتن */
 
 /* ==================== VERIFICATION MODAL STYLES ==================== */
 
@@ -2990,4 +2992,332 @@
     .video-controls .btn {
         width: 100%;
     }
+}
+
+/* فقط با CSS موقعیت را تغییر می‌دهیم */
+@media (max-width: 991.98px) {
+    /* مخفی کردن دکمه خانه اصلی */
+    .back-to-home {
+        display: none;
+    }
+    
+    /* ساخت دکمه جدید با pseudo-element */
+    .mobile-header-content::after {
+        content: '\f015'; /* آیکون خانه FontAwesome */
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        width: 40px;
+        height: 40px;
+        background: var(--primary-500);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-md);
+        flex-shrink: 0;
+        order: 3;
+    }
+    
+    .mobile-header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+    }
+    
+    .mobile-header-content::after:hover {
+        background: var(--primary-600);
+        transform: scale(1.1);
+    }
+    
+    /* اضافه کردن کلیک JavaScript */
+    .mobile-header-content::after {
+        pointer-events: auto;
+    }
+}
+
+
+/* ==================== NATIONALITY SELECTOR STYLES ==================== */
+.nationality-selector {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--gray-50);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-200);
+}
+
+.nationality-selector h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-800);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.nationality-selector h4 i {
+    color: var(--primary-500);
+}
+
+.nationality-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nationality-option {
+    cursor: pointer;
+}
+
+.nationality-option input[type="radio"] {
+    display: none;
+}
+
+.nationality-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: white;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nationality-option input[type="radio"]:checked + .nationality-card {
+    border-color: var(--primary-500);
+    background: var(--primary-50);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+}
+
+.nationality-flag {
+    font-size: 2rem;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-100);
+    border-radius: 8px;
+}
+
+.nationality-info {
+    flex: 1;
+}
+
+.nationality-title {
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.nationality-desc {
+    color: var(--gray-600);
+    font-size: 0.85rem;
+}
+
+.nationality-check {
+    color: var(--gray-400);
+    font-size: 1.25rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.nationality-option input[type="radio"]:checked + .nationality-card .nationality-check {
+    color: var(--primary-500);
+    opacity: 1;
+}
+
+/* ==================== STEP FOOTER ALIGNMENT ==================== */
+.step-footer {
+    display: flex;
+    justify-content: flex-start; 
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+.step-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start; 
+    width: 100%;
+}
+
+.step-footer .btn,
+.step-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: row-reverse; 
+}
+
+/* آیکون‌های دکمه */
+.step-footer .btn i,
+.step-actions .btn i {
+    order: -1; 
+    transition: transform 0.3s ease;
+}
+
+.step-actions .btn--outline {
+    flex-direction: row; 
+}
+
+.step-actions .btn--outline i {
+    order: 1; 
+}
+
+/* ==================== MODAL FOOTER SIMPLIFICATION ==================== */
+.verification-modal-footer {
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--gray-200);
+    background: var(--gray-50);
+}
+
+.footer-actions {
+    display: flex;
+    justify-content: flex-end; /* فقط دکمه بستن */
+}
+
+/* ==================== RESPONSIVE STYLES ==================== */
+@media (max-width: 768px) {
+    .nationality-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .nationality-flag {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .step-actions {
+        flex-direction: column;
+    }
+    
+    .step-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* در موبایل همه دکمه‌ها را به صورت row-reverse نمایش می‌دهیم */
+    .step-actions .btn {
+        flex-direction: row-reverse;
+    }
+    
+    .step-actions .btn i {
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .nationality-selector {
+        padding: 1rem;
+    }
+    
+    .nationality-card {
+        padding: 0.75rem;
+    }
+    
+    .step-footer {
+        padding-top: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .verification-modal-footer {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* ==================== VERIFICATION BADGE IN SIDEBAR ==================== */
+.user-verification-status {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.verification-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--gray-100);
+    border-radius: var(--border-radius);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.verification-badge i {
+    color: var(--gray-600);
+}
+
+.verification-badge.level-0 {
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.verification-badge.level-0 i {
+    color: var(--gray-600);
+}
+
+.verification-badge.level-1 {
+    background: var(--primary-50);
+    color: var(--primary-700);
+}
+
+.verification-badge.level-1 i {
+    color: var(--primary-500);
+}
+
+.verification-badge.level-2 {
+    background: var(--warning-50);
+    color: var(--warning-700);
+}
+
+.verification-badge.level-2 i {
+    color: var(--warning-500);
+}
+
+.verification-badge.level-3 {
+    background: var(--success-50);
+    color: var(--success-700);
+}
+
+.verification-badge.level-3 i {
+    color: var(--success-500);
+}
+
+.verification-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--success-500);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.verification-btn:hover {
+    background: var(--success-600);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.verification-btn:active {
+    transform: translateY(0);
 }
