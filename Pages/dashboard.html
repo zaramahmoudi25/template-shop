@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="/CSS/utilities.css">
     <link rel="stylesheet" href="/CSS/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
   
 </head>
 <body>
-    <!-- نوار ارز کامپکت -->
   <!-- نوار ارز کامپکت -->
 <div class="compact-currency-bar" id="compactCurrencyBar">
     <div class="compact-currency-container">
@@ -30,22 +31,26 @@
         <div class="compact-currency-items">
             <div class="compact-currency-item">
                 <div class="currency-info">
-                    <span class="currency-flag">🇺🇸</span>
-                    <span class="currency-name">دلار</span>
+<span class="currency-flag">
+    <span class="fi fi-us"></span> <!-- پرچم آمریکا -->
+</span>                    <span class="currency-name">دلار</span>
                 </div>
                 <span class="currency-value" id="usdRate">--</span>
             </div>
             <div class="compact-currency-item">
                 <div class="currency-info">
-                    <span class="currency-flag">🇹🇷</span>
-                    <span class="currency-name">لیر</span>
+
+<span class="currency-flag">
+    <span class="fi fi-tr"></span> <!-- پرچم ترکیه -->
+</span>                    <span class="currency-name">لیر</span>
                 </div>
                 <span class="currency-value" id="tryRate">--</span>
             </div>
             <div class="compact-currency-item">
                 <div class="currency-info">
-                    <span class="currency-flag">🇦🇫</span>
-                    <span class="currency-name">افغانی</span>
+<span class="currency-flag">
+    <span class="fi fi-af"></span> <!-- پرچم افغانستان -->
+</span>                    <span class="currency-name">افغانی</span>
                 </div>
                 <span class="currency-value" id="afnRate">--</span>
             </div>
@@ -828,7 +833,11 @@
                         <label class="nationality-option">
                             <input type="radio" name="nationality" value="iranian" checked onchange="handleNationalityChange(this)">
                             <div class="nationality-card">
-                                <div class="nationality-flag">🇮🇷</div>
+                                <div class="nationality-flag">
+                                    <span class="currency-flag">
+    <span class="fi fi-ir"></span> <!-- پرچم ایران -->
+</span>
+                                </div>
                                 <div class="nationality-info">
                                     <div class="nationality-title">ایرانی</div>
                                     <div class="nationality-desc">احراز هویت با کارت ملی</div>
@@ -842,7 +851,13 @@
                         <label class="nationality-option">
                             <input type="radio" name="nationality" value="afghan" onchange="handleNationalityChange(this)">
                             <div class="nationality-card">
-                                <div class="nationality-flag">🇦🇫</div>
+                                <div class="nationality-flag">
+                                    
+<span class="currency-flag">
+    <span class="fi fi-af"></span> <!-- پرچم افغانستان -->
+</span>
+
+                                </div>
                                 <div class="nationality-info">
                                     <div class="nationality-title">افغانستانی</div>
                                     <div class="nationality-desc">احراز هویت با تذکره</div>
